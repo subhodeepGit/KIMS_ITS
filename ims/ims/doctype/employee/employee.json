@@ -178,8 +178,9 @@
   },
   {
    "fieldname": "role_profile",
-   "fieldtype": "Data",
-   "label": "Role Profile"
+   "fieldtype": "Link",
+   "label": "Role Profile",
+   "options": "Role Profile"
   },
   {
    "fieldname": "signature",
@@ -216,7 +217,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-25 17:20:06.607507",
+ "modified": "2022-10-25 17:51:51.657270",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
