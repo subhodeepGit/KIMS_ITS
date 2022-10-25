@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-10-25 17:04:17.847778",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "material_service_code",
+  "material_service_name",
+  "manufacturer",
+  "manufacturer_email",
+  "column_break_5",
+  "material_service_group",
+  "serial_number",
+  "mac_id",
+  "section_break_9",
+  "warrant_period",
+  "column_break_11",
+  "warranty_ends_on"
+ ],
+ "fields": [
+  {
+   "fieldname": "material_service_code",
+   "fieldtype": "Data",
+   "label": "Material/Service Code"
+  },
+  {
+   "fieldname": "material_service_name",
+   "fieldtype": "Data",
+   "label": "Material/Service Name"
+  },
+  {
+   "fieldname": "manufacturer",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fetch_from": "manufacturer.email_id",
+   "fieldname": "manufacturer_email",
+   "fieldtype": "Data",
+   "label": "Suplier Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "material_service_group",
+   "fieldtype": "Link",
+   "label": "Material/Service Group",
+   "options": "Material or Service Group"
+  },
+  {
+   "fieldname": "serial_number",
+   "fieldtype": "Data",
+   "label": "Serial Number"
+  },
+  {
+   "fieldname": "mac_id",
+   "fieldtype": "Data",
+   "label": "Mac Id"
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "warrant_period",
+   "fieldtype": "Data",
+   "label": "Warrant Period"
+  },
+  {
+   "fieldname": "column_break_11",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "warranty_ends_on",
+   "fieldtype": "Data",
+   "label": "Warranty Ends on"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-10-25 17:09:00.576687",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Material or Service",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

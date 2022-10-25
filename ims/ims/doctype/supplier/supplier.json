@@ -24,7 +24,10 @@
   "column_break_15",
   "supplier_primary_address",
   "more_information_section",
-  "data_18"
+  "website",
+  "supplier_details",
+  "column_break_20",
+  "language"
  ],
  "fields": [
   {
@@ -127,13 +130,29 @@
    "label": "More Information"
   },
   {
-   "fieldname": "data_18",
-   "fieldtype": "Data"
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website"
+  },
+  {
+   "fieldname": "supplier_details",
+   "fieldtype": "Text",
+   "label": "Supplier Details"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "language",
+   "fieldtype": "Link",
+   "label": "Print Language",
+   "options": "Language"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-25 16:24:33.450340",
+ "modified": "2022-10-25 16:32:13.266442",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",
