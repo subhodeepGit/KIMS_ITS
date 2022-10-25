@@ -80,10 +80,12 @@
    "reqd": 1
   },
   {
+   "depends_on": "eval:doc.supplier_type=='Company'",
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "reqd": 1
   },
   {
    "fieldname": "pan_no",
@@ -152,7 +154,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-25 16:32:13.266442",
+ "modified": "2022-10-25 18:01:47.262695",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",
