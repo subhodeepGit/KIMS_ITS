@@ -5,17 +5,16 @@ import frappe
 from frappe.model.document import Document
 
 class Employee(Document):
-	# pass
 	def after_insert(self):
 		self.create_emp_user()
 	
-	def validate(self):
+	def on_change(self):
 		self.enabled_emp()
-		self.disable_emp()
+		# self.disable_emp()
 
-	def on_trash(self):
-		for usr in frappe.db.get_all("User", {'email':self.email},{'name'}):
-			frappe.delete_doc("User",usr.name)
+	# def on_trash(self):
+	# 	for usr in frappe.db.get_all("User", {'email':self.email},{'name'}):
+	# 		frappe.delete_doc("User",usr.name)
 
 	def create_emp_user(self):
 		if not frappe.db.exists("User", self.email):
@@ -36,19 +35,24 @@ class Employee(Document):
 	def enabled_emp(self):
 		if self.enabled==0:
 			emp=frappe.db.get_all("User", {'email':self.email},['name','enabled'])
-			status=emp[0]['enabled']
-			emp_name = emp[0]['name']
-			if status == 1:
-				update_doc = frappe.get_doc("User",emp_name)
-				update_doc.enabled=0
-				update_doc.save()
-
-	def disable_emp(self):
-		if self.enabled==1:
+			# status=emp[0]['enabled']
+			# emp_name = emp[0]['name']
+			# if status == 1:
+			update_doc = frappe.get_doc("User",emp)
+			update_doc.enabled=0
+			update_doc.save()
+		else:
 			emp=frappe.db.get_all("User", {'email':self.email},['name','enabled'])
-			status=emp[0]['enabled']
-			emp_name = emp[0]['name']
-			if status == 0:
-				update_doc = frappe.get_doc("User",emp_name)
-				update_doc.enabled=1
-				update_doc.save()
+			update_doc = frappe.get_doc("User",emp)
+			update_doc.enabled=1
+			update_doc.save()
+
+	# def disable_emp(self):
+	# 	if self.enabled==1:
+	# 		emp=frappe.db.get_all("User", {'email':self.email},['name','enabled'])
+	# 		# status=emp[0]['enabled']
+	# 		# emp_name = emp[0]['name']
+	# 		# if status == 0:
+	# 		update_doc = frappe.get_doc("User",emp)
+	# 		update_doc.enabled=1
+	# 		update_doc.save()
