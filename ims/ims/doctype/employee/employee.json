@@ -29,10 +29,6 @@
   "emergency_phone",
   "column_break_16",
   "relation",
-  "erpnext_user_section",
-  "user_id",
-  "create_user_permission",
-  "create_user",
   "department_and_grade_section",
   "department",
   "designation",
@@ -136,18 +132,6 @@
    "label": "Relation"
   },
   {
-   "fieldname": "erpnext_user_section",
-   "fieldtype": "Section Break",
-   "label": "ERPNext User"
-  },
-  {
-   "fieldname": "user_id",
-   "fieldtype": "Link",
-   "label": "User ID",
-   "options": "User",
-   "unique": 1
-  },
-  {
    "fieldname": "department_and_grade_section",
    "fieldtype": "Section Break",
    "label": "Department and Grade"
@@ -199,19 +183,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "1",
-   "depends_on": "user_id",
-   "fieldname": "create_user_permission",
-   "fieldtype": "Check",
-   "label": "Create User Permission"
-  },
-  {
-   "default": "0",
-   "fieldname": "create_user",
-   "fieldtype": "Button",
-   "label": "Create User"
-  },
-  {
    "fieldname": "mobile_no",
    "fieldtype": "Phone",
    "label": "Mobile No"
@@ -238,7 +209,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-26 18:31:05.199864",
+ "modified": "2022-10-26 19:01:14.198992",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
