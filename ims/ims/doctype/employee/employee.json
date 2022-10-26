@@ -7,6 +7,8 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "employee_active",
+  "section_break_2",
   "first_name",
   "middle_name",
   "last_name",
@@ -45,7 +47,9 @@
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "First Name"
+   "in_list_view": 1,
+   "label": "First Name",
+   "reqd": 1
   },
   {
    "fieldname": "middle_name",
@@ -138,8 +142,10 @@
   },
   {
    "fieldname": "user_id",
-   "fieldtype": "Data",
-   "label": "User ID"
+   "fieldtype": "Link",
+   "label": "User ID",
+   "options": "User",
+   "unique": 1
   },
   {
    "fieldname": "department_and_grade_section",
@@ -192,7 +198,8 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "0",
+   "default": "1",
+   "depends_on": "user_id",
    "fieldname": "create_user_permission",
    "fieldtype": "Check",
    "label": "Create User Permission"
@@ -211,13 +218,26 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Email",
-   "options": "Email"
+   "options": "Email",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "employee_active",
+   "fieldtype": "Check",
+   "label": "Employee Active"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-25 17:51:51.657270",
+ "modified": "2022-10-26 11:55:41.020671",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
