@@ -114,7 +114,7 @@
   },
   {
    "fieldname": "emergency_contact_name",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "label": "Emergency Contact Name"
   },
   {
@@ -209,7 +209,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-26 19:01:14.198992",
+ "modified": "2022-10-26 19:03:58.445936",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
