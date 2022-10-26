@@ -10,11 +10,19 @@ class Employee(Document):
 	
 	def on_change(self):
 		self.enabled_emp()
-		# self.disable_emp()
+		# self.new_email()
 
-	# def on_trash(self):
-	# 	for usr in frappe.db.get_all("User", {'email':self.email},{'name'}):
-	# 		frappe.delete_doc("User",usr.name)
+	def before_save(self):
+		emply = frappe.get_all("Employee",{"name":self.name},{"role_profile"})
+		if emply:
+			if self.role_profiles!=emply[0]["role_profile"]:
+				self.role_profiles()
+	
+	def validate(self):
+		self.set_employee_name()
+	
+	def set_employee_name(self):
+		self.full_name = ' '.join(filter(lambda x: x, [self.first_name, self.middle_name, self.last_name]))
 
 	def create_emp_user(self):
 		if not frappe.db.exists("User", self.email):
@@ -25,19 +33,16 @@ class Employee(Document):
 				'email': self.email,
 				'gender': self.gender,
 				'enabled': self.enabled,
+				'role_profile_name': self.role_profile,
 				'send_welcome_email': 1,
 				'user_type': 'Website User'
 				})
 			emp_user.flags.ignore_permissions = True
-			emp_user.add_roles("Accounts Manager")
 			emp_user.save()
 
 	def enabled_emp(self):
 		if self.enabled==0:
 			emp=frappe.db.get_all("User", {'email':self.email},['name','enabled'])
-			# status=emp[0]['enabled']
-			# emp_name = emp[0]['name']
-			# if status == 1:
 			update_doc = frappe.get_doc("User",emp)
 			update_doc.enabled=0
 			update_doc.save()
@@ -47,12 +52,22 @@ class Employee(Document):
 			update_doc.enabled=1
 			update_doc.save()
 
-	# def disable_emp(self):
-	# 	if self.enabled==1:
-	# 		emp=frappe.db.get_all("User", {'email':self.email},['name','enabled'])
-	# 		# status=emp[0]['enabled']
-	# 		# emp_name = emp[0]['name']
-	# 		# if status == 0:
-	# 		update_doc = frappe.get_doc("User",emp)
-	# 		update_doc.enabled=1
-	# 		update_doc.save()
+	def role_profiles(self):
+		role = frappe.db.get_all("User",filters=[["email","=",self.email]],fields=["name"])
+		if role:
+			if len(role)==1:
+				frappe.db.sql(""" update `tabUser` set role_profile_name="%s" where name = "%s" """%(self.role_profile,role[0]["name"]))
+			else:
+				role_info=tuple([t["name"] for t in role])
+				frappe.db.sql(""" update `tabUser` set role_profile_name="%s" where name in %s"""%(self.role_profile,role_info))
+	
+	# def new_email(self):
+	# 	user_info=frappe.get_list("User",{"email":self.email},["name"])
+	# 	if user_info:
+	# 		if user_info[0]["name"]!=self.email:
+	# 			old_user=user_info[0]["name"]
+	# 			frappe.rename_doc("User", old_user, self.email)
+	# 			frappe.db.commit()
+	# 			user=frappe.get_doc("User",self.email)
+	# 			user.email=self.email
+	# 			user.save()
