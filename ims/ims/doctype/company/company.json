@@ -1,17 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:company_name",
  "creation": "2022-10-25 15:22:06.288406",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "company",
+  "company_name",
+  "abbr",
   "company_address"
  ],
  "fields": [
   {
-   "fieldname": "company",
+   "fieldname": "company_address",
+   "fieldtype": "Data",
+   "label": "Company Address"
+  },
+  {
+   "fieldname": "company_name",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Company",
@@ -19,17 +26,18 @@
    "unique": 1
   },
   {
-   "fieldname": "company_address",
+   "fieldname": "abbr",
    "fieldtype": "Data",
-   "label": "Company Address"
+   "label": "Abbr"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-25 15:22:06.288406",
+ "modified": "2022-10-27 16:41:25.157709",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Company",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
