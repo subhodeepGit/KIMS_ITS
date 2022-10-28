@@ -13,6 +13,7 @@ class Employee(Document):
 		# self.new_email()
 
 	def before_save(self):
+		self.new_email()
 		emply = frappe.get_all("Employee",{"name":self.name},{"role_profile"})
 		if emply:
 			if self.role_profiles!=emply[0]["role_profile"]:
@@ -61,13 +62,13 @@ class Employee(Document):
 				role_info=tuple([t["name"] for t in role])
 				frappe.db.sql(""" update `tabUser` set role_profile_name="%s" where name in %s"""%(self.role_profile,role_info))
 	
-	# def new_email(self):
-	# 	user_info=frappe.get_list("User",{"email":self.email},["name"])
-	# 	if user_info:
-	# 		if user_info[0]["name"]!=self.email:
-	# 			old_user=user_info[0]["name"]
-	# 			frappe.rename_doc("User", old_user, self.email)
-	# 			frappe.db.commit()
-	# 			user=frappe.get_doc("User",self.email)
-	# 			user.email=self.email
-	# 			user.save()
+	def new_email(self):
+		user_info=frappe.get_list("User",{"email":self.email},["name"])
+		if user_info:
+			if user_info[0]["name"]!=self.email:
+				old_user=user_info[0]["name"]
+				frappe.rename_doc("User", old_user, self.email)
+				frappe.db.commit()
+				user=frappe.get_doc("User",self.email)
+				user.email=self.email
+				user.save()

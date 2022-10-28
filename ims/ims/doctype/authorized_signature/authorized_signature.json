@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-10-28 12:37:24.229940",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "emp_id",
+  "emp_name",
+  "designation",
+  "date_of_approval",
+  "date_of_receivable",
+  "column_break_6",
+  "department",
+  "remarks",
+  "approval_status",
+  "previous_status",
+  "transfer_to"
+ ],
+ "fields": [
+  {
+   "fieldname": "emp_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Emp ID",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "emp_id.full_name",
+   "fieldname": "emp_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Emp Name"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Designation"
+  },
+  {
+   "fieldname": "date_of_approval",
+   "fieldtype": "Date",
+   "label": "Date of Approval"
+  },
+  {
+   "fieldname": "date_of_receivable",
+   "fieldtype": "Date",
+   "label": "Date of Receivable"
+  },
+  {
+   "fieldname": "approval_status",
+   "fieldtype": "Data",
+   "label": "Approval Status"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "previous_status",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Previous Status"
+  },
+  {
+   "fieldname": "transfer_to",
+   "fieldtype": "Data",
+   "label": "Transfer to"
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-10-28 12:44:24.668900",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Authorized Signature",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
