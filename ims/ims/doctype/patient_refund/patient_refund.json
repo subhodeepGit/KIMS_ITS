@@ -1,0 +1,277 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-10-28 15:37:13.088824",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "name_of_the_patient",
+  "ip__uhid_no",
+  "department",
+  "total_bill",
+  "approval_of_tpa__insurance__corporate__ostf",
+  "amount_deposited_by_patient",
+  "less__approval_approval_letter_to_be_attached",
+  "approval_attachment",
+  "column_break_5",
+  "cash_refund",
+  "less__non_admissible_item__discount_amount",
+  "net_refundable_in_figures",
+  "net_refundable_in_words",
+  "mode_of_payment",
+  "remarks",
+  "section_break_16",
+  "patient_ip_no",
+  "patients_name",
+  "amount_deposited",
+  "amount_deposited_through",
+  "date_of_submission_of_fees",
+  "date_of_cancellation",
+  "reason_of_cancellation",
+  "account_type",
+  "account_holder_name",
+  "column_break_27",
+  "joint_account_holder_name",
+  "name_of_the_bank",
+  "branch",
+  "ifsc_code",
+  "account_no",
+  "account_holder_relation_with_the_patient",
+  "doc_attached",
+  "original_money_receipt",
+  "xerox_copy_of_any_itenty_proof",
+  "section_break_36",
+  "authorized_signature"
+ ],
+ "fields": [
+  {
+   "fieldname": "name_of_the_patient",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name of the Patient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ip__uhid_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "IP / UHID No.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Department",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_bill",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Bill",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approval_of_tpa__insurance__corporate__ostf",
+   "fieldtype": "Data",
+   "label": "Approval of TPA / Insurance / Corporate / OSTF"
+  },
+  {
+   "fieldname": "amount_deposited_by_patient",
+   "fieldtype": "Currency",
+   "label": "Amount Deposited By patient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "less__approval_approval_letter_to_be_attached",
+   "fieldtype": "Attach",
+   "label": "Less : Approval (Approval letter to be attached)"
+  },
+  {
+   "fieldname": "approval_attachment",
+   "fieldtype": "Attach",
+   "label": "Approval Attachment"
+  },
+  {
+   "fieldname": "cash_refund",
+   "fieldtype": "Currency",
+   "label": "Cash Refund"
+  },
+  {
+   "fieldname": "less__non_admissible_item__discount_amount",
+   "fieldtype": "Currency",
+   "label": "Less : Non-admissible item / Discount amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "net_refundable_in_figures",
+   "fieldtype": "Data",
+   "label": "Net Refundable (in figures)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "net_refundable_in_words",
+   "fieldtype": "Currency",
+   "label": "Net Refundable (in words)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Select",
+   "label": "Mode of Payment",
+   "options": "\nRTGS - UTR , Date of Transaction\nNEFT - UTR , Date of Transaction\nIMPS - UTR , Date of Transaction\nCheque - Cheque No. , Date of Transaction\nCash - Cash Receipt No., Date of Transaction"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "patient_ip_no",
+   "fieldtype": "Data",
+   "label": "Patient IP No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "patients_name",
+   "fieldtype": "Data",
+   "label": "Patient's Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount_deposited",
+   "fieldtype": "Currency",
+   "label": "Amount Deposited"
+  },
+  {
+   "fieldname": "amount_deposited_through",
+   "fieldtype": "Data",
+   "label": "Amount Deposited Through"
+  },
+  {
+   "fieldname": "date_of_submission_of_fees",
+   "fieldtype": "Date",
+   "label": "Date of Submission of Fees"
+  },
+  {
+   "fieldname": "date_of_cancellation",
+   "fieldtype": "Date",
+   "label": "Date of Cancellation"
+  },
+  {
+   "fieldname": "reason_of_cancellation",
+   "fieldtype": "Data",
+   "label": "Reason of Cancellation"
+  },
+  {
+   "fieldname": "account_type",
+   "fieldtype": "Data",
+   "label": "Account Type"
+  },
+  {
+   "fieldname": "account_holder_name",
+   "fieldtype": "Data",
+   "label": "Account Holder Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "joint_account_holder_name",
+   "fieldtype": "Data",
+   "label": "Joint Account Holder Name"
+  },
+  {
+   "fieldname": "name_of_the_bank",
+   "fieldtype": "Data",
+   "label": "Name of the Bank",
+   "reqd": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "label": "IFSC Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account_no",
+   "fieldtype": "Data",
+   "label": "Account No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account_holder_relation_with_the_patient",
+   "fieldtype": "Data",
+   "label": "Account Holder Relation With The Patient",
+   "reqd": 1
+  },
+  {
+   "fieldname": "doc_attached",
+   "fieldtype": "Attach",
+   "label": "Documents to be attached with Cancellation / Refund Application form"
+  },
+  {
+   "fieldname": "original_money_receipt",
+   "fieldtype": "Attach",
+   "label": "Original Money Receipt"
+  },
+  {
+   "fieldname": "xerox_copy_of_any_itenty_proof",
+   "fieldtype": "Attach",
+   "label": "Xerox Copy of any itenty Proof"
+  },
+  {
+   "fieldname": "column_break_27",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_36",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "authorized_signature",
+   "fieldtype": "Table",
+   "label": "Authorized Signature",
+   "options": "Authorized Signature"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-10-28 15:56:56.607784",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Patient Refund",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
