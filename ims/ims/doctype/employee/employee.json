@@ -213,6 +213,7 @@
   {
    "fieldname": "user",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "User",
    "read_only": 1
   },
@@ -229,7 +230,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 18:43:29.701631",
+ "modified": "2022-10-31 19:31:26.296748",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
