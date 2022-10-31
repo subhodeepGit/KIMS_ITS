@@ -7,6 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "enabled",
   "basic_info",
   "naming_series",
   "supplier_name",
@@ -23,6 +24,12 @@
   "email_id",
   "column_break_15",
   "supplier_primary_address",
+  "bank_details_section",
+  "bank_ac_no",
+  "bank_name",
+  "column_break_25",
+  "ifsc_code",
+  "bank_address",
   "more_information_section",
   "website",
   "supplier_details",
@@ -150,11 +157,46 @@
    "fieldtype": "Link",
    "label": "Print Language",
    "options": "Language"
+  },
+  {
+   "fieldname": "bank_details_section",
+   "fieldtype": "Section Break",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "bank_ac_no",
+   "fieldtype": "Data",
+   "label": "Bank A/C No."
+  },
+  {
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "label": "IFSC Code"
+  },
+  {
+   "fieldname": "column_break_25",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "bank_address",
+   "fieldtype": "Data",
+   "label": "Bank Address"
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-25 18:01:47.262695",
+ "modified": "2022-10-31 19:13:10.223705",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",
