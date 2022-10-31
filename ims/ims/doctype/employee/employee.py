@@ -19,7 +19,7 @@ class Employee(Document):
 	def on_trash(self):
 		for usr in frappe.db.get_all("User", {'email':self.email},{'name'}):
 			frappe.delete_doc("User",usr.name)
-			
+
 	def after_insert(self):
 		self.create_emp_user()
 	
@@ -57,12 +57,12 @@ class Employee(Document):
 	def enabled_emp(self):
 		user_list=frappe.get_all("Employee",{"name":self.name},["enabled"])
 		if user_list:
-			if self.enabled==0 and user_list[0]["enabled"]==1:
+			if self.enabled==0 and user_list[0]["enabled"]==0:
 				emp=frappe.db.get_all("User", {'email':self.email},['name','enabled'])
 				update_doc = frappe.get_doc("User",emp)
 				update_doc.enabled=0
 				update_doc.save()
-			if self.enabled==1 and user_list[0]["enabled"]==0:
+			if self.enabled==1 and user_list[0]["enabled"]==1:
 				emp=frappe.db.get_all("User", {'email':self.email},['name','enabled'])
 				update_doc = frappe.get_doc("User",emp)
 				update_doc.enabled=1
