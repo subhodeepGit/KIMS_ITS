@@ -24,6 +24,7 @@
   "date_of_joining",
   "employee_number",
   "email",
+  "user",
   "emergency_contact_section",
   "emergency_contact_name",
   "emergency_phone",
@@ -37,7 +38,9 @@
   "column_break_27",
   "branch",
   "role_profile",
-  "signature"
+  "signature",
+  "section_break_33",
+  "new_password"
  ],
  "fields": [
   {
@@ -90,7 +93,7 @@
    "fieldname": "gender",
    "fieldtype": "Select",
    "label": "Gender",
-   "options": "Male\nFemale\nOthers"
+   "options": "\nMale\nFemale\nOthers"
   },
   {
    "fieldname": "date_of_birth",
@@ -105,7 +108,8 @@
   {
    "fieldname": "employee_number",
    "fieldtype": "Data",
-   "label": "Employee Number"
+   "label": "Employee Number",
+   "reqd": 1
   },
   {
    "fieldname": "emergency_contact_section",
@@ -205,11 +209,27 @@
    "fieldname": "enabled",
    "fieldtype": "Check",
    "label": "Enabled"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Data",
+   "label": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_33",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.user",
+   "fieldname": "new_password",
+   "fieldtype": "Password",
+   "label": "New Password"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-26 19:03:58.445936",
+ "modified": "2022-10-31 18:43:29.701631",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",

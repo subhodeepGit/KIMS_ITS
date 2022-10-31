@@ -185,3 +185,17 @@ app_license = "MIT"
 # auth_hooks = [
 #	"ims.auth.validate"
 # ]
+
+# fixtures = [
+# 	{"dt": "Custom DocPerm", "filters": [
+# 		[
+# 			"parent", "not in", [
+# 				"DocType"
+# 			]
+# 		]
+# 	]},
+	# {"dt": "Translation"},
+    # {"dt": "Role"},
+#     {"dt": "Role Profile"},
+#     {"dt": "Module Profile"},
+# ]
