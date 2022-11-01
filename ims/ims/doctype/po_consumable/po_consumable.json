@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "PO-CONS.-.#####",
  "creation": "2022-10-28 09:50:40.948038",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -183,10 +184,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-28 13:08:02.493966",
+ "modified": "2022-11-01 13:08:23.208581",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {

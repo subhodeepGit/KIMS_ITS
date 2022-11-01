@@ -25,6 +25,7 @@
   "column_break_15",
   "supplier_primary_address",
   "bank_details_section",
+  "account_holder_name",
   "bank_ac_no",
   "bank_name",
   "column_break_25",
@@ -192,11 +193,16 @@
    "fieldname": "enabled",
    "fieldtype": "Check",
    "label": "Enabled"
+  },
+  {
+   "fieldname": "account_holder_name",
+   "fieldtype": "Data",
+   "label": "Account Holder Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 19:13:10.223705",
+ "modified": "2022-11-01 15:27:04.416430",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",
