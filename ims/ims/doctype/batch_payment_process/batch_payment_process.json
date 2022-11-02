@@ -1,0 +1,224 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-11-01 15:14:35.935880",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "document_status",
+  "account_doctype_section",
+  "account_reference_no",
+  "account_post_date",
+  "column_break_5",
+  "paying_bank",
+  "bank_ac_no",
+  "branch_details",
+  "bank_name",
+  "ifsc_code",
+  "audit_section",
+  "audit_reference_no",
+  "audit_posting_date",
+  "cheque_details_section_section",
+  "cheque_no",
+  "cheque_date",
+  "amount",
+  "cheque_attachment",
+  "note_sheet_attachment",
+  "column_break_19",
+  "contact_person",
+  "contact_phone_no",
+  "contact_email_id",
+  "section_break_25",
+  "table_26",
+  "approval_hierarchy_section",
+  "approval_hierarchy"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account_doctype_section",
+   "fieldtype": "Section Break",
+   "label": "Account Section"
+  },
+  {
+   "fieldname": "account_reference_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Account Reference No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "account_post_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Account Post Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "paying_bank",
+   "fieldtype": "Link",
+   "label": "Paying Bank",
+   "options": "Bank Details For Payment"
+  },
+  {
+   "fetch_from": "paying_bank.bank_name",
+   "fieldname": "bank_ac_no",
+   "fieldtype": "Data",
+   "label": "Bank A/C No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "paying_bank.branch_details",
+   "fieldname": "branch_details",
+   "fieldtype": "Data",
+   "label": "Branch Details",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "paying_bank.bank_name",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "paying_bank.ifsc_code",
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "label": "IFSC Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "document_status",
+   "fieldtype": "Data",
+   "label": "Document Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "audit_section",
+   "fieldtype": "Section Break",
+   "label": "Audit Section"
+  },
+  {
+   "fieldname": "audit_reference_no",
+   "fieldtype": "Data",
+   "label": "Audit Reference No"
+  },
+  {
+   "fieldname": "audit_posting_date",
+   "fieldtype": "Date",
+   "label": "Audit Posting Date "
+  },
+  {
+   "fieldname": "cheque_details_section_section",
+   "fieldtype": "Section Break",
+   "label": "Cheque Details Section"
+  },
+  {
+   "fieldname": "cheque_no",
+   "fieldtype": "Data",
+   "label": "Cheque No"
+  },
+  {
+   "fieldname": "cheque_date",
+   "fieldtype": "Date",
+   "label": "Cheque Date"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount"
+  },
+  {
+   "fieldname": "column_break_19",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Link",
+   "label": "Contact Person",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "contact_person.mobile_no",
+   "fieldname": "contact_phone_no",
+   "fieldtype": "Data",
+   "label": "Contact Phone No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "contact_person.email",
+   "fieldname": "contact_email_id",
+   "fieldtype": "Data",
+   "label": "Contact Email Id",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approval_hierarchy",
+   "fieldtype": "Table",
+   "label": "Approval Hierarchy",
+   "options": "Authorized Signature"
+  },
+  {
+   "fieldname": "approval_hierarchy_section",
+   "fieldtype": "Section Break",
+   "label": "Approval Hierarchy"
+  },
+  {
+   "fieldname": "cheque_attachment",
+   "fieldtype": "Attach",
+   "label": "Cheque Attachment"
+  },
+  {
+   "fieldname": "note_sheet_attachment",
+   "fieldtype": "Attach",
+   "label": "Note Sheet Attachment"
+  },
+  {
+   "fieldname": "section_break_25",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_26",
+   "fieldtype": "Table",
+   "options": "Batch Payment Child"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-11-01 16:05:39.988649",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Batch Payment Process",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
