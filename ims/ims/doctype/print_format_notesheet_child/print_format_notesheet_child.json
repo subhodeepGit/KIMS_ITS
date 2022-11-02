@@ -1,0 +1,57 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-11-02 17:43:50.048724",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "department",
+  "department_abbr",
+  "text_for_print_format"
+ ],
+ "fields": [
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Department",
+   "options": "Department",
+   "print_width": "10",
+   "reqd": 1,
+   "width": "10px"
+  },
+  {
+   "fetch_from": "department.department_abbr",
+   "fieldname": "department_abbr",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Department Abbr",
+   "print_width": "10",
+   "reqd": 1,
+   "width": "10px"
+  },
+  {
+   "fieldname": "text_for_print_format",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Text for Print Format",
+   "print_width": "10",
+   "reqd": 1,
+   "width": "10PX"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-02 17:52:58.594619",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Print Format NoteSheet Child",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
