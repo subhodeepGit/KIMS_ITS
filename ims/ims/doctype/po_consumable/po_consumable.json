@@ -65,10 +65,10 @@
    "reqd": 1
   },
   {
+   "fetch_from": "name_of_schooldepartment.parent_department",
    "fieldname": "for_which_department",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "For which Department",
-   "options": "Department",
    "reqd": 1
   },
   {
@@ -79,6 +79,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "item_of_purchaseexpense.material_service_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
    "label": "Item Name",
@@ -184,7 +185,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-01 13:08:23.208581",
+ "modified": "2022-11-02 09:46:36.024408",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
