@@ -3,24 +3,82 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe import utils
 
 class POConsumable(Document):
 	def validate(self):
-		print("\n\n\n\n\n\n")
 		session_user = frappe.session.user
-		print(session_user)
-		data = frappe.get_all("Employee",{"email":session_user},{"name"})
-		print(data)
-		for i in data:
-			self.append("authorized_signature",{                                     
-				"emp_id":i['name'],                                       
-				"emp_name":"Ram",                                        
-				"designation":"Dr.",                                        
-				"date_of_approval":"2022-11-02",                                        
-				"date_of_receivable":"2022-11-02",                                        
-				"department":"D",                                        
-				"approval_status":"Save",                                        
-				"previous_status":"Draft",                                        
-				"transfer_to":0,                                    
-			})
-			a.s
+		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
+			if session_user:
+				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
+				if emp_data:
+					flag="Yes"
+					object_var=""
+					for t in self.get("authorized_signature"):
+						object_var=t
+
+					if object_var!="":
+						if object_var.approval_status==self.workflow_state :
+							flag="No"
+
+					approval_status=self.workflow_state
+					previous_status=frappe.get_all("PO Consumable",{"name":self.name},["workflow_state"])
+					if not previous_status:
+						previous_status=""
+					else:
+						previous_status=previous_status[0]['workflow_state']	
+					
+					date_of_receivable=""
+					for t in self.get("authorized_signature"):
+						date_of_receivable=t.date_of_approval
+					
+					if date_of_receivable=="":
+						date_of_receivable=utils.today()
+					emp_name=emp_data[0]['salutation']+" "+emp_data[0]['full_name']
+
+
+					if flag=="Yes":
+						self.append("authorized_signature",{                                     
+							"emp_id":emp_data[0]['name'],                                       
+							"emp_name":emp_name,                                        
+							"designation":emp_data[0]['designation'],                                        
+							"date_of_approval":utils.today(),                                        
+							"date_of_receivable":date_of_receivable,                                        
+							"department":emp_data[0]['department'],                                        
+							"approval_status":approval_status,                              
+							"previous_status":previous_status,                                 
+							"transfer_to":0,                                    
+						})
+					if flag=="No":
+						for t in self.get("authorized_signature"):
+							if t.name==object_var.name:
+								previous_status=t.previous_status
+								t.emp_id=emp_data[0]['name']
+								t.emp_name=emp_name
+								t.designation=emp_data[0]['designation']
+								t.date_of_approval=utils.today()
+								t.date_of_receivable=date_of_receivable
+								t.department=emp_data[0]['department']
+								t.approval_status=approval_status
+								t.previous_status=previous_status
+								t.transfer_to=0
+
+			else:
+				frappe.throw("Employee not found")		
+		else:
+			if self.workflow_state=="Rejected and Transfer":
+				check=""
+				count=0
+				for t in self.get("authorized_signature"):
+					if t.transfer_to==1:
+						count=count+1
+						check=t.previous_status
+				if count==0:
+					frappe.throw("No Document Transferring Employee is Selected")
+				elif count==1:
+					frappe.db.sql(""" update `tabPO Consumable` set workflow_state="%s" where name="%s" """%(check,self.name))
+					frappe.db.commit()
+					frappe.throw("Your Rejection and Transfer is Completed, So Please Referesh you page")
+					pass
+				elif count>1:
+					frappe.throw("More then one Employee selected for Document Transferring")
