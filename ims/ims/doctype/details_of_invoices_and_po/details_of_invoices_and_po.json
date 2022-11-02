@@ -13,6 +13,11 @@
   "invoices_amountin_rs",
   "po_no",
   "invoice_attachment",
+  "po_attachment",
+  "delivery_challan",
+  "bill_summary",
+  "credit_memo",
+  "grn",
   "document_attachment"
  ],
  "fields": [
@@ -64,12 +69,38 @@
   {
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "po_attachment",
+   "fieldtype": "Attach",
+   "label": "PO Attachment",
+   "mandatory_depends_on": "eval:doc.workflow_state==\"Verify and Save\""
+  },
+  {
+   "fieldname": "delivery_challan",
+   "fieldtype": "Attach",
+   "label": "Delivery Challan"
+  },
+  {
+   "fieldname": "bill_summary",
+   "fieldtype": "Attach",
+   "label": "Bill Summary"
+  },
+  {
+   "fieldname": "credit_memo",
+   "fieldtype": "Attach",
+   "label": "Credit Memo"
+  },
+  {
+   "fieldname": "grn",
+   "fieldtype": "Attach",
+   "label": "GRN"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-28 12:45:32.443666",
+ "modified": "2022-11-02 18:15:55.244995",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Details of Invoices and PO",

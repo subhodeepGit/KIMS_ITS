@@ -24,34 +24,40 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Emp ID",
-   "options": "Employee"
+   "options": "Employee",
+   "read_only": 1
   },
   {
    "fieldname": "emp_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Emp Name"
+   "label": "Emp Name",
+   "read_only": 1
   },
   {
    "fieldname": "designation",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Designation"
+   "label": "Designation",
+   "read_only": 1
   },
   {
    "fieldname": "date_of_approval",
    "fieldtype": "Date",
-   "label": "Date of Approval"
+   "label": "Date of Approval",
+   "read_only": 1
   },
   {
    "fieldname": "date_of_receivable",
    "fieldtype": "Date",
-   "label": "Date of Receivable"
+   "label": "Date of Receivable",
+   "read_only": 1
   },
   {
    "fieldname": "approval_status",
    "fieldtype": "Data",
-   "label": "Approval Status"
+   "label": "Approval Status",
+   "read_only": 1
   },
   {
    "fieldname": "remarks",
@@ -62,18 +68,21 @@
    "fieldname": "department",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Department"
+   "label": "Department",
+   "read_only": 1
   },
   {
    "fieldname": "previous_status",
    "fieldtype": "Data",
-   "label": "Previous Status"
+   "label": "Previous Status",
+   "read_only": 1
   },
   {
    "default": "0",
    "fieldname": "transfer_to",
    "fieldtype": "Check",
-   "label": "Transfer to"
+   "label": "Transfer to",
+   "read_only_depends_on": "eval:doc.previous_status==\"\""
   },
   {
    "fieldname": "column_break_6",
@@ -83,7 +92,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-02 12:50:31.158150",
+ "modified": "2022-11-02 18:44:35.940090",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Authorized Signature",

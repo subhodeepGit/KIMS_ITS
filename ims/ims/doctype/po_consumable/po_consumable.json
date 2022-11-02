@@ -30,6 +30,14 @@
   "column_break_21",
   "advance_amount_already_paid_in_rs",
   "net_final_amount_to_be_paid_in_rs",
+  "journal_voucher_section",
+  "profit_center",
+  "document_number",
+  "ref_no",
+  "column_break_28",
+  "document_date",
+  "posting_date",
+  "attach_journal_voucher",
   "section_break_24",
   "authorized_signature"
  ],
@@ -181,11 +189,51 @@
    "fieldtype": "Table",
    "label": "Authorized Signature",
    "options": "Authorized Signature"
+  },
+  {
+   "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "fieldname": "journal_voucher_section",
+   "fieldtype": "Section Break",
+   "label": "Journal Voucher"
+  },
+  {
+   "fieldname": "profit_center",
+   "fieldtype": "Data",
+   "label": "Profit Center"
+  },
+  {
+   "fieldname": "document_number",
+   "fieldtype": "Data",
+   "label": "Document Number"
+  },
+  {
+   "fieldname": "ref_no",
+   "fieldtype": "Data",
+   "label": "Ref. No"
+  },
+  {
+   "fieldname": "column_break_28",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "document_date",
+   "fieldtype": "Date",
+   "label": "Document Date"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "attach_journal_voucher",
+   "fieldtype": "Attach",
+   "label": "Attach Journal Voucher"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-02 11:18:28.674470",
+ "modified": "2022-11-02 18:37:00.358305",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
