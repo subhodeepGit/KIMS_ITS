@@ -77,11 +77,13 @@
   {
    "fieldname": "previous_status",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Previous Status",
    "read_only": 1
   },
   {
    "default": "0",
+   "depends_on": "eval:doc.disapproval_check==0",
    "fieldname": "transfer_to",
    "fieldtype": "Check",
    "label": "Transfer to",
@@ -115,7 +117,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-03 10:59:45.481819",
+ "modified": "2022-11-03 13:21:55.184478",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Authorized Signature",

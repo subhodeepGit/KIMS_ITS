@@ -61,24 +61,37 @@ class POConsumable(Document):
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
 								t.previous_status=previous_status
-								t.transfer_to=0
+								# t.transfer_to=0
 
 			else:
 				frappe.throw("Employee not found")		
 		else:
 			if self.workflow_state=="Rejected and Transfer":
+				print("\n\n\n\n")
 				check=""
 				count=0
+				name=""
 				for t in self.get("authorized_signature"):
-					if t.transfer_to==1:
-						count=count+1
+					if t.transfer_to==1 and t.disapproval_check==0:
+						# print(t.transfer_to)
+						# print(t.disapproval_check)
+						# print(t.name)
 						check=t.previous_status
-				if count==0:
-					frappe.throw("No Document Transferring Employee is Selected")
-				elif count==1:
-					frappe.db.sql(""" update `tabPO Consumable` set workflow_state="%s" where name="%s" """%(check,self.name))
-					frappe.db.commit()
-					frappe.throw("Your Rejection and Transfer is Completed, So Please Referesh you page")
-					pass
-				elif count>1:
-					frappe.throw("More then one Employee selected for Document Transferring")
+						name=t.name
+				if name!="":
+					emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
+					if emp_data:
+						emp_name=emp_data[0]['salutation']+" "+emp_data[0]['full_name']
+						for t in self.get("authorized_signature"):
+							if t.name>=name:
+								frappe.db.sql(""" update `tabAuthorized Signature` set disapproval_check=1,disapproval_emp_name="%s",disapproval_emp="%s" 
+												where name="%s" """%(emp_name,emp_data[0]['name'],t.name))
+								frappe.db.commit()
+
+						frappe.db.sql(""" update `tabPO Consumable` set workflow_state="%s" where name="%s" """%(check,self.name))
+						frappe.db.commit()
+						frappe.throw("Your Rejection and Transfer is Completed, So Please Referesh you page")	
+					else:
+						frappe.throw("Employee Not Found")			
+				else:
+					frappe.throw("Transfer To Employee Not Selected")			
