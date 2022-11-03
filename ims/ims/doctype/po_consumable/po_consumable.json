@@ -22,6 +22,10 @@
   "priority",
   "master_invoice_attachment",
   "note_sheet_attachment",
+  "audit_section_section",
+  "audit_ref_no",
+  "column_break_18",
+  "today_date",
   "section_break_15",
   "details_of_invoices_and_po",
   "section_break_18",
@@ -48,6 +52,7 @@
    "in_list_view": 1,
    "label": "Company",
    "options": "Company",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -55,6 +60,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Note Sheet No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -62,6 +68,7 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Date Of Note Sheet",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -70,6 +77,7 @@
    "in_list_view": 1,
    "label": "Name Of School/Department",
    "options": "Department",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -77,6 +85,7 @@
    "fieldtype": "Link",
    "label": "For which Department",
    "options": "Department",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -84,6 +93,7 @@
    "fieldtype": "Link",
    "label": "Item Of Purchase/Expense",
    "options": "Material or Service",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -99,6 +109,7 @@
    "fieldtype": "Link",
    "label": "Supplier Code",
    "options": "Supplier",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -113,6 +124,7 @@
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
@@ -120,17 +132,20 @@
    "fieldtype": "Select",
    "label": "Priority",
    "options": "\nUrgent\nNormal\nHigh Priority\nLow Priority",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
    "reqd": 1
   },
   {
    "fieldname": "master_invoice_attachment",
    "fieldtype": "Attach",
-   "label": "Master Invoice Attachment"
+   "label": "Master Invoice Attachment",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
   },
   {
    "fieldname": "note_sheet_attachment",
    "fieldtype": "Attach",
-   "label": "Note sheet Attachment"
+   "label": "Note sheet Attachment",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
   },
   {
    "fieldname": "column_break_7",
@@ -138,7 +153,8 @@
   },
   {
    "fieldname": "section_break_15",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
   },
   {
    "fieldname": "details_of_invoices_and_po",
@@ -156,7 +172,8 @@
   {
    "depends_on": "eval:doc.details_of_invoices_and_po",
    "fieldname": "section_break_18",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
   },
   {
    "default": "0",
@@ -191,7 +208,8 @@
   },
   {
    "fieldname": "section_break_24",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
   },
   {
    "fieldname": "authorized_signature",
@@ -203,22 +221,27 @@
    "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "journal_voucher_section",
    "fieldtype": "Section Break",
-   "label": "Journal Voucher"
+   "label": "Journal Voucher",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
   },
   {
+   "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "profit_center",
    "fieldtype": "Data",
-   "label": "Profit Center"
+   "label": "Profit Center",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
   },
   {
    "fieldname": "document_number",
    "fieldtype": "Data",
-   "label": "Document Number"
+   "label": "Document Number",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
   },
   {
    "fieldname": "ref_no",
    "fieldtype": "Data",
-   "label": "Ref. No"
+   "label": "Ref. No",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
   },
   {
    "fieldname": "column_break_28",
@@ -227,22 +250,49 @@
   {
    "fieldname": "document_date",
    "fieldtype": "Date",
-   "label": "Document Date"
+   "label": "Document Date",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "label": "Posting Date"
+   "label": "Posting Date",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
   },
   {
    "fieldname": "attach_journal_voucher",
    "fieldtype": "Attach",
-   "label": "Attach Journal Voucher"
+   "label": "Attach Journal Voucher",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+  },
+  {
+   "depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\");",
+   "fieldname": "audit_section_section",
+   "fieldtype": "Section Break",
+   "label": "Audit Section"
+  },
+  {
+   "fieldname": "audit_ref_no",
+   "fieldtype": "Data",
+   "label": "Audit Ref No",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\");"
+  },
+  {
+   "default": "Today",
+   "fieldname": "today_date",
+   "fieldtype": "Date",
+   "label": "Today Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-03 14:58:42.188629",
+ "modified": "2022-11-03 18:34:51.822010",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

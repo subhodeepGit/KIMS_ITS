@@ -51,3 +51,19 @@ frappe.ui.form.on('PO Consumable',"net_final_amount_to_be_paid_in_rs", function(
 	frm.set_value("net_final_amount_to_be_paid_in_rs",net_amount)
 	refresh_field("net_final_amount_to_be_paid_in_rs");
 });
+
+// Child table field Mandatory when workflow state in draft
+frappe.ui.form.on('PO Consumable', {
+	before_load: function(frm) {
+		frm.trigger("mandatory_field");
+		},
+		mandatory_field(frm){
+			if(frm.doc.workflow_state=="Draft"){
+			var df1 = frappe.meta.get_docfield("Details of Invoices and PO","po_attachment", cur_frm.doc.name);
+			df1.reqd = 1;
+			}
+		},
+		before_save: function(frm) {
+			frm.trigger("mandatory_field");
+		},
+});

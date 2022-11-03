@@ -93,19 +93,10 @@
   "docstatus": 0,
   "doctype": "Workflow State",
   "icon": "",
-  "modified": "2022-11-01 12:07:26.955738",
+  "modified": "2022-11-03 13:38:42.850304",
   "name": "Cancelled",
-  "style": "",
+  "style": "Danger",
   "workflow_state_name": "Cancelled"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2022-11-01 12:11:05.119735",
-  "name": "Approved by MM GM",
-  "style": "",
-  "workflow_state_name": "Approved by MM GM"
  },
  {
   "docstatus": 0,
@@ -430,5 +421,41 @@
   "name": "Verify and Save",
   "style": "",
   "workflow_state_name": "Verify and Save"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-03 17:21:54.907629",
+  "name": "Approved by Dy. Head MM",
+  "style": "",
+  "workflow_state_name": "Approved by Dy. Head MM"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-03 17:25:56.837774",
+  "name": "Approved by Accounts Clerk",
+  "style": "",
+  "workflow_state_name": "Approved by Accounts Clerk"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-03 17:29:11.048825",
+  "name": "Approved by Audit User",
+  "style": "",
+  "workflow_state_name": "Approved by Audit User"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-01 12:11:05.119735",
+  "name": "Approved by MM GM",
+  "style": "",
+  "workflow_state_name": "Approved by MM GM"
  }
 ]

@@ -1732,7 +1732,7 @@
   "doctype": "Workflow",
   "document_type": "PO Consumable",
   "is_active": 1,
-  "modified": "2022-11-02 18:40:08.381145",
+  "modified": "2022-11-03 17:29:41.491352",
   "name": "Consumable W",
   "override_status": 0,
   "send_email_alert": 1,
@@ -1785,7 +1785,7 @@
     "parent": "Consumable W",
     "parentfield": "states",
     "parenttype": "Workflow",
-    "state": "Approved by MM Deputy Director",
+    "state": "Approved by Dy. Head MM",
     "update_field": "document_status",
     "update_value": null
    },
@@ -1876,7 +1876,7 @@
     "parent": "Consumable W",
     "parentfield": "states",
     "parenttype": "Workflow",
-    "state": "Approved by Audit User 2",
+    "state": "Approved by Audit User",
     "update_field": "document_status",
     "update_value": null
    },
@@ -1916,6 +1916,19 @@
     "parentfield": "states",
     "parenttype": "Workflow",
     "state": "Passed for Payment",
+    "update_field": "document_status",
+    "update_value": null
+   },
+   {
+    "allow_edit": "Accounts Clerk",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Consumable W",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Clerk",
     "update_field": "document_status",
     "update_value": null
    }
@@ -1959,7 +1972,7 @@
     "allow_self_approval": 1,
     "allowed": "MM Deputy Director",
     "condition": null,
-    "next_state": "Approved by MM Deputy Director",
+    "next_state": "Approved by Dy. Head MM",
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
@@ -1996,7 +2009,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by MM Deputy Director"
+    "state": "Approved by Dy. Head MM"
    },
    {
     "action": "Reject",
@@ -2007,7 +2020,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by MM Deputy Director"
+    "state": "Approved by Dy. Head MM"
    },
    {
     "action": "Reject and Transfer",
@@ -2018,14 +2031,14 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by MM Deputy Director"
+    "state": "Approved by Dy. Head MM"
    },
    {
     "action": "Approve",
     "allow_self_approval": 1,
     "allowed": "Accounts Head (CFO)",
     "condition": null,
-    "next_state": "Approved by Accounts Head(CFO)",
+    "next_state": "Approved by Accounts Clerk",
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
@@ -2052,6 +2065,39 @@
     "parentfield": "transitions",
     "parenttype": "Workflow",
     "state": "Approved by MM GM"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Approved by Accounts Head(CFO)",
+    "parent": "Consumable W",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Clerk"
+   },
+   {
+    "action": "Reject",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Cancelled",
+    "parent": "Consumable W",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Clerk"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Consumable W",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Clerk"
    },
    {
     "action": "Approve",
@@ -2124,7 +2170,7 @@
     "allow_self_approval": 1,
     "allowed": "Auditor(Audit Verification)",
     "condition": null,
-    "next_state": "Approved by Audit User 2",
+    "next_state": "Approved by Audit User",
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
@@ -2161,7 +2207,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Audit User 2"
+    "state": "Approved by Audit User"
    },
    {
     "action": "Reject",
@@ -2172,7 +2218,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Audit User 2"
+    "state": "Approved by Audit User"
    },
    {
     "action": "Reject and Transfer",
@@ -2183,7 +2229,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Audit User 2"
+    "state": "Approved by Audit User"
    },
    {
     "action": "Approve",
