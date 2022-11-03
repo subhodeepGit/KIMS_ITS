@@ -166,8 +166,7 @@
   {
    "fieldname": "document_status",
    "fieldtype": "Data",
-   "label": "Document Status",
-   "read_only": 1
+   "label": "Document Status"
   },
   {
    "depends_on": "eval:doc.details_of_invoices_and_po",
@@ -187,7 +186,8 @@
    "default": "0",
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
-   "label": "TDS Amount To Be Deducted (In Rs.)"
+   "label": "TDS Amount To Be Deducted (In Rs.)",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
    "fieldname": "column_break_21",
@@ -197,7 +197,8 @@
    "default": "0",
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Advance Amount Already Paid (In Rs.)"
+   "label": "Advance Amount Already Paid (In Rs.)",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
    "default": "0",
@@ -221,27 +222,29 @@
    "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "journal_voucher_section",
    "fieldtype": "Section Break",
-   "label": "Journal Voucher",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
+   "label": "Journal Voucher"
   },
   {
    "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "profit_center",
    "fieldtype": "Data",
    "label": "Profit Center",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
    "fieldname": "document_number",
    "fieldtype": "Data",
    "label": "Document Number",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
    "fieldname": "ref_no",
    "fieldtype": "Data",
    "label": "Ref. No",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
    "fieldname": "column_break_28",
@@ -251,22 +254,25 @@
    "fieldname": "document_date",
    "fieldtype": "Date",
    "label": "Document Date",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
    "fieldname": "attach_journal_voucher",
    "fieldtype": "Attach",
    "label": "Attach Journal Voucher",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\")"
   },
   {
-   "depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\");",
+   "depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "audit_section_section",
    "fieldtype": "Section Break",
    "label": "Audit Section"
@@ -275,8 +281,8 @@
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
    "label": "Audit Ref No",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
   },
   {
    "default": "Today",
@@ -292,7 +298,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-03 18:34:51.822010",
+ "modified": "2022-11-03 18:47:32.711671",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
