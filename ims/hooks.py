@@ -186,7 +186,7 @@ app_license = "MIT"
 #	"ims.auth.validate"
 # ]
 
-fixtures = [
+# fixtures = [
 # 	{"dt": "Custom DocPerm", "filters": [
 # 		[
 # 			"parent", "not in", [
@@ -198,4 +198,4 @@ fixtures = [
 #     {"dt": "Workflow State"},
 #     {"dt": "Workflow Action Master"},
     # {"dt": "Module Profile"},
-]
+# ]
