@@ -90,8 +90,8 @@ class POConsumable(Document):
 
 						frappe.db.sql(""" update `tabPO Consumable` set workflow_state="%s" where name="%s" """%(check,self.name))
 						frappe.db.commit()
-						frappe.throw("Your Rejection and Transfer is Completed, So Please Referesh you page")	
+						frappe.throw("Your Rejection and Transfer is Completed, So Please Referesh your page")	
 					else:
 						frappe.throw("Employee Not Found")			
 				else:
-					frappe.throw("Transfer To Employee Not Selected")			
+					frappe.throw("Transfer To Employee Not Selected")

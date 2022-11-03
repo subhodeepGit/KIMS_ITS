@@ -26,6 +26,7 @@ frappe.ui.form.on('Details of Invoices and PO', {	//Child table Name
 	}
 });
 
+// Calculation
 frappe.ui.form.on('PO Consumable',"advance_amount_already_paid_in_rs", function(frm) {
 	var net_amount = 0;
 	net_amount = cur_frm.doc.total_amount_in_rs - cur_frm.doc.tds_amount_to_be_deducted_in_rs - cur_frm.doc.advance_amount_already_paid_in_rs
@@ -33,6 +34,18 @@ frappe.ui.form.on('PO Consumable',"advance_amount_already_paid_in_rs", function(
 	refresh_field("net_final_amount_to_be_paid_in_rs");
 });
 frappe.ui.form.on('PO Consumable',"tds_amount_to_be_deducted_in_rs", function(frm) {
+	var net_amount = 0;
+	net_amount = cur_frm.doc.total_amount_in_rs - cur_frm.doc.advance_amount_already_paid_in_rs - cur_frm.doc.tds_amount_to_be_deducted_in_rs
+	frm.set_value("net_final_amount_to_be_paid_in_rs",net_amount)
+	refresh_field("net_final_amount_to_be_paid_in_rs");
+});
+frappe.ui.form.on('PO Consumable',"net_final_amount_to_be_paid_in_rs", function(frm) {
+	var net_amount = 0;
+	net_amount = cur_frm.doc.total_amount_in_rs - cur_frm.doc.tds_amount_to_be_deducted_in_rs - cur_frm.doc.advance_amount_already_paid_in_rs
+	frm.set_value("net_final_amount_to_be_paid_in_rs",net_amount)
+	refresh_field("net_final_amount_to_be_paid_in_rs");
+});
+frappe.ui.form.on('PO Consumable',"net_final_amount_to_be_paid_in_rs", function(frm) {
 	var net_amount = 0;
 	net_amount = cur_frm.doc.total_amount_in_rs - cur_frm.doc.advance_amount_already_paid_in_rs - cur_frm.doc.tds_amount_to_be_deducted_in_rs
 	frm.set_value("net_final_amount_to_be_paid_in_rs",net_amount)
