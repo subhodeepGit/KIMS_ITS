@@ -16,7 +16,10 @@
   "remarks",
   "approval_status",
   "previous_status",
-  "transfer_to"
+  "transfer_to",
+  "disapproval_check",
+  "disapproval_emp",
+  "disapproval_emp_name"
  ],
  "fields": [
   {
@@ -87,12 +90,32 @@
   {
    "fieldname": "column_break_6",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "disapproval_check",
+   "fieldtype": "Check",
+   "label": "Disapproval Check",
+   "read_only": 1
+  },
+  {
+   "fieldname": "disapproval_emp",
+   "fieldtype": "Link",
+   "label": "Disapproval Emp",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "disapproval_emp_name",
+   "fieldtype": "Data",
+   "label": "Disapproval Emp Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-02 18:44:35.940090",
+ "modified": "2022-11-03 10:59:45.481819",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Authorized Signature",
