@@ -67,3 +67,13 @@ frappe.ui.form.on('PO Consumable', {
 			frm.trigger("mandatory_field");
 		},
 });
+
+
+frappe.ui.form.on("PO Consumable", {
+	onload:function(frm){
+		//cannot able to add rows
+		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
+		//cannot able to delete rows
+		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
+	}
+});
