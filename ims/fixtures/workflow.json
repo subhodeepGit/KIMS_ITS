@@ -1732,7 +1732,7 @@
   "doctype": "Workflow",
   "document_type": "PO Consumable",
   "is_active": 1,
-  "modified": "2022-11-03 17:29:41.491352",
+  "modified": "2022-11-03 19:27:20.441860",
   "name": "Consumable W",
   "override_status": 0,
   "send_email_alert": 1,
@@ -1787,7 +1787,7 @@
     "parenttype": "Workflow",
     "state": "Approved by Dy. Head MM",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Submitted by Dy. Head MM"
    },
    {
     "allow_edit": "Note Keeper(Asst Store Keeper)",
@@ -1813,7 +1813,7 @@
     "parenttype": "Workflow",
     "state": "Approved by MM GM",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Submitted by MM GM"
    },
    {
     "allow_edit": "Note Keeper(Asst Store Keeper)",
@@ -1826,7 +1826,7 @@
     "parenttype": "Workflow",
     "state": "Rejected and Transfer",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Rejected and Transfer"
    },
    {
     "allow_edit": "Director, Administration",
@@ -1839,7 +1839,7 @@
     "parenttype": "Workflow",
     "state": "Approved by Accounts Head(CFO)",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Submitted by Accounts Head(CFO)"
    },
    {
     "allow_edit": "Audit Clerk(Receiving by Audit Department)",
@@ -1852,7 +1852,7 @@
     "parenttype": "Workflow",
     "state": "Approved by Director",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Submitted by DIrector"
    },
    {
     "allow_edit": "Auditor(Audit Verification)",
@@ -1865,7 +1865,7 @@
     "parenttype": "Workflow",
     "state": "Bill Received by Audit",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Bill Received by Audit"
    },
    {
     "allow_edit": "Pro VC",
@@ -1878,7 +1878,7 @@
     "parenttype": "Workflow",
     "state": "Approved by Audit User",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Submitted by Audit User"
    },
    {
     "allow_edit": "Pro VC",
@@ -1891,7 +1891,7 @@
     "parenttype": "Workflow",
     "state": "Approved by Pro VC",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Submitted by Pro VC"
    },
    {
     "allow_edit": "Accounts Clerk",
@@ -1904,7 +1904,7 @@
     "parenttype": "Workflow",
     "state": "Journal Entry by Account Dept.",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Journal Entry by Account Dept."
    },
    {
     "allow_edit": "Accounts Clerk",
@@ -1917,7 +1917,7 @@
     "parenttype": "Workflow",
     "state": "Passed for Payment",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Passed for Payment"
    },
    {
     "allow_edit": "Accounts Clerk",
@@ -1930,7 +1930,7 @@
     "parenttype": "Workflow",
     "state": "Approved by Accounts Clerk",
     "update_field": "document_status",
-    "update_value": null
+    "update_value": "Submitted by Accounts Clerk"
    }
   ],
   "transitions": [
