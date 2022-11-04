@@ -18,8 +18,10 @@ class Employee(Document):
 				self.db_set("new_password",None)	
 
 	def on_trash(self):
-		for usr in frappe.db.get_all("User", {'email':self.email},{'name'}):
-			frappe.delete_doc("User",usr.name)
+		data = frappe.db.get_all("User", {'email':self.email},{'name'})
+		if data:
+			for usr in frappe.db.get_all("User", {'email':self.email},{'name'}):
+				frappe.delete_doc("User",usr.name)
 
 	def after_insert(self):
 		self.create_emp_user()

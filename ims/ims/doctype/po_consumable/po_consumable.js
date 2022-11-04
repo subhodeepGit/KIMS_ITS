@@ -59,15 +59,16 @@ frappe.ui.form.on('PO Consumable', {
 		},
 		mandatory_field(frm){
 			if(frm.doc.workflow_state=="Draft"){
-			var df1 = frappe.meta.get_docfield("Details of Invoices and PO","po_attachment", cur_frm.doc.name);
-			df1.reqd = 1;
+				frm.set_value("document_status","Invoice in Draft State")
+				refresh_field("document_status");
+				var df1 = frappe.meta.get_docfield("Details of Invoices and PO","po_attachment", cur_frm.doc.name);
+				df1.reqd = 1;
 			}
 		},
 		before_save: function(frm) {
 			frm.trigger("mandatory_field");
 		},
 });
-
 
 frappe.ui.form.on("PO Consumable", {
 	onload:function(frm){
