@@ -1,7 +1,0 @@
-## Ims
-
-IMS
-
-#### License
-
-MIT
