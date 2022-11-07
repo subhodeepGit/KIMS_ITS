@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "PO-MM.-.####",
  "creation": "2022-10-28 12:53:19.163285",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -80,6 +81,7 @@
    "fieldname": "item_name",
    "fieldtype": "Data",
    "label": "Item Name",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -94,6 +96,7 @@
    "fieldname": "name_of_supplier",
    "fieldtype": "Data",
    "label": "Name Of Supplier",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -145,12 +148,15 @@
    "fieldtype": "Section Break"
   },
   {
+   "default": "0",
    "fieldname": "total_amount_in_rs",
    "fieldtype": "Currency",
    "label": "Total Amount (IN Rs.)",
+   "read_only": 1,
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
    "label": "TDS Amount To Be Deducted (In Rs.)"
@@ -160,14 +166,17 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
    "label": "Advance Amount Already Paid (In Rs.)"
   },
   {
+   "default": "0",
    "fieldname": "net_final_amount_to_be_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Net Final Amount To Be Paid (In Rs.)"
+   "label": "Net Final Amount To Be Paid (In Rs.)",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_24",
@@ -182,10 +191,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-04 11:30:47.524187",
+ "modified": "2022-11-04 18:00:13.141874",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {

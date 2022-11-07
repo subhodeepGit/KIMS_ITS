@@ -284,8 +284,8 @@
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
    "label": "Audit Ref No",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");"
+   "mandatory_depends_on": "eval:(doc.workflow_state===\"Approved by Director\");",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\");"
   },
   {
    "default": "Today",
@@ -301,7 +301,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-03 19:05:33.019792",
+ "modified": "2022-11-04 17:35:06.271053",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

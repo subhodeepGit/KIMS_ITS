@@ -78,3 +78,17 @@ frappe.ui.form.on("PO Consumable", {
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
 	}
 });
+
+// frappe.ui.form.on('PO Consumable', {
+// 	refresh: function(frm) {
+// 		if(frm.doc.workflow_state=="Approved by Director"){
+// 			frm.set_df_property('audit_ref_no', 'reqd', 1)
+// 		}
+// 	}
+// });
+// frappe.ui.form.on('PO Consumable', {
+// 	refresh: function(frm) {
+// 		// $('.primary-action').prop('hidden', true); //hide save button
+// 		$('.btn-primary').hide(); //hide all button
+// 		}
+// });
