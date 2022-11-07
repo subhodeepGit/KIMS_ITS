@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // Copyright (c) 2022, SOUL and contributors
 // For license information, please see license.txt
 
@@ -102,4 +100,3 @@ frappe.ui.form.on("PO Consumable", {
 // 		$('.btn-primary').hide(); //hide all button
 // 		}
 // });
->>>>>>> 18061d6b6d39e33d217b4a78a12da4db25bf152a

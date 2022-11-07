@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // Copyright (c) 2022, SOUL and contributors
 // For license information, please see license.txt
 
@@ -70,4 +68,3 @@ frappe.ui.form.on("PO Material Management", {
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
 	}
 });
->>>>>>> 18061d6b6d39e33d217b4a78a12da4db25bf152a

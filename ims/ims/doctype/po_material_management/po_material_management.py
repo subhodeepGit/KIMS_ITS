@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # Copyright (c) 2022, SOUL and contributors
 # For license information, please see license.txt
 
@@ -92,4 +90,3 @@ class POMaterialManagement(Document):
 						frappe.throw("Employee Not Found")			
 				else:
 					frappe.throw("Transfer To Employee Not Selected")
->>>>>>> 18061d6b6d39e33d217b4a78a12da4db25bf152a
