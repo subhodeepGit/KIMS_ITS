@@ -40,7 +40,7 @@
    "in_list_view": 1,
    "label": "Company",
    "options": "Company",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -48,14 +48,14 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Note Sheet No.",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "date_of_note_sheet",
    "fieldtype": "Date",
    "label": "Date Of Note Sheet",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -63,7 +63,7 @@
    "fieldtype": "Link",
    "label": "Name Of School/Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -71,7 +71,7 @@
    "fieldtype": "Link",
    "label": "For which Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -79,7 +79,7 @@
    "fieldtype": "Link",
    "label": "Item Of Purchase/Expense",
    "options": "Material or Service",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -95,7 +95,7 @@
    "fieldtype": "Link",
    "label": "Supplier Code",
    "options": "Supplier",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -110,7 +110,7 @@
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -118,20 +118,20 @@
    "fieldtype": "Select",
    "label": "Priority",
    "options": "\nUrgent\nNormal\nHigh Priority\nLow Priority",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "master_invoice_attachment",
    "fieldtype": "Attach",
    "label": "Master Invoice Attachment",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "note_sheet_attachment",
    "fieldtype": "Attach",
    "label": "Note sheet Attachment",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "document_status",
@@ -152,7 +152,7 @@
    "fieldtype": "Table",
    "label": "Details of Invoices & PO",
    "options": "Invoices and PO",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") ",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -172,7 +172,7 @@
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
    "label": "TDS Amount To Be Deducted (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "column_break_21",
@@ -183,7 +183,7 @@
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
    "label": "Advance Amount Already Paid (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "default": "0",
@@ -201,12 +201,12 @@
    "fieldtype": "Table",
    "label": "Authorized Signature",
    "options": "Authorized Signature",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-07 12:09:42.085099",
+ "modified": "2022-11-07 12:20:12.625645",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
