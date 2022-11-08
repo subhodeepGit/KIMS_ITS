@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "NON-PO-CON.-.####",
  "creation": "2022-10-28 14:26:29.684888",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -273,10 +274,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-08 15:19:00.041072",
+ "modified": "2022-11-08 16:26:44.676159",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {

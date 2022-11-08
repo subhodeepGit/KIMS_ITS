@@ -4,7 +4,7 @@
   "doctype": "Workflow",
   "document_type": "PO Consignment",
   "is_active": 1,
-  "modified": "2022-11-08 15:42:52.877245",
+  "modified": "2022-11-08 16:06:44.109328",
   "name": "PO Consignment Workflow",
   "override_status": 0,
   "send_email_alert": 1,
@@ -101,7 +101,7 @@
     "update_value": "Rejected and Transfer"
    },
    {
-    "allow_edit": "Director, Administration",
+    "allow_edit": "Accounts Clerk",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -153,7 +153,7 @@
     "update_value": "Submitted by Audit User"
    },
    {
-    "allow_edit": "Pro VC",
+    "allow_edit": "Accounts Clerk",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -192,7 +192,7 @@
     "update_value": "Passed for Payment"
    },
    {
-    "allow_edit": "Accounts Clerk",
+    "allow_edit": "Director, Administration",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -336,7 +336,7 @@
     "allow_self_approval": 1,
     "allowed": "Accounts Head (CFO)",
     "condition": null,
-    "next_state": "Approved by Accounts Clerk",
+    "next_state": "Approved by Accounts Head(CFO)",
     "parent": "PO Consignment Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
@@ -358,11 +358,11 @@
     "allow_self_approval": 1,
     "allowed": "Accounts Clerk",
     "condition": null,
-    "next_state": "Approved by Accounts Head(CFO)",
+    "next_state": "Approved by Accounts Clerk",
     "parent": "PO Consignment Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Clerk"
+    "state": "Approved by Accounts Head(CFO)"
    },
    {
     "action": "Reject and Transfer",
@@ -373,7 +373,7 @@
     "parent": "PO Consignment Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Clerk"
+    "state": "Approved by Accounts Head(CFO)"
    },
    {
     "action": "Approve",
@@ -384,7 +384,7 @@
     "parent": "PO Consignment Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Head(CFO)"
+    "state": "Approved by Accounts Clerk"
    },
    {
     "action": "Reject and Transfer",
@@ -395,7 +395,7 @@
     "parent": "PO Consignment Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Head(CFO)"
+    "state": "Approved by Accounts Clerk"
    },
    {
     "action": "Approve",
@@ -2233,7 +2233,7 @@
   "doctype": "Workflow",
   "document_type": "PO Consumable",
   "is_active": 1,
-  "modified": "2022-11-07 12:12:10.702473",
+  "modified": "2022-11-08 16:11:50.188738",
   "name": "Consumable W",
   "override_status": 0,
   "send_email_alert": 1,
@@ -2330,7 +2330,7 @@
     "update_value": "Rejected and Transfer"
    },
    {
-    "allow_edit": "Director, Administration",
+    "allow_edit": "Accounts Clerk",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -2382,7 +2382,7 @@
     "update_value": "Submitted by Audit User"
    },
    {
-    "allow_edit": "Pro VC",
+    "allow_edit": "Accounts Clerk",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -2421,7 +2421,7 @@
     "update_value": "Passed for Payment"
    },
    {
-    "allow_edit": "Accounts Clerk",
+    "allow_edit": "Director, Administration",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -2517,7 +2517,7 @@
     "allow_self_approval": 1,
     "allowed": "Accounts Head (CFO)",
     "condition": null,
-    "next_state": "Approved by Accounts Clerk",
+    "next_state": "Approved by Accounts Head(CFO)",
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
@@ -2539,11 +2539,11 @@
     "allow_self_approval": 1,
     "allowed": "Accounts Clerk",
     "condition": null,
-    "next_state": "Approved by Accounts Head(CFO)",
+    "next_state": "Approved by Accounts Clerk",
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Clerk"
+    "state": "Approved by Accounts Head(CFO)"
    },
    {
     "action": "Reject and Transfer",
@@ -2554,7 +2554,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Clerk"
+    "state": "Approved by Accounts Head(CFO)"
    },
    {
     "action": "Approve",
@@ -2565,7 +2565,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Head(CFO)"
+    "state": "Approved by Accounts Clerk"
    },
    {
     "action": "Reject and Transfer",
@@ -2576,7 +2576,7 @@
     "parent": "Consumable W",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Head(CFO)"
+    "state": "Approved by Accounts Clerk"
    },
    {
     "action": "Approve",
@@ -2686,7 +2686,7 @@
   "doctype": "Workflow",
   "document_type": "PO Material Management",
   "is_active": 1,
-  "modified": "2022-11-07 10:48:00.519135",
+  "modified": "2022-11-08 16:16:16.015757",
   "name": "PO MM",
   "override_status": 0,
   "send_email_alert": 1,
@@ -2770,7 +2770,7 @@
     "update_value": "Rejected and Transfer"
    },
    {
-    "allow_edit": "Director, Administration",
+    "allow_edit": "Accounts Clerk",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -2822,7 +2822,7 @@
     "update_value": "Submitted by Audit User"
    },
    {
-    "allow_edit": "Pro VC",
+    "allow_edit": "Accounts Clerk",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -2861,7 +2861,7 @@
     "update_value": "Passed for Payment"
    },
    {
-    "allow_edit": "Accounts Clerk",
+    "allow_edit": "Director, Administration",
     "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
@@ -2935,7 +2935,7 @@
     "allow_self_approval": 1,
     "allowed": "Accounts Head (CFO)",
     "condition": null,
-    "next_state": "Approved by Accounts Clerk",
+    "next_state": "Approved by Accounts Head(CFO)",
     "parent": "PO MM",
     "parentfield": "transitions",
     "parenttype": "Workflow",
@@ -2957,11 +2957,11 @@
     "allow_self_approval": 1,
     "allowed": "Accounts Clerk",
     "condition": null,
-    "next_state": "Approved by Accounts Head(CFO)",
+    "next_state": "Approved by Accounts Clerk",
     "parent": "PO MM",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Clerk"
+    "state": "Approved by Accounts Head(CFO)"
    },
    {
     "action": "Reject and Transfer",
@@ -2972,7 +2972,7 @@
     "parent": "PO MM",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Clerk"
+    "state": "Approved by Accounts Head(CFO)"
    },
    {
     "action": "Approve",
@@ -2983,7 +2983,7 @@
     "parent": "PO MM",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Head(CFO)"
+    "state": "Approved by Accounts Clerk"
    },
    {
     "action": "Reject and Transfer",
@@ -2994,7 +2994,7 @@
     "parent": "PO MM",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Approved by Accounts Head(CFO)"
+    "state": "Approved by Accounts Clerk"
    },
    {
     "action": "Approve",
@@ -3097,6 +3097,389 @@
    }
   ],
   "workflow_name": "PO MM",
+  "workflow_state_field": "workflow_state"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow",
+  "document_type": "Non PO Contract",
+  "is_active": 1,
+  "modified": "2022-11-08 16:24:06.792320",
+  "name": "Non Po Contract Workflow",
+  "override_status": 0,
+  "send_email_alert": 1,
+  "states": [
+   {
+    "allow_edit": "Note Keeper(Accounts Clerk)",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Draft",
+    "update_field": "document_status",
+    "update_value": "Invoice in Draft State"
+   },
+   {
+    "allow_edit": "Note Keeper(Accounts Clerk)",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Verify and Save",
+    "update_field": "document_status",
+    "update_value": "Document save"
+   },
+   {
+    "allow_edit": "Accounts Head (CFO)",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Verified & Submitted by Note Creator",
+    "update_field": "document_status",
+    "update_value": "Submitted by Note Keeper"
+   },
+   {
+    "allow_edit": "Note Keeper(Accounts Clerk)",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Cancelled",
+    "update_field": "document_status",
+    "update_value": "Document cancelled Note Keeper"
+   },
+   {
+    "allow_edit": "Note Keeper(Accounts Clerk)",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Rejected and Transfer",
+    "update_field": "document_status",
+    "update_value": "Rejected and Transfer"
+   },
+   {
+    "allow_edit": "Director, Administration",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Clerk",
+    "update_field": "document_status",
+    "update_value": "Submitted by Accounts Head(CFO)"
+   },
+   {
+    "allow_edit": "Audit Clerk(Receiving by Audit Department)",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved by Director",
+    "update_field": "document_status",
+    "update_value": "Submitted by DIrector"
+   },
+   {
+    "allow_edit": "Auditor(Audit Verification)",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Bill Received by Audit",
+    "update_field": "document_status",
+    "update_value": "Bill Received by Audit"
+   },
+   {
+    "allow_edit": "Pro VC",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved by Audit User",
+    "update_field": "document_status",
+    "update_value": "Submitted by Audit User"
+   },
+   {
+    "allow_edit": "Accounts Clerk",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved by Pro VC",
+    "update_field": "document_status",
+    "update_value": "Submitted by Pro VC"
+   },
+   {
+    "allow_edit": "Accounts Clerk",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Journal Entry by Account Dept.",
+    "update_field": "document_status",
+    "update_value": "Journal Entry by Account Dept."
+   },
+   {
+    "allow_edit": "Accounts Clerk",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Passed for Payment",
+    "update_field": "document_status",
+    "update_value": "Passed for Payment"
+   },
+   {
+    "allow_edit": "Accounts Clerk",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Head(CFO)",
+    "update_field": "document_status",
+    "update_value": "Submitted by Accounts Clerk"
+   }
+  ],
+  "transitions": [
+   {
+    "action": "Verify and Save",
+    "allow_self_approval": 1,
+    "allowed": "Note Keeper(Accounts Clerk)",
+    "condition": null,
+    "next_state": "Verify and Save",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Draft"
+   },
+   {
+    "action": "Cancel",
+    "allow_self_approval": 1,
+    "allowed": "Note Keeper(Accounts Clerk)",
+    "condition": "",
+    "next_state": "Cancelled",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Draft"
+   },
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "Note Keeper(Accounts Clerk)",
+    "condition": null,
+    "next_state": "Verified & Submitted by Note Creator",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Verify and Save"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Head (CFO)",
+    "condition": null,
+    "next_state": "Approved by Accounts Head(CFO)",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Verified & Submitted by Note Creator"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Head (CFO)",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Verified & Submitted by Note Creator"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Approved by Accounts Clerk",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Head(CFO)"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Head(CFO)"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Director, Administration",
+    "condition": null,
+    "next_state": "Approved by Director",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Clerk"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Director, Administration",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Accounts Clerk"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Audit Clerk(Receiving by Audit Department)",
+    "condition": null,
+    "next_state": "Bill Received by Audit",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Director"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Audit Clerk(Receiving by Audit Department)",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Director"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Auditor(Audit Verification)",
+    "condition": null,
+    "next_state": "Approved by Audit User",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Bill Received by Audit"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Auditor(Audit Verification)",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Bill Received by Audit"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Pro VC",
+    "condition": null,
+    "next_state": "Approved by Pro VC",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Audit User"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Pro VC",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Audit User"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Journal Entry by Account Dept.",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Pro VC"
+   },
+   {
+    "action": "Reject and Transfer",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Rejected and Transfer",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved by Pro VC"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Accounts Clerk",
+    "condition": null,
+    "next_state": "Passed for Payment",
+    "parent": "Non Po Contract Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Journal Entry by Account Dept."
+   }
+  ],
+  "workflow_name": "Non Po Contract Workflow",
   "workflow_state_field": "workflow_state"
  }
 ]
