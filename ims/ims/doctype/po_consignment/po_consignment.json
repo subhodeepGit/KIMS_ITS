@@ -25,6 +25,10 @@
   "section_break_16",
   "details_of_invoices_credit_note_and_po",
   "section_break_18",
+  "total_hospital_margin_amount",
+  "column_break_23",
+  "to_pay_total",
+  "section_break_24",
   "total_amount_in_rs",
   "column_break_20",
   "less_credit_note_amount_in_rs",
@@ -145,20 +149,25 @@
    "fieldtype": "Section Break"
   },
   {
+   "default": "0",
    "fieldname": "total_amount_in_rs",
    "fieldtype": "Currency",
    "label": "Total Amount (IN Rs.)",
+   "read_only": 1,
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "less_credit_note_amount_in_rs",
    "fieldtype": "Currency",
    "label": "Less Credit Note Amount (IN Rs.)"
   },
   {
+   "default": "0",
    "fieldname": "net_final_amount_to_be_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Net Final Amount To Be Paid (In Rs.)"
+   "label": "Net Final Amount To Be Paid (In Rs.)",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_22",
@@ -177,11 +186,33 @@
   {
    "fieldname": "column_break_22",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_hospital_margin_amount",
+   "fieldtype": "Currency",
+   "label": "Total Hospital Margin Amount",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "to_pay_total",
+   "fieldtype": "Currency",
+   "label": "To Pay Total",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_24",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-07 15:30:38.997582",
+ "modified": "2022-11-08 13:13:47.878619",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",

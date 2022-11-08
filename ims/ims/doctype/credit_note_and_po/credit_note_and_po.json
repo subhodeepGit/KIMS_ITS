@@ -72,7 +72,7 @@
   },
   {
    "fieldname": "to_pay",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "To-Pay",
    "reqd": 1
   },
@@ -126,7 +126,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-28 13:46:55.044661",
+ "modified": "2022-11-08 13:17:21.664653",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Credit Note and PO",
