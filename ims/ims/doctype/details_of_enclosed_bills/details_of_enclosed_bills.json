@@ -52,8 +52,7 @@
   {
    "fieldname": "remarks_if_any",
    "fieldtype": "Data",
-   "label": "Remarks, If Any",
-   "reqd": 1
+   "label": "Remarks, If Any"
   },
   {
    "fieldname": "invoice_attachment",
@@ -70,7 +69,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-28 14:32:03.682329",
+ "modified": "2022-11-08 11:35:18.698194",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Details of Enclosed Bills",
