@@ -23,6 +23,10 @@
   "date_of_purchase_order",
   "master_invoice_attachment",
   "note_sheet_attachment",
+  "audit_section_section",
+  "audit_ref_no",
+  "column_break_20",
+  "today_date",
   "section_break_16",
   "details_of_enclosed_bills",
   "section_break_18",
@@ -31,6 +35,14 @@
   "column_break_23",
   "advance_amount_already_paid_in_rs",
   "net_final_amount_to_be_paid_in_rs",
+  "journal_voucher_section",
+  "profit_center",
+  "document_number",
+  "ref_no",
+  "column_break_34",
+  "document_date",
+  "posting_date",
+  "attach_journal_voucher",
   "section_break_22",
   "authorized_signature"
  ],
@@ -91,6 +103,7 @@
    "fieldname": "item_name",
    "fieldtype": "Data",
    "label": "Item Name",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -105,6 +118,7 @@
    "fieldname": "name_of_supplier",
    "fieldtype": "Data",
    "label": "Name Of Supplier",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -166,12 +180,15 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "total_amount_in_rs",
    "fieldtype": "Currency",
    "label": "Total Amount (IN Rs.)",
+   "read_only": 1,
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
    "label": "TDS Amount To Be Deducted (In Rs.)"
@@ -181,19 +198,82 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
    "label": "Advance Amount Already Paid (In Rs.)"
   },
   {
+   "default": "0",
    "fieldname": "net_final_amount_to_be_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Net Final Amount To Be Paid (In Rs.)"
+   "label": "Net Final Amount To Be Paid (In Rs.)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "audit_section_section",
+   "fieldtype": "Section Break",
+   "label": "Audit Section"
+  },
+  {
+   "fieldname": "audit_ref_no",
+   "fieldtype": "Data",
+   "label": "Audit Ref No"
+  },
+  {
+   "fieldname": "column_break_20",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "today_date",
+   "fieldtype": "Date",
+   "label": "Today Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "journal_voucher_section",
+   "fieldtype": "Section Break",
+   "label": "Journal Voucher"
+  },
+  {
+   "fieldname": "profit_center",
+   "fieldtype": "Data",
+   "label": "Profit Center"
+  },
+  {
+   "fieldname": "document_number",
+   "fieldtype": "Data",
+   "label": "Document Number"
+  },
+  {
+   "fieldname": "ref_no",
+   "fieldtype": "Data",
+   "label": "Ref. No"
+  },
+  {
+   "fieldname": "column_break_34",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "document_date",
+   "fieldtype": "Date",
+   "label": "Document Date"
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "attach_journal_voucher",
+   "fieldtype": "Data",
+   "label": "Attach Journal Voucher"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-28 14:34:41.912712",
+ "modified": "2022-11-08 15:19:00.041072",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",
