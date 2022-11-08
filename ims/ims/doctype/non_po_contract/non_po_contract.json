@@ -103,6 +103,7 @@
    "fieldname": "item_name",
    "fieldtype": "Data",
    "label": "Item Name",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -117,6 +118,7 @@
    "fieldname": "name_of_supplier",
    "fieldtype": "Data",
    "label": "Name Of Supplier",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -182,6 +184,7 @@
    "fieldname": "total_amount_in_rs",
    "fieldtype": "Currency",
    "label": "Total Amount (IN Rs.)",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -204,7 +207,8 @@
    "default": "0",
    "fieldname": "net_final_amount_to_be_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Net Final Amount To Be Paid (In Rs.)"
+   "label": "Net Final Amount To Be Paid (In Rs.)",
+   "read_only": 1
   },
   {
    "fieldname": "audit_section_section",
@@ -269,7 +273,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-08 15:10:15.357745",
+ "modified": "2022-11-08 15:19:00.041072",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",
