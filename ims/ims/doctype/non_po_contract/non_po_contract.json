@@ -245,7 +245,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Today",
    "fieldname": "today_date",
    "fieldtype": "Date",
    "label": "Today Date",
@@ -300,7 +299,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-09 10:57:00.130852",
+ "modified": "2022-11-09 11:26:41.425063",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",

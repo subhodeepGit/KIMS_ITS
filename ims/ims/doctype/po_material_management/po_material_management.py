@@ -4,9 +4,13 @@
 import frappe
 from frappe.model.document import Document
 from frappe import utils
+from frappe.utils import cint, date_diff, datetime, get_datetime, today
 
 class POMaterialManagement(Document):
 	def validate(self):
+		if self.workflow_state=="Bill Received by Audit":
+			date=datetime.date.today()
+			self.db_set("today_date",date)
 		session_user = frappe.session.user
 		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
 			if session_user:

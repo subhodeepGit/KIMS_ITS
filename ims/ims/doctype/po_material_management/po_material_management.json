@@ -233,7 +233,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Today",
    "fieldname": "today_date",
    "fieldtype": "Date",
    "label": "Today Date",
@@ -294,7 +293,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-08 10:32:03.801652",
+ "modified": "2022-11-09 11:57:52.628834",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
