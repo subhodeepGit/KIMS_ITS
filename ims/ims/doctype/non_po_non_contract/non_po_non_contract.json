@@ -177,9 +177,7 @@
    "fieldname": "total_amount_in_rs",
    "fieldtype": "Currency",
    "label": "Total Amount (IN Rs.)",
-   "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "default": "0",
@@ -204,8 +202,7 @@
    "fieldname": "net_final_amount_to_be_paid_in_rs",
    "fieldtype": "Currency",
    "label": "Net Final Amount To Be Paid (In Rs.)",
-   "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "read_only": 1
   },
   {
    "fieldname": "section_break_22",
@@ -221,7 +218,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-09 15:11:09.939745",
+ "modified": "2022-11-09 16:56:55.854691",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
