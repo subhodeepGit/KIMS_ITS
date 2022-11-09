@@ -2,6 +2,27 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
+  "modified": "2022-08-16 10:56:54.667041",
+  "name": "Review",
+  "workflow_action_name": "Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2022-11-01 18:02:33.325490",
+  "name": "Rejection of Note Sheet",
+  "workflow_action_name": "Rejection of Note Sheet"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2022-11-01 18:05:26.506084",
+  "name": "Reject and Re-Verify",
+  "workflow_action_name": "Reject and Re-Verify"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
   "modified": "2022-08-16 10:56:54.661592",
   "name": "Approve",
   "workflow_action_name": "Approve"
