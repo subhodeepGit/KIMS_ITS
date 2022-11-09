@@ -87,7 +87,7 @@
    "fieldname": "item_name",
    "fieldtype": "Data",
    "label": "Item Name",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -113,7 +113,7 @@
    "fieldname": "name_of_supplier",
    "fieldtype": "Data",
    "label": "Name Of Supplier",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -217,7 +217,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-09 17:25:59.729247",
+ "modified": "2022-11-09 17:34:18.060421",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
