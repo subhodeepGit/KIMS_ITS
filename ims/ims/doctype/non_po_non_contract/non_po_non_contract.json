@@ -156,12 +156,15 @@
    "fieldtype": "Section Break"
   },
   {
+   "default": "0",
    "fieldname": "total_amount_in_rs",
    "fieldtype": "Currency",
    "label": "Total Amount (IN Rs.)",
+   "read_only": 1,
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
    "label": "TDS Amount To Be Deducted (In Rs.)"
@@ -171,14 +174,17 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "0",
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
    "label": "Advance Amount Already Paid (In Rs.)"
   },
   {
+   "default": "0",
    "fieldname": "net_final_amount_to_be_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Net Final Amount To Be Paid (In Rs.)"
+   "label": "Net Final Amount To Be Paid (In Rs.)",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_22",
@@ -193,7 +199,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-28 15:14:49.095422",
+ "modified": "2022-11-09 15:03:08.884710",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
