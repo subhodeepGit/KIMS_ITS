@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "NPNC.-.####",
  "creation": "2022-10-28 14:55:24.347530",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -217,10 +218,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-09 17:34:18.060421",
+ "modified": "2022-11-09 17:41:55.233444",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {
