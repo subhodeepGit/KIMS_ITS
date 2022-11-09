@@ -94,8 +94,7 @@
    "fieldname": "document_status",
    "fieldtype": "Data",
    "label": "Document Status",
-   "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "read_only": 1
   },
   {
    "fieldname": "column_break_7",
@@ -125,11 +124,11 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "fieldname": "priority",
    "fieldtype": "Select",
    "label": "Priority",
    "options": "\nUrgent\nNormal\nHigh Priority\nLow Priority",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -218,7 +217,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-09 16:56:55.854691",
+ "modified": "2022-11-09 17:25:59.729247",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
