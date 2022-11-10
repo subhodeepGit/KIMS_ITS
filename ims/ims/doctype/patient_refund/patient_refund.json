@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "PAT-RFD.-.####",
  "creation": "2022-10-28 15:37:13.088824",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -68,6 +69,7 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "total_bill",
    "fieldtype": "Currency",
    "in_list_view": 1,
@@ -75,11 +77,13 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "approval_of_tpa__insurance__corporate__ostf",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Approval of TPA / Insurance / Corporate / OSTF"
   },
   {
+   "default": "0",
    "fieldname": "amount_deposited_by_patient",
    "fieldtype": "Currency",
    "label": "Amount Deposited By patient",
@@ -96,11 +100,13 @@
    "label": "Approval Attachment"
   },
   {
+   "default": "0",
    "fieldname": "cash_refund",
    "fieldtype": "Currency",
    "label": "Cash Refund"
   },
   {
+   "default": "0",
    "fieldname": "less__non_admissible_item__discount_amount",
    "fieldtype": "Currency",
    "label": "Less : Non-admissible item / Discount amount",
@@ -110,7 +116,7 @@
    "fieldname": "net_refundable_in_figures",
    "fieldtype": "Currency",
    "label": "Net Refundable (in figures)",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "net_refundable_in_words",
@@ -252,10 +258,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-10 16:32:19.545166",
+ "modified": "2022-11-10 17:17:45.646722",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {
