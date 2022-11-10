@@ -17,7 +17,8 @@
   "section_break_9",
   "shift_request_approver",
   "lft",
-  "rgt"
+  "rgt",
+  "old_parent"
  ],
  "fields": [
   {
@@ -101,12 +102,19 @@
    "fieldtype": "Table",
    "label": "Shift Request Approver",
    "options": "Department Approver"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Old Parent",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2022-10-25 15:51:24.797862",
+ "modified": "2022-11-10 15:44:34.878300",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Department",
