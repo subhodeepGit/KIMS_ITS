@@ -2,6 +2,51 @@
  {
   "docstatus": 0,
   "doctype": "Workflow State",
+  "icon": "question-sign",
+  "modified": "2022-08-16 10:56:54.632219",
+  "name": "Pending",
+  "style": "",
+  "workflow_state_name": "Pending"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2022-08-16 10:56:54.635327",
+  "name": "Approved",
+  "style": "Success",
+  "workflow_state_name": "Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "remove",
+  "modified": "2022-08-16 10:56:54.638309",
+  "name": "Rejected",
+  "style": "Danger",
+  "workflow_state_name": "Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-02 11:32:13.524122",
+  "name": "Rejected to Note creator",
+  "style": "",
+  "workflow_state_name": "Rejected to Note creator"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-09 17:01:04.331926",
+  "name": "Approved by Medical Superintendent",
+  "style": "",
+  "workflow_state_name": "Approved by Medical Superintendent"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
   "icon": "",
   "modified": "2022-11-07 15:04:47.136282",
   "name": "Approved by Deputy Director, MMD",
