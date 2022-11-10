@@ -17,8 +17,8 @@
   "column_break_5",
   "cash_refund",
   "less__non_admissible_item__discount_amount",
-  "net_refundable_in_words",
   "net_refundable_in_figures",
+  "net_refundable_in_words",
   "mode_of_payment",
   "remarks",
   "section_break_16",
@@ -29,9 +29,9 @@
   "date_of_submission_of_fees",
   "date_of_cancellation",
   "reason_of_cancellation",
+  "column_break_27",
   "account_type",
   "account_holder_name",
-  "column_break_27",
   "joint_account_holder_name",
   "name_of_the_bank",
   "branch",
@@ -108,16 +108,15 @@
   },
   {
    "fieldname": "net_refundable_in_figures",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Net Refundable (in figures)",
-   "read_only": 1,
    "reqd": 1
   },
   {
    "fieldname": "net_refundable_in_words",
-   "fieldtype": "Currency",
+   "fieldtype": "Data",
    "label": "Net Refundable (in words)",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "mode_of_payment",
@@ -253,7 +252,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-10 14:44:38.531168",
+ "modified": "2022-11-10 16:32:19.545166",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
