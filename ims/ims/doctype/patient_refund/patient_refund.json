@@ -17,8 +17,8 @@
   "column_break_5",
   "cash_refund",
   "less__non_admissible_item__discount_amount",
-  "net_refundable_in_figures",
   "net_refundable_in_words",
+  "net_refundable_in_figures",
   "mode_of_payment",
   "remarks",
   "section_break_16",
@@ -110,6 +110,7 @@
    "fieldname": "net_refundable_in_figures",
    "fieldtype": "Data",
    "label": "Net Refundable (in figures)",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -252,7 +253,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-28 15:56:56.607784",
+ "modified": "2022-11-10 14:44:38.531168",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
