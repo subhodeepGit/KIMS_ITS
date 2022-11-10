@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "EMP.-.#####",
  "creation": "2022-10-25 16:45:35.185289",
@@ -230,7 +231,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-31 19:31:26.296748",
+ "modified": "2022-11-10 12:19:34.182798",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
