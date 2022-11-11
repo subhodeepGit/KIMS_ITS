@@ -35,3 +35,12 @@ frappe.ui.form.on('Pharmacy',"advance_amount_already_paid_in_rs", function(frm) 
 	frm.set_value("net_final_amount_to_be_paid_in_rs",net_amount)
 	refresh_field("net_final_amount_to_be_paid_in_rs");
 });
+
+frappe.ui.form.on("Pharmacy", {
+	onload:function(frm){
+		//cannot able to add rows
+		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
+		//cannot able to delete rows
+		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
+	}
+});
