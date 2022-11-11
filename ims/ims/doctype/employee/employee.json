@@ -70,7 +70,8 @@
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "Full Name"
+   "label": "Full Name",
+   "read_only": 1
   },
   {
    "fieldname": "employment_type",
@@ -231,7 +232,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-10 12:19:34.182798",
+ "modified": "2022-11-11 12:31:05.477798",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",

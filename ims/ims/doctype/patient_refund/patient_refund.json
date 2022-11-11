@@ -113,6 +113,7 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "net_refundable_in_figures",
    "fieldtype": "Currency",
    "label": "Net Refundable (in figures)",
@@ -258,7 +259,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-10 17:17:45.646722",
+ "modified": "2022-11-10 18:13:09.459376",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
