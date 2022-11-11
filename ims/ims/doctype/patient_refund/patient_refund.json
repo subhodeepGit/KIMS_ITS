@@ -15,6 +15,7 @@
   "amount_deposited_by_patient",
   "less__approval_approval_letter_to_be_attached",
   "approval_attachment",
+  "document_status",
   "column_break_5",
   "cash_refund",
   "less__non_admissible_item__discount_amount",
@@ -255,11 +256,17 @@
    "fieldtype": "Table",
    "label": "Authorized Signature",
    "options": "Authorized Signature"
+  },
+  {
+   "fieldname": "document_status",
+   "fieldtype": "Data",
+   "label": "Document Status",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-10 18:13:09.459376",
+ "modified": "2022-11-11 14:06:26.683388",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
