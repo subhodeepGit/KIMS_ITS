@@ -22,6 +22,11 @@
   "net_refundable_in_figures",
   "net_refundable_in_words",
   "mode_of_payment",
+  "utr_no",
+  "cheque_no",
+  "cash_receipt_no",
+  "date_of_transaction",
+  "posting_date",
   "remarks",
   "section_break_16",
   "patient_ip_no",
@@ -140,8 +145,9 @@
    "fieldname": "mode_of_payment",
    "fieldtype": "Select",
    "label": "Mode of Payment",
-   "options": "\nRTGS - UTR , Date of Transaction\nNEFT - UTR , Date of Transaction\nIMPS - UTR , Date of Transaction\nCheque - Cheque No. , Date of Transaction\nCash - Cash Receipt No., Date of Transaction",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "options": "\nRTGS\nNEFT\nIMPS\nCheque\nCash",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
+   "reqd": 1
   },
   {
    "fieldname": "remarks",
@@ -293,11 +299,46 @@
    "fieldtype": "Data",
    "label": "Document Status",
    "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "date_of_transaction",
+   "fieldtype": "Date",
+   "label": "Date of Transaction",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment==\"RTGS\" || doc.mode_of_payment==\"NEFT\" || doc.mode_of_payment==\"IMPS\"",
+   "fieldname": "utr_no",
+   "fieldtype": "Data",
+   "label": "UTR No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment==\"Cheque\"",
+   "fieldname": "cheque_no",
+   "fieldtype": "Data",
+   "label": "Cheque No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment==\"Cash\"",
+   "fieldname": "cash_receipt_no",
+   "fieldtype": "Data",
+   "label": "Cash Receipt No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-11 16:08:08.926893",
+ "modified": "2022-11-14 18:17:41.621654",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
