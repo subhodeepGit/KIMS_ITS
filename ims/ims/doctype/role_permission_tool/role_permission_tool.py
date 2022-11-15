@@ -5,13 +5,18 @@ import frappe
 from frappe.model.document import Document
 
 class RolePermissionTool(Document):
+
 	def validate(self):
-		print("\n\n\n\n")
 		role_cration(self)
 		role_permissions_manager_cration(self)
 		workflow_state_cration(self)
 		workflow_action_master_cration(self)
-		workflow_creation(self)
+		
+
+	def before_save(self):
+		print("\n\n\n")
+		print("before_save")
+		workflow_creation(self)	
 
 
 
@@ -33,11 +38,12 @@ def role_cration(self):
 def role_permissions_manager_cration(self):
 	for t in self.get("role_permission_tool_child"):
 		role_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":self.doctype_name,"role":t.designation})
-		if role_permissions_manager_info:
+		if not role_permissions_manager_info:
 			role_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
 			role_permissions_manager_doc.parent=self.doctype_name
 			role_permissions_manager_doc.role=t.designation
 			role_permissions_manager_doc.permlevel=0
+			role_permissions_manager_doc.select=1
 			role_permissions_manager_doc.read=1
 			role_permissions_manager_doc.write=1
 			role_permissions_manager_doc.create=1
@@ -47,11 +53,11 @@ def role_permissions_manager_cration(self):
 			role_permissions_manager_doc.amend=0
 			role_permissions_manager_doc.report=1
 			role_permissions_manager_doc.export=1
-			# role_permissions_manager_doc.import=1
 			role_permissions_manager_doc.share=0
 			role_permissions_manager_doc.print=1
 			role_permissions_manager_doc.email=0
 			role_permissions_manager_doc.save()
+			frappe.db.sql(""" Update `tabCustom DocPerm` set import=1 where name='%s' """%(role_permissions_manager_doc.name))
 
 
 
@@ -77,7 +83,7 @@ def workflow_state_cration(self):
 			if t.description_of_state==None or t.description_of_state=="":	
 				name="Approved by "+t.designation
 			else:
-				name=t.description_of_state
+				name=t.description_of_state	
 			workflow_state_info=frappe.get_all("Workflow State",{"name":name},['name','style'])
 			if not workflow_state_info:
 				workflow_state=frappe.new_doc("Workflow State")
@@ -105,7 +111,7 @@ def workflow_creation(self):
 	workflow_doc_info=frappe.get_all("Workflow",{"document_type":self.doctype_name})
 	workflow_name=self.doctype_name+"_"+str(len(workflow_doc_info)+1)
 	self.workflow_name=workflow_name
-	
+
 	workflow_doc = frappe.new_doc("Workflow")
 	workflow_doc.workflow_name=workflow_name
 	workflow_doc.document_type=self.doctype_name
@@ -334,4 +340,4 @@ def workflow_creation(self):
 					"condition":condition,
 
 				})
-	workflow_doc.save()
+	# workflow_doc.save()
