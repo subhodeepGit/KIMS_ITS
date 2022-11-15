@@ -74,7 +74,7 @@ def workflow_state_cration(self):
 						workflow_state.style=t.style
 						workflow_state.save()
 		else:
-			if t.description_of_state==None:	
+			if t.description_of_state==None or t.description_of_state=="":	
 				name="Approved by "+t.designation
 			else:
 				name=t.description_of_state
@@ -155,12 +155,12 @@ def workflow_creation(self):
 					new_j=t.idx+1
 					if j.idx==new_j:
 						flag="Yes"
-						if t.description_of_state==None:	
+						if t.description_of_state==None or t.description_of_state=="":	
 							name="Approved by "+t.designation
 						else:
 							name=t.description_of_state
 
-						if t.description_of_state==None:
+						if t.description_of_state==None or t.description_of_state=="":
 							update_value="Submitted by "+t.designation
 						else:
 							update_value=t.description_of_state
@@ -176,12 +176,12 @@ def workflow_creation(self):
 
 				if flag=="No":
 					update_value="Submitted by "+t.designation
-					if t.description_of_state==None:	
+					if t.description_of_state==None or t.description_of_state=="":	
 						name="Approved by "+t.designation
 					else:
 						name=t.description_of_state
 					
-					if t.description_of_state==None:
+					if t.description_of_state==None or t.description_of_state=="":
 						update_value="Submitted by "+t.designation
 					else:
 						update_value=t.description_of_state	
@@ -221,12 +221,12 @@ def workflow_creation(self):
 			for j in self.get("role_permission_tool_child"):
 				if j.idx==new_j:
 					flag="Yes"
-					if t.description_of_state==None:	
+					if t.description_of_state==None or t.description_of_state=="":	
 						name="Approved by "+t.designation
 					else:
 						name=t.description_of_state
 					allowed=t.designation
-					if j.description_of_state==None:
+					if j.description_of_state==None or j.description_of_state=="":
 						next_state="Approved by "+j.designation
 					else:
 						next_state=j.description_of_state
@@ -275,13 +275,13 @@ def workflow_creation(self):
 
 						})
 		if flag=="No":
-			if t.description_of_state==None:	
+			if t.description_of_state==None or t.description_of_state=="":	
 				name="Approved by "+t.designation
 			else:
 				name=t.description_of_state
 			allowed=t.designation
 
-			if t.description_of_state==None:
+			if t.description_of_state==None or t.description_of_state=="":
 				next_state="Approved by "+t.designation
 			else:
 				next_state=t.description_of_state
