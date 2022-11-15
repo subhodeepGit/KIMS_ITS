@@ -38,7 +38,7 @@
   "grade",
   "column_break_27",
   "branch",
-  "role_profile",
+  "role",
   "signature",
   "section_break_33",
   "new_password"
@@ -173,13 +173,6 @@
    "label": "Branch"
   },
   {
-   "fieldname": "role_profile",
-   "fieldtype": "Link",
-   "label": "Role Profile",
-   "options": "Role Profile",
-   "reqd": 1
-  },
-  {
    "fieldname": "signature",
    "fieldtype": "Attach Image",
    "label": "Signature"
@@ -228,11 +221,18 @@
    "fieldname": "new_password",
    "fieldtype": "Password",
    "label": "New Password"
+  },
+  {
+   "fieldname": "role",
+   "fieldtype": "Link",
+   "label": "Role",
+   "options": "Role",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-11 12:31:05.477798",
+ "modified": "2022-11-15 13:21:07.670742",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
