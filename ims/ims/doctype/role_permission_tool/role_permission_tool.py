@@ -31,26 +31,27 @@ def role_cration(self):
 			role_doc.dashboard=1  
 			role_doc.save()
 def role_permissions_manager_cration(self):
-
 	for t in self.get("role_permission_tool_child"):
-		role_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
-		role_permissions_manager_doc.parent=self.doctype_name
-		role_permissions_manager_doc.role=self.designation
-		role_permissions_manager_doc.permlevel=0
-		role_permissions_manager_doc.read=1
-		role_permissions_manager_doc.write=1
-		role_permissions_manager_doc.create=1
-		role_permissions_manager_doc.delete=0
-		role_permissions_manager_doc.submit=0
-		role_permissions_manager_doc.cancel=0
-		role_permissions_manager_doc.amend=0
-		role_permissions_manager_doc.report=1
-		role_permissions_manager_doc.export=1
-		# role_permissions_manager_doc.import=1
-		role_permissions_manager_doc.share=0
-		role_permissions_manager_doc.print=1
-		role_permissions_manager_doc.email=0
-		role_permissions_manager_doc.save()
+		role_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":self.doctype_name,"role":t.designation})
+		if role_permissions_manager_info:
+			role_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
+			role_permissions_manager_doc.parent=self.doctype_name
+			role_permissions_manager_doc.role=t.designation
+			role_permissions_manager_doc.permlevel=0
+			role_permissions_manager_doc.read=1
+			role_permissions_manager_doc.write=1
+			role_permissions_manager_doc.create=1
+			role_permissions_manager_doc.delete=0
+			role_permissions_manager_doc.submit=0
+			role_permissions_manager_doc.cancel=0
+			role_permissions_manager_doc.amend=0
+			role_permissions_manager_doc.report=1
+			role_permissions_manager_doc.export=1
+			# role_permissions_manager_doc.import=1
+			role_permissions_manager_doc.share=0
+			role_permissions_manager_doc.print=1
+			role_permissions_manager_doc.email=0
+			role_permissions_manager_doc.save()
 
 
 
@@ -280,10 +281,10 @@ def workflow_creation(self):
 				name=t.description_of_state
 			allowed=t.designation
 
-			if j.description_of_state==None:
-				next_state="Approved by "+j.designation
+			if t.description_of_state==None:
+				next_state="Approved by "+t.designation
 			else:
-				next_state=j.description_of_state
+				next_state=t.description_of_state
 			
 			if t.approve==1:	
 				state=name
