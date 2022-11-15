@@ -102,7 +102,12 @@ def workflow_action_master_cration(self):
 			workflow_action_master.save()
 
 def workflow_creation(self):
+	workflow_doc_info=frappe.get_all("Workflow",{"document_type":self.doctype_name})
+	workflow_name=self.doctype_name+"_"+str(len(workflow_doc_info)+1)
+	self.workflow_name=workflow_name
+	
 	workflow_doc = frappe.new_doc("Workflow")
+	workflow_doc.workflow_name=workflow_name
 	workflow_doc.document_type=self.doctype_name
 	workflow_doc.is_active=1
 	workflow_doc.override_status=0
