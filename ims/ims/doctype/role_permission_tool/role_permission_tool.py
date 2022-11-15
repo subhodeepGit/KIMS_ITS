@@ -8,6 +8,7 @@ class RolePermissionTool(Document):
 	def validate(self):
 		print("\n\n\n\n")
 		role_cration(self)
+		role_permissions_manager_cration(self)
 		workflow_state_cration(self)
 		workflow_action_master_cration(self)
 		workflow_creation(self)
@@ -29,6 +30,29 @@ def role_cration(self):
 			role_doc.timeline=1
 			role_doc.dashboard=1  
 			role_doc.save()
+def role_permissions_manager_cration(self):
+
+	for t in self.get("role_permission_tool_child"):
+		role_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
+		role_permissions_manager_doc.parent=self.doctype_name
+		role_permissions_manager_doc.role=self.designation
+		role_permissions_manager_doc.permlevel=0
+		role_permissions_manager_doc.read=1
+		role_permissions_manager_doc.write=1
+		role_permissions_manager_doc.create=1
+		role_permissions_manager_doc.delete=0
+		role_permissions_manager_doc.submit=0
+		role_permissions_manager_doc.cancel=0
+		role_permissions_manager_doc.amend=0
+		role_permissions_manager_doc.report=1
+		role_permissions_manager_doc.export=1
+		# role_permissions_manager_doc.import=1
+		role_permissions_manager_doc.share=0
+		role_permissions_manager_doc.print=1
+		role_permissions_manager_doc.email=0
+		role_permissions_manager_doc.save()
+
+
 
 def workflow_state_cration(self):
 	for t in self.get("role_permission_tool_child"):
@@ -179,7 +203,7 @@ def workflow_creation(self):
 				action=states['action']
 				next_state=states['next_state']
 				allowed=t.designation
-				condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)
+				condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)	
 				workflow_doc.append("transitions",{
 					"state":state,
 					"action":action,
@@ -192,7 +216,7 @@ def workflow_creation(self):
 		else:
 			flag="No"
 			new_j=t.idx+1
-			
+
 			for j in self.get("role_permission_tool_child"):
 				if j.idx==new_j:
 					flag="Yes"
@@ -200,14 +224,17 @@ def workflow_creation(self):
 						name="Approved by "+t.designation
 					else:
 						name=t.description_of_state
-
 					allowed=t.designation
+					if j.description_of_state==None:
+						next_state="Approved by "+j.designation
+					else:
+						next_state=j.description_of_state
 					
 					if t.approve==1:	
 						state=name
 						action="Approve"
 						next_state=""
-						condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
@@ -245,6 +272,60 @@ def workflow_creation(self):
 							"allow_self_approval":1,
 							"condition":condition,
 
-						})	
-	
+						})
+		if flag=="No":
+			if t.description_of_state==None:	
+				name="Approved by "+t.designation
+			else:
+				name=t.description_of_state
+			allowed=t.designation
 
+			if j.description_of_state==None:
+				next_state="Approved by "+j.designation
+			else:
+				next_state=j.description_of_state
+			
+			if t.approve==1:	
+				state=name
+				action="Approve"
+				next_state=""
+				condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
+				workflow_doc.append("transitions",{
+					"state":state,
+					"action":action,
+					"next_state":next_state,
+					"allowed":allowed,
+					"allow_self_approval":1,
+					"condition":condition,
+
+				})
+
+			if t.reject==1:	
+				state=name
+				action="Reject"
+				next_state=""
+				condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+				workflow_doc.append("transitions",{
+					"state":state,
+					"action":action,
+					"next_state":next_state,
+					"allowed":allowed,
+					"allow_self_approval":1,
+					"condition":condition,
+
+				})
+			if t.reject_and_transfer==1:	
+				state=name
+				action="Reject and Transfer"
+				next_state=""
+				condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+				workflow_doc.append("transitions",{
+					"state":state,
+					"action":action,
+					"next_state":next_state,
+					"allowed":allowed,
+					"allow_self_approval":1,
+					"condition":condition,
+
+				})
+	workflow_doc.save()
