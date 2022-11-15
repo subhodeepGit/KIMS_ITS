@@ -5,17 +5,18 @@ import frappe
 from frappe.model.document import Document
 
 class RolePermissionTool(Document):
-	# def before_save(self):
-	# 	print("\n\n\n")
-	# 	print("before_save")
+
 	def validate(self):
-		print("\n\n\n\n")
-		# print("validate")
 		role_cration(self)
 		role_permissions_manager_cration(self)
 		workflow_state_cration(self)
 		workflow_action_master_cration(self)
-		workflow_creation(self)
+		
+
+	def before_save(self):
+		print("\n\n\n")
+		print("before_save")
+		workflow_creation(self)	
 
 
 
@@ -56,14 +57,12 @@ def role_permissions_manager_cration(self):
 			role_permissions_manager_doc.print=1
 			role_permissions_manager_doc.email=0
 			role_permissions_manager_doc.save()
-
 			frappe.db.sql(""" Update `tabCustom DocPerm` set import=1 where name='%s' """%(role_permissions_manager_doc.name))
 
 
 
 def workflow_state_cration(self):
 	for t in self.get("role_permission_tool_child"):
-		# print("\n\n\n\n")
 		if t.idx==1:
 			list_info=["Draft","Verify and Save","Verified & Submitted by Note Creator","Rejected and Transfer","Cancelled"]
 			for z in list_info:
@@ -84,8 +83,7 @@ def workflow_state_cration(self):
 			if t.description_of_state==None or t.description_of_state=="":	
 				name="Approved by "+t.designation
 			else:
-				name=t.description_of_state
-			# print(name)	
+				name=t.description_of_state	
 			workflow_state_info=frappe.get_all("Workflow State",{"name":name},['name','style'])
 			if not workflow_state_info:
 				workflow_state=frappe.new_doc("Workflow State")
@@ -110,7 +108,6 @@ def workflow_action_master_cration(self):
 			workflow_action_master.save()
 
 def workflow_creation(self):
-	# print("\n\n\n\n")
 	workflow_doc_info=frappe.get_all("Workflow",{"document_type":self.doctype_name})
 	workflow_name=self.doctype_name+"_"+str(len(workflow_doc_info)+1)
 	self.workflow_name=workflow_name
