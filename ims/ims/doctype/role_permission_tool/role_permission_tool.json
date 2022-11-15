@@ -7,7 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "doctype_name",
-  "role_permission_tool_child"
+  "role_permission_tool_child",
+  "workflow_name"
  ],
  "fields": [
   {
@@ -21,11 +22,17 @@
    "fieldtype": "Table",
    "label": "Role Permission Tool Child",
    "options": "Role Permission Tool Child"
+  },
+  {
+   "fieldname": "workflow_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Workflow Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-15 13:33:47.713178",
+ "modified": "2022-11-15 15:57:50.117475",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Role Permission Tool",
