@@ -1,0 +1,84 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-11-08 12:11:14.690998",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "designation",
+  "description_of_state",
+  "approve",
+  "reject_and_transfer",
+  "reject",
+  "style",
+  "amount_grater",
+  "amount_smaller"
+ ],
+ "fields": [
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Designation",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "style",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Style",
+   "options": "\nPrimary\nInfo\nSuccess\nWarning\nDanger\nInverse"
+  },
+  {
+   "fieldname": "description_of_state",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Description of State"
+  },
+  {
+   "default": "0",
+   "fieldname": "approve",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Approve "
+  },
+  {
+   "default": "0",
+   "fieldname": "reject_and_transfer",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reject and Transfer"
+  },
+  {
+   "default": "0",
+   "fieldname": "reject",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Reject"
+  },
+  {
+   "fieldname": "amount_grater",
+   "fieldtype": "Int",
+   "label": "Amount Grater"
+  },
+  {
+   "fieldname": "amount_smaller",
+   "fieldtype": "Data",
+   "label": "Amount Smaller"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-10 16:28:31.554109",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Role Permission Tool Child",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
