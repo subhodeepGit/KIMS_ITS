@@ -22,6 +22,11 @@
   "net_refundable_in_figures",
   "net_refundable_in_words",
   "mode_of_payment",
+  "utr_no",
+  "cheque_no",
+  "cash_receipt_no",
+  "date_of_transaction",
+  "posting_date",
   "remarks",
   "section_break_16",
   "patient_ip_no",
@@ -52,6 +57,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Name of the Patient",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -59,6 +65,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "IP / UHID No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -67,6 +74,7 @@
    "in_list_view": 1,
    "label": "Department",
    "options": "Department",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -75,42 +83,49 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Total Bill",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "default": "0",
    "fieldname": "approval_of_tpa__insurance__corporate__ostf",
    "fieldtype": "Currency",
-   "label": "Approval of TPA / Insurance / Corporate / OSTF"
+   "label": "Approval of TPA / Insurance / Corporate / OSTF",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "default": "0",
    "fieldname": "amount_deposited_by_patient",
    "fieldtype": "Currency",
    "label": "Amount Deposited By patient",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "less__approval_approval_letter_to_be_attached",
    "fieldtype": "Attach",
-   "label": "Less : Approval (Approval letter to be attached)"
+   "label": "Less : Approval (Approval letter to be attached)",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "approval_attachment",
    "fieldtype": "Attach",
-   "label": "Approval Attachment"
+   "label": "Approval Attachment",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "default": "0",
    "fieldname": "cash_refund",
    "fieldtype": "Currency",
-   "label": "Cash Refund"
+   "label": "Cash Refund",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "default": "0",
    "fieldname": "less__non_admissible_item__discount_amount",
    "fieldtype": "Currency",
    "label": "Less : Non-admissible item / Discount amount",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -130,12 +145,15 @@
    "fieldname": "mode_of_payment",
    "fieldtype": "Select",
    "label": "Mode of Payment",
-   "options": "\nRTGS - UTR , Date of Transaction\nNEFT - UTR , Date of Transaction\nIMPS - UTR , Date of Transaction\nCheque - Cheque No. , Date of Transaction\nCash - Cash Receipt No., Date of Transaction"
+   "options": "\nRTGS\nNEFT\nIMPS\nCheque\nCash",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
+   "reqd": 1
   },
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
-   "label": "Remarks"
+   "label": "Remarks",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "column_break_5",
@@ -149,99 +167,117 @@
    "fieldname": "patient_ip_no",
    "fieldtype": "Data",
    "label": "Patient IP No",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "patients_name",
    "fieldtype": "Data",
    "label": "Patient's Name",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "amount_deposited",
    "fieldtype": "Currency",
-   "label": "Amount Deposited"
+   "label": "Amount Deposited",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "amount_deposited_through",
    "fieldtype": "Data",
-   "label": "Amount Deposited Through"
+   "label": "Amount Deposited Through",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "date_of_submission_of_fees",
    "fieldtype": "Date",
-   "label": "Date of Submission of Fees"
+   "label": "Date of Submission of Fees",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "date_of_cancellation",
    "fieldtype": "Date",
-   "label": "Date of Cancellation"
+   "label": "Date of Cancellation",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "reason_of_cancellation",
    "fieldtype": "Data",
-   "label": "Reason of Cancellation"
+   "label": "Reason of Cancellation",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "account_type",
    "fieldtype": "Data",
-   "label": "Account Type"
+   "label": "Account Type",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "account_holder_name",
    "fieldtype": "Data",
    "label": "Account Holder Name",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "joint_account_holder_name",
    "fieldtype": "Data",
-   "label": "Joint Account Holder Name"
+   "label": "Joint Account Holder Name",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "name_of_the_bank",
    "fieldtype": "Data",
    "label": "Name of the Bank",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "branch",
    "fieldtype": "Data",
    "label": "Branch",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "ifsc_code",
    "fieldtype": "Data",
    "label": "IFSC Code",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "account_no",
    "fieldtype": "Data",
    "label": "Account No",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "account_holder_relation_with_the_patient",
    "fieldtype": "Data",
    "label": "Account Holder Relation With The Patient",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "doc_attached",
    "fieldtype": "Attach",
-   "label": "Documents to be attached with Cancellation / Refund Application form"
+   "label": "Documents to be attached with Cancellation / Refund Application form",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "original_money_receipt",
    "fieldtype": "Attach",
-   "label": "Original Money Receipt"
+   "label": "Original Money Receipt",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "xerox_copy_of_any_itenty_proof",
    "fieldtype": "Attach",
-   "label": "Xerox Copy of any itenty Proof"
+   "label": "Xerox Copy of any itenty Proof",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "column_break_27",
@@ -255,18 +291,54 @@
    "fieldname": "authorized_signature",
    "fieldtype": "Table",
    "label": "Authorized Signature",
-   "options": "Authorized Signature"
+   "options": "Authorized Signature",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "document_status",
    "fieldtype": "Data",
    "label": "Document Status",
    "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1,
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "date_of_transaction",
+   "fieldtype": "Date",
+   "label": "Date of Transaction",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment==\"RTGS\" || doc.mode_of_payment==\"NEFT\" || doc.mode_of_payment==\"IMPS\"",
+   "fieldname": "utr_no",
+   "fieldtype": "Data",
+   "label": "UTR No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment==\"Cheque\"",
+   "fieldname": "cheque_no",
+   "fieldtype": "Data",
+   "label": "Cheque No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "depends_on": "eval:doc.mode_of_payment==\"Cash\"",
+   "fieldname": "cash_receipt_no",
+   "fieldtype": "Data",
+   "label": "Cash Receipt No.",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-11 14:06:26.683388",
+ "modified": "2022-11-14 18:17:41.621654",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
