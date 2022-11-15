@@ -30,10 +30,10 @@ class Employee(Document):
 		new_email(self)
 		
 	def before_save(self):
-		emply = frappe.get_all("Employee",{"name":self.name},{"role_profile"})
+		emply = frappe.get_all("Employee",{"name":self.name},{"role"})
 		if emply:
-			if self.role_profiles!=emply[0]["role_profile"]:
-				self.role_profiles()
+			if self.role!=emply[0]["role"]:
+				self.role_user()
 
 	def set_employee_name(self):
 		self.full_name = ' '.join(filter(lambda x: x, [self.first_name, self.middle_name, self.last_name]))
@@ -48,11 +48,12 @@ class Employee(Document):
 				'gender': self.gender,
 				'enabled': self.enabled,
 				'username': self.employee_number,
-				'role_profile_name': self.role_profile,
+				# 'role_profile_name': self.role_profile,
 				'send_welcome_email': 1,
 				'user_type': 'Website User'
 				})
 			emp_user.flags.ignore_permissions = True
+			emp_user.add_roles(self.role)
 			emp_user.save()
 			self.db_set("user",emp_user.name)
 
@@ -70,14 +71,15 @@ class Employee(Document):
 				update_doc.enabled=1
 				update_doc.save()
 
-	def role_profiles(self):
-		role = frappe.db.get_all("User",filters=[["email","=",self.email]],fields=["name"])
-		if role:
-			if len(role)==1:
-				frappe.db.sql(""" update `tabUser` set role_profile_name="%s" where name = "%s" """%(self.role_profile,role[0]["name"]))
-			else:
-				role_info=tuple([t["name"] for t in role])
-				frappe.db.sql(""" update `tabUser` set role_profile_name="%s" where name in %s"""%(self.role_profile,role_info))
+	def role_user(self):
+		rol_user = frappe.db.get_all("User",filters=[["email","=",self.email]],fields=["name"])
+		if rol_user:
+			emp_user = frappe.get_doc('User', self.email)
+			user_roles = frappe.get_roles()	
+			emp_user.remove_roles(*user_roles)
+			emp_user.flags.ignore_permissions = True
+			emp_user.add_roles(self.role)
+			emp_user.save()
 	
 def new_email(self):
 	emp_data= frappe.get_all("Employee",{"name":self.name},['email','user'])
