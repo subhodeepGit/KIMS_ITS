@@ -118,6 +118,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "supplier_code.amount_clearance_period_in_days",
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
@@ -218,7 +219,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-09 17:41:55.233444",
+ "modified": "2022-11-16 18:24:43.119065",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",

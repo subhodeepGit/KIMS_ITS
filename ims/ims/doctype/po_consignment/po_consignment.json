@@ -110,6 +110,8 @@
    "reqd": 1
   },
   {
+   "default": "-",
+   "fetch_from": "supplier_code.amount_clearance_period_in_days",
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
@@ -228,7 +230,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-10 15:04:04.814942",
+ "modified": "2022-11-16 18:13:45.252556",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",

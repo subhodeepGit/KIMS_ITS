@@ -121,6 +121,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "supplier_code.amount_clearance_period_in_days",
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
@@ -300,7 +301,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-09 11:58:28.425827",
+ "modified": "2022-11-16 18:07:24.546967",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
