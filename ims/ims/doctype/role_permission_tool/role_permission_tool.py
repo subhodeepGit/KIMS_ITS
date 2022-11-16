@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.utils import datetime
 
 class RolePermissionTool(Document):
 
@@ -11,11 +12,6 @@ class RolePermissionTool(Document):
 		role_permissions_manager_cration(self)
 		workflow_state_cration(self)
 		workflow_action_master_cration(self)
-		
-
-	def before_save(self):
-		print("\n\n\n")
-		print("before_save")
 		workflow_creation(self)	
 
 
@@ -158,77 +154,75 @@ def workflow_creation(self):
 				"update_value":update_value,
 				"allow_edit":role_name
 			})
-		
-		else:
-			if t.idx==2:
-				for j in self.get("role_permission_tool_child"):
-					new_j=t.idx+1
-					if j.idx==new_j:
-						list_state=[{"state":"Verified & Submitted by Note Creator","update_value":"Submitted by Note Keeper"}]
-						name=list_state[0]["state"]
-						update_value=list_state[0]['update_value']
-						role_name=j.designation
-						workflow_doc.append("states",{
-									"state":name,
-									"doc_status":0,
-									"update_field":"document_status",
-									"update_value":update_value,
-									"allow_edit":role_name
-								})
-			else:
-				flag="No"
-				for j in self.get("role_permission_tool_child"):
-					new_j=t.idx+1
-					if j.idx==new_j:
-						flag="Yes"
-						if t.description_of_state==None or t.description_of_state=="":	
-							name="Approved by "+t.designation
-						else:
-							name=t.description_of_state
-
-						if t.description_of_state==None or t.description_of_state=="":
-							update_value="Submitted by "+t.designation
-						else:
-							update_value=t.description_of_state
-
-						role_name=j.designation
-						workflow_doc.append("states",{
+			for j in self.get("role_permission_tool_child"):
+				new_j=t.idx+1
+				if j.idx==new_j:
+					list_state=[{"state":"Verified & Submitted by Note Creator","update_value":"Submitted by Note Keeper"}]
+					name=list_state[0]["state"]
+					update_value=list_state[0]['update_value']
+					role_name=j.designation
+					workflow_doc.append("states",{
 								"state":name,
 								"doc_status":0,
 								"update_field":"document_status",
 								"update_value":update_value,
 								"allow_edit":role_name
-							})		
-
-				if flag=="No":
-					update_value="Submitted by "+t.designation
+							})
+		
+		else:
+			flag="No"
+			for j in self.get("role_permission_tool_child"):
+				new_j=t.idx+1
+				if j.idx==new_j:
+					flag="Yes"
 					if t.description_of_state==None or t.description_of_state=="":	
 						name="Approved by "+t.designation
 					else:
 						name=t.description_of_state
-					
+
 					if t.description_of_state==None or t.description_of_state=="":
 						update_value="Submitted by "+t.designation
 					else:
-						update_value=t.description_of_state	
-					role_name=t.designation	
+						update_value=t.description_of_state
+
+					role_name=j.designation
 					workflow_doc.append("states",{
 							"state":name,
 							"doc_status":0,
 							"update_field":"document_status",
 							"update_value":update_value,
 							"allow_edit":role_name
-						})
-					############################# pass for payment
-					name="Passed for Payment"
-					update_value="Passed for Payment"
-					workflow_doc.append("states",{
-							"state":name,
-							"doc_status":0,
-							"update_field":"document_status",
-							"update_value":update_value,
-							"allow_edit":role_name
-						})
+						})		
+
+			if flag=="No":
+				update_value="Submitted by "+t.designation
+				if t.description_of_state==None or t.description_of_state=="":	
+					name="Approved by "+t.designation
+				else:
+					name=t.description_of_state
+				
+				if t.description_of_state==None or t.description_of_state=="":
+					update_value="Submitted by "+t.designation
+				else:
+					update_value=t.description_of_state	
+				role_name=t.designation	
+				workflow_doc.append("states",{
+						"state":name,
+						"doc_status":0,
+						"update_field":"document_status",
+						"update_value":update_value,
+						"allow_edit":role_name
+					})
+				############################# pass for payment
+				name="Passed for Payment"
+				update_value="Passed for Payment"
+				workflow_doc.append("states",{
+						"state":name,
+						"doc_status":0,
+						"update_field":"document_status",
+						"update_value":update_value,
+						"allow_edit":role_name
+					})
 
 	############################################## Workflow Transition child doc
 	for t in self.get("role_permission_tool_child"):
@@ -252,128 +246,121 @@ def workflow_creation(self):
 					"condition":condition,
 
 				})
+
+			new_j=t.idx+1
+			for j in self.get("role_permission_tool_child"):
+				if j.idx==new_j:
+					list_state=[{"state":"Verified & Submitted by Note Creator"}]
+					name=list_state[0]["state"]
+					if j.description_of_state==None or j.description_of_state=="":
+						next_state="Approved by "+j.designation
+					else:
+						next_state=j.description_of_state
+
+					allowed=j.designation	
+					if j.approve==1:	
+						state=name
+						action="Approve"
+						next_state=next_state
+						condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+							"condition":condition,
+						})
+
+					if j.reject==1:	
+						state=name
+						action="Reject"
+						next_state="Cancelled"
+						condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+							"condition":condition,
+						})
+					if j.reject_and_transfer==1:	
+						state=name
+						action="Reject and Transfer"
+						next_state=next_state
+						condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+							"condition":condition,
+						})
+
 		else:
 			flag="No"
-			if t.idx==2:
-				new_j=t.idx+1
-				for j in self.get("role_permission_tool_child"):
-					if j.idx==new_j:
-						flag="Yes"
-						list_state=[{"state":"Verified & Submitted by Note Creator"}]
-						name=list_state[0]["state"]
-						if j.description_of_state==None or j.description_of_state=="":
-							next_state="Approved by "+j.designation
-						else:
-							next_state=j.description_of_state
+			new_j=t.idx+1
+			for j in self.get("role_permission_tool_child"):
+				if j.idx==new_j:
+					flag="Yes"
+					if t.description_of_state==None or t.description_of_state=="":	
+						name="Approved by "+t.designation
+					else:
+						name=t.description_of_state
+					allowed=j.designation
+					if j.description_of_state==None or j.description_of_state=="":
+						next_state="Approved by "+j.designation
+					else:
+						next_state=j.description_of_state
+					
+					if t.approve==1:	
+						state=name
+						action="Approve"
+						next_state=next_state
+						condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+							"condition":condition,
+						})
 
-						allowed=j.designation	
-						if t.approve==1:	
-							state=name
-							action="Approve"
-							next_state=next_state
-							condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
-							workflow_doc.append("transitions",{
-								"state":state,
-								"action":action,
-								"next_state":next_state,
-								"allowed":allowed,
-								"allow_self_approval":1,
-								"condition":condition,
-							})
-
-						if t.reject==1:	
-							state=name
-							action="Reject"
-							next_state="Cancelled"
-							condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
-							workflow_doc.append("transitions",{
-								"state":state,
-								"action":action,
-								"next_state":next_state,
-								"allowed":allowed,
-								"allow_self_approval":1,
-								"condition":condition,
-							})
-						if t.reject_and_transfer==1:	
-							state=name
-							action="Reject and Transfer"
-							next_state=next_state
-							condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
-							workflow_doc.append("transitions",{
-								"state":state,
-								"action":action,
-								"next_state":next_state,
-								"allowed":allowed,
-								"allow_self_approval":1,
-								"condition":condition,
-							})
-			else:
-				flag="No"
-				new_j=t.idx+1
-				for j in self.get("role_permission_tool_child"):
-					if j.idx==new_j:
-						flag="Yes"
-						if t.description_of_state==None or t.description_of_state=="":	
-							name="Approved by "+t.designation
-						else:
-							name=t.description_of_state
-						allowed=j.designation
-						if j.description_of_state==None or j.description_of_state=="":
-							next_state="Approved by "+j.designation
-						else:
-							next_state=j.description_of_state
-						
-						if t.approve==1:	
-							state=name
-							action="Approve"
-							next_state=next_state
-							condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
-							workflow_doc.append("transitions",{
-								"state":state,
-								"action":action,
-								"next_state":next_state,
-								"allowed":allowed,
-								"allow_self_approval":1,
-								"condition":condition,
-							})
-
-						if t.reject==1:	
-							state=name
-							action="Reject"
-							next_state="Cancelled"
-							condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
-							workflow_doc.append("transitions",{
-								"state":state,
-								"action":action,
-								"next_state":next_state,
-								"allowed":allowed,
-								"allow_self_approval":1,
-								"condition":condition,
-							})
-						if t.reject_and_transfer==1:	
-							state=name
-							action="Reject and Transfer"
-							next_state=next_state
-							condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
-							workflow_doc.append("transitions",{
-								"state":state,
-								"action":action,
-								"next_state":next_state,
-								"allowed":allowed,
-								"allow_self_approval":1,
-								"condition":condition,
-							})
+					if t.reject==1:	
+						state=name
+						action="Reject"
+						next_state="Cancelled"
+						condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+							"condition":condition,
+						})
+					if t.reject_and_transfer==1:	
+						state=name
+						action="Reject and Transfer"
+						next_state=next_state
+						condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+							"condition":condition,
+						})
 			if flag=="No":
 				if t.description_of_state==None or t.description_of_state=="":	
 					name="Approved by "+t.designation
 				else:
 					name=t.description_of_state
 				allowed=t.designation
-
-				# if t.description_of_state==None or t.description_of_state=="":
-				# 	next_state="Approved by "+t.designation
-				# else:
-				# 	next_state=t.description_of_state
 				next_state="Passed for Payment"
 				
 				if t.approve==1:	
@@ -418,11 +405,8 @@ def workflow_creation(self):
 						"allow_self_approval":1,
 						"condition":condition,
 
-					})
-	print("\n\n\n\n")
-	for t1 in workflow_doc.get("states"):
-		print("state-",t1.state,"\t","doc_status-",t1.doc_status,"\t","update_field-",t1.update_field,"\t","allow_edit-",t1.allow_edit)
-	print("\n\n\n\n")
-	for t1 in workflow_doc.get("transitions"):
-		print("state-",t1.state,"\t","action-",t1.action,"\t","next_state-",t1.next_state,"\t","allowed-",t1.allowed,"\t","allow_self_approval-",t1.allow_self_approval)	
+					})	
 	workflow_doc.save()
+	self.db_set("workflow_name",workflow_doc.name)
+	date = datetime.date.today()
+	self.db_set("posting_date",date)
