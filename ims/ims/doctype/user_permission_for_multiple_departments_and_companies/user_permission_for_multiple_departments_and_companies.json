@@ -12,7 +12,8 @@
   "designation",
   "user_id",
   "disable",
-  "departments"
+  "departments",
+  "companies"
  ],
  "fields": [
   {
@@ -53,11 +54,17 @@
    "fieldtype": "Table",
    "label": "Departments",
    "options": "Division Child"
+  },
+  {
+   "fieldname": "companies",
+   "fieldtype": "Table",
+   "label": "Companies",
+   "options": "Company Child"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 14:30:07.050039",
+ "modified": "2022-11-16 14:54:03.421334",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "User Permission for Multiple Departments and Companies",
