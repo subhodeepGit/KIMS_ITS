@@ -12,8 +12,9 @@
   "document_date",
   "vendor_code",
   "vendor_name",
-  "ifsc_code",
+  "column_break_7",
   "ac_no",
+  "ifsc_code",
   "amount",
   "amount1",
   "sap_document_number",
@@ -103,12 +104,16 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Invoice tracking number"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-01 16:24:38.382133",
+ "modified": "2022-11-16 16:17:00.607878",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Child",

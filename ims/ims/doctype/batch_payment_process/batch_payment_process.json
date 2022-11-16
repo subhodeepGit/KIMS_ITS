@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "BAT-PAY-PRO.-.####",
  "creation": "2022-11-01 15:14:35.935880",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -42,6 +43,7 @@
    "in_list_view": 1,
    "label": "Company",
    "options": "Company",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\"",
    "reqd": 1
   },
   {
@@ -54,6 +56,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Account Reference No",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\"",
    "reqd": 1
   },
   {
@@ -61,6 +64,7 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Account Post Date",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\"",
    "reqd": 1
   },
   {
@@ -71,7 +75,8 @@
    "fieldname": "paying_bank",
    "fieldtype": "Link",
    "label": "Paying Bank",
-   "options": "Bank Details For Payment"
+   "options": "Bank Details For Payment",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fetch_from": "paying_bank.bank_name",
@@ -115,32 +120,39 @@
   {
    "fieldname": "audit_reference_no",
    "fieldtype": "Data",
-   "label": "Audit Reference No"
+   "label": "Audit Reference No",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "audit_posting_date",
    "fieldtype": "Date",
-   "label": "Audit Posting Date "
+   "label": "Audit Posting Date ",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
+   "depends_on": "eval:doc.workflow_state==\"Cheque Attachment\" || doc.workflow_state==\"Payment Done\"",
    "fieldname": "cheque_details_section_section",
    "fieldtype": "Section Break",
-   "label": "Cheque Details Section"
+   "label": "Cheque Details Section",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "cheque_no",
    "fieldtype": "Data",
-   "label": "Cheque No"
+   "label": "Cheque No",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "cheque_date",
    "fieldtype": "Date",
-   "label": "Cheque Date"
+   "label": "Cheque Date",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "amount",
    "fieldtype": "Currency",
-   "label": "Amount"
+   "label": "Amount",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "column_break_19",
@@ -150,7 +162,8 @@
    "fieldname": "contact_person",
    "fieldtype": "Link",
    "label": "Contact Person",
-   "options": "Employee"
+   "options": "Employee",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fetch_from": "contact_person.mobile_no",
@@ -170,7 +183,8 @@
    "fieldname": "approval_hierarchy",
    "fieldtype": "Table",
    "label": "Approval Hierarchy",
-   "options": "Authorized Signature"
+   "options": "Authorized Signature",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "approval_hierarchy_section",
@@ -180,12 +194,14 @@
   {
    "fieldname": "cheque_attachment",
    "fieldtype": "Attach",
-   "label": "Cheque Attachment"
+   "label": "Cheque Attachment",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "note_sheet_attachment",
    "fieldtype": "Attach",
-   "label": "Note Sheet Attachment"
+   "label": "Note Sheet Attachment",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
    "fieldname": "section_break_25",
@@ -194,15 +210,17 @@
   {
    "fieldname": "table_26",
    "fieldtype": "Table",
-   "options": "Batch Payment Child"
+   "options": "Batch Payment Child",
+   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-01 16:05:39.988649",
+ "modified": "2022-11-16 16:35:26.048237",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {
