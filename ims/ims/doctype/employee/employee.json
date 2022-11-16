@@ -232,7 +232,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-15 13:21:07.670742",
+ "modified": "2022-11-16 13:29:06.245216",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
@@ -252,6 +252,7 @@
    "write": 1
   }
  ],
+ "search_fields": "full_name",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
