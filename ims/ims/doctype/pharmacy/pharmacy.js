@@ -2,9 +2,10 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Pharmacy', {
-	// refresh: function(frm) {
-
-	// }
+	refresh: function(frm) {
+		const collection = frm.getElementsByClassName("btn btn-default btn-sm ellipsis");
+		console.log(collection);
+	}
 });
 frappe.ui.form.on('Enclosed Bills', {	
 	invoice_amount:function(frm, cdt, cdn){	
