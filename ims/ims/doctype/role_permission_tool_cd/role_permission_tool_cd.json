@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-11-16 12:26:43.011986",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "doctype_name",
+  "select",
+  "read",
+  "write",
+  "del_data",
+  "create",
+  "report",
+  "export",
+  "import_data",
+  "print"
+ ],
+ "fields": [
+  {
+   "fieldname": "doctype_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Doctype name",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "select",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Select"
+  },
+  {
+   "default": "0",
+   "fieldname": "read",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Read"
+  },
+  {
+   "default": "0",
+   "fieldname": "write",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Write"
+  },
+  {
+   "default": "0",
+   "fieldname": "create",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Create"
+  },
+  {
+   "default": "0",
+   "fieldname": "report",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Report"
+  },
+  {
+   "default": "0",
+   "fieldname": "export",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Export"
+  },
+  {
+   "default": "0",
+   "fieldname": "print",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Print"
+  },
+  {
+   "default": "0",
+   "fieldname": "del_data",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Delete"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_data",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Import"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-16 15:02:54.821380",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Role permission Tool CD",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
