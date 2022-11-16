@@ -261,11 +261,12 @@ def workflow_creation(self):
 						flag="Yes"
 						list_state=[{"state":"Verified & Submitted by Note Creator"}]
 						name=list_state[0]["state"]
-						# next_state=""	
 						if j.description_of_state==None or j.description_of_state=="":
 							next_state="Approved by "+j.designation
 						else:
 							next_state=j.description_of_state
+
+						allowed=j.designation	
 						if t.approve==1:	
 							state=name
 							action="Approve"
@@ -316,7 +317,7 @@ def workflow_creation(self):
 							name="Approved by "+t.designation
 						else:
 							name=t.description_of_state
-						allowed=t.designation
+						allowed=j.designation
 						if j.description_of_state==None or j.description_of_state=="":
 							next_state="Approved by "+j.designation
 						else:
