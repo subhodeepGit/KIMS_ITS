@@ -2,6 +2,51 @@
  {
   "docstatus": 0,
   "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-16 16:02:33.722564",
+  "name": "Verified & Submitted by Accounts User",
+  "style": "Primary",
+  "workflow_state_name": "Verified & Submitted by Accounts User"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-16 16:02:39.609127",
+  "name": "Payment Sheet prepared",
+  "style": "Primary",
+  "workflow_state_name": "Payment Sheet prepared"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-16 16:02:50.263107",
+  "name": "Verified by Signing Authorities",
+  "style": "Primary",
+  "workflow_state_name": "Verified by Signing Authorities"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-16 16:02:58.250760",
+  "name": "Cheque Attachment",
+  "style": "Primary",
+  "workflow_state_name": "Cheque Attachment"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2022-11-16 16:02:21.108668",
+  "name": "Payment Done",
+  "style": "Success",
+  "workflow_state_name": "Payment Done"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
   "icon": "question-sign",
   "modified": "2022-08-16 10:56:54.632219",
   "name": "Pending",
