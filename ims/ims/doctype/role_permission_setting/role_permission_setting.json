@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "ROL-PER-.-.####",
  "creation": "2022-11-16 12:28:16.286865",
@@ -54,7 +55,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-11-16 15:25:02.357583",
+ "modified": "2022-11-17 12:43:53.464249",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Role Permission Setting",
