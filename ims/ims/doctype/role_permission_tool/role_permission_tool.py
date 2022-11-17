@@ -389,7 +389,7 @@ def workflow_creation(self):
 						"next_state":next_state,
 						"allowed":allowed,
 						"allow_self_approval":1,
-						"condition":condition,
+						# "condition":condition,
 
 					})
 				if t.reject_and_transfer==1:	
