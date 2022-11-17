@@ -60,15 +60,18 @@ def role_permissions_manager_cration(t_object,role):
 
 @frappe.whitelist()
 def get_doctype_list(role):
+	print("\n\n\n\n")
 	role_name=role
-	doctype_name = ["Company", "Department", "Employee", "Supplier", "Supplier Group", "Material or Service", "Material or Service Group", "Bank Details For Payment", "Designation"]
+	# doctype_name = ["Company", "Department", "Employee", "Supplier", "Supplier Group", "Material or Service", "Material or Service Group", "Bank Details For Payment", "Designation"]
+	ims_doc=frappe.get_all("DocType",filters={"module":"Ims","istable":0},fields=['name'],order_by="name asc")
+	print(ims_doc)
 	final_list=[]
-	for doc in doctype_name:
-		role_permission=frappe.get_all("Custom DocPerm",{"parent":doc,"role":role_name},
+	for doc in ims_doc:
+		role_permission=frappe.get_all("Custom DocPerm",{"parent":doc['name'],"role":role_name},
 							["name","select","read","write","create","delete","report","export","import","print"])
 		if role_permission:
 			list_dic={}
-			list_dic['doctype_name']=doc
+			list_dic['doctype_name']=doc['name']
 			list_dic['select']=role_permission[0]["select"]
 			list_dic['read']=role_permission[0]["read"]
 			list_dic['write']=role_permission[0]["write"]
@@ -82,7 +85,7 @@ def get_doctype_list(role):
 		else:
 			field=["name","select","read","write","create","del_data","report","export","import_data","print"]
 			list_dic={}
-			list_dic['doctype_name']=doc
+			list_dic['doctype_name']=doc['name']
 			for t in field:
 				list_dic[t]=0
 			final_list.append(list_dic)
