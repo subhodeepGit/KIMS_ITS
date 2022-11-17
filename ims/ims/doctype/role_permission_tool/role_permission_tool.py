@@ -236,7 +236,6 @@ def workflow_creation(self):
 				action=states['action']
 				next_state=states['next_state']
 				allowed=t.designation
-				message=t.grouping_of_designation
 				# condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)	
 				workflow_doc.append("transitions",{
 					"state":state,
@@ -245,7 +244,6 @@ def workflow_creation(self):
 					"allowed":allowed,
 					"allow_self_approval":1,
 					# "condition":condition,
-					"message":message
 
 				})
 
