@@ -146,12 +146,15 @@
    "fieldname": "department",
    "fieldtype": "Link",
    "label": "Department",
-   "options": "Department"
+   "options": "Department",
+   "reqd": 1
   },
   {
    "fieldname": "designation",
-   "fieldtype": "Data",
-   "label": "Designation"
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "reqd": 1
   },
   {
    "fieldname": "reports_to",
@@ -232,7 +235,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 13:29:06.245216",
+ "modified": "2022-11-17 13:33:53.532910",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
