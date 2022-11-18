@@ -26,6 +26,16 @@ class POConsumable(Document):
 							flag="No"
 
 					approval_status=self.workflow_state
+					document_type="PO Consumable"
+					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
+					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status,"allow_edit":emp_data[0]['designation']},
+												['name',"grouping_of_designation","single_user"])
+						
+
+					grouping_of_designation=grp_info[0]['grouping_of_designation']
+					single_user=grp_info[0]['single_user']
+
+
 					previous_status=frappe.get_all("PO Consumable",{"name":self.name},["workflow_state"])
 					if not previous_status:
 						previous_status=""
@@ -51,7 +61,10 @@ class POConsumable(Document):
 							"department":emp_data[0]['department'],                                        
 							"approval_status":approval_status,                              
 							"previous_status":previous_status,                                 
-							"transfer_to":0,                                    
+							"transfer_to":0,
+							"workflow_data":workflow_name,
+							"grouping_of_designation":grouping_of_designation,
+							"single_user":single_user                                  
 						})
 					if flag=="No":
 						for t in self.get("authorized_signature"):
@@ -65,21 +78,20 @@ class POConsumable(Document):
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
 								t.previous_status=previous_status
+								t.workflow_data= workflow_name
+								t.grouping_of_designation=grouping_of_designation
+								t.single_user=single_user 
 								# t.transfer_to=0
 
 			else:
 				frappe.throw("Employee not found")		
 		else:
 			if self.workflow_state=="Rejected and Transfer":
-				print("\n\n\n\n")
 				check=""
 				count=0
 				name=""
 				for t in self.get("authorized_signature"):
 					if t.transfer_to==1 and t.disapproval_check==0:
-						# print(t.transfer_to)
-						# print(t.disapproval_check)
-						# print(t.name)
 						check=t.previous_status
 						name=t.name
 				if name!="":
