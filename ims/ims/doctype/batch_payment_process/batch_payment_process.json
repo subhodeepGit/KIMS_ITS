@@ -32,6 +32,7 @@
   "contact_phone_no",
   "contact_email_id",
   "section_break_25",
+  "get_outstanding_amount",
   "table_26",
   "approval_hierarchy_section",
   "approval_hierarchy"
@@ -212,11 +213,16 @@
    "fieldtype": "Table",
    "options": "Batch Payment Child",
    "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+  },
+  {
+   "fieldname": "get_outstanding_amount",
+   "fieldtype": "Button",
+   "label": "Get Outstanding Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 16:35:26.048237",
+ "modified": "2022-11-17 11:00:44.252976",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",

@@ -62,4 +62,14 @@ class BatchPaymentProcess(Document):
 							t.previous_status=previous_status
 
 		else:
-			frappe.throw("Employee not found")	
+			frappe.throw("Employee not found")
+
+@frappe.whitelist()
+def get_outstanding_amount(company=None):
+	po_con=frappe.db.sql(""" Select supplier_code,name_of_supplier from `tabPO Consumable`
+	where company="%s" """%(company),as_dict = True)
+
+	if len(po_con)!=0:
+		return po_con
+	else:
+		frappe.throw("No Payment is due")
