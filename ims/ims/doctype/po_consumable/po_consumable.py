@@ -26,9 +26,11 @@ class POConsumable(Document):
 							flag="No"
 
 					approval_status=self.workflow_state
+					print("\n\n\n\n")
+					print(approval_status)
 					document_type="PO Consumable"
 					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
-					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status,"allow_edit":emp_data[0]['designation']},
+					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status},
 												['name',"grouping_of_designation","single_user"])
 						
 
