@@ -13,7 +13,9 @@
   "reject",
   "style",
   "amount_grater",
-  "amount_smaller"
+  "amount_smaller",
+  "single_user",
+  "grouping_of_designation"
  ],
  "fields": [
   {
@@ -35,7 +37,8 @@
    "fieldname": "description_of_state",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Description of State"
+   "label": "Description of State",
+   "read_only_depends_on": "eval:doc.idx==1"
   },
   {
    "default": "0",
@@ -72,12 +75,24 @@
    "fieldname": "amount_smaller",
    "fieldtype": "Currency",
    "label": "Amount Smaller"
+  },
+  {
+   "default": "0",
+   "fieldname": "single_user",
+   "fieldtype": "Check",
+   "label": "Single User"
+  },
+  {
+   "fieldname": "grouping_of_designation",
+   "fieldtype": "Select",
+   "label": "Grouping of Designation",
+   "options": "\nA\nB\nC\nD\nE\nF\nG\nH"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-17 13:19:14.237372",
+ "modified": "2022-11-18 12:56:44.639252",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Role Permission Tool Child",

@@ -134,6 +134,8 @@ def workflow_creation(self):
 	for t in self.get("role_permission_tool_child"):
 		if t.idx==1:
 			role_name=t.designation
+			grouping_of_designation=t.grouping_of_designation
+			single_user=t.single_user
 			list_state=[{"state":"Draft","update_value":"Invoice in Draft State"},{"state":"Verify and Save","update_value":"Document save"},
 						{"state":"Cancelled","update_value":"Document cancelled Note Keeper"}]
 			for state in list_state:
@@ -142,7 +144,9 @@ def workflow_creation(self):
 					"doc_status":0,
 					"update_field":"document_status",
 					"update_value":state['update_value'],
-					"allow_edit":role_name
+					"allow_edit":role_name,
+					"grouping_of_designation":grouping_of_designation,
+					"single_user":single_user
 				})
 
 			name="Rejected and Transfer"
@@ -152,7 +156,9 @@ def workflow_creation(self):
 				"doc_status":0,
 				"update_field":"document_status",
 				"update_value":update_value,
-				"allow_edit":role_name
+				"allow_edit":role_name,					
+				"grouping_of_designation":grouping_of_designation,
+				"single_user":single_user
 			})
 			for j in self.get("role_permission_tool_child"):
 				new_j=t.idx+1
@@ -161,12 +167,16 @@ def workflow_creation(self):
 					name=list_state[0]["state"]
 					update_value=list_state[0]['update_value']
 					role_name=j.designation
+					single_user=j.single_user
+					grouping_of_designation=j.grouping_of_designation
 					workflow_doc.append("states",{
 								"state":name,
 								"doc_status":0,
 								"update_field":"document_status",
 								"update_value":update_value,
-								"allow_edit":role_name
+								"allow_edit":role_name,
+								"single_user":single_user,
+								"grouping_of_designation":grouping_of_designation
 							})
 		
 		else:
@@ -186,12 +196,16 @@ def workflow_creation(self):
 						update_value=t.description_of_state
 
 					role_name=j.designation
+					single_user=j.single_user
+					grouping_of_designation=j.grouping_of_designation
 					workflow_doc.append("states",{
 							"state":name,
 							"doc_status":0,
 							"update_field":"document_status",
 							"update_value":update_value,
-							"allow_edit":role_name
+							"allow_edit":role_name,
+							"single_user":single_user,
+							"grouping_of_designation":grouping_of_designation
 						})		
 
 			if flag=="No":
@@ -205,13 +219,17 @@ def workflow_creation(self):
 					update_value="Submitted by "+t.designation
 				else:
 					update_value=t.description_of_state	
-				role_name=t.designation	
+				role_name=t.designation
+				single_user=t.single_user
+				grouping_of_designation=t.grouping_of_designation	
 				workflow_doc.append("states",{
 						"state":name,
 						"doc_status":0,
 						"update_field":"document_status",
 						"update_value":update_value,
-						"allow_edit":role_name
+						"allow_edit":role_name,
+						"single_user":single_user,
+						"grouping_of_designation":grouping_of_designation
 					})
 				############################# pass for payment
 				name="Passed for Payment"
@@ -221,7 +239,9 @@ def workflow_creation(self):
 						"doc_status":0,
 						"update_field":"document_status",
 						"update_value":update_value,
-						"allow_edit":role_name
+						"allow_edit":role_name,
+						"single_user":single_user,
+						"grouping_of_designation":grouping_of_designation
 					})
 
 	############################################## Workflow Transition child doc
@@ -389,7 +409,7 @@ def workflow_creation(self):
 						"next_state":next_state,
 						"allowed":allowed,
 						"allow_self_approval":1,
-						"condition":condition,
+						# "condition":condition,
 
 					})
 				if t.reject_and_transfer==1:	
