@@ -26,9 +26,23 @@ class POConsumable(Document):
 							flag="No"
 
 					approval_status=self.workflow_state
+					previous_status=frappe.get_all("PO Consumable",{"name":self.name},["workflow_state"])
+					if not previous_status:
+						previous_status=""
+					else:
+						previous_status=previous_status[0]['workflow_state']	
+					
+
 					document_type="PO Consumable"
+					approval_status_print=""
+					
+					if previous_status=="":
+						approval_status_print=approval_status
+					else:
+						approval_status_print=previous_status
+
 					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
-					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status},
+					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status_print},
 												['name',"grouping_of_designation","single_user"])
 						
 
@@ -36,12 +50,6 @@ class POConsumable(Document):
 					single_user=grp_info[0]['single_user']
 
 
-					previous_status=frappe.get_all("PO Consumable",{"name":self.name},["workflow_state"])
-					if not previous_status:
-						previous_status=""
-					else:
-						previous_status=previous_status[0]['workflow_state']	
-					
 					date_of_receivable=""
 					for t in self.get("authorized_signature"):
 						date_of_receivable=t.date_of_approval
