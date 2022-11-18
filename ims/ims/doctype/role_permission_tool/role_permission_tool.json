@@ -7,9 +7,12 @@
  "engine": "InnoDB",
  "field_order": [
   "doctype_name",
+  "workflow_configuration_section",
   "role_permission_tool_child",
   "posting_date",
-  "workflow_name"
+  "workflow_name",
+  "grouping_of_designation_info_section",
+  "head_name"
  ],
  "fields": [
   {
@@ -35,11 +38,27 @@
    "fieldtype": "Date",
    "label": "Posting Date",
    "read_only": 1
+  },
+  {
+   "fieldname": "grouping_of_designation_info_section",
+   "fieldtype": "Section Break",
+   "label": "Grouping of Designation Info"
+  },
+  {
+   "fieldname": "head_name",
+   "fieldtype": "Table",
+   "label": "Head name",
+   "options": "Section Head Name"
+  },
+  {
+   "fieldname": "workflow_configuration_section",
+   "fieldtype": "Section Break",
+   "label": "Workflow Configuration"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 17:41:42.188723",
+ "modified": "2022-11-18 23:08:39.679317",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Role Permission Tool",

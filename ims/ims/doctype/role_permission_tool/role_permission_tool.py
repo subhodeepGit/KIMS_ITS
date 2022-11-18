@@ -12,7 +12,8 @@ class RolePermissionTool(Document):
 		role_permissions_manager_cration(self)
 		workflow_state_cration(self)
 		workflow_action_master_cration(self)
-		workflow_creation(self)	
+		workflow_creation(self)
+		grouping_of_designation_info_section(self)	
 
 
 
@@ -430,3 +431,19 @@ def workflow_creation(self):
 	self.db_set("workflow_name",workflow_doc.name)
 	date = datetime.date.today()
 	self.db_set("posting_date",date)
+
+def grouping_of_designation_info_section(self):
+	grouping_of_designation_info=[]
+	for t in self.get("role_permission_tool_child"):
+		if t.grouping_of_designation!=None and t.grouping_of_designation!="":
+			grouping_of_designation_info.append(t.grouping_of_designation)
+
+	grouping_of_designation_info=list(set(grouping_of_designation_info))
+	grouping_of_designation_info.sort()
+
+	if not self.get("head_name"):
+		for t in grouping_of_designation_info:
+			self.append("head_name",{                                     
+					"lable_name":t,                                       
+					"name_of_the_group":t,                                                                   
+				})							
