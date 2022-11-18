@@ -19,7 +19,10 @@
   "transfer_to",
   "disapproval_check",
   "disapproval_emp",
-  "disapproval_emp_name"
+  "disapproval_emp_name",
+  "workflow_data",
+  "grouping_of_designation",
+  "single_user"
  ],
  "fields": [
   {
@@ -113,12 +116,30 @@
    "fieldtype": "Data",
    "label": "Disapproval Emp Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "workflow_data",
+   "fieldtype": "Data",
+   "label": "Workflow Data",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grouping_of_designation",
+   "fieldtype": "Data",
+   "label": "Grouping of Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "single_user",
+   "fieldtype": "Data",
+   "label": " Single User ",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-08 16:40:52.949861",
+ "modified": "2022-11-18 13:00:10.049830",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Authorized Signature",
