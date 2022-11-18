@@ -53,7 +53,13 @@ class Employee(Document):
 				'user_type': 'Website User'
 				})
 			emp_user.flags.ignore_permissions = True
-			emp_user.add_roles(self.role)
+			if self.role==None and self.third_party_employee==1:
+				emp_user.add_roles("Third Party")
+			if self.role!=None and self.third_party_employee==0:
+				emp_user.add_roles(self.role)
+			if self.role!=None and self.third_party_employee==1:
+				emp_user.add_roles("Third Party")
+				emp_user.add_roles(self.role)
 			emp_user.save()
 			self.db_set("user",emp_user.name)
 
@@ -75,10 +81,23 @@ class Employee(Document):
 		rol_user = frappe.db.get_all("User",filters=[["email","=",self.email]],fields=["name"])
 		if rol_user:
 			emp_user = frappe.get_doc('User', self.email)
-			user_roles = frappe.get_roles()	
-			emp_user.remove_roles(*user_roles)
-			emp_user.flags.ignore_permissions = True
-			emp_user.add_roles(self.role)
+			user_roles = frappe.get_roles()
+			if self.role!=None and self.third_party_employee==0:	
+				emp_user.remove_roles(*user_roles)
+				emp_user.flags.ignore_permissions = True
+				emp_user.add_roles(self.role)
+			if self.role==None and self.third_party_employee==1:
+				emp_user.remove_roles(*user_roles)
+				emp_user.flags.ignore_permissions = True
+				emp_user.add_roles("Third Party")
+			if self.role!=None and self.third_party_employee==1:
+				emp_user.remove_roles(*user_roles)
+				emp_user.flags.ignore_permissions = True
+				emp_user.add_roles("Third Party")
+				emp_user.add_roles(self.role)
+			if self.role==None and self.third_party_employee==0:
+				emp_user.remove_roles(*user_roles)
+				emp_user.flags.ignore_permissions = True
 			emp_user.save()
 	
 def new_email(self):

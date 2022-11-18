@@ -38,6 +38,7 @@
   "grade",
   "column_break_27",
   "branch",
+  "third_party_employee",
   "role",
   "signature",
   "section_break_33",
@@ -229,13 +230,18 @@
    "fieldname": "role",
    "fieldtype": "Link",
    "label": "Role",
-   "options": "Designation",
-   "reqd": 1
+   "options": "Designation"
+  },
+  {
+   "default": "0",
+   "fieldname": "third_party_employee",
+   "fieldtype": "Check",
+   "label": "Third Party Employee"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-17 15:01:31.925152",
+ "modified": "2022-11-18 15:17:20.513776",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
