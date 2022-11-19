@@ -256,16 +256,13 @@ def workflow_creation(self):
 				state=states['state']
 				action=states['action']
 				next_state=states['next_state']
-				allowed=t.designation
-				# condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)	
+				allowed=t.designation	
 				workflow_doc.append("transitions",{
 					"state":state,
 					"action":action,
 					"next_state":next_state,
 					"allowed":allowed,
 					"allow_self_approval":1,
-					# "condition":condition,
-
 				})
 
 			new_j=t.idx+1
@@ -278,12 +275,14 @@ def workflow_creation(self):
 					else:
 						next_state=j.description_of_state
 
-					allowed=j.designation	
+					allowed=j.designation
+					# condition=""
+
 					if j.approve==1:	
 						state=name
 						action="Approve"
 						next_state=next_state
-						# condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
+
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
@@ -296,8 +295,7 @@ def workflow_creation(self):
 					if j.reject==1:	
 						state=name
 						action="Reject"
-						next_state="Cancelled"
-						# condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						next_state="Cancelled"			
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
@@ -309,8 +307,7 @@ def workflow_creation(self):
 					if j.reject_and_transfer==1:	
 						state=name
 						action="Reject and Transfer"
-						next_state=next_state
-						# condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						next_state=next_state		
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
@@ -336,45 +333,53 @@ def workflow_creation(self):
 					else:
 						next_state=j.description_of_state
 					
+					condition=""
+					if j.select_14=="Non Inclusive":
+						if j.amount_grater!=0 and j.amount_smaller==0:
+							condition="doc.net_final_amount_to_be_paid_in_rs>=%s "%(j.amount_grater)
+						elif j.amount_grater==0 and j.amount_smaller!=0:	
+							condition="doc.net_final_amount_to_be_paid_in_rs<=%s "%(j.amount_smaller)
+						elif j.amount_grater!=0 and j.amount_smaller!=0:	
+							condition="doc.net_final_amount_to_be_paid_in_rs>=%s and doc.net_final_amount_to_be_paid_in_rs<=%s "%(j.amount_grater,j.amount_smaller)	
+
+
 					if t.approve==1:	
 						state=name
 						action="Approve"
-						next_state=next_state
-						# condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
+						next_state=next_state				
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
 							"next_state":next_state,
 							"allowed":allowed,
 							"allow_self_approval":1,
-							# "condition":condition,
+							"condition":condition,
 						})
 
 					if t.reject==1:	
 						state=name
 						action="Reject"
-						next_state="Cancelled"
-						# condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						next_state="Cancelled"			
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
 							"next_state":next_state,
 							"allowed":allowed,
 							"allow_self_approval":1,
-							# "condition":condition,
+							"condition":condition,
 						})
+
 					if t.reject_and_transfer==1:	
 						state=name
 						action="Reject and Transfer"
-						next_state=next_state
-						# condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+						next_state=next_state			
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
 							"next_state":next_state,
 							"allowed":allowed,
 							"allow_self_approval":1,
-							# "condition":condition,
+							"condition":condition,
 						})
 			if flag=="No":
 				if t.description_of_state==None or t.description_of_state=="":	
@@ -387,46 +392,106 @@ def workflow_creation(self):
 				if t.approve==1:	
 					state=name
 					action="Approve"
-					next_state=next_state
-					# condition="doc.net_final_amount_to_be_paid_in_rs >= %s and doc.net_final_amount_to_be_paid_in_rs <= %s"%(t.amount_grater,t.amount_smaller)				
+					next_state=next_state				
 					workflow_doc.append("transitions",{
 						"state":state,
 						"action":action,
 						"next_state":next_state,
 						"allowed":allowed,
 						"allow_self_approval":1,
-						# "condition":condition,
-
 					})
 
 				if t.reject==1:	
 					state=name
 					action="Reject"
-					next_state=next_state
-					# condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+					next_state=next_state		
 					workflow_doc.append("transitions",{
 						"state":state,
 						"action":action,
 						"next_state":next_state,
 						"allowed":allowed,
 						"allow_self_approval":1,
-						# "condition":condition,
-
 					})
+
 				if t.reject_and_transfer==1:	
 					state=name
 					action="Reject and Transfer"
-					next_state=next_state
-					# condition="doc.net_final_amount_to_be_paid_in_rs >= %s"%(t.amount_grater)				
+					next_state=next_state		
 					workflow_doc.append("transitions",{
 						"state":state,
 						"action":action,
 						"next_state":next_state,
 						"allowed":allowed,
 						"allow_self_approval":1,
-						# "condition":condition,
+					})
+	for t in self.get("role_permission_tool_child"):
+		if t.idx!=1:
+			if t.amount_grater!=0 and t.amount_smaller!=0:
+				new_idx=t.idx-1
+				for j in self.get("role_permission_tool_child"):
+					if j.idx==new_idx:
+						if j.description_of_state==None or j.description_of_state=="":	
+							name="Approved by "+j.designation
+						else:
+							name=j.description_of_state
 
-					})	
+				if t.amount_grater!=0 and t.amount_smaller==0:
+					condition="doc.net_final_amount_to_be_paid_in_rs>=%s "%(t.amount_grater)
+				elif t.amount_grater==0 and t.amount_smaller!=0:	
+					condition="doc.net_final_amount_to_be_paid_in_rs<=%s "%(t.amount_smaller)
+				elif t.amount_grater!=0 and t.amount_smaller!=0:	
+					condition="doc.net_final_amount_to_be_paid_in_rs>=%s and doc.net_final_amount_to_be_paid_in_rs<=%s "%(t.amount_grater,t.amount_smaller)	
+
+				new_idx=t.idx+1
+				flag="Yes"
+				for j in self.get("role_permission_tool_child"):
+					if j.idx==new_idx:
+						flag="No"
+						if j.description_of_state==None or j.description_of_state=="":
+							next_state="Approved by "+j.designation
+						else:
+							next_state=j.description_of_state
+						allowed=j.designation	
+
+
+				if flag=="No":
+					if t.approve==1:	
+						state=name
+						action="Approve"
+						next_state=next_state				
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+							"condition":condition,
+						})
+					
+					if t.reject==1:	
+						state=name
+						action="Reject"
+						next_state=next_state		
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+						})
+
+					if t.reject_and_transfer==1:	
+						state=name
+						action="Reject and Transfer"
+						next_state=next_state		
+						workflow_doc.append("transitions",{
+							"state":state,
+							"action":action,
+							"next_state":next_state,
+							"allowed":allowed,
+							"allow_self_approval":1,
+						})	
+
 	workflow_doc.save()
 	self.db_set("workflow_name",workflow_doc.name)
 	date = datetime.date.today()
