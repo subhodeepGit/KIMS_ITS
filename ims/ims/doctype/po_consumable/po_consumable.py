@@ -35,13 +35,25 @@ class POConsumable(Document):
 
 					document_type="PO Consumable"
 					approval_status_print=""
-					
+					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
 					if previous_status=="":
 						approval_status_print=approval_status
 					else:
-						approval_status_print=previous_status
+						# approval_status_print=previous_status
+						state_info=frappe.get_all("Workflow Document State",{"parent":workflow_name},["state"],order_by="idx asc")
+						count=0
+						for s in state_info:
+							count=count+1
+							if s["state"]==approval_status:
+								break
 
-					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
+						pre_flow_list=state_info[count-1]["state"]
+						approval_status_print=pre_flow_list	
+						# approval_status
+						# previous_status
+
+
+					
 					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status_print},
 												['name',"grouping_of_designation","single_user"])
 						
