@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-11-20 19:20:57.189543",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "type_of_note_sheet",
+  "documnet_no",
+  "note_sheet_no",
+  "date_of_note_sheet",
+  "name_of_schooldepartment",
+  "for_which_department",
+  "document_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "type_of_note_sheet",
+   "fieldtype": "Data",
+   "label": "Type of Note sheet"
+  },
+  {
+   "fieldname": "documnet_no",
+   "fieldtype": "Data",
+   "label": "Documnet No"
+  },
+  {
+   "fieldname": "note_sheet_no",
+   "fieldtype": "Data",
+   "label": "Note Sheet No."
+  },
+  {
+   "fieldname": "date_of_note_sheet",
+   "fieldtype": "Data",
+   "label": "Date Of Note Sheet"
+  },
+  {
+   "fieldname": "name_of_schooldepartment",
+   "fieldtype": "Data",
+   "label": "Name Of School/Department"
+  },
+  {
+   "fieldname": "for_which_department",
+   "fieldtype": "Data",
+   "label": "For which Department"
+  },
+  {
+   "fieldname": "document_status",
+   "fieldtype": "Data",
+   "label": "Document Status"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-11-20 19:22:37.426791",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Third-Party Verification",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
