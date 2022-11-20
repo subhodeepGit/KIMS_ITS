@@ -197,8 +197,8 @@ def workflow_creation(self):
 						update_value=t.description_of_state
 
 					role_name=j.designation
-					single_user=j.single_user
-					grouping_of_designation=j.grouping_of_designation
+					single_user=t.single_user
+					grouping_of_designation=t.grouping_of_designation
 					workflow_doc.append("states",{
 							"state":name,
 							"doc_status":0,
