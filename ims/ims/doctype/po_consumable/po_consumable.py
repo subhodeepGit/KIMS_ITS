@@ -32,36 +32,6 @@ class POConsumable(Document):
 					else:
 						previous_status=previous_status[0]['workflow_state']	
 					
-
-					document_type="PO Consumable"
-					approval_status_print=""
-					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
-					if previous_status=="":
-						approval_status_print=approval_status
-					else:
-						# approval_status_print=previous_status
-						state_info=frappe.get_all("Workflow Document State",{"parent":workflow_name},["state"],order_by="idx asc")
-						count=0
-						for s in state_info:
-							count=count+1
-							if s["state"]==approval_status:
-								break
-
-						pre_flow_list=state_info[count-1]["state"]
-						approval_status_print=pre_flow_list	
-						# approval_status
-						# previous_status
-
-
-					
-					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status_print},
-												['name',"grouping_of_designation","single_user"])
-						
-
-					grouping_of_designation=grp_info[0]['grouping_of_designation']
-					single_user=grp_info[0]['single_user']
-
-
 					date_of_receivable=""
 					for t in self.get("authorized_signature"):
 						date_of_receivable=t.date_of_approval
@@ -81,10 +51,7 @@ class POConsumable(Document):
 							"department":emp_data[0]['department'],                                        
 							"approval_status":approval_status,                              
 							"previous_status":previous_status,                                 
-							"transfer_to":0,
-							"workflow_data":workflow_name,
-							"grouping_of_designation":grouping_of_designation,
-							"single_user":single_user                                  
+							"transfer_to":0,                                    
 						})
 					if flag=="No":
 						for t in self.get("authorized_signature"):
@@ -98,10 +65,6 @@ class POConsumable(Document):
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
 								t.previous_status=previous_status
-								t.workflow_data= workflow_name
-								t.grouping_of_designation=grouping_of_designation
-								t.single_user=single_user 
-								# t.transfer_to=0
 
 			else:
 				frappe.throw("Employee not found")		

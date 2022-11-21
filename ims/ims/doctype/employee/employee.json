@@ -230,7 +230,7 @@
    "fieldname": "role",
    "fieldtype": "Link",
    "label": "Role",
-   "options": "Designation"
+   "options": "Role"
   },
   {
    "default": "0",
@@ -241,7 +241,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-18 15:17:20.513776",
+ "modified": "2022-11-21 11:07:03.134584",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",
