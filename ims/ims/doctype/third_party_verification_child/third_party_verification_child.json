@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2022-11-21 16:16:44.401879",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "details_of_invoices_po",
+  "invoice_no",
+  "section_break_3",
+  "invoice_date",
+  "invoices_amountin_rs",
+  "invoice_attachment",
+  "credit_memo_attachment",
+  "document_attachment",
+  "po_attachment_attachment",
+  "bill_summary_attachment",
+  "delivery_challan_attachment",
+  "grn_attachment"
+ ],
+ "fields": [
+  {
+   "fieldname": "details_of_invoices_po",
+   "fieldtype": "Data",
+   "label": "Details of Invoices P.O",
+   "read_only": 1
+  },
+  {
+   "fieldname": "invoice_no",
+   "fieldtype": "Data",
+   "label": "Invoice No.",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "invoice_date",
+   "fieldtype": "Data",
+   "label": "Invoice Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "invoices_amountin_rs",
+   "fieldtype": "Data",
+   "label": "Invoices Amount(in Rs)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "invoice_attachment",
+   "fieldtype": "Attach",
+   "label": "Invoice Attachment"
+  },
+  {
+   "fieldname": "credit_memo_attachment",
+   "fieldtype": "Attach",
+   "label": "Credit Memo Attachment",
+   "read_only": 1
+  },
+  {
+   "fieldname": "document_attachment",
+   "fieldtype": "Attach",
+   "label": "Document Attachment"
+  },
+  {
+   "fieldname": "po_attachment_attachment",
+   "fieldtype": "Attach",
+   "label": "PO Attachment Attachment"
+  },
+  {
+   "fieldname": "bill_summary_attachment",
+   "fieldtype": "Attach",
+   "label": "Bill Summary Attachment",
+   "read_only": 1
+  },
+  {
+   "fieldname": "delivery_challan_attachment",
+   "fieldtype": "Attach",
+   "label": "Delivery Challan Attachment",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grn_attachment",
+   "fieldtype": "Attach",
+   "label": "GRN Attachment",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-22 14:31:31.030593",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Third-Party Verification Child",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

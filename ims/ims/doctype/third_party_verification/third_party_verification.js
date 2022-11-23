@@ -3,6 +3,7 @@
 
 frappe.ui.form.on('Third-Party Verification', {
 	// refresh: function(frm) {
-
-	// }
+	// 	// $('.primary-action').prop('hidden', true); //hide save button
+	// 	$('.btn-primary').hide(); //hide all button
+	// 	}
 });

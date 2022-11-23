@@ -60,11 +60,9 @@ def role_permissions_manager_cration(t_object,role):
 
 @frappe.whitelist()
 def get_doctype_list(role):
-	print("\n\n\n\n")
 	role_name=role
 	# doctype_name = ["Company", "Department", "Employee", "Supplier", "Supplier Group", "Material or Service", "Material or Service Group", "Bank Details For Payment", "Designation"]
 	ims_doc=frappe.get_all("DocType",filters={"module":"Ims","istable":0},fields=['name'],order_by="name asc")
-	print(ims_doc)
 	final_list=[]
 	for doc in ims_doc:
 		role_permission=frappe.get_all("Custom DocPerm",{"parent":doc['name'],"role":role_name},

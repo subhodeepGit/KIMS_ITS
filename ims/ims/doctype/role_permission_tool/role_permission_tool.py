@@ -33,6 +33,13 @@ def role_cration(self):
 			role_doc.dashboard=1  
 			role_doc.save()
 def role_permissions_manager_cration(self):
+	pre_role_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":self.doctype_name},["name",'role'])
+	for t in pre_role_permissions_manager_info: 		
+		frappe.delete_doc("Custom DocPerm",t["name"])
+	pre_role_3d_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification"},["name",'role'])
+	for t in pre_role_3d_permissions_manager_info: 		
+		frappe.delete_doc("Custom DocPerm",t["name"])	
+
 	for t in self.get("role_permission_tool_child"):
 		role_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":self.doctype_name,"role":t.designation})
 		if not role_permissions_manager_info:
@@ -43,7 +50,10 @@ def role_permissions_manager_cration(self):
 			role_permissions_manager_doc.select=1
 			role_permissions_manager_doc.read=1
 			role_permissions_manager_doc.write=1
-			role_permissions_manager_doc.create=1
+			if t.idx==1:
+				role_permissions_manager_doc.create=1
+			else:
+				role_permissions_manager_doc.create=0	
 			role_permissions_manager_doc.delete=0
 			role_permissions_manager_doc.submit=0
 			role_permissions_manager_doc.cancel=0
@@ -55,6 +65,30 @@ def role_permissions_manager_cration(self):
 			role_permissions_manager_doc.email=0
 			role_permissions_manager_doc.save()
 			frappe.db.sql(""" Update `tabCustom DocPerm` set import=1 where name='%s' """%(role_permissions_manager_doc.name))
+
+		role_3rd_party_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification","role":t.designation})
+		print("\n\n\n\n")
+		print(role_3rd_party_permissions_manager_info)
+		if not role_3rd_party_permissions_manager_info:
+			role_3rd_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
+			role_3rd_permissions_manager_doc.parent="Third-Party Verification"
+			role_3rd_permissions_manager_doc.role=t.designation
+			role_3rd_permissions_manager_doc.permlevel=0
+			role_3rd_permissions_manager_doc.select=1
+			role_3rd_permissions_manager_doc.read=1
+			role_3rd_permissions_manager_doc.write=0
+			role_3rd_permissions_manager_doc.create=0
+			role_3rd_permissions_manager_doc.delete=0
+			role_3rd_permissions_manager_doc.submit=0
+			role_3rd_permissions_manager_doc.cancel=0
+			role_3rd_permissions_manager_doc.amend=0
+			role_3rd_permissions_manager_doc.report=1
+			role_3rd_permissions_manager_doc.export=0
+			role_3rd_permissions_manager_doc.share=0
+			role_3rd_permissions_manager_doc.print=1
+			role_3rd_permissions_manager_doc.email=0
+			role_3rd_permissions_manager_doc.save()
+			frappe.db.sql(""" Update `tabCustom DocPerm` set import=0 where name='%s' """%(role_permissions_manager_doc.name))	
 
 
 
@@ -511,4 +545,16 @@ def grouping_of_designation_info_section(self):
 			self.append("head_name",{                                     
 					"lable_name":t,                                       
 					"name_of_the_group":t,                                                                   
-				})							
+				})
+	else:
+		for t in grouping_of_designation_info:
+			flag="No"
+			for j in self.get("head_name"):
+				if j.lable_name==t:
+					flag="Yes"
+					break
+			if flag=="No":
+				self.append("head_name",{                                     
+					"lable_name":t,                                       
+					"name_of_the_group":t,                                                                   
+				})	

@@ -42,6 +42,8 @@
   "document_date",
   "posting_date",
   "attach_journal_voucher",
+  "section_break_36",
+  "third_party_verification",
   "section_break_24",
   "authorized_signature"
  ],
@@ -297,11 +299,21 @@
   {
    "fieldname": "column_break_18",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_36",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "third_party_verification",
+   "fieldtype": "Table",
+   "label": "Third Party Verification",
+   "options": "Reference of  Note sheet Verification"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 18:07:24.546967",
+ "modified": "2022-11-21 15:28:32.618312",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

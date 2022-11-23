@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "TPV.-.#####",
  "creation": "2022-11-20 19:20:57.189543",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -13,7 +14,10 @@
   "date_of_note_sheet",
   "name_of_schooldepartment",
   "for_which_department",
-  "document_status"
+  "document_status",
+  "priority",
+  "third_party_verification_child",
+  "amended_from"
  ],
  "fields": [
   {
@@ -56,15 +60,36 @@
    "fieldname": "document_status",
    "fieldtype": "Data",
    "label": "Document Status"
+  },
+  {
+   "fieldname": "third_party_verification_child",
+   "fieldtype": "Table",
+   "label": "Third Party Verification Child",
+   "options": "Third-Party Verification Child"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Data",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Third-Party Verification",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-11-20 19:22:37.426791",
+ "modified": "2022-11-22 14:24:36.945329",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Third-Party Verification",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {
