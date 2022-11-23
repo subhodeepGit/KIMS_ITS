@@ -17,7 +17,7 @@ class BatchPaymentProcess(Document):
 				if emp_data:
 					flag="Yes"
 					object_var=""
-					for t in self.get("authorized_signature"):
+					for t in self.get("approval_hierarchy"):
 						object_var=t
 
 					if object_var!="":
@@ -32,7 +32,7 @@ class BatchPaymentProcess(Document):
 						previous_status=previous_status[0]['workflow_state']	
 					
 					date_of_receivable=""
-					for t in self.get("authorized_signature"):
+					for t in self.get("approval_hierarchy"):
 						date_of_receivable=t.date_of_approval
 					
 					if date_of_receivable=="":
@@ -41,7 +41,7 @@ class BatchPaymentProcess(Document):
 
 
 					if flag=="Yes":
-						self.append("authorized_signature",{                                     
+						self.append("approval_hierarchy",{                                     
 							"emp_id":emp_data[0]['name'],                                       
 							"emp_name":emp_name,                                        
 							"designation":emp_data[0]['designation'],                                        
@@ -53,7 +53,7 @@ class BatchPaymentProcess(Document):
 							"transfer_to":0,                                    
 						})
 					if flag=="No":
-						for t in self.get("authorized_signature"):
+						for t in self.get("approval_hierarchy"):
 							if t.name==object_var.name:
 								previous_status=t.previous_status
 								t.emp_id=emp_data[0]['name']
@@ -72,7 +72,7 @@ class BatchPaymentProcess(Document):
 				check=""
 				count=0
 				name=""
-				for t in self.get("authorized_signature"):
+				for t in self.get("approval_hierarchy"):
 					if t.transfer_to==1 and t.disapproval_check==0:
 						check=t.previous_status
 						name=t.name
@@ -80,7 +80,7 @@ class BatchPaymentProcess(Document):
 					emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 					if emp_data:
 						emp_name=emp_data[0]['salutation']+" "+emp_data[0]['full_name']
-						for t in self.get("authorized_signature"):
+						for t in self.get("approval_hierarchy"):
 							if t.name>=name:
 								frappe.db.sql(""" update `tabAuthorized Signature` set disapproval_check=1,disapproval_emp_name="%s",disapproval_emp="%s" 
 												where name="%s" """%(emp_name,emp_data[0]['name'],t.name))

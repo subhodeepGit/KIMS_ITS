@@ -48,6 +48,7 @@ class Employee(Document):
 				'gender': self.gender,
 				'enabled': self.enabled,
 				'username': self.employee_number,
+				'module_profile':'Support Team',
 				# 'role_profile_name': self.role_profile,
 				'send_welcome_email': 1,
 				'user_type': 'Website User'
