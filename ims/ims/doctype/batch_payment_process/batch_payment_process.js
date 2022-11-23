@@ -30,32 +30,16 @@ frappe.ui.form.on("Batch Payment Process", {
 				fieldname:"from_posting_date", default:frappe.datetime.add_days(today, -30)},
 			{fieldtype:"Column Break"},
 			{fieldtype:"Date", label: __("To Date"), fieldname:"to_posting_date", default:today},
-			{fieldtype:"Section Break", label: __("Due Date")},
-			{fieldtype:"Date", label: __("From Date"), fieldname:"from_due_date"},
-			{fieldtype:"Column Break"},
-			{fieldtype:"Date", label: __("To Date"), fieldname:"to_due_date"},
 			{fieldtype:"Section Break", label: __("Outstanding Amount")},
 			{fieldtype:"Float", label: __("Greater Than Amount"),
 				fieldname:"outstanding_amt_greater_than", default: 0},
 			{fieldtype:"Column Break"},
 			{fieldtype:"Float", label: __("Less Than Amount"), fieldname:"outstanding_amt_less_than"},
 			{fieldtype:"Section Break"},
-			// {fieldtype:"Link", label:__("Cost Center"), fieldname:"cost_center", options:"Cost Center",
-			// default:frm.doc.cost_center,
-			// 	"get_query": function() {
-			// 		return {
-			// 			"filters": {"company": frm.doc.company}
-			// 		}
-			// 	}
-			// },
-			// {fieldtype:"Column Break"},
-			{fieldtype:"Section Break"},
-			{fieldtype:"Check", label: __("Allocate Payment Amount"), fieldname:"allocate_payment_amount", default:1},
 		];
 		frappe.prompt(fields, function(filters){
 			frappe.flags.allocate_payment_amount = true;
 			frm.events.validate_filters_data(frm, filters);
-			// frm.doc.cost_center = filters.cost_center;
 			frm.events.get_outstanding_documents(frm, filters);
 		}, __("Filters"), __("Get Outstanding Documents"));
 	},
@@ -63,7 +47,6 @@ frappe.ui.form.on("Batch Payment Process", {
 	validate_filters_data: function(frm, filters) {
 		const fields = {
 			'Posting Date': ['from_posting_date', 'to_posting_date'],
-			'Due Date': ['from_posting_date', 'to_posting_date'],
 			'Advance Amount': ['from_posting_date', 'to_posting_date'],
 		};
 
@@ -84,12 +67,21 @@ frappe.ui.form.on("Batch Payment Process", {
 	},
 	get_outstanding_documents: function(frm, filters) {
 		frm.clear_table("table_26");
-		frappe.call({
+		var args={
+			"company": frm.doc.company,
+			"posting_date": frm.doc.posting_date
+		}
+
+		for (let key in filters) {
+			args[key] = filters[key];
+		}
+
+		return frappe.call({
 			method: "ims.ims.doctype.batch_payment_process.batch_payment_process.get_outstanding_amount",
 			args:{
-				company: frm.doc.company,
-
+				args:args
 			},
+			
 			
 			callback: function(r) {
 				if(r.message){
@@ -98,6 +90,16 @@ frappe.ui.form.on("Batch Payment Process", {
 						var c = frm.add_child("table_26")
 						c.vendor_name=element.name_of_supplier
 						c.vendor_code=element.supplier_code
+						c.document_no=element.document_number
+						c.document_date=element.document_date
+						c.ifsc_code=element.ifsc_code
+						c.ac_no=element.ac_no
+						c.amount=element.net_final_amount_to_be_paid_in_rs
+						c.amount1=element.net_final_amount_to_be_paid_in_rs
+						c.ac_holder_name=element.ac_holder_name
+						c.bank_name=element.bank_name
+						c.branch=element.branch
+						c.invoice_tracking_number=element.name
 					});
 				} 
 				frm.refresh();

@@ -14,6 +14,7 @@
   "for_which_department",
   "document_status",
   "column_break_7",
+  "posting_date",
   "item_of_purchaseexpense",
   "item_name",
   "supplier_code",
@@ -34,6 +35,13 @@
   "less_credit_note_amount_in_rs",
   "column_break_22",
   "net_final_amount_to_be_paid_in_rs",
+  "journal_voucher_section",
+  "profit_center",
+  "document_number",
+  "ref_no",
+  "column_break_33",
+  "document_date",
+  "attach_journal_voucher",
   "section_break_22",
   "authorized_signature"
  ],
@@ -226,11 +234,58 @@
   {
    "fieldname": "section_break_24",
    "fieldtype": "Section Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Data",
+   "label": "Posting Date",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "fieldname": "journal_voucher_section",
+   "fieldtype": "Section Break",
+   "label": "Journal Voucher"
+  },
+  {
+   "fieldname": "profit_center",
+   "fieldtype": "Data",
+   "label": "Profit Center",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "document_number",
+   "fieldtype": "Data",
+   "label": "Document Number",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "ref_no",
+   "fieldtype": "Data",
+   "label": "Ref. No",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "column_break_33",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "document_date",
+   "fieldtype": "Date",
+   "label": "Document Date",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "attach_journal_voucher",
+   "fieldtype": "Data",
+   "label": "Attach Journal Voucher",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 18:13:45.252556",
+ "modified": "2022-11-23 12:55:37.236143",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",

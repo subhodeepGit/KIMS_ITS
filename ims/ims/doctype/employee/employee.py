@@ -30,9 +30,9 @@ class Employee(Document):
 		new_email(self)
 		
 	def before_save(self):
-		emply = frappe.get_all("Employee",{"name":self.name},{"role"})
+		emply = frappe.get_all("Employee",{"name":self.name},{"role","third_party_employee"})
 		if emply:
-			if self.role!=emply[0]["role"]:
+			if self.role!=emply[0]["role"] or self.third_party_employee!=emply[0]["third_party_employee"]:
 				self.role_user()
 
 	def set_employee_name(self):

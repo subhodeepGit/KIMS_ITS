@@ -24,7 +24,6 @@
   "cheque_details_section_section",
   "cheque_no",
   "cheque_date",
-  "amount",
   "cheque_attachment",
   "note_sheet_attachment",
   "column_break_19",
@@ -34,6 +33,8 @@
   "section_break_25",
   "get_outstanding_amount",
   "table_26",
+  "section_break_27",
+  "total_amount",
   "approval_hierarchy_section",
   "approval_hierarchy"
  ],
@@ -150,12 +151,6 @@
    "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
   },
   {
-   "fieldname": "amount",
-   "fieldtype": "Currency",
-   "label": "Amount",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
-  },
-  {
    "fieldname": "column_break_19",
    "fieldtype": "Column Break"
   },
@@ -218,11 +213,21 @@
    "fieldname": "get_outstanding_amount",
    "fieldtype": "Button",
    "label": "Get Outstanding Amount"
+  },
+  {
+   "fieldname": "section_break_27",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-17 11:00:44.252976",
+ "modified": "2022-11-23 12:47:31.546150",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",

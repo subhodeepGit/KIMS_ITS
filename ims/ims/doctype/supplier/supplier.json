@@ -168,12 +168,14 @@
   {
    "fieldname": "bank_ac_no",
    "fieldtype": "Data",
-   "label": "Bank A/C No."
+   "label": "Bank A/C No.",
+   "reqd": 1
   },
   {
    "fieldname": "ifsc_code",
    "fieldtype": "Data",
-   "label": "IFSC Code"
+   "label": "IFSC Code",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_25",
@@ -182,12 +184,14 @@
   {
    "fieldname": "bank_name",
    "fieldtype": "Data",
-   "label": "Bank Name"
+   "label": "Bank Name",
+   "reqd": 1
   },
   {
    "fieldname": "bank_address",
    "fieldtype": "Data",
-   "label": "Bank Address"
+   "label": "Branch",
+   "reqd": 1
   },
   {
    "default": "1",
@@ -198,7 +202,8 @@
   {
    "fieldname": "account_holder_name",
    "fieldtype": "Data",
-   "label": "Account Holder Name"
+   "label": "Account Holder Name",
+   "reqd": 1
   },
   {
    "default": "'NA'",
@@ -209,7 +214,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 18:20:43.462970",
+ "modified": "2022-11-23 10:53:08.560387",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",
