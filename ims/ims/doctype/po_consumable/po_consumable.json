@@ -233,18 +233,21 @@
    "fieldname": "profit_center",
    "fieldtype": "Data",
    "label": "Profit Center",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "document_number",
    "fieldtype": "Data",
    "label": "Document Number",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "ref_no",
    "fieldtype": "Data",
    "label": "Ref. No",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
@@ -255,18 +258,21 @@
    "fieldname": "document_date",
    "fieldtype": "Date",
    "label": "Document Date",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "attach_journal_voucher",
    "fieldtype": "Attach",
    "label": "Attach Journal Voucher",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
@@ -279,6 +285,7 @@
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
    "label": "Audit Ref No",
+   "mandatory_depends_on": "eval:(doc.workflow_state===\"Approved by Director\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
@@ -294,7 +301,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-21 11:05:30.596081",
+ "modified": "2022-11-16 18:07:24.546967",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
