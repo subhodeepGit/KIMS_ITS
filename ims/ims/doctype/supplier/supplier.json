@@ -214,7 +214,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 10:53:08.560387",
+ "modified": "2022-11-24 17:52:23.540161",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",
@@ -235,6 +235,7 @@
   }
  ],
  "quick_entry": 1,
+ "search_fields": "supplier_name",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
