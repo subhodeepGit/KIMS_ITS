@@ -8,7 +8,6 @@ from frappe.utils import cint, date_diff, datetime, get_datetime, today
 
 class POConsumable(Document):
 	def validate(self):
-		print("\n\n\n")
 		third_party_verification=self.get("third_party_verification")
 		if third_party_verification:
 			for t in self.get("third_party_verification"):
@@ -76,7 +75,6 @@ class POConsumable(Document):
 					if previous_status=="":
 						approval_status_print=approval_status
 					else:
-						# approval_status_print=previous_status
 						state_info=frappe.get_all("Workflow Document State",{"parent":workflow_name},["state"],order_by="idx asc")
 						count=0
 						for s in state_info:
@@ -85,9 +83,7 @@ class POConsumable(Document):
 								break
 
 						pre_flow_list=state_info[count-1]["state"]
-						approval_status_print=pre_flow_list	
-						# approval_status
-						# previous_status
+						approval_status_print=pre_flow_list
 
 
 					
@@ -138,8 +134,8 @@ class POConsumable(Document):
 								t.workflow_data= workflow_name
 								t.grouping_of_designation=grouping_of_designation
 								t.single_user=single_user 
-								# t.transfer_to=0
-
+					if 	approval_status=="Journal Entry by Account Dept.":
+						self.payment_status="Passed for Payment"
 			else:
 				frappe.throw("Employee not found")		
 		else:
