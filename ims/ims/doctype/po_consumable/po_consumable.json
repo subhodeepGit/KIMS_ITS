@@ -13,6 +13,7 @@
   "name_of_schooldepartment",
   "for_which_department",
   "document_status",
+  "payment_status",
   "column_break_7",
   "posting_date",
   "item_of_purchaseexpense",
@@ -273,7 +274,7 @@
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
-   "depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
+   "depends_on": "eval:(doc.workflow_state==\"Approved by Director, Administration\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "audit_section_section",
    "fieldtype": "Section Break",
    "label": "Audit Section"
@@ -282,14 +283,17 @@
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
    "label": "Audit Ref No",
-   "mandatory_depends_on": "eval:(doc.workflow_state===\"Approved by Director\");",
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director, Administration\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
+   "default": "Today",
    "fieldname": "today_date",
    "fieldtype": "Date",
    "label": "Today Date",
-   "read_only": 1
+   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director, Administration\");",
+   "read_only": 1,
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "column_break_18",
@@ -304,11 +308,17 @@
    "fieldtype": "Table",
    "label": "Third Party Verification",
    "options": "Reference of  Note sheet Verification"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "label": "Payment Status",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 16:30:14.669718",
+ "modified": "2022-11-24 16:46:00.115441",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
