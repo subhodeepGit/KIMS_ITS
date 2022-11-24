@@ -18,6 +18,7 @@
   {
    "fieldname": "doctype_name",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Doctype Name",
    "options": "\nPO Consumable\nPO Consignment\nPO Material Management\nPharmacy\nNon PO Contract\nNon PO Non Contract\nPatient Refund\nBatch Payment Process"
   },
@@ -30,12 +31,14 @@
   {
    "fieldname": "workflow_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Workflow Name",
    "read_only": 1
   },
   {
    "fieldname": "posting_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Posting Date",
    "read_only": 1
   },
@@ -58,7 +61,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-18 23:08:39.679317",
+ "modified": "2022-11-24 11:09:55.583313",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Role Permission Tool",

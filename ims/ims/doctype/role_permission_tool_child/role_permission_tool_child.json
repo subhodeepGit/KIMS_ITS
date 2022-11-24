@@ -72,13 +72,15 @@
    "default": "0",
    "fieldname": "amount_grater",
    "fieldtype": "Currency",
-   "label": "Amount Grater"
+   "label": "Amount Grater",
+   "read_only_depends_on": "eval:doc.idx==1"
   },
   {
    "default": "0",
    "fieldname": "amount_smaller",
    "fieldtype": "Currency",
-   "label": "Amount Smaller"
+   "label": "Amount Smaller",
+   "read_only_depends_on": "eval:doc.idx==1"
   },
   {
    "default": "0",
@@ -111,13 +113,14 @@
    "fieldname": "select_14",
    "fieldtype": "Select",
    "label": "Permission Lavel",
-   "options": "\nInclusive\nNon Inclusive"
+   "options": "\nInclusive\nNon Inclusive",
+   "read_only_depends_on": "eval:doc.idx==1"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-19 17:02:18.949044",
+ "modified": "2022-11-24 10:56:11.297417",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Role Permission Tool Child",
