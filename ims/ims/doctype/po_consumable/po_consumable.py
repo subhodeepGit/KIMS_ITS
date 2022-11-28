@@ -8,6 +8,9 @@ from frappe.utils import cint, date_diff, datetime, get_datetime, today
 
 class POConsumable(Document):
 	def validate(self):
+
+		mandatory_check(self)
+		a.s
 		third_party_verification=self.get("third_party_verification")
 		if third_party_verification:
 			for t in self.get("third_party_verification"):
@@ -164,3 +167,14 @@ class POConsumable(Document):
 						frappe.throw("Employee Not Found")			
 				else:
 					frappe.throw("Transfer To Employee Not Selected")
+
+@frappe.whitelist()
+def clearance_period(supplier):
+	data=frappe.get_all("Supplier",{"name":supplier},["amount_clearance_period_in_days"])
+	return data[0]['amount_clearance_period_in_days']
+
+def mandatory_check(self):
+	print("\n\n\n\n")
+	print(self.workflow_state)
+	
+	pass

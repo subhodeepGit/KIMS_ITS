@@ -66,17 +66,58 @@ frappe.ui.form.on('PO Consumable', {
 		frm.trigger("mandatory_field");
 		},
 		mandatory_field(frm){
+			// frm.set_df_property('note_sheet_no', 'read_only', 1);
 			if(frm.doc.workflow_state=="Draft"){
 				frm.set_value("document_status","Invoice in Draft State")
 				refresh_field("document_status");
-				var df1 = frappe.meta.get_docfield("Details of Invoices and PO","po_attachment", cur_frm.doc.name);
-				df1.reqd = 1;
+				var df1 = frappe.meta.get_docfield("Details of Invoices and PO","po_attachment_attachment", cur_frm.doc.name);
+				df1.reqd = 1; // not working
+			}
+			if(frm.is_new()==1){
+				frm.set_df_property('note_sheet_no', 'read_only', 0)
+				frm.set_df_property('company', 'read_only', 0)
+				frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+				frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+				frm.set_df_property('for_which_department', 'read_only', 0)
+				frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+				frm.set_df_property("supplier_code",'read_only', 0)
+			}
+			else{
+				if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save" ){
+					frm.set_df_property('note_sheet_no', 'read_only', 0)
+					frm.set_df_property('company', 'read_only', 0)
+					frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+					frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+					frm.set_df_property('for_which_department', 'read_only', 0)
+					frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+					frm.set_df_property("supplier_code",'read_only', 0)
+				}
+				else{
+					frm.set_df_property('note_sheet_no', 'read_only', 1)
+					frm.set_df_property('company', 'read_only', 1)
+					frm.set_df_property('date_of_note_sheet', 'read_only', 1)
+					frm.set_df_property('name_of_schooldepartment', 'read_only', 1)
+					frm.set_df_property('for_which_department', 'read_only', 1)
+					frm.set_df_property("item_of_purchaseexpense",'read_only', 1)
+					frm.set_df_property("supplier_code",'read_only', 1)
+				}
+		
+				if (frm.doc.workflow_state=="Approved by Director, Administration"){
+					frm.set_df_property("audit_ref_no", "reqd", true);
+					frm.set_df_property("today_date", "reqd", 1);
+				}
+				
+				// eval:(doc.workflow_state=="Approved by Director, Administration");/
+				// eval:(doc.workflow_state=="Approved by Director, Administration");today_dateToday
+				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
+				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
 			}
 		},
 		before_save: function(frm) {
 			frm.trigger("mandatory_field");
 		},
 });
+
 
 frappe.ui.form.on("PO Consumable", {
 	onload:function(frm){
@@ -100,3 +141,19 @@ frappe.ui.form.on("PO Consumable", {
 // 		$('.btn-primary').hide(); //hide all button
 // 		}
 // });
+
+frappe.ui.form.on('PO Consumable', {
+	supplier_code: function(frm) {
+		frappe.call({
+			method: 'ims.ims.doctype.po_consumable.po_consumable.clearance_period',
+			args: {
+				supplier:frm.doc.supplier_code
+			},
+			callback: function(r) {
+				frm.set_value("amount_clearance_period_in_days",r.message)
+			}
+		})
+
+	}
+});
+

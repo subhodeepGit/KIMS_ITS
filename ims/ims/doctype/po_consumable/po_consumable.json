@@ -17,7 +17,6 @@
   "column_break_7",
   "posting_date",
   "item_of_purchaseexpense",
-  "item_name",
   "supplier_code",
   "name_of_supplier",
   "amount_clearance_period_in_days",
@@ -55,7 +54,6 @@
    "in_list_view": 1,
    "label": "Company",
    "options": "Company",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -63,7 +61,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Note Sheet No.",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -71,7 +68,6 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Date Of Note Sheet",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -80,7 +76,6 @@
    "in_list_view": 1,
    "label": "Name Of School/Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -88,23 +83,12 @@
    "fieldtype": "Link",
    "label": "For which Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "item_of_purchaseexpense",
-   "fieldtype": "Link",
-   "label": "Item Of Purchase/Expense",
-   "options": "Material or Service",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "item_of_purchaseexpense.material_service_name",
-   "fieldname": "item_name",
    "fieldtype": "Data",
-   "label": "Item Name",
-   "read_only": 1,
+   "label": "Item Of Purchase/Expense",
    "reqd": 1
   },
   {
@@ -112,7 +96,6 @@
    "fieldtype": "Link",
    "label": "Supplier Code",
    "options": "Supplier",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -124,7 +107,7 @@
    "reqd": 1
   },
   {
-   "fetch_from": "supplier_code.amount_clearance_period_in_days",
+   "default": "0",
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
@@ -261,7 +244,6 @@
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
-   "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
@@ -282,18 +264,12 @@
   {
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
-   "label": "Audit Ref No",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director, Administration\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Audit Ref No"
   },
   {
-   "default": "Today",
    "fieldname": "today_date",
    "fieldtype": "Date",
-   "label": "Today Date",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Approved by Director, Administration\");",
-   "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Today Date"
   },
   {
    "fieldname": "column_break_18",
@@ -318,7 +294,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-24 16:46:00.115441",
+ "modified": "2022-11-26 19:00:49.749869",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

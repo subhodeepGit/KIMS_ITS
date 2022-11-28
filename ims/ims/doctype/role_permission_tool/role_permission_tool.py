@@ -67,8 +67,6 @@ def role_permissions_manager_cration(self):
 			frappe.db.sql(""" Update `tabCustom DocPerm` set import=1 where name='%s' """%(role_permissions_manager_doc.name))
 
 		role_3rd_party_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification","role":t.designation})
-		print("\n\n\n\n")
-		print(role_3rd_party_permissions_manager_info)
 		if not role_3rd_party_permissions_manager_info:
 			role_3rd_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
 			role_3rd_permissions_manager_doc.parent="Third-Party Verification"
