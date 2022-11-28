@@ -50,7 +50,6 @@ class POConsumable(Document):
 		if self.workflow_state=="Bill Received by Audit" and (self.today_date==None or self.today_date==""):
 			date=datetime.date.today()
 			self.db_set("today_date",date)
-		# a.s	
 		session_user = frappe.session.user
 		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
 			if session_user:
@@ -137,7 +136,7 @@ class POConsumable(Document):
 								t.previous_status=previous_status
 								t.workflow_data= workflow_name
 								t.grouping_of_designation=grouping_of_designation
-								t.single_user=single_user 
+								t.single_user=single_user		 
 					if 	approval_status=="Journal Entry by Account Dept.":
 						self.payment_status="Passed for Payment"
 			else:
@@ -175,7 +174,25 @@ def clearance_period(supplier):
 	return data[0]['amount_clearance_period_in_days']
 
 def mandatory_check(self):
-	# print("\n\n\n\n")
-	# print(self.workflow_state)
+	if self.workflow_state=="Verify and Save":
+		count=0
+		for t in self.get("details_of_invoices_and_po"):
+			count=count+1
+			if t.po_attachment_attachment!=1: 
+				frappe.throw("PO Attachment	is mandatory in row on %s"%(count))
 	
-	pass
+	if self.workflow_state=="Bill Received by Audit" and (self.audit_ref_no==None or self.audit_ref_no==""): 
+		frappe.throw("Audit Ref No.	is mandatory")
+
+	if self.workflow_state=="Passed for Payment":
+		if self.profit_center==None or self.profit_center=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.document_number==None or self.document_number=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.ref_no==None or self.ref_no=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.document_date==None or self.document_date=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.attach_journal_voucher==None or self.attach_journal_voucher=="":
+			frappe.throw("Profit Center	is mandatory")
+				
