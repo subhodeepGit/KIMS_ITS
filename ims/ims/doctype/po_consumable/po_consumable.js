@@ -88,8 +88,8 @@ frappe.ui.form.on('PO Consumable', {
 				frm.set_df_property("ref_no",'read_only', 1)
 				frm.set_df_property("document_date",'read_only', 1)
 				frm.set_df_property("attach_journal_voucher",'read_only', 1)
-				frm.set_df_property("third_party_verification", "cannot_add_rows", true);
-				frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
+				// frm.set_df_property("third_party_verification", "cannot_add_rows", true);
+				// frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
 			}
 			else{
 				if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save" ){
@@ -162,7 +162,7 @@ frappe.ui.form.on("PO Consumable", {
 		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
 		//cannot able to delete rows
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
-		if (frm.doc.workflow_state=="Passed for Payment"){
+		if (frm.doc.workflow_state=="Passed for Payment" || frm.doc.workflow_state=="Draft"){
 			frm.set_df_property("third_party_verification", "cannot_add_rows", true);
 			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
 		}
