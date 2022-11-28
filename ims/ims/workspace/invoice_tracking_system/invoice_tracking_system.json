@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Invoice Tracking System</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"PO Based invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Non PO based Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Other Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Payment Workflow\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Third Party Verification\",\"col\":4}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Invoice Tracking System</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"PO Based invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Non PO based Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Other Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Payment Workflow\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Third Party Verification\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}}]",
  "creation": "2022-11-03 11:00:43.773444",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -236,9 +236,47 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tools",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Dynamic Workflow Tool",
+   "link_count": 0,
+   "link_to": "Role Permission Tool",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Role Permission Tool",
+   "link_count": 0,
+   "link_to": "Role Permission Setting",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "User Permission Tool",
+   "link_count": 0,
+   "link_to": "User Permission for Multiple Departments and Companies",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2022-11-23 17:33:48.257068",
+ "modified": "2022-11-28 13:12:42.054161",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Tracking System",
