@@ -10,7 +10,7 @@ class POConsumable(Document):
 	def validate(self):
 
 		mandatory_check(self)
-		a.s
+		# a.s
 		third_party_verification=self.get("third_party_verification")
 		if third_party_verification:
 			for t in self.get("third_party_verification"):
