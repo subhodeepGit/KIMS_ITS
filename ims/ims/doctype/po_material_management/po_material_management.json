@@ -41,7 +41,7 @@
   "column_break_32",
   "document_date",
   "attach_journal_voucher",
-  "column_break_35",
+  "section_break_36",
   "third_party_verification",
   "section_break_24",
   "authorized_signature"
@@ -284,19 +284,19 @@
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
-   "fieldname": "column_break_35",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "third_party_verification",
    "fieldtype": "Table",
    "label": "Third Party Verification",
    "options": "Reference of  Note sheet Verification"
+  },
+  {
+   "fieldname": "section_break_36",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-28 15:48:23.646792",
+ "modified": "2022-11-28 16:01:53.678465",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
