@@ -8,6 +8,7 @@ from frappe.utils import cint, date_diff, datetime, get_datetime, today
 
 class POMaterialManagement(Document):
 	def validate(self):
+		mandatory_check(self)
 		if self.workflow_state=="Bill Received by Audit":
 			date=datetime.date.today()
 			self.db_set("today_date",date)
@@ -94,3 +95,28 @@ class POMaterialManagement(Document):
 						frappe.throw("Employee Not Found")			
 				else:
 					frappe.throw("Transfer To Employee Not Selected")
+
+
+
+def mandatory_check(self):
+	if self.workflow_state=="Verify and Save":
+		count=0
+		for t in self.get("details_of_invoices_and_po"):
+			count=count+1
+			if t.po_attachment_attachment!=1: 
+				frappe.throw("PO Attachment	is mandatory in row on %s"%(count))
+	
+	if self.workflow_state=="Bill Received by Audit" and (self.audit_ref_no==None or self.audit_ref_no==""): 
+		frappe.throw("Audit Ref No.	is mandatory")
+
+	if self.workflow_state=="Passed for Payment":
+		if self.profit_center==None or self.profit_center=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.document_number==None or self.document_number=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.ref_no==None or self.ref_no=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.document_date==None or self.document_date=="":
+			frappe.throw("Profit Center	is mandatory")
+		if self.attach_journal_voucher==None or self.attach_journal_voucher=="":
+			frappe.throw("Profit Center	is mandatory")

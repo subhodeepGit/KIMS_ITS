@@ -111,7 +111,6 @@
    "reqd": 1
   },
   {
-   "fetch_from": "supplier_code.amount_clearance_period_in_days",
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
@@ -296,7 +295,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-28 16:01:53.678465",
+ "modified": "2022-11-28 16:12:47.877776",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
