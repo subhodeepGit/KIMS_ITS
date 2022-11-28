@@ -209,29 +209,24 @@
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
-   "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "journal_voucher_section",
    "fieldtype": "Section Break",
    "label": "Journal Voucher"
   },
   {
-   "depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "profit_center",
    "fieldtype": "Data",
-   "label": "Profit Center",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Profit Center"
   },
   {
    "fieldname": "document_number",
    "fieldtype": "Data",
-   "label": "Document Number",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Document Number"
   },
   {
    "fieldname": "ref_no",
    "fieldtype": "Data",
-   "label": "Ref. No",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Ref. No"
   },
   {
    "fieldname": "column_break_28",
@@ -240,8 +235,7 @@
   {
    "fieldname": "document_date",
    "fieldtype": "Date",
-   "label": "Document Date",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Document Date"
   },
   {
    "fieldname": "posting_date",
@@ -252,11 +246,9 @@
   {
    "fieldname": "attach_journal_voucher",
    "fieldtype": "Attach",
-   "label": "Attach Journal Voucher",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Attach Journal Voucher"
   },
   {
-   "depends_on": "eval:(doc.workflow_state==\"Approved by Director, Administration\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "audit_section_section",
    "fieldtype": "Section Break",
    "label": "Audit Section"
@@ -294,7 +286,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-26 19:00:49.749869",
+ "modified": "2022-11-28 11:48:10.313047",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

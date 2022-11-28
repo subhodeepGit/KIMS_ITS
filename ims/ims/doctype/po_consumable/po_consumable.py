@@ -10,7 +10,7 @@ class POConsumable(Document):
 	def validate(self):
 
 		mandatory_check(self)
-		# a.s
+
 		third_party_verification=self.get("third_party_verification")
 		if third_party_verification:
 			for t in self.get("third_party_verification"):
@@ -46,10 +46,11 @@ class POConsumable(Document):
 					t.status_of_verification="Forward For Verification"
 					t.document_name=doc_name
 					
-
-		if self.workflow_state=="Bill Received by Audit":
+		
+		if self.workflow_state=="Bill Received by Audit" and (self.today_date==None or self.today_date==""):
 			date=datetime.date.today()
 			self.db_set("today_date",date)
+		# a.s	
 		session_user = frappe.session.user
 		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
 			if session_user:
@@ -174,7 +175,7 @@ def clearance_period(supplier):
 	return data[0]['amount_clearance_period_in_days']
 
 def mandatory_check(self):
-	print("\n\n\n\n")
-	print(self.workflow_state)
+	# print("\n\n\n\n")
+	# print(self.workflow_state)
 	
 	pass
