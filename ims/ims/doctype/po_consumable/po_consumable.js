@@ -139,7 +139,6 @@ frappe.ui.form.on('PO Consumable', {
 					frm.set_df_property("attach_journal_voucher",'read_only', 1)
 				}
 				
-
 				// eval:(doc.workflow_state=="Approved by Director, Administration");/
 				// eval:(doc.workflow_state=="Approved by Director, Administration");today_dateToday
 				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
