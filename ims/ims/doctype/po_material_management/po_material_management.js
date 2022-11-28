@@ -115,7 +115,7 @@ frappe.ui.form.on('PO Material Management', {
 					frm.set_df_property("supplier_code",'read_only', 0)
 				}
 				else{
-					frm.set_frm.doc.workflow_statedf_property('note_sheet_no', 'read_only', 1)
+					frm.set_df_property('note_sheet_no', 'read_only', 1)
 					frm.set_df_property('company', 'read_only', 1)
 					frm.set_df_property('date_of_note_sheet', 'read_only', 1)
 					frm.set_df_property('name_of_schooldepartment', 'read_only', 1)
