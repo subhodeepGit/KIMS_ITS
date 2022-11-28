@@ -201,7 +201,6 @@
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
-   "depends_on": "eval:(doc.workflow_state==\"Approved by Director\") || (doc.workflow_state==\"Bill Received by Audit\") || (doc.workflow_state==\"Approved by Audit User\") || (doc.workflow_state==\"Approved by Pro VC\") || (doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "fieldname": "audit_section_section",
    "fieldtype": "Section Break",
    "label": "Audit Section"
@@ -209,9 +208,7 @@
   {
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
-   "label": "Audit Ref No",
-   "mandatory_depends_on": "eval:(doc.workflow_state===\"Approved by Director\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Audit Ref No"
   },
   {
    "fieldname": "column_break_18",
@@ -288,7 +285,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-28 16:23:22.243850",
+ "modified": "2022-11-28 16:50:02.573216",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
