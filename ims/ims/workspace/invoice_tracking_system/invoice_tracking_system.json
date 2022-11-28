@@ -60,34 +60,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Non PO based Invoices",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Non PO Contract",
-   "link_count": 0,
-   "link_to": "Non PO Contract",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Non PO Non Contract",
-   "link_count": 0,
-   "link_to": "Non PO Non Contract",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Third-Party Verification",
    "link_count": 0,
    "link_to": "Third-Party Verification",
@@ -240,8 +212,36 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Non PO based Invoices",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Non PO Contract",
+   "link_count": 0,
+   "link_to": "Non PO Contract",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Non PO Non Contract",
+   "link_count": 0,
+   "link_to": "Non PO Non Contract",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Tools",
-   "link_count": 3,
+   "link_count": 4,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -274,9 +274,19 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Designation",
+   "link_count": 0,
+   "link_to": "Designation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2022-11-28 13:12:42.054161",
+ "modified": "2022-11-28 14:47:14.688758",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Tracking System",
