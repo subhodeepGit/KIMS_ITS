@@ -16,7 +16,6 @@
   "column_break_7",
   "posting_date",
   "item_of_purchaseexpense",
-  "item_name",
   "supplier_code",
   "name_of_supplier",
   "amount_clearance_period_in_days",
@@ -42,6 +41,8 @@
   "column_break_32",
   "document_date",
   "attach_journal_voucher",
+  "column_break_35",
+  "third_party_verification",
   "section_break_24",
   "authorized_signature"
  ],
@@ -88,18 +89,9 @@
   },
   {
    "fieldname": "item_of_purchaseexpense",
-   "fieldtype": "Link",
-   "label": "Item Of Purchase/Expense",
-   "options": "Material or Service",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "item_of_purchaseexpense.material_service_name",
-   "fieldname": "item_name",
    "fieldtype": "Data",
-   "label": "Item Name",
-   "read_only": 1,
+   "label": "Item Of Purchase/Expense",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -290,11 +282,21 @@
    "label": "Attach Journal Voucher",
    "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "column_break_35",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "third_party_verification",
+   "fieldtype": "Table",
+   "label": "Third Party Verification",
+   "options": "Reference of  Note sheet Verification"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 15:46:25.381077",
+ "modified": "2022-11-28 15:48:23.646792",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
