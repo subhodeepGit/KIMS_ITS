@@ -162,6 +162,10 @@ frappe.ui.form.on("PO Consumable", {
 		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
 		//cannot able to delete rows
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
+		if (frm.doc.workflow_state=="Passed for Payment"){
+			frm.set_df_property("third_party_verification", "cannot_add_rows", true);
+			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
+		}
 	}
 });
 
