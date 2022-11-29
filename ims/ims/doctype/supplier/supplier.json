@@ -10,11 +10,12 @@
   "enabled",
   "basic_info",
   "naming_series",
+  "sap__henai_vendor_code",
   "supplier_name",
-  "country",
   "gst_no",
   "amount_clearance_period_in_days",
   "column_break_5",
+  "country",
   "supplier_group",
   "supplier_type",
   "company",
@@ -210,11 +211,16 @@
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)"
+  },
+  {
+   "fieldname": "sap__henai_vendor_code",
+   "fieldtype": "Data",
+   "label": "SAP / HENAI Vendor Code"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-24 17:52:23.540161",
+ "modified": "2022-11-29 10:24:20.068822",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",

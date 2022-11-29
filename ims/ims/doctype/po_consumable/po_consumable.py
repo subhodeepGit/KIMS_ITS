@@ -18,7 +18,7 @@ class POConsumable(Document):
 					ref_party_doc=frappe.get_doc({
 						'doctype':'Third-Party Verification',
 						"company":self.company,
-						"type_of_note_sheet":"PO Consumable",
+						"type_of_note_sheet":"PO Consignment",
 						"documnet_no":self.name,
 						"note_sheet_no":self.note_sheet_no,
 						"date_of_note_sheet":self.date_of_note_sheet,
@@ -188,11 +188,11 @@ def mandatory_check(self):
 		if self.profit_center==None or self.profit_center=="":
 			frappe.throw("Profit Center	is mandatory")
 		if self.document_number==None or self.document_number=="":
-			frappe.throw("Profit Center	is mandatory")
+			frappe.throw("Document Number	is mandatory")
 		if self.ref_no==None or self.ref_no=="":
-			frappe.throw("Profit Center	is mandatory")
+			frappe.throw("Reference Number is mandatory")
 		if self.document_date==None or self.document_date=="":
-			frappe.throw("Profit Center	is mandatory")
+			frappe.throw("Document Date	is mandatory")
 		if self.attach_journal_voucher==None or self.attach_journal_voucher=="":
-			frappe.throw("Profit Center	is mandatory")
+			frappe.throw("Attach Journal Voucher is mandatory")
 				

@@ -16,7 +16,6 @@
   "column_break_7",
   "posting_date",
   "item_of_purchaseexpense",
-  "item_name",
   "supplier_code",
   "name_of_supplier",
   "amount_clearance_period_in_days",
@@ -25,6 +24,8 @@
   "note_sheet_attachment",
   "section_break_16",
   "details_of_invoices_credit_note_and_po",
+  "audit_section_section",
+  "audit_ref_no",
   "section_break_18",
   "total_hospital_margin_amount",
   "column_break_23",
@@ -42,6 +43,8 @@
   "column_break_33",
   "document_date",
   "attach_journal_voucher",
+  "section_break_35",
+  "third_party_verification",
   "section_break_22",
   "authorized_signature"
  ],
@@ -87,17 +90,8 @@
   },
   {
    "fieldname": "item_of_purchaseexpense",
-   "fieldtype": "Link",
-   "label": "Item Of Purchase/Expense",
-   "options": "Material or Service",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "item_of_purchaseexpense.material_service_name",
-   "fieldname": "item_name",
    "fieldtype": "Data",
-   "label": "Item Name",
+   "label": "Item Of Purchase/Expense",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
@@ -106,14 +100,6 @@
    "fieldtype": "Link",
    "label": "Supplier Code",
    "options": "Supplier",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "supplier_code.supplier_name",
-   "fieldname": "name_of_supplier",
-   "fieldtype": "Data",
-   "label": "Name Of Supplier",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
@@ -278,14 +264,42 @@
   },
   {
    "fieldname": "attach_journal_voucher",
-   "fieldtype": "Data",
+   "fieldtype": "Attach",
    "label": "Attach Journal Voucher",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "section_break_35",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "third_party_verification",
+   "fieldtype": "Table",
+   "label": "Third Party Verification",
+   "options": "Reference of  Note sheet Verification"
+  },
+  {
+   "fetch_from": "supplier_code.supplier_name",
+   "fieldname": "name_of_supplier",
+   "fieldtype": "Data",
+   "label": "Name Of Supplier",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
+   "reqd": 1
+  },
+  {
+   "fieldname": "audit_section_section",
+   "fieldtype": "Section Break",
+   "label": "Audit Section"
+  },
+  {
+   "fieldname": "audit_ref_no",
+   "fieldtype": "Data",
+   "label": "Audit Ref No"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 12:55:37.236143",
+ "modified": "2022-11-28 17:33:30.565876",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",
