@@ -16,6 +16,7 @@
   "item_of_purchaseexpense",
   "item_name",
   "column_break_7",
+  "posting_date",
   "supplier_code",
   "name_of_supplier",
   "amount_clearance_period_in_days",
@@ -42,7 +43,6 @@
   "ref_no",
   "column_break_34",
   "document_date",
-  "posting_date",
   "attach_journal_voucher",
   "section_break_22",
   "authorized_signature"
@@ -286,10 +286,11 @@
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
+   "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "read_only": 1
   },
   {
    "fieldname": "attach_journal_voucher",
@@ -300,7 +301,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-16 18:24:03.555135",
+ "modified": "2022-11-28 12:08:16.624117",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",

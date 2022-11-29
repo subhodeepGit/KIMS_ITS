@@ -9,6 +9,7 @@
  "field_order": [
   "company",
   "document_status",
+  "column_break_3",
   "account_doctype_section",
   "account_reference_no",
   "account_post_date",
@@ -33,6 +34,8 @@
   "section_break_25",
   "get_outstanding_amount",
   "table_26",
+  "section_break_28",
+  "vendor_wise_payment_details",
   "section_break_27",
   "total_amount",
   "approval_hierarchy_section",
@@ -223,11 +226,25 @@
    "fieldtype": "Currency",
    "label": "Total Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_28",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "vendor_wise_payment_details",
+   "fieldtype": "Table",
+   "label": "Vendor Wise Payment Details",
+   "options": "Vendor Wise Payment Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 12:47:31.546150",
+ "modified": "2022-11-29 13:01:20.662615",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",

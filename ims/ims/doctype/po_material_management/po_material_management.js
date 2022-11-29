@@ -86,6 +86,7 @@ frappe.ui.form.on('PO Material Management', {
 				var df1 = frappe.meta.get_docfield("Details of Invoices and PO","po_attachment_attachment", cur_frm.doc.name);
 				df1.reqd = 1; // not working
 			}
+			
 			if(frm.is_new()==1){
 				frm.set_df_property('note_sheet_no', 'read_only', 0)
 				frm.set_df_property('company', 'read_only', 0)
