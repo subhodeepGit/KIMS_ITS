@@ -11,10 +11,35 @@
   "invoice_amount",
   "column_break_4",
   "remarks_if_any",
-  "invoice_attachment_1",
   "invoice_attachment",
-  "document_attachment_1",
-  "document_attachment"
+  "purchase_receipt_attachment_note",
+  "purchase_receipt_note",
+  "requisition_form_attachment",
+  "requisition_form",
+  "request_for_quotation_attachment",
+  "request_for_quotation",
+  "vendor_quotation_attachment",
+  "vendor_quotation",
+  "comparative_statement_attachment",
+  "comparative_statement",
+  "column_break_17",
+  "approval_sheet_attachment",
+  "approval_sheet",
+  "po_attachment",
+  "po",
+  "delivery_challan_attachment",
+  "delivery_challan",
+  "invoice_attachment_1",
+  "invoice",
+  "column_break_26",
+  "grn_attachment",
+  "grn",
+  "bill_challan_attachment",
+  "bill_challan",
+  "credit_memo_attachment",
+  "credit_memo",
+  "others_attachment",
+  "others"
  ],
  "fields": [
   {
@@ -49,16 +74,10 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.invoice_attachment_1==1",
+   "default": "0",
    "fieldname": "invoice_attachment",
-   "fieldtype": "Attach",
-   "label": "Invoice"
-  },
-  {
-   "depends_on": "eval:doc.document_attachment_1==1",
-   "fieldname": "document_attachment",
-   "fieldtype": "Attach",
-   "label": "Document"
+   "fieldtype": "Section Break",
+   "label": "Invoice Attachment"
   },
   {
    "default": "0",
@@ -68,15 +87,180 @@
   },
   {
    "default": "0",
-   "fieldname": "document_attachment_1",
+   "fieldname": "purchase_receipt_attachment_note",
    "fieldtype": "Check",
-   "label": "Document Attachment"
+   "label": "Purchase Receipt Attachment Note"
+  },
+  {
+   "depends_on": "eval:doc.purchase_receipt_attachment_note==1",
+   "fieldname": "purchase_receipt_note",
+   "fieldtype": "Attach",
+   "label": "Purchase Receipt Note",
+   "mandatory_depends_on": "eval:doc.purchase_receipt_attachment_note==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "requisition_form_attachment",
+   "fieldtype": "Check",
+   "label": "Requisition Form Attachment"
+  },
+  {
+   "depends_on": "eval:doc.requisition_form_attachment==1",
+   "fieldname": "requisition_form",
+   "fieldtype": "Attach",
+   "label": "Requisition Form",
+   "mandatory_depends_on": "eval:doc.requisition_form_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "request_for_quotation_attachment",
+   "fieldtype": "Check",
+   "label": "Request for Quotation Attachment"
+  },
+  {
+   "depends_on": "eval:doc.request_for_quotation_attachment==1",
+   "fieldname": "request_for_quotation",
+   "fieldtype": "Attach",
+   "label": "Request for Quotation",
+   "mandatory_depends_on": "eval:doc.request_for_quotation_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "vendor_quotation_attachment",
+   "fieldtype": "Check",
+   "label": "Vendor Quotation Attachment"
+  },
+  {
+   "depends_on": "eval:doc.vendor_quotation_attachment==1",
+   "fieldname": "vendor_quotation",
+   "fieldtype": "Attach",
+   "label": "Vendor Quotation",
+   "mandatory_depends_on": "eval:doc.vendor_quotation_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "comparative_statement_attachment",
+   "fieldtype": "Check",
+   "label": "Comparative Statement Attachment"
+  },
+  {
+   "depends_on": "eval:doc.comparative_statement_attachment==1",
+   "fieldname": "comparative_statement",
+   "fieldtype": "Attach",
+   "label": "Comparative Statement",
+   "mandatory_depends_on": "eval:doc.comparative_statement_attachment==1"
+  },
+  {
+   "fieldname": "column_break_17",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "approval_sheet_attachment",
+   "fieldtype": "Check",
+   "label": "Approval Sheet Attachment"
+  },
+  {
+   "depends_on": "eval:doc.approval_sheet_attachment==1",
+   "fieldname": "approval_sheet",
+   "fieldtype": "Attach",
+   "label": "Approval Sheet",
+   "mandatory_depends_on": "eval:doc.approval_sheet_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "po_attachment",
+   "fieldtype": "Check",
+   "label": "PO Attachment"
+  },
+  {
+   "depends_on": "eval:doc.po_attachment==1",
+   "fieldname": "po",
+   "fieldtype": "Attach",
+   "label": "PO",
+   "mandatory_depends_on": "eval:doc.po_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "delivery_challan_attachment",
+   "fieldtype": "Check",
+   "label": "Delivery Challan Attachment"
+  },
+  {
+   "depends_on": "eval:doc.delivery_challan_attachment==1",
+   "fieldname": "delivery_challan",
+   "fieldtype": "Attach",
+   "label": "Delivery Challan",
+   "mandatory_depends_on": "eval:doc.delivery_challan_attachment==1"
+  },
+  {
+   "depends_on": "eval:doc.invoice_attachment_1==1",
+   "fieldname": "invoice",
+   "fieldtype": "Attach",
+   "label": "Invoice",
+   "mandatory_depends_on": "eval:doc.invoice_attachment_1==1"
+  },
+  {
+   "fieldname": "column_break_26",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "grn_attachment",
+   "fieldtype": "Check",
+   "label": "GRN Attachment"
+  },
+  {
+   "depends_on": "eval:doc.grn_attachment==1",
+   "fieldname": "grn",
+   "fieldtype": "Attach",
+   "label": "GRN",
+   "mandatory_depends_on": "eval:doc.grn_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "bill_challan_attachment",
+   "fieldtype": "Check",
+   "label": "Bill Challan Attachment"
+  },
+  {
+   "depends_on": "eval:doc.bill_challan_attachment==1",
+   "fieldname": "bill_challan",
+   "fieldtype": "Attach",
+   "label": "Bill Challan",
+   "mandatory_depends_on": "eval:doc.bill_challan_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "credit_memo_attachment",
+   "fieldtype": "Check",
+   "label": "Credit Memo Attachment"
+  },
+  {
+   "depends_on": "eval:doc.credit_memo_attachment==1",
+   "fieldname": "credit_memo",
+   "fieldtype": "Attach",
+   "label": "Credit Memo",
+   "mandatory_depends_on": "eval:doc.credit_memo_attachment==1"
+  },
+  {
+   "default": "0",
+   "fieldname": "others_attachment",
+   "fieldtype": "Check",
+   "label": "Others Attachment"
+  },
+  {
+   "depends_on": "eval:doc.others_attachment==1",
+   "fieldname": "others",
+   "fieldtype": "Attach",
+   "label": "Others",
+   "mandatory_depends_on": "eval:doc.others_attachment==1"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-15 16:21:56.179199",
+ "modified": "2022-11-29 16:42:04.107637",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Enclosed Bills",
