@@ -12,54 +12,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "PO Based invoices",
-   "link_count": 4,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "PO Consumable",
-   "link_count": 0,
-   "link_to": "PO Consumable",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "PO Consignment",
-   "link_count": 0,
-   "link_to": "PO Consignment",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "PO Material Management",
-   "link_count": 0,
-   "link_to": "PO Material Management",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Pharmacy",
-   "link_count": 0,
-   "link_to": "Pharmacy",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Third-Party Verification",
    "link_count": 0,
    "link_to": "Third-Party Verification",
@@ -284,9 +236,57 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "PO Based invoices",
+   "link_count": 4,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "PO Consumable",
+   "link_count": 0,
+   "link_to": "PO Consumable",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "PO Consignment",
+   "link_count": 0,
+   "link_to": "PO Consignment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "PO Material Management",
+   "link_count": 0,
+   "link_to": "PO Material Management",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Pharmacy",
+   "link_count": 0,
+   "link_to": "Pharmacy",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2022-11-28 14:47:14.688758",
+ "modified": "2022-11-29 15:20:59.182002",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Tracking System",

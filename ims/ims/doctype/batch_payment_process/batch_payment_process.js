@@ -112,13 +112,14 @@ frappe.ui.form.on("Batch Payment Process", {
 						c.document_no=element.document_number
 						c.document_date=element.document_date
 						c.ifsc_code=element.ifsc_code
-						c.ac_no=element.ac_no
+						c.ac_no=element.bank_ac_no
 						c.amount=element.net_final_amount_to_be_paid_in_rs
 						c.amount1=element.net_final_amount_to_be_paid_in_rs
-						c.ac_holder_name=element.ac_holder_name
+						c.ac_holder_name=element.account_holder_name
 						c.bank_name=element.bank_name
-						c.branch=element.branch
+						c.branch=element.bank_address
 						c.invoice_tracking_number=element.name
+						c.approve=element.workflow_state
 					});
 				} 
 				frm.refresh();
