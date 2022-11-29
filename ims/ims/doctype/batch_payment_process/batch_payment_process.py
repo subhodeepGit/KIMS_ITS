@@ -107,9 +107,9 @@ def get_outstanding_amount(args):
 	filter.append(['priority',"=",args.get('priority')])
 
 	if args.get('outstanding_amt_greater_than') > 0:
-		filter.append(["net_final_amount_to_be_paid_in_rs",">",args.get('outstanding_amt_greater_than')])
+		filter.append(["net_final_amount_to_be_paid_in_rs",">=",args.get('outstanding_amt_greater_than')])
 	if args.get('outstanding_amt_less_than') >0:
-		filter.append(["net_final_amount_to_be_paid_in_rs","<",args.get('outstanding_amt_less_than')])
+		filter.append(["net_final_amount_to_be_paid_in_rs","<=",args.get('outstanding_amt_less_than')])
 	if args.get("invoice")==None:
 		c_doctype=[{"doctype":"PO Consumable","child_doc":"Details of Invoices and PO"},{"doctype":"PO Consignment","child_doc":"Credit Note and PO"},
 					{"doctype":"PO Material Management","child_doc":"Invoices and PO"},{"doctype":"Pharmacy","child_doc":"Enclosed Bills"},
@@ -126,7 +126,7 @@ def get_outstanding_amount(args):
 		invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter,
 		fields=['name','posting_date','company','supplier_code','document_number',
 				'document_date','supplier_code','name_of_supplier',
-				'net_final_amount_to_be_paid_in_rs'],order_by="posting_date asc")
+				'net_final_amount_to_be_paid_in_rs','workflow_state'],order_by="posting_date asc")
 		
 		for t in invoice_data:
 			sup_info=frappe.db.get_all("Supplier",{"name":t['supplier_code']},["ifsc_code","bank_ac_no","account_holder_name","bank_name","bank_address"])
