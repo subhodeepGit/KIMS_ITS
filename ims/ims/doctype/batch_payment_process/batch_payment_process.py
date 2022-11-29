@@ -104,16 +104,24 @@ def get_outstanding_amount(args):
 	filter.append(["net_final_amount_to_be_paid_in_rs",">",0])	
 	filter.append(["workflow_state","=","Passed for Payment"])
 	filter.append(['company',"=",args.get('company')])
+	filter.append(['priority',"=",args.get('priority')])
 
 	if args.get('outstanding_amt_greater_than') > 0:
 		filter.append(["net_final_amount_to_be_paid_in_rs",">",args.get('outstanding_amt_greater_than')])
 	if args.get('outstanding_amt_less_than') >0:
 		filter.append(["net_final_amount_to_be_paid_in_rs","<",args.get('outstanding_amt_less_than')])
+	if args.get("invoice")==None:
+		c_doctype=[{"doctype":"PO Consumable","child_doc":"Details of Invoices and PO"},{"doctype":"PO Consignment","child_doc":"Credit Note and PO"},
+					{"doctype":"PO Material Management","child_doc":"Invoices and PO"},{"doctype":"Pharmacy","child_doc":"Enclosed Bills"},
+					{"doctype":"Non PO Contract","child_doc":"Details of Enclosed Bills"},{"doctype":"Non PO Non Contract","child_doc":"Details Enclosed Bills"}]
+	elif args.get("invoice")!=None:
+		c_doctype=[{"doctype":args.get("invoice")}]
 
-	c_doctype=[{"doctype":"PO Consumable","child_doc":"Details of Invoices and PO"},{"doctype":"PO Consignment","child_doc":"Credit Note and PO"},
-						{"doctype":"PO Material Management","child_doc":"Invoices and PO"},{"doctype":"Pharmacy","child_doc":"Enclosed Bills"},
-						{"doctype":"Non PO Contract","child_doc":"Details of Enclosed Bills"},{"doctype":"Non PO Non Contract","child_doc":"Details Enclosed Bills"}]
+	if args.get('vendor'):
+		filter.append(['supplier_code',"=",args.get('vendor')])		
+
 	data=[]
+
 	for doctype in c_doctype:
 		invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter,
 		fields=['name','posting_date','company','supplier_code','document_number',
@@ -129,7 +137,7 @@ def get_outstanding_amount(args):
 			t['bank_address']=sup_info[0]['bank_address']
 
 		for t in invoice_data:
-			data.append(t)
+				data.append(t)
 	if not data:
 		frappe.msgprint("No Data")
 

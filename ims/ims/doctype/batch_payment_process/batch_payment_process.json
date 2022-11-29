@@ -9,6 +9,7 @@
  "field_order": [
   "company",
   "document_status",
+  "column_break_3",
   "account_doctype_section",
   "account_reference_no",
   "account_post_date",
@@ -223,11 +224,15 @@
    "fieldtype": "Currency",
    "label": "Total Amount",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 12:47:31.546150",
+ "modified": "2022-11-28 17:36:38.253969",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",

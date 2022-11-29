@@ -29,7 +29,22 @@ frappe.ui.form.on("Batch Payment Process", {
 			{fieldtype:"Date", label: __("From Date"),
 				fieldname:"from_posting_date", default:frappe.datetime.add_days(today, -30)},
 			{fieldtype:"Column Break"},
-			{fieldtype:"Date", label: __("To Date"), fieldname:"to_posting_date", default:today},
+			{fieldtype:"Date", label: __("To Date"), fieldname:"to_posting_date", default:today},	
+			{fieldtype:"Section Break", label: __("Type of Invoice")},
+			{fieldtype:"Select", label: __("Invoice"),
+				fieldname:"invoice", options: ["","PO Consumable","PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract"]},
+			{fieldtype:"Section Break", label: __("Type of Invoice")},
+			{fieldtype:"Select", label: __("Priority"),
+				fieldname:"priority", options: ["","Urgent","Normal","High Priority","Low Priority"]},
+			{fieldtype:"Section Break", label: __("Vendor")},
+			{fieldtype:"Link", label: __("Vendor"),fieldname:"vendor", options: "Supplier",
+				default:frm.doc.supplier_code,
+				"get_query": function() {
+					return {
+						"filters": {"company": frm.doc.company}
+					}
+				}
+			},
 			{fieldtype:"Section Break", label: __("Outstanding Amount")},
 			{fieldtype:"Float", label: __("Greater Than Amount"),
 				fieldname:"outstanding_amt_greater_than", default: 0},
@@ -40,6 +55,7 @@ frappe.ui.form.on("Batch Payment Process", {
 		frappe.prompt(fields, function(filters){
 			frappe.flags.allocate_payment_amount = true;
 			frm.events.validate_filters_data(frm, filters);
+			frm.doc.vendor = filters.supplier_code;
 			frm.events.get_outstanding_documents(frm, filters);
 		}, __("Filters"), __("Get Outstanding Documents"));
 	},
@@ -69,7 +85,10 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.clear_table("table_26");
 		var args={
 			"company": frm.doc.company,
-			"posting_date": frm.doc.posting_date
+			"posting_date": frm.doc.posting_date,
+			"priority": frm.doc.priority,
+			"vendor": frm.doc.supplier_code,
+			// "invoice": frm.doc.invoice
 		}
 
 		for (let key in filters) {
