@@ -8,6 +8,7 @@ from frappe.utils import cint, date_diff, datetime, get_datetime, today
 
 class POMaterialManagement(Document):
 	def validate(self):
+
 		mandatory_check(self)
 		third_party_verification=self.get("third_party_verification")
 		if third_party_verification:
@@ -47,7 +48,7 @@ class POMaterialManagement(Document):
 			date=datetime.date.today()
 			self.db_set("today_date",date)
 		session_user = frappe.session.user
-		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
+		if self.workflow_state!="Rejected and Transfer":	
 			if session_user:
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 				if emp_data:
@@ -57,8 +58,14 @@ class POMaterialManagement(Document):
 						object_var=t
 
 					if object_var!="":
-						if object_var.approval_status==self.workflow_state :
-							flag="No"
+						if self.workflow_state=="Draft" or self.workflow_state=="Verify and Save" or self.workflow_state=="Cancelled":
+							if (object_var.approval_status==self.workflow_state) and object_var.emp_id==emp_data[0]["name"]:
+								flag="No"
+						else:
+							doc_before_save = self.get_doc_before_save()
+							if doc_before_save.document_status==self.document_status:
+								flag=""
+
 
 					approval_status=self.workflow_state
 					previous_status=frappe.get_all("PO Material Management",{"name":self.name},["workflow_state"])
@@ -135,7 +142,9 @@ class POMaterialManagement(Document):
 								t.previous_status=previous_status
 								t.workflow_data= workflow_name
 								t.grouping_of_designation=grouping_of_designation
-								t.single_user=single_user	
+								t.single_user=single_user
+					if 	approval_status=="Journal Entry by Account Dept.":
+						self.payment_status="Passed for Payment"				
 
 			else:
 				frappe.throw("Employee not found")		
