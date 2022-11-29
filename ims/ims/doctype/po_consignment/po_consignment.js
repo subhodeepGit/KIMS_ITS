@@ -17,6 +17,8 @@ frappe.ui.form.on('Credit Note and PO', {	//Child table Name
 	refresh_field("total_amount_in_rs");
 	frm.set_value("net_final_amount_to_be_paid_in_rs", a); // Parent field name where calculation going to fetch
 	refresh_field("net_final_amount_to_be_paid_in_rs");
+	frm.set_value("to_pay_total", a); // Parent field name where calculation going to fetch
+	refresh_field("to_pay_total");
    },
   // When field is deleted from child table on that time calculation going to happend to the accordingly
     details_of_invoices_credit_note_and_po_remove:function(frm, cdt, cdn){ //Child table name
@@ -34,6 +36,8 @@ frappe.ui.form.on('Credit Note and PO', {	//Child table Name
 	refresh_field("net_final_amount_to_be_paid_in_rs");
 	frm.set_value("total_hospital_margin_amount",b)
 	refresh_field("total_hospital_margin_amount");
+	frm.set_value("less_credit_note_amount_in_rs",b)
+	refresh_field("less_credit_note_amount_in_rs");
 	frm.set_value("to_pay_total",c)
 	refresh_field("to_pay_total");
 	},
@@ -44,15 +48,17 @@ frappe.ui.form.on('Credit Note and PO', {	//Child table Name
 		frm.doc.details_of_invoices_credit_note_and_po.forEach(function(d)  { a = a+ d.hospital_margin_amount;}); //Child table name and field name
 		frm.set_value("total_hospital_margin_amount", a);			
 		refresh_field("total_hospital_margin_amount");
+		frm.set_value("less_credit_note_amount_in_rs", a);
+		refresh_field("less_credit_note_amount_in_rs");
 	},
-	to_pay:function(frm, cdt, cdn){	//Child table field Name where you data enter
-		var d = locals[cdt][cdn];
-		var total = 0;
-		let b= parseInt(total)
-		frm.doc.details_of_invoices_credit_note_and_po.forEach(function(d)  { b = b+ d.to_pay;}); //Child table name and field name
-		frm.set_value("to_pay_total", b);			
-		refresh_field("to_pay_total");
-	},
+	// to_pay:function(frm, cdt, cdn){	//Child table field Name where you data enter
+	// 	var d = locals[cdt][cdn];
+	// 	var total = 0;
+	// 	let b= parseInt(total)
+	// 	frm.doc.details_of_invoices_credit_note_and_po.forEach(function(d)  { b = b+ d.to_pay;}); //Child table name and field name
+	// 	frm.set_value("to_pay_total", b);			
+	// 	refresh_field("to_pay_total");
+	// },
 });
 
 
@@ -65,14 +71,16 @@ frappe.ui.form.on('PO Consignment', {
 			net_amount = cur_frm.doc.total_amount_in_rs - cur_frm.doc.less_credit_note_amount_in_rs
 			frm.set_value("net_final_amount_to_be_paid_in_rs",net_amount)
 			refresh_field("net_final_amount_to_be_paid_in_rs");
-		}
-	});
+		},
+});
 
 frappe.ui.form.on('PO Consignment',"less_credit_note_amount_in_rs", function(frm) {
 	var net_amount = 0;
 	net_amount = cur_frm.doc.total_amount_in_rs - cur_frm.doc.less_credit_note_amount_in_rs
 	frm.set_value("net_final_amount_to_be_paid_in_rs",net_amount)
 	refresh_field("net_final_amount_to_be_paid_in_rs");
+	frm.set_value("to_pay_total",net_amount)
+	refresh_field("to_pay_total");
 });
 
 frappe.ui.form.on("PO Consignment", {
@@ -98,3 +106,15 @@ frappe.ui.form.on('PO Consignment', {
 
 	}
 });
+
+frappe.ui.form.on("Credit Note and PO", "hospital_margin_amount", function(frm, cdt, cdn){
+	var d = locals[cdt][cdn];
+		d.to_pay=d.invoice_amount-d.hospital_margin_amount
+		refresh_field("to_pay", d.name, d.parentfield);
+	});
+
+frappe.ui.form.on("Credit Note and PO", "invoice_amount", function(frm, cdt, cdn){
+	var d = locals[cdt][cdn];
+		d.to_pay=d.invoice_amount-d.hospital_margin_amount
+		refresh_field("to_pay", d.name, d.parentfield);
+	});
