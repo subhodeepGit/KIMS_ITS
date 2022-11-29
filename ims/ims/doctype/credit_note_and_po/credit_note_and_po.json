@@ -92,15 +92,18 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "hospital_margin_amount",
    "fieldtype": "Currency",
    "label": "Hospital Margin Amount",
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "to_pay",
    "fieldtype": "Currency",
    "label": "To-Pay",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -322,7 +325,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-28 16:17:43.758589",
+ "modified": "2022-11-29 16:31:43.342203",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Credit Note and PO",
