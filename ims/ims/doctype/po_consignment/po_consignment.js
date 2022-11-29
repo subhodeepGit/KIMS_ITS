@@ -83,3 +83,18 @@ frappe.ui.form.on("PO Consignment", {
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
 	}
 });
+
+frappe.ui.form.on('PO Consignment', {
+	supplier_code: function(frm) {
+		frappe.call({
+			method: 'ims.ims.doctype.po_consignment.po_consignment.clearance_period',
+			args: {
+				supplier:frm.doc.supplier_code
+			},
+			callback: function(r) {
+				frm.set_value("amount_clearance_period_in_days",r.message)
+			}
+		})
+
+	}
+});
