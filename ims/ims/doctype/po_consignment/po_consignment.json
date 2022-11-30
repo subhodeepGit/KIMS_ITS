@@ -24,12 +24,13 @@
   "master_invoice_attachment",
   "note_sheet_attachment",
   "section_break_16",
-  "details_of_invoices_credit_note_and_po",
   "audit_section_section",
   "audit_ref_no",
-  "section_break_18",
-  "total_hospital_margin_amount",
   "column_break_23",
+  "today_date",
+  "section_break_18",
+  "details_of_invoices_credit_note_and_po",
+  "total_hospital_margin_amount",
   "to_pay_total",
   "section_break_24",
   "total_amount_in_rs",
@@ -37,6 +38,7 @@
   "less_credit_note_amount_in_rs",
   "column_break_22",
   "net_final_amount_to_be_paid_in_rs",
+  "column_break_32",
   "journal_voucher_section",
   "profit_center",
   "document_number",
@@ -294,11 +296,20 @@
    "fieldtype": "Data",
    "label": "Payment Status",
    "read_only": 1
+  },
+  {
+   "fieldname": "today_date",
+   "fieldtype": "Date",
+   "label": "Today Date"
+  },
+  {
+   "fieldname": "column_break_32",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-29 22:35:51.901968",
+ "modified": "2022-11-30 11:11:21.789062",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",
