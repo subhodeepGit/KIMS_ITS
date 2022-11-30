@@ -45,3 +45,18 @@ frappe.ui.form.on("Pharmacy", {
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
 	}
 });
+
+frappe.ui.form.on("Pharmacy", {
+	supplier_code: function(frm) {
+		frappe.call({
+			method: 'ims.ims.doctype.pharmacy.pharmacy.clearance_period',
+			args: {
+				supplier:frm.doc.supplier_code
+			},
+			callback: function(r) {
+				frm.set_value("amount_clearance_period_in_days",r.message)
+			}
+		})
+
+	}
+});
