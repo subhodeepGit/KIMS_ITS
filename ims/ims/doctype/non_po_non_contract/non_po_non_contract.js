@@ -68,5 +68,42 @@ frappe.ui.form.on("Non PO Non Contract", {
 		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
 		//cannot able to delete rows
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
+}
+});
+frappe.ui.form.on("Non PO Non Contract", {
+	onload:function(frm){
+	if (frm.doc.type_of_supplier==""){
+		frm.set_df_property("employee", "hidden", 1);
+		frm.set_df_property("supplier_code", "hidden", 1);
 	}
+}
+});
+frappe.ui.form.on("Non PO Non Contract", {
+	type_of_supplier:function(frm){
+		if (frm.doc.type_of_supplier==""){
+			frm.set_df_property("employee", "hidden", 1);
+			frm.set_df_property("supplier_code", "hidden", 1);
+			frm.set_df_property("employee_name", "hidden", 1);
+			frm.set_df_property("name_of_supplier", "hidden", 1);
+			frm.set_value('employee', '')
+			frm.set_value('supplier_code', '')
+
+		}
+		if (frm.doc.type_of_supplier=="Employee"){
+			frm.set_df_property("employee", "hidden", 0);
+			frm.set_df_property("employee", "reqd", 1);
+			frm.set_df_property("supplier_code", "hidden", 1);
+			frm.set_df_property("employee_name", "hidden", 0);
+			frm.set_df_property("name_of_supplier", "hidden", 1);
+			frm.set_value('supplier_code', '')
+		}
+		if (frm.doc.type_of_supplier=="Supplier"){
+			frm.set_df_property("supplier_code", "hidden", 0);
+			frm.set_df_property("supplier_code", "reqd", 1);
+			frm.set_df_property("employee", "hidden", 1);
+			frm.set_df_property("employee_name", "hidden", 1);
+			frm.set_df_property("name_of_supplier", "hidden", 0);
+			frm.set_value('employee', '')
+}
+}
 });

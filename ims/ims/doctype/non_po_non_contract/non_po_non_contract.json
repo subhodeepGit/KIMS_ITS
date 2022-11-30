@@ -17,6 +17,9 @@
   "document_status",
   "column_break_7",
   "posting_date",
+  "type_of_supplier",
+  "employee",
+  "employee_name",
   "supplier_code",
   "name_of_supplier",
   "amount_clearance_period_in_days",
@@ -114,16 +117,14 @@
    "fieldtype": "Link",
    "label": "Supplier Code",
    "options": "Supplier",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fetch_from": "supplier_code.supplier_name",
    "fieldname": "name_of_supplier",
    "fieldtype": "Data",
    "label": "Name Of Supplier",
-   "read_only": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fetch_from": "supplier_code.amount_clearance_period_in_days",
@@ -270,11 +271,31 @@
    "fieldtype": "Attach",
    "label": "Attach Journal Voucher",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "type_of_supplier",
+   "fieldtype": "Select",
+   "label": "Type Of Supplier",
+   "options": "\nEmployee\nSupplier",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee.full_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-23 15:44:21.596249",
+ "modified": "2022-11-30 12:52:32.906789",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
