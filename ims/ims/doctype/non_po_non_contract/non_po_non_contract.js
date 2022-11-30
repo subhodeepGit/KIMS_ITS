@@ -87,8 +87,13 @@ frappe.ui.form.on("Non PO Non Contract", {
 			frm.set_df_property("name_of_supplier", "hidden", 1);
 			frm.set_value('employee', '')
 			frm.set_value('supplier_code', '')
-
 		}
+		// else{
+		// 	frm.set_df_property("employee", "hidden", 0);
+		// 	frm.set_df_property("supplier_code", "hidden", 0);
+		// 	frm.set_df_property("employee_name", "hidden", 0);
+		// 	frm.set_df_property("name_of_supplier", "hidden", 0);
+		// }
 		if (frm.doc.type_of_supplier=="Employee"){
 			frm.set_df_property("employee", "hidden", 0);
 			frm.set_df_property("employee", "reqd", 1);
@@ -99,6 +104,13 @@ frappe.ui.form.on("Non PO Non Contract", {
 			frm.set_value("amount_clearance_period_in_days","0")
 			// 
 		}
+		else{
+			// frm.set_df_property("employee", "hidden", 1);
+			frm.set_df_property("employee", "reqd", 0);
+			// frm.set_df_property("supplier_code", "hidden", 0);
+			// frm.set_df_property("employee_name", "hidden", 1);
+			// frm.set_df_property("name_of_supplier", "hidden", 0);
+		}
 		if (frm.doc.type_of_supplier=="Supplier"){
 			frm.set_df_property("supplier_code", "hidden", 0);
 			frm.set_df_property("supplier_code", "reqd", 1);
@@ -106,8 +118,14 @@ frappe.ui.form.on("Non PO Non Contract", {
 			frm.set_df_property("employee_name", "hidden", 1);
 			frm.set_df_property("name_of_supplier", "hidden", 0);
 			frm.set_value('employee', '')
-			
-}
+			}
+		else{
+			// frm.set_df_property("supplier_code", "hidden", 1);
+			frm.set_df_property("supplier_code", "reqd", 0);
+			// frm.set_df_property("employee", "hidden", 0);
+			// frm.set_df_property("employee_name", "hidden", 0);
+			// frm.set_df_property("name_of_supplier", "hidden", 1);
+		}
 }
 });
 
