@@ -175,6 +175,7 @@ def mandatory_check(self):
 		count=0
 		for t in self.get("details_of_invoices_credit_note_and_po"):
 			count=count+1
+			print(t.po_attachment)
 			if t.po_attachment!=1: 
 				frappe.throw("PO Attachment	is mandatory in row on %s"%(count))
 	
