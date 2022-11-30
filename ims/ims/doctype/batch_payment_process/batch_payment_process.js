@@ -17,6 +17,8 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.set_df_property("approval_hierarchy", "cannot_add_rows", true);
 		//cannot able to delete rows
 		frm.set_df_property("approval_hierarchy", "cannot_delete_rows", true);
+		frm.set_df_property("vendor_wise_payment_details", "cannot_add_rows", true);
+		frm.set_df_property("vendor_wise_payment_details", "cannot_delete_rows", true);
 	}
 });
 frappe.ui.form.on("Batch Payment Process", {
@@ -24,9 +26,64 @@ frappe.ui.form.on("Batch Payment Process", {
 		if(frm.doc.workflow_state!="Draft" && frm.doc.workflow_state!="Verify and Save"){
 			frm.set_df_property("table_26", "cannot_add_rows", true);
 			frm.set_df_property("table_26", "cannot_delete_rows", true);
-			frm.set_df_property("vendor_wise_payment_details", "cannot_add_rows", true);
-			frm.set_df_property("vendor_wise_payment_details", "cannot_delete_rows", true);
-			// frm.set_df_property("company",'read_only', 0)
+			frm.set_df_property("company",'read_only', 1)
+			frm.set_df_property("paying_bank",'read_only', 1)
+			frm.set_df_property("account_reference_no",'read_only', 1)
+			frm.set_df_property("account_post_date",'read_only', 1)
+			frm.set_df_property("audit_reference_no",'read_only', 1)
+			frm.set_df_property("audit_posting_date",'read_only', 1)
+	}
+		else{
+			frm.set_df_property("company",'read_only', 0)
+			frm.set_df_property("paying_bank",'read_only', 0)
+			frm.set_df_property("account_reference_no",'read_only', 0)
+			frm.set_df_property("account_post_date",'read_only', 0)
+			frm.set_df_property("audit_reference_no",'read_only', 0)
+			frm.set_df_property("audit_posting_date",'read_only', 0)
+	}
+		if(frm.doc.workflow_state!="Cheque Attachment"){
+			frm.set_df_property("cheque_no",'read_only', 1)
+			frm.set_df_property("cheque_date",'read_only', 1)
+			frm.set_df_property("cheque_attachment",'read_only', 1)
+			frm.set_df_property("note_sheet_attachment",'read_only', 1)
+			frm.set_df_property("contact_person",'read_only', 1)
+			frm.set_df_property("cheque_no",'reqd', 1)
+		}
+		else{
+			frm.set_df_property("cheque_no",'read_only', 0)
+			frm.set_df_property("cheque_date",'read_only', 0)
+			frm.set_df_property("cheque_attachment",'read_only', 0)
+			frm.set_df_property("note_sheet_attachment",'read_only', 0)
+			frm.set_df_property("contact_person",'read_only', 0)
+		}
+		if(frm.doc.workflow_state=="Draft"){
+			frm.set_value('cheque_no', '')
+			frm.set_value('cheque_date', '')
+			frm.set_value('cheque_attachment', '')
+			frm.set_value('note_sheet_attachment', '')
+			frm.set_value('contact_person', '')
+		}
+		if(frm.doc.workflow_state=="Cheque Attachment"){
+			frm.set_df_property("cheque_no",'reqd', 1)
+			frm.set_df_property("cheque_date",'reqd', 1)
+			frm.set_df_property("cheque_attachment",'reqd', 1)
+			frm.set_df_property("note_sheet_attachment",'reqd', 1)
+			frm.set_df_property("contact_person",'reqd', 1)
+		}
+		else{
+			frm.set_df_property("cheque_no",'reqd', 0)
+			frm.set_df_property("cheque_date",'reqd', 0)
+			frm.set_df_property("cheque_attachment",'reqd', 0)
+			frm.set_df_property("note_sheet_attachment",'reqd', 0)
+			frm.set_df_property("contact_person",'reqd', 0)
+		}
+}
+});
+
+frappe.ui.form.on("Batch Payment Process", {
+	validate:function(frm){
+		if(frm.doc.workflow_state=="Draft"){
+			frm.clear_table("vendor_wise_payment_details");
 	}
 }
 });
@@ -68,7 +125,6 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.events.validate_filters_data(frm, filters);
 			frm.doc.vendor = filters.supplier_code;
 			frm.events.get_outstanding_documents(frm, filters);
-			// frm.events.get_child_data(frm,filters);
 		}, __("Filters"), __("Get Outstanding Documents"));
 	},
 
@@ -95,6 +151,9 @@ frappe.ui.form.on("Batch Payment Process", {
 	},
 	get_outstanding_documents: function(frm, filters) {
 		frm.clear_table("table_26");
+		if (frm.doc.workflow_state=="Draft"){
+			frm.clear_table("vendor_wise_payment_details");
+			}
 		var args={
 			"company": frm.doc.company,
 			"posting_date": frm.doc.posting_date,
@@ -138,44 +197,4 @@ frappe.ui.form.on("Batch Payment Process", {
 			}
 		});
 	},
-	get_child_data: function(frm, filters) {
-		frm.clear_table("vendor_wise_payment_details");
-		var args={
-			"company": frm.doc.company,
-			"posting_date": frm.doc.posting_date,
-			"priority": frm.doc.priority,
-			"vendor": frm.doc.supplier_code,
-		}
-
-		for (let key in filters) {
-			args[key] = filters[key];
-		}
-
-		return frappe.call({
-			method: "ims.ims.doctype.batch_payment_process.batch_payment_process.merge_same_vendor",
-			args:{
-				args:args
-			},
-			
-			
-			callback: function(r) {
-				if(r.message){
-					frappe.model.clear_table(frm.doc, 'vendor_wise_payment_details');
-					(r.message).forEach(element => {
-						var c = frm.add_child("vendor_wise_payment_details")
-						c.ifsc_code=element.ifsc_code
-						c.ac_no=element.ac_no
-						c.amount=element.amount
-						c.ac_holder_name=element.ac_holder_name
-						c.bank_name=element.bank_name
-						c.branch=element.branch
-						c.vendor_name=element.name_of_supplier
-						c.vendor_code=element.supplier_code
-					});
-				} 
-				frm.refresh();
-				frm.refresh_field("vendor_wise_payment_details")
-			}
-		});
-	}
 });

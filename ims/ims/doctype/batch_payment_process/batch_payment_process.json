@@ -48,7 +48,6 @@
    "in_list_view": 1,
    "label": "Company",
    "options": "Company",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\"",
    "reqd": 1
   },
   {
@@ -61,7 +60,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Account Reference No",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\"",
    "reqd": 1
   },
   {
@@ -69,7 +67,6 @@
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Account Post Date",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\"",
    "reqd": 1
   },
   {
@@ -81,7 +78,7 @@
    "fieldtype": "Link",
    "label": "Paying Bank",
    "options": "Bank Details For Payment",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "reqd": 1
   },
   {
    "fetch_from": "paying_bank.bank_name",
@@ -125,33 +122,27 @@
   {
    "fieldname": "audit_reference_no",
    "fieldtype": "Data",
-   "label": "Audit Reference No",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "label": "Audit Reference No"
   },
   {
    "fieldname": "audit_posting_date",
    "fieldtype": "Date",
-   "label": "Audit Posting Date ",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "label": "Audit Posting Date "
   },
   {
-   "depends_on": "eval:doc.workflow_state==\"Cheque Attachment\" || doc.workflow_state==\"Payment Done\"",
    "fieldname": "cheque_details_section_section",
    "fieldtype": "Section Break",
-   "label": "Cheque Details Section",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "label": "Cheque Details Section"
   },
   {
    "fieldname": "cheque_no",
    "fieldtype": "Data",
-   "label": "Cheque No",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "label": "Cheque No"
   },
   {
    "fieldname": "cheque_date",
    "fieldtype": "Date",
-   "label": "Cheque Date",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "label": "Cheque Date"
   },
   {
    "fieldname": "column_break_19",
@@ -161,8 +152,7 @@
    "fieldname": "contact_person",
    "fieldtype": "Link",
    "label": "Contact Person",
-   "options": "Employee",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "options": "Employee"
   },
   {
    "fetch_from": "contact_person.mobile_no",
@@ -193,14 +183,12 @@
   {
    "fieldname": "cheque_attachment",
    "fieldtype": "Attach",
-   "label": "Cheque Attachment",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "label": "Cheque Attachment"
   },
   {
    "fieldname": "note_sheet_attachment",
    "fieldtype": "Attach",
-   "label": "Note Sheet Attachment",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "label": "Note Sheet Attachment"
   },
   {
    "fieldname": "section_break_25",
@@ -209,8 +197,7 @@
   {
    "fieldname": "table_26",
    "fieldtype": "Table",
-   "options": "Batch Payment Child",
-   "read_only_depends_on": "eval:doc.workflow_state==\"Payment Done\""
+   "options": "Batch Payment Child"
   },
   {
    "fieldname": "get_outstanding_amount",
@@ -244,7 +231,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-29 13:01:20.662615",
+ "modified": "2022-11-30 16:14:41.776827",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",

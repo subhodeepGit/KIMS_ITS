@@ -9,6 +9,7 @@ import json
 
 class BatchPaymentProcess(Document):
 	def validate(self):
+		mand(self)
 		if self.workflow_state=="Verified & Submitted by Note Creator":
 			merge_same_vendor(self)
 		calculate_total(self)
@@ -218,4 +219,16 @@ def merge_same_vendor(self):
 					"ifsc_code":t['ifsc_code'],
 					"branch":t['branch'],
 					"amount":t['amount']                                                                   
-				})	
+				})
+def mand(self):
+	if self.workflow_state=="Payment Done":
+		if self.cheque_no==None or self.cheque_no=="":
+			frappe.throw("Cheque No	is mandatory")
+		if self.cheque_date==None or self.cheque_date=="":
+			frappe.throw("Cheque Date is mandatory")
+		if self.cheque_attachment==None or self.cheque_attachment=="":
+			frappe.throw("Cheque Attachment is mandatory")
+		if self.note_sheet_attachment==None or self.note_sheet_attachment=="":
+			frappe.throw("Note Sheet Attachment	is mandatory")
+		if self.contact_person==None or self.contact_person=="":
+			frappe.throw("Contact Person is mandatory")

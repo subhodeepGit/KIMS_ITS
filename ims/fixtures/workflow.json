@@ -4,13 +4,13 @@
   "doctype": "Workflow",
   "document_type": "Batch Payment Process",
   "is_active": 1,
-  "modified": "2022-11-23 16:28:41.684209",
+  "modified": "2022-11-30 13:08:03.475354",
   "name": "Batch Payment Process Workflow",
   "override_status": 0,
   "send_email_alert": 1,
   "states": [
    {
-    "allow_edit": "Accounts User",
+    "allow_edit": "Note Keeper(Accounts Clerk)",
     "doc_status": "0",
     "grouping_of_designation": null,
     "is_optional_state": 0,
@@ -25,7 +25,7 @@
     "update_value": null
    },
    {
-    "allow_edit": "Accounts User",
+    "allow_edit": "Note Keeper(Accounts Clerk)",
     "doc_status": "0",
     "grouping_of_designation": null,
     "is_optional_state": 0,
@@ -40,7 +40,22 @@
     "update_value": null
    },
    {
-    "allow_edit": "Accounts User",
+    "allow_edit": "Note Keeper(Accounts Clerk)",
+    "doc_status": "0",
+    "grouping_of_designation": null,
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Batch Payment Process Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "single_user": 0,
+    "state": "Verify and Save",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Note Keeper(Accounts Clerk)",
     "doc_status": "0",
     "grouping_of_designation": null,
     "is_optional_state": 0,
@@ -65,7 +80,7 @@
     "parentfield": "states",
     "parenttype": "Workflow",
     "single_user": 0,
-    "state": "Verified & Submitted by Accounts User",
+    "state": "Verified & Submitted by Note Creator",
     "update_field": null,
     "update_value": null
    },
@@ -147,11 +162,11 @@
   ],
   "transitions": [
    {
-    "action": "Submit",
+    "action": "Verify and Save",
     "allow_self_approval": 1,
-    "allowed": "Accounts User",
+    "allowed": "Note Keeper(Accounts Clerk)",
     "condition": null,
-    "next_state": "Verified & Submitted by Accounts User",
+    "next_state": "Verify and Save",
     "parent": "Batch Payment Process Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
@@ -160,13 +175,24 @@
    {
     "action": "Cancel",
     "allow_self_approval": 1,
-    "allowed": "Accounts User",
+    "allowed": "Note Keeper(Accounts Clerk)",
     "condition": null,
     "next_state": "Cancelled",
     "parent": "Batch Payment Process Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
     "state": "Draft"
+   },
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "Note Keeper(Accounts Clerk)",
+    "condition": null,
+    "next_state": "Verified & Submitted by Note Creator",
+    "parent": "Batch Payment Process Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Verify and Save"
    },
    {
     "action": "Approve",
@@ -177,7 +203,7 @@
     "parent": "Batch Payment Process Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Verified & Submitted by Accounts User"
+    "state": "Verified & Submitted by Note Creator"
    },
    {
     "action": "Reject and Transfer",
@@ -188,7 +214,7 @@
     "parent": "Batch Payment Process Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Verified & Submitted by Accounts User"
+    "state": "Verified & Submitted by Note Creator"
    },
    {
     "action": "Approve",
