@@ -56,7 +56,6 @@
    "in_list_view": 1,
    "label": "Company",
    "options": "Company",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -310,7 +309,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-30 12:51:34.815310",
+ "modified": "2022-11-30 15:14:24.139144",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",
