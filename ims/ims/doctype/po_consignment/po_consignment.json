@@ -13,6 +13,7 @@
   "name_of_schooldepartment",
   "for_which_department",
   "document_status",
+  "payment_status",
   "column_break_7",
   "posting_date",
   "item_of_purchaseexpense",
@@ -287,11 +288,21 @@
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
    "label": "Audit Ref No"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "label": "Payment Status",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2022-11-29 17:12:58.042397",
+=======
  "modified": "2022-11-29 22:35:51.901968",
+>>>>>>> 8d18f1a47205a75d433000057bad6897f9923e24
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",
