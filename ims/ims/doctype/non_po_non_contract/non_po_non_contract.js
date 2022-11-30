@@ -90,12 +90,15 @@ frappe.ui.form.on("Non PO Non Contract", {
 
 		}
 		if (frm.doc.type_of_supplier=="Employee"){
+			alert("ok")
 			frm.set_df_property("employee", "hidden", 0);
 			frm.set_df_property("employee", "reqd", 1);
 			frm.set_df_property("supplier_code", "hidden", 1);
 			frm.set_df_property("employee_name", "hidden", 0);
 			frm.set_df_property("name_of_supplier", "hidden", 1);
 			frm.set_value('supplier_code', '')
+			frm.set_value("amount_clearance_period_in_days","0")
+			// 
 		}
 		if (frm.doc.type_of_supplier=="Supplier"){
 			frm.set_df_property("supplier_code", "hidden", 0);
@@ -104,6 +107,24 @@ frappe.ui.form.on("Non PO Non Contract", {
 			frm.set_df_property("employee_name", "hidden", 1);
 			frm.set_df_property("name_of_supplier", "hidden", 0);
 			frm.set_value('employee', '')
+			
 }
 }
+});
+
+frappe.ui.form.on('Non PO Non Contract', {
+	supplier_code: function(frm) {
+		if (frm.doc.type_of_supplier=="Supplier"){
+			frappe.call({
+				method: 'ims.ims.doctype.po_consignment.po_consignment.clearance_period',
+				args: {
+					supplier:frm.doc.supplier_code
+				},
+				callback: function(r) {
+					frm.set_value("amount_clearance_period_in_days",r.message)
+				}
+			})
+		}
+
+	}
 });

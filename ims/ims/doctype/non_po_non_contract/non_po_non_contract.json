@@ -13,7 +13,6 @@
   "name_of_schooldepartment",
   "for_which_department",
   "item_of_purchaseexpense",
-  "item_name",
   "document_status",
   "column_break_7",
   "posting_date",
@@ -88,18 +87,9 @@
   },
   {
    "fieldname": "item_of_purchaseexpense",
-   "fieldtype": "Link",
-   "label": "Item Of Purchase/Expense",
-   "options": "Material or Service",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "item_of_purchaseexpense.material_service_name",
-   "fieldname": "item_name",
    "fieldtype": "Data",
-   "label": "Item Name",
-   "read_only": 1,
+   "label": "Item Of Purchase/Expense",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -295,7 +285,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-30 12:52:32.906789",
+ "modified": "2022-11-30 13:13:19.473536",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
