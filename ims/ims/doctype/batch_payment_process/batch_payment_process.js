@@ -19,6 +19,17 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.set_df_property("approval_hierarchy", "cannot_delete_rows", true);
 	}
 });
+frappe.ui.form.on("Batch Payment Process", {
+	onload:function(frm){
+		if(frm.doc.workflow_state!="Draft" && frm.doc.workflow_state!="Verify and Save"){
+			frm.set_df_property("table_26", "cannot_add_rows", true);
+			frm.set_df_property("table_26", "cannot_delete_rows", true);
+			frm.set_df_property("vendor_wise_payment_details", "cannot_add_rows", true);
+			frm.set_df_property("vendor_wise_payment_details", "cannot_delete_rows", true);
+			// frm.set_df_property("company",'read_only', 0)
+	}
+}
+});
 
 frappe.ui.form.on("Batch Payment Process", {
 	//  open of pop up 
@@ -57,6 +68,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.events.validate_filters_data(frm, filters);
 			frm.doc.vendor = filters.supplier_code;
 			frm.events.get_outstanding_documents(frm, filters);
+			// frm.events.get_child_data(frm,filters);
 		}, __("Filters"), __("Get Outstanding Documents"));
 	},
 
@@ -88,7 +100,6 @@ frappe.ui.form.on("Batch Payment Process", {
 			"posting_date": frm.doc.posting_date,
 			"priority": frm.doc.priority,
 			"vendor": frm.doc.supplier_code,
-			// "invoice": frm.doc.invoice
 		}
 
 		for (let key in filters) {
@@ -124,6 +135,46 @@ frappe.ui.form.on("Batch Payment Process", {
 				} 
 				frm.refresh();
 				frm.refresh_field("table_26")
+			}
+		});
+	},
+	get_child_data: function(frm, filters) {
+		frm.clear_table("vendor_wise_payment_details");
+		var args={
+			"company": frm.doc.company,
+			"posting_date": frm.doc.posting_date,
+			"priority": frm.doc.priority,
+			"vendor": frm.doc.supplier_code,
+		}
+
+		for (let key in filters) {
+			args[key] = filters[key];
+		}
+
+		return frappe.call({
+			method: "ims.ims.doctype.batch_payment_process.batch_payment_process.merge_same_vendor",
+			args:{
+				args:args
+			},
+			
+			
+			callback: function(r) {
+				if(r.message){
+					frappe.model.clear_table(frm.doc, 'vendor_wise_payment_details');
+					(r.message).forEach(element => {
+						var c = frm.add_child("vendor_wise_payment_details")
+						c.ifsc_code=element.ifsc_code
+						c.ac_no=element.ac_no
+						c.amount=element.amount
+						c.ac_holder_name=element.ac_holder_name
+						c.bank_name=element.bank_name
+						c.branch=element.branch
+						c.vendor_name=element.name_of_supplier
+						c.vendor_code=element.supplier_code
+					});
+				} 
+				frm.refresh();
+				frm.refresh_field("vendor_wise_payment_details")
 			}
 		});
 	}

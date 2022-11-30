@@ -6,13 +6,15 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "vendor_code",
+  "vendor_name",
   "ac_holder_name",
   "bank_name",
   "ac_no",
-  "ifcs_code",
+  "ifsc_code",
+  "column_break_7",
   "branch",
   "amount",
-  "column_break_7",
   "sap_document_number",
   "mode_of_payment",
   "utr_number",
@@ -39,13 +41,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "A/C No",
-   "read_only": 1
-  },
-  {
-   "fieldname": "ifcs_code",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "IFCS Code",
    "read_only": 1
   },
   {
@@ -97,12 +92,35 @@
   {
    "fieldname": "column_break_7",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vendor_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vendor Code",
+   "options": "Supplier",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "vendor_code.supplier_name",
+   "fieldname": "vendor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vendor Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "IFSC Code",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-29 13:04:20.382304",
+ "modified": "2022-11-29 16:51:28.694271",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Vendor Wise Payment Details",
