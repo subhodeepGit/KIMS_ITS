@@ -13,8 +13,8 @@
   "name_of_schooldepartment",
   "for_which_department",
   "document_status",
+  "payment_status",
   "item_of_purchaseexpense",
-  "item_name",
   "column_break_7",
   "posting_date",
   "supplier_code",
@@ -45,6 +45,8 @@
   "document_date",
   "attach_journal_voucher",
   "section_break_22",
+  "third_party_verification",
+  "section_break_39",
   "authorized_signature"
  ],
  "fields": [
@@ -99,18 +101,9 @@
   },
   {
    "fieldname": "item_of_purchaseexpense",
-   "fieldtype": "Link",
-   "label": "Item Of Purchase/Expense",
-   "options": "Material or Service",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
-  },
-  {
-   "fetch_from": "item_of_purchaseexpense.material_service_name",
-   "fieldname": "item_name",
    "fieldtype": "Data",
-   "label": "Item Name",
-   "read_only": 1,
+   "label": "Item Of Purchase/Expense",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -297,11 +290,27 @@
    "fieldtype": "Attach",
    "label": "Attach Journal Voucher",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "third_party_verification",
+   "fieldtype": "Table",
+   "label": "Third Party Verification",
+   "options": "Reference of  Note sheet Verification"
+  },
+  {
+   "fieldname": "section_break_39",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "label": "Payment Status",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-28 12:08:16.624117",
+ "modified": "2022-11-30 12:51:34.815310",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",
