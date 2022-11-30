@@ -9,6 +9,8 @@ import json
 
 class BatchPaymentProcess(Document):
 	def validate(self):
+		if self.workflow_state=="Verified & Submitted by Note Creator":
+			merge_same_vendor(self)
 		calculate_total(self)
 		session_user = frappe.session.user
 		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
@@ -158,3 +160,62 @@ def calculate_total(self):
 		self.total_amount = 0
 		for d in self.table_26:
 			self.total_amount += d.amount1
+
+@frappe.whitelist()
+def merge_same_vendor(self):
+	data=[]
+	for t in self.get("table_26"):
+		a={}
+		a['name']=t.name
+		a['supplier_code']=t.vendor_code
+		a['name_of_supplier']=t.vendor_name
+		a['net_final_amount_to_be_paid_in_rs']=t.amount
+		a['ifsc_code']=t.ifsc_code
+		a['bank_ac_no']=t.ac_no
+		a['account_holder_name']=t.ac_holder_name
+		a['bank_name']=t.bank_name
+		a['bank_address']=t.branch
+		data.append(a)
+	
+	if not data:
+		frappe.msgprint("No Data")
+	else:
+		supplier_code=[]
+		for t in data:
+			supplier_code.append(t['supplier_code'])
+		supplier_code=list(set(supplier_code))
+		final_data=[]
+		for t in supplier_code:
+			a={}
+			for j in data:
+				if t==j['supplier_code']:
+					a['supplier_code']=j['supplier_code']
+					a['name_of_supplier']=j['name_of_supplier']
+					a["ac_holder_name"]=j['account_holder_name']
+					a["bank_name"]=j['bank_name']
+					a["ac_no"]=j['bank_ac_no']
+					a["ifsc_code"]=j['ifsc_code']
+					a["branch"]=j['bank_address']
+					a["amount"]=[]
+					break
+			final_data.append(a)
+
+		for t in final_data:
+			for j in data:
+				if t['supplier_code']==j['supplier_code']:
+					t["amount"].append(j['net_final_amount_to_be_paid_in_rs'])
+
+		for t in final_data:
+			t["amount"]=sum(t["amount"])
+		data=final_data
+		for t in data:
+			self.append("vendor_wise_payment_details",{                                     
+					"vendor_code":t['supplier_code'],                                       
+					"vendor_name":t['name_of_supplier'],
+					"ac_holder_name":t['ac_holder_name'],
+					"bank_name":t['bank_name'],
+					"ac_no":t['ac_no'],
+					"ifsc_code":t['ifsc_code'],
+					"branch":t['branch'],
+					"amount":t['amount']                                                                   
+				})	
