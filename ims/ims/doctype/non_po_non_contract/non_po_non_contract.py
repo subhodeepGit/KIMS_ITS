@@ -90,3 +90,11 @@ class NonPONonContract(Document):
 						frappe.throw("Employee Not Found")			
 				else:
 					frappe.throw("Transfer To Employee Not Selected")
+
+
+@frappe.whitelist()
+def emp_clearance_period(employee):
+	print("\n\n\n")
+	print(employee)
+	data=frappe.get_all("Employee",{"name":employee},["amount_clearance_period_in_days"])
+	return data[0]['amount_clearance_period_in_days']

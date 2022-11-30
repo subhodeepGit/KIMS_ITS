@@ -90,7 +90,6 @@ frappe.ui.form.on("Non PO Non Contract", {
 
 		}
 		if (frm.doc.type_of_supplier=="Employee"){
-			alert("ok")
 			frm.set_df_property("employee", "hidden", 0);
 			frm.set_df_property("employee", "reqd", 1);
 			frm.set_df_property("supplier_code", "hidden", 1);
@@ -119,6 +118,23 @@ frappe.ui.form.on('Non PO Non Contract', {
 				method: 'ims.ims.doctype.po_consignment.po_consignment.clearance_period',
 				args: {
 					supplier:frm.doc.supplier_code
+				},
+				callback: function(r) {
+					frm.set_value("amount_clearance_period_in_days",r.message)
+				}
+			})
+		}
+
+	}
+});
+
+frappe.ui.form.on('Non PO Non Contract', {
+	employee: function(frm) {
+		if (frm.doc.type_of_supplier=="Employee"){
+			frappe.call({
+				method: 'ims.ims.doctype.non_po_non_contract.non_po_non_contract.emp_clearance_period',
+				args: {
+					employee:frm.doc.employee
 				},
 				callback: function(r) {
 					frm.set_value("amount_clearance_period_in_days",r.message)
