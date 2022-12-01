@@ -23,6 +23,23 @@ frappe.ui.form.on("Batch Payment Process", {
 });
 frappe.ui.form.on("Batch Payment Process", {
 	onload:function(frm){
+	if(frm.doc.workflow_state=="Payment Done"){
+		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
+	}
+	else{
+		frm.set_df_property("vendor_wise_payment_details",'read_only', 0)
+	}
+}
+});
+frappe.ui.form.on("Batch Payment Process", {
+	onload:function(frm){
+	if(frm.doc.workflow_state!="Draft" && frm.doc.workflow_state!="Verify and Save"){
+		frm.set_df_property("get_outstanding_amount",'hidden', 1)
+	}
+}
+});
+frappe.ui.form.on("Batch Payment Process", {
+	onload:function(frm){
 		if(frm.doc.workflow_state!="Draft" && frm.doc.workflow_state!="Verify and Save"){
 			frm.set_df_property("table_26", "cannot_add_rows", true);
 			frm.set_df_property("table_26", "cannot_delete_rows", true);
