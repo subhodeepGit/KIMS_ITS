@@ -234,10 +234,13 @@ frappe.ui.form.on('Non PO Non Contract', {
 					frm.set_df_property("supplier_code",'read_only', 1)
 					frm.set_df_property("type_of_supplier",'read_only', 1)
 					frm.set_df_property("employee",'read_only', 1)
-					
+					frm.set_df_property("purchase_order_no",'read_only', 1)
+					frm.set_df_property("date_of_purchase_order",'read_only', 1)
+					frm.set_df_property("master_invoice_attachment",'read_only', 1)
+					frm.set_df_property("note_sheet_attachment",'read_only', 1)
 				}
 		
-				if (frm.doc.workflow_state=="Approved by Director, Administration"){
+				if (frm.doc.workflow_state=="Approved by Medical Superintendent"){
 					frm.set_df_property("audit_ref_no", "reqd", 1);
 					frm.set_df_property("today_date", "reqd", 1);
 					frm.set_df_property("audit_ref_no",'read_only', 0)
@@ -258,6 +261,7 @@ frappe.ui.form.on('Non PO Non Contract', {
 					frm.set_df_property("ref_no",'reqd', 1)
 					frm.set_df_property("document_date",'reqd', 1)
 					frm.set_df_property("attach_journal_voucher",'reqd', 1)
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 1)
 				}
 				else{
 					frm.set_df_property("profit_center",'read_only', 1)
@@ -265,6 +269,13 @@ frappe.ui.form.on('Non PO Non Contract', {
 					frm.set_df_property("ref_no",'read_only', 1)
 					frm.set_df_property("document_date",'read_only', 1)
 					frm.set_df_property("attach_journal_voucher",'read_only', 1)
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 0)
+				}
+				if (frm.doc.workflow_state=="Passed for Payment"){
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 1)
+				}
+				else{
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 0)
 				}
 				// eval:(doc.workflow_state=="Approved by Director, Administration");/
 				// eval:(doc.workflow_state=="Approved by Director, Administration");today_dateToday
