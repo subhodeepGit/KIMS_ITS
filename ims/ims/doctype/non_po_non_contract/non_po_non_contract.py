@@ -67,6 +67,33 @@ class NonPONonContract(Document):
 						previous_status=""
 					else:
 						previous_status=previous_status[0]['workflow_state']	
+
+					document_type="Non PO Non Contract"
+					approval_status_print=""
+					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
+					if previous_status=="":
+						approval_status_print=approval_status
+					else:
+						state_info=frappe.get_all("Workflow Document State",{"parent":workflow_name},["state"],order_by="idx asc")
+						count=0
+						for s in state_info:
+							count=count+1
+							if s["state"]==approval_status:
+								break
+
+						pre_flow_list=state_info[count-1]["state"]
+						approval_status_print=pre_flow_list	
+					
+					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status_print},
+												['name',"grouping_of_designation","single_user"])
+						
+
+					grouping_of_designation=grp_info[0]['grouping_of_designation']
+					single_user=grp_info[0]['single_user']
+
+
+
+
 					
 					date_of_receivable=""
 					for t in self.get("authorized_signature"):
@@ -87,7 +114,9 @@ class NonPONonContract(Document):
 							"department":emp_data[0]['department'],                                        
 							"approval_status":approval_status,                              
 							"previous_status":previous_status,                                 
-							"transfer_to":0,                                    
+							"transfer_to":0, 
+							"grouping_of_designation":grouping_of_designation,
+							"single_user":single_user                                       
 						})
 					if flag=="No":
 						for t in self.get("authorized_signature"):
@@ -101,6 +130,8 @@ class NonPONonContract(Document):
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
 								t.previous_status=previous_status
+								t.grouping_of_designation=grouping_of_designation
+								t.single_user=single_user
 					if 	approval_status=="Journal Entry by Account Dept.":
 						self.payment_status="Passed for Payment"			
 
