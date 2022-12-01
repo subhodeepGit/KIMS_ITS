@@ -54,21 +54,18 @@
    "in_list_view": 1,
    "label": "Company",
    "options": "Company",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "note_sheet_no",
    "fieldtype": "Data",
    "label": "Note Sheet No.",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "date_of_note_sheet",
    "fieldtype": "Date",
    "label": "Date Of Note Sheet",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -76,7 +73,6 @@
    "fieldtype": "Link",
    "label": "Name Of School/Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -84,14 +80,12 @@
    "fieldtype": "Link",
    "label": "For which Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "item_of_purchaseexpense",
    "fieldtype": "Data",
    "label": "Item Of Purchase/Expense",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -108,8 +102,7 @@
    "fieldname": "supplier_code",
    "fieldtype": "Link",
    "label": "Supplier Code",
-   "options": "Supplier",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "options": "Supplier"
   },
   {
    "fetch_from": "supplier_code.supplier_name",
@@ -117,14 +110,6 @@
    "fieldtype": "Data",
    "label": "Name Of Supplier",
    "read_only": 1
-  },
-  {
-   "fetch_from": "supplier_code.amount_clearance_period_in_days",
-   "fieldname": "amount_clearance_period_in_days",
-   "fieldtype": "Int",
-   "label": "Amount Clearance Period (in Days)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
   },
   {
    "fieldname": "priority",
@@ -295,11 +280,17 @@
    "fieldtype": "Data",
    "label": "Payment Status",
    "read_only": 1
+  },
+  {
+   "fieldname": "amount_clearance_period_in_days",
+   "fieldtype": "Int",
+   "label": "Amount Clearance Period (in Days)",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-30 15:50:59.519513",
+ "modified": "2022-12-01 10:36:01.686624",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
