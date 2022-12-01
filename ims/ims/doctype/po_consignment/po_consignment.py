@@ -168,8 +168,6 @@ class POConsignment(Document):
 @frappe.whitelist()
 def clearance_period(supplier):
 	data=frappe.get_all("Supplier",{"name":supplier},["amount_clearance_period_in_days"])
-	print("\n\n\n\n\n\nsupplier")
-	print(data)
 	return data[0]['amount_clearance_period_in_days']
 
 def mandatory_check(self):

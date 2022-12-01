@@ -137,8 +137,6 @@ class NonPONonContract(Document):
 @frappe.whitelist()
 def emp_clearance_period(employee):
 	data=frappe.get_all("Employee",{"name":employee},["amount_clearance_period_in_days"])
-	print("\n\n\n\n\n\nemployee")
-	print(data)
 	return data[0]['amount_clearance_period_in_days']
 
 
