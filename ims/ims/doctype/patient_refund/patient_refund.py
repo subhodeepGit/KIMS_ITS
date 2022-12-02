@@ -8,6 +8,7 @@ from frappe import utils
 
 class PatientRefund(Document):
 	def validate(self):
+		mand(self)
 		mandatory_check(self)
 		# self.net_refundable_in_figures=(self.amount_deposited_by_patient - self.approval_of_tpa__insurance__corporate__ostf - self.cash_refund - self.total_bill - self.approval_of_tpa__insurance__corporate__ostf - self.less__non_admissible_item__discount_amount)
 		self.net_refundable_in_words = money_in_words(self.net_refundable_in_figures)
@@ -160,3 +161,8 @@ def mandatory_check(self):
 	# 		frappe.throw("Document Date	is mandatory")
 	# 	if self.attach_journal_voucher==None or self.attach_journal_voucher=="":
 	# 		frappe.throw("Attach Journal Voucher is mandatory")	
+
+def mand(self):
+	if self.ifsc_code!="":
+		if self.branch==None:
+			frappe.throw("IFSC Code is not Correct")

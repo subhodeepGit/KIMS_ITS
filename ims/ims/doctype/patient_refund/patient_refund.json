@@ -42,9 +42,10 @@
   "account_type",
   "account_holder_name",
   "joint_account_holder_name",
+  "ifsc_code",
   "name_of_the_bank",
   "branch",
-  "ifsc_code",
+  "bank_address",
   "account_no",
   "account_holder_relation_with_the_patient",
   "attachment_doument_section",
@@ -237,15 +238,15 @@
    "fieldname": "name_of_the_bank",
    "fieldtype": "Data",
    "label": "Name of the Bank",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
+   "read_only": 1,
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "branch",
    "fieldtype": "Data",
    "label": "Branch",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
-   "reqd": 1
+   "read_only": 1,
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "ifsc_code",
@@ -371,11 +372,17 @@
    "fieldname": "final_bill",
    "fieldtype": "Attach",
    "label": "Final Bill"
+  },
+  {
+   "fieldname": "bank_address",
+   "fieldtype": "Data",
+   "label": "Bank Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-02 17:40:11.502057",
+ "modified": "2022-12-02 18:04:13.829384",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
