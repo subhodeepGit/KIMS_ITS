@@ -7,6 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "refund_of_hospital_due_paid_in_excess_section",
   "name_of_the_patient",
   "ip__uhid_no",
   "department",
@@ -46,9 +47,13 @@
   "ifsc_code",
   "account_no",
   "account_holder_relation_with_the_patient",
+  "attachment_doument_section",
   "doc_attached",
   "original_money_receipt",
   "xerox_copy_of_any_itenty_proof",
+  "self_declaration_form",
+  "column_break_45",
+  "final_bill",
   "section_break_36",
   "authorized_signature"
  ],
@@ -161,20 +166,21 @@
   },
   {
    "fieldname": "section_break_16",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Cancellation / Refund Application Form"
   },
   {
    "fieldname": "patient_ip_no",
    "fieldtype": "Data",
    "label": "Patient IP No",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
+   "read_only": 1,
    "reqd": 1
   },
   {
    "fieldname": "patients_name",
    "fieldtype": "Data",
    "label": "Patient's Name",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -217,6 +223,7 @@
    "fieldname": "account_holder_name",
    "fieldtype": "Data",
    "label": "Account Holder Name",
+   "read_only": 1,
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
@@ -276,7 +283,7 @@
   {
    "fieldname": "xerox_copy_of_any_itenty_proof",
    "fieldtype": "Attach",
-   "label": "Xerox Copy of any itenty Proof",
+   "label": "Xerox Copy of any identity Proof",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
@@ -340,11 +347,35 @@
    "fieldtype": "Data",
    "label": "Payment Status",
    "read_only": 1
+  },
+  {
+   "fieldname": "refund_of_hospital_due_paid_in_excess_section",
+   "fieldtype": "Section Break",
+   "label": "Refund of Hospital Due paid in Excess"
+  },
+  {
+   "fieldname": "attachment_doument_section",
+   "fieldtype": "Section Break",
+   "label": "Attachment Doument"
+  },
+  {
+   "fieldname": "column_break_45",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "self_declaration_form",
+   "fieldtype": "Attach",
+   "label": "Self Declaration Form"
+  },
+  {
+   "fieldname": "final_bill",
+   "fieldtype": "Attach",
+   "label": "Final Bill"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-02 12:37:04.827597",
+ "modified": "2022-12-02 17:40:11.502057",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",

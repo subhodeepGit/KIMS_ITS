@@ -43,3 +43,9 @@ frappe.ui.form.on('Patient Refund', "ip__uhid_no", function(frm) {
 	frm.set_value("patient_ip_no",ip);
 	refresh_field("patient_ip_no");
 });
+frappe.ui.form.on('Patient Refund', "name_of_the_patient", function(frm) {
+	var name_patient = "";
+	name_patient = cur_frm.doc.name_of_the_patient;
+	frm.set_value("patients_name",name_patient);
+	refresh_field("patients_name");
+});
