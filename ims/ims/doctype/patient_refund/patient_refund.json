@@ -16,6 +16,7 @@
   "less__approval_approval_letter_to_be_attached",
   "approval_attachment",
   "document_status",
+  "payment_status",
   "column_break_5",
   "cash_refund",
   "less__non_admissible_item__discount_amount",
@@ -83,7 +84,6 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Total Bill",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -334,11 +334,17 @@
    "fieldtype": "Data",
    "label": "Cash Receipt No.",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "label": "Payment Status",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-14 18:17:41.621654",
+ "modified": "2022-12-02 12:37:04.827597",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
