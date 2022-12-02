@@ -10,6 +10,7 @@
   "company",
   "document_status",
   "column_break_3",
+  "date",
   "account_doctype_section",
   "account_reference_no",
   "account_post_date",
@@ -81,7 +82,7 @@
    "reqd": 1
   },
   {
-   "fetch_from": "paying_bank.bank_name",
+   "fetch_from": "paying_bank.bank_ac_no",
    "fieldname": "bank_ac_no",
    "fieldtype": "Data",
    "label": "Bank A/C No",
@@ -227,11 +228,18 @@
    "fieldtype": "Table",
    "label": "Vendor Wise Payment Details",
    "options": "Vendor Wise Payment Details"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-30 16:14:41.776827",
+ "modified": "2022-12-01 16:46:39.291779",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",
