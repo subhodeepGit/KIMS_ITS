@@ -6,6 +6,7 @@ from frappe.model.document import Document
 
 class Employee(Document):
 	def validate(self):
+		mand(self)
 		self.enabled_emp()
 		self.set_employee_name()
 		if self.new_password!=None:
@@ -113,3 +114,7 @@ def new_email(self):
 			user.save()
 			self.db_set("user",user.name)
 
+def mand(self):
+	if self.ifsc_code!="":
+		if self.branch_name==None:
+			frappe.throw("IFSC Code is not Correct")

@@ -33,6 +33,7 @@
   "column_break_25",
   "ifsc_code",
   "bank_address",
+  "bank_addresss",
   "more_information_section",
   "website",
   "supplier_details",
@@ -169,14 +170,12 @@
   {
    "fieldname": "bank_ac_no",
    "fieldtype": "Data",
-   "label": "Bank A/C No.",
-   "reqd": 1
+   "label": "Bank A/C No."
   },
   {
    "fieldname": "ifsc_code",
    "fieldtype": "Data",
-   "label": "IFSC Code",
-   "reqd": 1
+   "label": "IFSC Code"
   },
   {
    "fieldname": "column_break_25",
@@ -186,13 +185,13 @@
    "fieldname": "bank_name",
    "fieldtype": "Data",
    "label": "Bank Name",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "bank_address",
    "fieldtype": "Data",
    "label": "Branch",
-   "reqd": 1
+   "read_only": 1
   },
   {
    "default": "1",
@@ -203,8 +202,7 @@
   {
    "fieldname": "account_holder_name",
    "fieldtype": "Data",
-   "label": "Account Holder Name",
-   "reqd": 1
+   "label": "Account Holder Name"
   },
   {
    "default": "'NA'",
@@ -216,11 +214,17 @@
    "fieldname": "sap__henai_vendor_code",
    "fieldtype": "Data",
    "label": "SAP / HENAI Vendor Code"
+  },
+  {
+   "fieldname": "bank_addresss",
+   "fieldtype": "Data",
+   "label": "Bank Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-29 10:24:20.068822",
+ "modified": "2022-12-02 17:33:38.814403",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Supplier",
