@@ -118,3 +118,6 @@ def mand(self):
 	if self.ifsc_code!="":
 		if self.branch_name==None:
 			frappe.throw("IFSC Code is not Correct")
+	if self.bank_ac_no!="":
+		if self.ifsc_code=="":
+			frappe.throw("IFSC Code is Required")
