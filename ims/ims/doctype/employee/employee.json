@@ -120,7 +120,8 @@
    "fieldname": "employee_number",
    "fieldtype": "Data",
    "label": "Employee Number",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "emergency_contact_section",
@@ -289,7 +290,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-30 16:17:34.582136",
+ "modified": "2022-12-02 11:39:14.153965",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",

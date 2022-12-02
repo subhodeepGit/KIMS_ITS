@@ -232,3 +232,8 @@ def mand(self):
 			frappe.throw("Note Sheet Attachment	is mandatory")
 		if self.contact_person==None or self.contact_person=="":
 			frappe.throw("Contact Person is mandatory")
+	if self.workflow_state=="Payment Sheet prepared":
+		if self.audit_reference_no==None or self.audit_reference_no=="":
+			frappe.throw("Audit Reference No is mandatory")
+		if self.audit_posting_date==None or self.audit_posting_date=="":
+			frappe.throw("Audit Posting Date is mandatory")

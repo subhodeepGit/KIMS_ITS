@@ -47,17 +47,25 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.set_df_property("paying_bank",'read_only', 1)
 			frm.set_df_property("account_reference_no",'read_only', 1)
 			frm.set_df_property("account_post_date",'read_only', 1)
-			frm.set_df_property("audit_reference_no",'read_only', 1)
-			frm.set_df_property("audit_posting_date",'read_only', 1)
+			// frm.set_df_property("audit_reference_no",'read_only', 1)
+			// frm.set_df_property("audit_posting_date",'read_only', 1)
 	}
 		else{
 			frm.set_df_property("company",'read_only', 0)
 			frm.set_df_property("paying_bank",'read_only', 0)
 			frm.set_df_property("account_reference_no",'read_only', 0)
 			frm.set_df_property("account_post_date",'read_only', 0)
-			frm.set_df_property("audit_reference_no",'read_only', 0)
-			frm.set_df_property("audit_posting_date",'read_only', 0)
+			// frm.set_df_property("audit_reference_no",'read_only', 0)
+			// frm.set_df_property("audit_posting_date",'read_only', 0)
 	}
+	if(frm.doc.workflow_state!="Approved by Accounts Head(CFO)"){
+		frm.set_df_property("audit_reference_no",'read_only', 1)
+		frm.set_df_property("audit_posting_date",'read_only', 1)
+}
+	else{
+		frm.set_df_property("audit_reference_no",'read_only', 0)
+		frm.set_df_property("audit_posting_date",'read_only', 0)
+}
 		if(frm.doc.workflow_state!="Cheque Attachment"){
 			frm.set_df_property("cheque_no",'read_only', 1)
 			frm.set_df_property("cheque_date",'read_only', 1)
@@ -93,6 +101,14 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.set_df_property("cheque_attachment",'reqd', 0)
 			frm.set_df_property("note_sheet_attachment",'reqd', 0)
 			frm.set_df_property("contact_person",'reqd', 0)
+		}
+		if(frm.doc.workflow_state=="Approved by Accounts Head(CFO)"){
+			frm.set_df_property("audit_reference_no",'reqd', 1)
+			frm.set_df_property("audit_posting_date",'reqd', 1)
+		}
+		else{
+			frm.set_df_property("audit_reference_no",'reqd', 0)
+			frm.set_df_property("audit_posting_date",'reqd', 0)
 		}
 }
 });
