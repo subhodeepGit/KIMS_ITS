@@ -42,13 +42,21 @@ frappe.ui.form.on('Patient Refund', "ip__uhid_no", function(frm) {
 	ip = cur_frm.doc.ip__uhid_no;
 	frm.set_value("patient_ip_no",ip);
 	refresh_field("patient_ip_no");
+	frm.set_value("data_61",ip);
+	refresh_field("data_61");
 });
 frappe.ui.form.on('Patient Refund', "name_of_the_patient", function(frm) {
 	var name_patient = "";
 	name_patient = cur_frm.doc.name_of_the_patient;
 	frm.set_value("patients_name",name_patient);
 	refresh_field("patients_name");
+	frm.set_value("patients_name_self",name_patient);
+	refresh_field("patients_name_self");
+	frm.set_value("data_62",name_patient);
+	refresh_field("data_62");
 });
+
+
 frappe.ui.form.on('Patient Refund', {
 	ifsc_code: function(frm) {
 		frappe.call({
