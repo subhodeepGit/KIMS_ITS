@@ -286,46 +286,9 @@ frappe.ui.form.on('Patient Refund', {
 					frm.set_df_property("ifsc_code",'read_only', 1)
 					frm.set_df_property("account_no",'read_only', 1)
 				}
-				// alert(frm.doc.workflow_state)
 				if (frm.doc.workflow_state=="Passed for Payment"){
 					frm.set_df_property("total_bill",'read_only', 1)
 				}
-				// if (frm.doc.workflow_state=="Approved by Director, Administration"){
-				// 	frm.set_df_property("audit_ref_no", "reqd", 1);
-				// 	frm.set_df_property("today_date", "reqd", 1);
-				// 	frm.set_df_property("audit_ref_no",'read_only', 0)
-				// 	frm.set_df_property("today_date",'read_only', 0)
-				// }
-				// else {
-				// 	frm.set_df_property("audit_ref_no",'read_only', 1)
-				// 	frm.set_df_property("today_date",'read_only', 1)
-				// }
-				// if (frm.doc.workflow_state=="Journal Entry by Account Dept."){
-				// 	frm.set_df_property("profit_center",'read_only', 0)
-				// 	frm.set_df_property("document_number",'read_only', 0)
-				// 	frm.set_df_property("ref_no",'read_only', 0)
-				// 	frm.set_df_property("document_date",'read_only', 0)
-				// 	frm.set_df_property("attach_journal_voucher",'read_only', 0)
-				// 	frm.set_df_property("profit_center",'reqd', 1)
-				// 	frm.set_df_property("document_number",'reqd', 1)
-				// 	frm.set_df_property("ref_no",'reqd', 1)
-				// 	frm.set_df_property("document_date",'reqd', 1)
-				// 	frm.set_df_property("attach_journal_voucher",'reqd', 1)
-				// }
-				// else{
-				// 	frm.set_df_property("profit_center",'read_only', 1)
-				// 	frm.set_df_property("document_number",'read_only', 1)
-				// 	frm.set_df_property("ref_no",'read_only', 1)
-				// 	frm.set_df_property("document_date",'read_only', 1)
-				// 	frm.set_df_property("attach_journal_voucher",'read_only', 1)
-				// }
-				// eval:(doc.workflow_state=="Approved by Director, Administration");/
-				// eval:(doc.workflow_state=="Approved by Director, Administration");today_dateToday
-				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
-				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
-// 				eval:(doc.workflow_state=="Approved by Director, Administration") || (doc.workflow_state=="Bill Received by Audit") || (doc.workflow_state=="Approved by Audit User") || (doc.workflow_state=="Approved by Pro VC") || (doc.workflow_state=="Journal Entry by Account Dept.") || (doc.workflow_state=="Passed for Payment")
-				// || (doc.workflow_state=="Approved by Auditor(Audit Verification)")
-				// eval:(doc.workflow_state=="Journal Entry by Account Dept.") || (doc.workflow_state=="Passed for Payment");
 
 			}
 		},
