@@ -8,7 +8,7 @@ from frappe import utils
 
 class PatientRefund(Document):
 	def validate(self):
-		mand(self)
+		# mand(self)
 		mandatory_check(self)
 		# self.net_refundable_in_figures=(self.amount_deposited_by_patient - self.approval_of_tpa__insurance__corporate__ostf - self.cash_refund - self.total_bill - self.approval_of_tpa__insurance__corporate__ostf - self.less__non_admissible_item__discount_amount)
 		self.net_refundable_in_words = money_in_words(self.net_refundable_in_figures)
@@ -136,33 +136,13 @@ class PatientRefund(Document):
 
 
 def mandatory_check(self):
-	if self.net_refundable_in_figures<=0:
-		frappe.throw("Net Refundable should more the Zerro.")
-
-	# if self.workflow_state=="Verify and Save":
-	# 	count=0
-	# 	for t in self.get("details_of_invoices_credit_note_and_po"):
-	# 		count=count+1
-	# 		print(t.po_attachment)
-	# 		if t.po_attachment!=1: 
-	# 			frappe.throw("PO Attachment	is mandatory in row on %s"%(count))
-	
-	# if self.workflow_state=="Bill Received by Audit" and (self.audit_ref_no==None or self.audit_ref_no==""): 
-	# 	frappe.throw("Audit Ref No.	is mandatory")
-
-	# if self.workflow_state=="Passed for Payment":
-	# 	if self.profit_center==None or self.profit_center=="":
-	# 		frappe.throw("Profit Center	is mandatory")
-	# 	if self.document_number==None or self.document_number=="":
-	# 		frappe.throw("Document Number	is mandatory")
-	# 	if self.ref_no==None or self.ref_no=="":
-	# 		frappe.throw("Reference Number is mandatory")
-	# 	if self.document_date==None or self.document_date=="":
-	# 		frappe.throw("Document Date	is mandatory")
-	# 	if self.attach_journal_voucher==None or self.attach_journal_voucher=="":
-	# 		frappe.throw("Attach Journal Voucher is mandatory")	
-
-def mand(self):
 	if self.ifsc_code!="":
 		if self.branch==None:
 			frappe.throw("IFSC Code is not Correct")
+	if self.net_refundable_in_figures<=0:
+		frappe.throw("Net Refundable should more the Zerro.")	
+
+# def mand(self):
+# 	if self.ifsc_code!="":
+# 		if self.branch==None:
+# 			frappe.throw("IFSC Code is not Correct")
