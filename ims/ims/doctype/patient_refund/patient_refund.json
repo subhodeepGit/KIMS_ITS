@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "refund_of_hospital_due_paid_in_excess_section",
+  "company",
   "name_of_the_patient",
   "ip__uhid_no",
   "department",
@@ -93,7 +94,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Name of the Patient",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -101,7 +101,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "IP / UHID No.",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -110,7 +109,6 @@
    "in_list_view": 1,
    "label": "Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -146,8 +144,7 @@
   {
    "fieldname": "approval_attachment",
    "fieldtype": "Attach",
-   "label": "Approval Attachment",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Approval Attachment"
   },
   {
    "default": "0",
@@ -217,85 +214,73 @@
   {
    "fieldname": "amount_deposited",
    "fieldtype": "Currency",
-   "label": "Amount Deposited",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Amount Deposited"
   },
   {
    "fieldname": "amount_deposited_through",
    "fieldtype": "Data",
-   "label": "Amount Deposited Through",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Amount Deposited Through"
   },
   {
    "fieldname": "date_of_submission_of_fees",
    "fieldtype": "Date",
-   "label": "Date of Submission of Fees",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Date of Submission of Fee"
   },
   {
    "fieldname": "date_of_cancellation",
    "fieldtype": "Date",
-   "label": "Date of Cancellation",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Date of Cancellation"
   },
   {
    "fieldname": "reason_of_cancellation",
    "fieldtype": "Data",
-   "label": "Reason of Cancellation",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Reason of Cancellation"
   },
   {
    "fieldname": "account_type",
    "fieldtype": "Data",
-   "label": "Account Type",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Account Type"
   },
   {
    "fieldname": "account_holder_name",
    "fieldtype": "Data",
    "label": "Account Holder Name",
    "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "joint_account_holder_name",
    "fieldtype": "Data",
-   "label": "Joint Account Holder Name",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Joint Account Holder Name"
   },
   {
    "fieldname": "ifsc_code",
    "fieldtype": "Data",
    "label": "IFSC Code",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "account_no",
    "fieldtype": "Data",
    "label": "Account No",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "account_holder_relation_with_the_patient",
    "fieldtype": "Data",
    "label": "Account Holder Relation With The Patient",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "doc_attached",
    "fieldtype": "Attach",
-   "label": "Documents to be attached with Cancellation / Refund Application form",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Documents to be attached with Cancellation / Refund Application for",
+   "reqd": 1
   },
   {
    "fieldname": "xerox_copy_of_any_itenty_proof",
    "fieldtype": "Attach",
    "label": "Xerox Copy of any identity Proof",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -320,8 +305,7 @@
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
-   "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "read_only": 1
   },
   {
    "fieldname": "date_of_transaction",
@@ -481,7 +465,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "0",
    "fieldname": "refund_amount",
    "fieldtype": "Currency",
    "label": "Refund Amount",
@@ -511,7 +494,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "0",
    "fieldname": "total_amount_refunded",
    "fieldtype": "Currency",
    "label": "Total Amount Refunded",
@@ -570,11 +552,18 @@
    "fieldname": "authorized_signature_section",
    "fieldtype": "Section Break",
    "label": "Authorized Signature"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-03 22:37:07.425125",
+ "modified": "2022-12-04 21:58:45.409763",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
