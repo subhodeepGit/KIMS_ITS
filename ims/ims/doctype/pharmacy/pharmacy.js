@@ -1,12 +1,12 @@
 // Copyright (c) 2022, SOUL and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Pharmacy', {
-	refresh: function(frm) {
-		const collection = frm.getElementsByClassName("btn btn-default btn-sm ellipsis");
-		console.log(collection);
-	}
-});
+// frappe.ui.form.on('Pharmacy', {
+// 	refresh: function(frm) {
+// 		const collection = frm.getElementsByClassName("btn btn-default btn-sm ellipsis");
+// 		console.log("collection",collection);
+// 	}
+// });
 frappe.ui.form.on('Enclosed Bills', {	
 	invoice_amount:function(frm, cdt, cdn){	
 	var d = locals[cdt][cdn];
@@ -159,3 +159,70 @@ frappe.ui.form.on("Pharmacy", {
 
 	}
 });
+
+
+frappe.ui.form.on('Pharmacy', {
+	refresh: function(frm) {
+		frappe.call({
+            method: "ims.ims.doctype.pharmacy.pharmacy.get_table_attachments",
+            callback: function(r) { 
+                if (r.message){
+
+					frm.fields_dict["details_of_enclosed_bills"].grid.add_custom_button(__('Download Attachments'), 
+					function() {
+						const attachment_map = r.message
+						
+						var urls = [];
+						let selected = frm.get_selected();
+						let sel = selected["details_of_enclosed_bills"];
+						for (var i = 0; i < cur_frm.doc.details_of_enclosed_bills.length; i++) {
+							for (var j = 0; j < sel.length; j++) {
+								if(sel[j]==cur_frm.doc.details_of_enclosed_bills[i].name){
+									var att1 = attachment_map;
+									var iter1 = att1.values();
+									for (let ele1 of iter1) {
+										var att_fld=ele1['att_fieldname'];
+										var chk_fld=ele1['chk_fieldname'];
+										var att_fld_data=cur_frm.doc.details_of_enclosed_bills[i][att_fld];
+										var chk_fld_data=cur_frm.doc.details_of_enclosed_bills[i][chk_fld];
+										var idx_data=cur_frm.doc.details_of_enclosed_bills[i].idx;
+										var rename_data = att_fld + idx_data;
+										if(chk_fld_data == 1) {
+											var url_obj = {dwnld : att_fld_data, rename : rename_data};
+											urls.push(url_obj);
+										}
+
+									}
+								}
+							}
+						}
+						// console.log(urls);
+
+						var interval = setInterval(download, 400, urls);
+
+						function download(urls) {
+							let url = new Array();
+							url = urls.pop();
+
+							var a = document.createElement("a");
+							a.download =  url['dwnld'].split('/').pop();
+							a.setAttribute('download', url['rename']);
+							document.body.appendChild(a);
+							a.setAttribute('href', url['dwnld']);
+							document.body.removeChild(a);
+							a.click();
+
+							if (urls.length == 0) {
+								clearInterval(interval);
+							}
+						}
+
+
+						
+					});
+				frm.fields_dict["details_of_enclosed_bills"].grid.grid_buttons.find('.btn-custom').removeClass('btn-default').addClass('btn-primary');
+            	} 
+			}
+        })
+	},
+});	
