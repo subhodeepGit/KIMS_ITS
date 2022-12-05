@@ -133,7 +133,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			{fieldtype:"Date", label: __("To Date"), fieldname:"to_posting_date", default:today},	
 			{fieldtype:"Section Break", label: __("Type of Invoice")},
 			{fieldtype:"Select", label: __("Invoice"),
-				fieldname:"invoice", options: ["","PO Consumable","PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract"]},
+				fieldname:"invoice", options: ["","PO Consumable","PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract","Patient Refund"]},
 			{fieldtype:"Section Break", label: __("Type of Invoice")},
 			{fieldtype:"Select", label: __("Priority"),
 				fieldname:"priority", options: ["","Urgent","Normal","High Priority","Low Priority"]},

@@ -238,6 +238,7 @@
    "label": "Document Date"
   },
   {
+   "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
@@ -286,7 +287,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-28 11:48:10.313047",
+ "modified": "2022-12-05 22:11:01.097246",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
