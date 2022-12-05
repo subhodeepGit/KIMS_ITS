@@ -329,7 +329,7 @@ frappe.ui.form.on('PO Consumable', {
 								}
 							}
 						}
-						console.log(urls);
+						// console.log(urls);
 
 						var interval = setInterval(download, 400, urls);
 

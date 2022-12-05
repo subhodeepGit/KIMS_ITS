@@ -178,7 +178,8 @@ class POConsumable(Document):
 @frappe.whitelist()
 def clearance_period(supplier):
 	data=frappe.get_all("Supplier",{"name":supplier},["amount_clearance_period_in_days"])
-	return data[0]['amount_clearance_period_in_days']
+	if data:
+		return data[0]['amount_clearance_period_in_days']
 
 def mandatory_check(self):
 	if self.workflow_state=="Verify and Save":
@@ -207,11 +208,8 @@ def mandatory_check(self):
 
 @frappe.whitelist()
 def get_table_attachments():
-	attachment_check = []
 	attachments = []
-	for t in frappe.get_all("DocField",{"parent": "Details of Invoices and PO","fieldtype":"Check"},["fieldname",]):
-		attachment_check.append(t['fieldname'])
-	
+
 	for t in frappe.get_all("DocField",{"parent": "Details of Invoices and PO","fieldtype":"Attach"},["fieldname","mandatory_depends_on"]):
 		if t['mandatory_depends_on']!=None or t['mandatory_depends_on']!="":
 			a=t['mandatory_depends_on'].split(":")

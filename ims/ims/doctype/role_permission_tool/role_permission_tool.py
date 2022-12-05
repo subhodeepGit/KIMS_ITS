@@ -281,6 +281,8 @@ def workflow_creation(self):
 						"grouping_of_designation":grouping_of_designation
 					})
 				############################# pass for payment
+				print("\n\n\n\n")
+				print(name)
 				if self.doctype_name=="Batch Payment Process":
 					name="Payment Done"
 					update_value="Payment Done"
@@ -440,9 +442,9 @@ def workflow_creation(self):
 					name=t.description_of_state
 				allowed=t.designation
 				if self.doctype_name=="Batch Payment Process":
-					name="Payment Done"
+					next_state="Payment Done"
 				else:	
-					name="Passed for Payment"
+					next_state="Passed for Payment"
 				
 				if t.approve==1:	
 					state=name

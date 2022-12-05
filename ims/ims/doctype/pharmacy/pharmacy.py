@@ -201,3 +201,19 @@ def mandatory_check(self):
 			frappe.throw("Document Date	is mandatory")
 		if self.attach_journal_voucher==None or self.attach_journal_voucher=="":
 			frappe.throw("Attach Journal Voucher is mandatory")
+
+
+@frappe.whitelist()
+def get_table_attachments():
+	attachments = []
+
+	for t in frappe.get_all("DocField",{"parent": "Enclosed Bills","fieldtype":"Attach"},["fieldname","mandatory_depends_on"]):
+		if t['mandatory_depends_on']!=None or t['mandatory_depends_on']!="":
+			a=t['mandatory_depends_on'].split(":")
+			a=a[1].split(".")
+			a=a[1].split("=")
+			flag={}
+			flag['att_fieldname']=t['fieldname']
+			flag['chk_fieldname']=a[0]
+			attachments.append(flag)	
+	return attachments
