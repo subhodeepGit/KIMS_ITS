@@ -207,11 +207,8 @@ def mandatory_check(self):
 
 @frappe.whitelist()
 def get_table_attachments():
-	# attachment_check = []
 	attachments = []
-	# for t in frappe.get_all("DocField",{"parent": "Details of Invoices and PO","fieldtype":"Check"},["fieldname"]):
-	# 	attachment_check.append(t['fieldname'])
-	
+
 	for t in frappe.get_all("DocField",{"parent": "Details of Invoices and PO","fieldtype":"Attach"},["fieldname","mandatory_depends_on"]):
 		if t['mandatory_depends_on']!=None or t['mandatory_depends_on']!="":
 			a=t['mandatory_depends_on'].split(":")
