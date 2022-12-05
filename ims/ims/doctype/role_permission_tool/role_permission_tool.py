@@ -36,7 +36,7 @@ def role_permissions_manager_cration(self):
 	pre_role_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":self.doctype_name},["name",'role'])
 	for t in pre_role_permissions_manager_info: 		
 		frappe.delete_doc("Custom DocPerm",t["name"])
-	if self.doctype_name!="Patient Refund":	
+	if self.doctype_name!="Patient Refund" and self.doctype_name!="Batch Payment Process":	
 		pre_role_3d_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification"},["name",'role'])
 		for t in pre_role_3d_permissions_manager_info: 		
 			frappe.delete_doc("Custom DocPerm",t["name"])	
@@ -67,7 +67,7 @@ def role_permissions_manager_cration(self):
 			role_permissions_manager_doc.save()
 			frappe.db.sql(""" Update `tabCustom DocPerm` set import=1 where name='%s' """%(role_permissions_manager_doc.name))
 
-		if self.doctype_name!="Patient Refund":
+		if self.doctype_name!="Patient Refund" and self.doctype_name!="Batch Payment Process":
 			role_3rd_party_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification","role":t.designation})
 			if not role_3rd_party_permissions_manager_info:
 				role_3rd_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
@@ -140,6 +140,20 @@ def workflow_state_cration(self):
 		workflow_state=frappe.get_doc("Workflow State",list_info[0])
 		workflow_state.style="Success"
 		workflow_state.save()
+		workflow_state_info=frappe.get_all("Workflow State",{"name":list_info[0]},['name','style'])
+
+	list_info=["Payment Done"]
+	workflow_state_info=frappe.get_all("Workflow State",{"name":list_info[0]},['name','style'])	
+	if not workflow_state_info:
+		workflow_state=frappe.new_doc("Workflow State")
+		workflow_state.name=list_info[0]
+		workflow_state.workflow_state_name=list_info[0]
+		workflow_state.style="Success"
+		workflow_state.save()
+	else:
+		workflow_state=frappe.get_doc("Workflow State",list_info[0])
+		workflow_state.style="Success"
+		workflow_state.save()	
 		
 
 
@@ -267,8 +281,12 @@ def workflow_creation(self):
 						"grouping_of_designation":grouping_of_designation
 					})
 				############################# pass for payment
-				name="Passed for Payment"
-				update_value="Passed for Payment"
+				if self.doctype_name=="Batch Payment Process":
+					name="Payment Done"
+					update_value="Payment Done"
+				else:	
+					name="Passed for Payment"
+					update_value="Passed for Payment"
 				workflow_doc.append("states",{
 						"state":name,
 						"doc_status":0,
@@ -421,7 +439,10 @@ def workflow_creation(self):
 				else:
 					name=t.description_of_state
 				allowed=t.designation
-				next_state="Passed for Payment"
+				if self.doctype_name=="Batch Payment Process":
+					name="Payment Done"
+				else:	
+					name="Passed for Payment"
 				
 				if t.approve==1:	
 					state=name
