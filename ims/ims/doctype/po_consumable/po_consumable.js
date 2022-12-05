@@ -311,27 +311,21 @@ frappe.ui.form.on('PO Consumable', {
 						for (var i = 0; i < cur_frm.doc.details_of_invoices_and_po.length; i++) {
 							for (var j = 0; j < sel.length; j++) {
 								if(sel[j]==cur_frm.doc.details_of_invoices_and_po[i].name){
-									console.log(cur_frm.doc.details_of_invoices_and_po[i].name)
 									var att1 = attachment_map;
 									var iter1 = att1.values();
 									for (let ele1 of iter1) {
-										// console.log(ele1)
-										// console.log(ele1['att_fieldname'])
-										// console.log(ele1['chk_fieldname'])
-										var att_fld=ele1['att_fieldname']
-										var chk_fld=ele1['chk_fieldname']
+										var att_fld=ele1['att_fieldname'];
+										var chk_fld=ele1['chk_fieldname'];
 										var att_fld_data=cur_frm.doc.details_of_invoices_and_po[i][att_fld];
 										var chk_fld_data=cur_frm.doc.details_of_invoices_and_po[i][chk_fld];
-
+										var idx_data=cur_frm.doc.details_of_invoices_and_po[i].idx;
+										var rename_data = att_fld + idx_data;
 										if(chk_fld_data == 1) {
-											console.log(att_fld_data)
-											console.log(chk_fld_data)
-											urls.push(att_fld_data);
+											var url_obj = {dwnld : att_fld_data, rename : rename_data};
+											urls.push(url_obj);
 										}
 
 									}
-									// console.log(attachment_map.att_fieldname)
-									// console.log(attachment_map.chk_fieldname)
 								}
 							}
 						}
@@ -344,11 +338,10 @@ frappe.ui.form.on('PO Consumable', {
 							url = urls.pop();
 
 							var a = document.createElement("a");
-							a.download = url.split('/').pop();
+							a.download =  url['dwnld'].split('/').pop();
+							a.setAttribute('download', url['rename']);
 							document.body.appendChild(a);
-							a.setAttribute('href', url);
-							// a.href = url;
-							// a.setAttribute('target', '_blank');
+							a.setAttribute('href', url['dwnld']);
 							document.body.removeChild(a);
 							a.click();
 
