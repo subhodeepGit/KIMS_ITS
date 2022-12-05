@@ -13,7 +13,9 @@ class PatientRefund(Document):
 		# self.net_refundable_in_figures=(self.amount_deposited_by_patient - self.approval_of_tpa__insurance__corporate__ostf - self.cash_refund - self.total_bill - self.approval_of_tpa__insurance__corporate__ostf - self.less__non_admissible_item__discount_amount)
 		self.net_refundable_in_words = money_in_words(self.net_refundable_in_figures)
 		session_user = frappe.session.user
-		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
+		if self.workflow_state!="Rejected and Transfer":
+			if 	approval_status=="Approved by Accounts Clerk":
+				self.payment_status="Passed for Payment"	
 			if session_user:
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 				if emp_data:
@@ -100,10 +102,7 @@ class PatientRefund(Document):
 								t.approval_status=approval_status
 								t.previous_status=previous_status
 								t.grouping_of_designation=grouping_of_designation
-								t.single_user=single_user
-
-					if 	approval_status=="Approved by Accounts Clerk":
-						self.payment_status="Passed for Payment"				
+								t.single_user=single_user			
 
 			else:
 				frappe.throw("Employee not found")
