@@ -43,7 +43,9 @@ class NonPONonContract(Document):
 					t.status_of_verification="Forward For Verification"
 					t.document_name=doc_name
 		session_user = frappe.session.user
-		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
+		if self.workflow_state!="Rejected and Transfer":
+			if 	approval_status=="Passed for Payment":
+				self.payment_status="Passed for Payment"	
 			if session_user:
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 				if emp_data:
@@ -131,9 +133,7 @@ class NonPONonContract(Document):
 								t.approval_status=approval_status
 								t.previous_status=previous_status
 								t.grouping_of_designation=grouping_of_designation
-								t.single_user=single_user
-					if 	approval_status=="Journal Entry by Account Dept.":
-						self.payment_status="Passed for Payment"			
+								t.single_user=single_user		
 
 			else:
 				frappe.throw("Employee not found")		
