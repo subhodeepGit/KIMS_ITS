@@ -115,9 +115,9 @@ def new_email(self):
 			self.db_set("user",user.name)
 
 def mand(self):
-	if self.ifsc_code!="":
+	if self.ifsc_code!="" and self.ifsc_code!=None:
 		if self.branch_name==None:
 			frappe.throw("IFSC Code is not Correct")
-	if self.bank_ac_no!="":
+	if self.bank_ac_no!="" and self.bank_ac_no!=None:
 		if self.ifsc_code=="":
 			frappe.throw("IFSC Code is Required")
