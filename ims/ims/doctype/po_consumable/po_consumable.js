@@ -166,7 +166,8 @@ frappe.ui.form.on("PO Consumable", {
 			frm.set_df_property("third_party_verification", "cannot_add_rows", true);
 			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
 		}
-	}
+	},
+
 });
 
 // frappe.ui.form.on('PO Consumable', {
@@ -198,3 +199,163 @@ frappe.ui.form.on('PO Consumable', {
 	}
 });
 
+// frappe.ui.form.on('PO Consumable', {
+//     refresh: function(frm) {
+// 		frm.fields_dict["details_of_invoices_and_po"].grid.add_custom_button(__('Download Attachments'), 
+// 		function() {
+// 			var urls = [];
+// 			let selected = frm.get_selected();
+// 			// alert(JSON.stringify(selected));
+// 			let sel = selected["details_of_invoices_and_po"];
+// 			// alert(sel);
+// 			// code to download selected rows
+// 			for (var i = 0; i < cur_frm.doc.details_of_invoices_and_po.length; i++) {
+// 				// alert(cur_frm.doc.details_of_invoices_and_po[i].name)
+// 				for (var j = 0; j < sel.length; j++) {
+// 					if(sel[j]==cur_frm.doc.details_of_invoices_and_po[i].name){
+// 						// alert(cur_frm.doc.details_of_invoices_and_po[i].name)
+// 						const data = cur_frm.doc.details_of_invoices_and_po[i].invoice_attachment;
+// 						const data1 = cur_frm.doc.details_of_invoices_and_po[i].credit_memo;
+// 						const data2 = cur_frm.doc.details_of_invoices_and_po[i].document_attachment;
+// 						const data3 = cur_frm.doc.details_of_invoices_and_po[i].purchase_received_note_attachment;
+// 						const data4 = cur_frm.doc.details_of_invoices_and_po[i].po_attachment;
+// 						const data5 = cur_frm.doc.details_of_invoices_and_po[i].bill_summary;
+// 						const data6 = cur_frm.doc.details_of_invoices_and_po[i].comparative_statement_attachment;
+// 						const data7 = cur_frm.doc.details_of_invoices_and_po[i].delivery_challan;
+// 						const data8 = cur_frm.doc.details_of_invoices_and_po[i].grn;
+// 						const data9 = cur_frm.doc.details_of_invoices_and_po[i].purchase_notesheet_attachment;
+// 						// const a = document.createElement('a');
+// 						// a.href = data;
+						
+// 						// a.download = data.split('/').pop();
+// 						// document.body.appendChild(a);
+// 						// a.click();
+// 						// document.body.removeChild(a);
+						
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].invoice_attachment_1 == 1){
+// 							urls.push(data);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].credit_memo_attachment == 1){
+// 							urls.push(data1);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].document_attachment_1 == 1){
+// 							urls.push(data2);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].purchase_received_note == 1){
+// 							urls.push(data3);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].po_attachment_attachment == 1){
+// 							urls.push(data4);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].bill_summary_attachment == 1){
+// 							urls.push(data5);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].comparative_statement == 1){
+// 							urls.push(data6);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].delivery_challan_attachment == 1){
+// 							urls.push(data7);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].grn_attachment == 1){
+// 							urls.push(data8);
+// 						}
+// 						if (cur_frm.doc.details_of_invoices_and_po[i].purchase_notesheet == 1){
+// 							urls.push(data9);
+// 						}
+						
+// 					}
+// 				}
+// 				}
+// 				console.log(urls);
+
+// 				var interval = setInterval(download, 400, urls);
+
+// 				function download(urls) {
+// 				var url = urls.pop();
+
+// 				var a = document.createElement("a");
+// 				a.download = url.split('/').pop();
+// 				document.body.appendChild(a);
+// 				a.setAttribute('href', url);
+// 				// a.setAttribute('target', '_blank');
+// 				document.body.removeChild(a);
+// 				a.click();
+
+// 				if (urls.length == 0) {
+// 					clearInterval(interval);
+// 				}
+// 				}
+
+// 		});
+// 	frm.fields_dict["details_of_invoices_and_po"].grid.grid_buttons.find('.btn-custom').removeClass('btn-default').addClass('btn-primary');
+// 	}
+// });
+
+
+
+
+frappe.ui.form.on('PO Consumable', {
+	refresh: function(frm) {
+		frappe.call({
+            method: "ims.ims.doctype.po_consumable.po_consumable.get_table_attachments",
+            callback: function(r) { 
+                if (r.message){
+
+					frm.fields_dict["details_of_invoices_and_po"].grid.add_custom_button(__('Download Attachments'), 
+					function() {
+						const attachment_map = r.message
+						
+						var urls = [];
+						let selected = frm.get_selected();
+						let sel = selected["details_of_invoices_and_po"];
+						for (var i = 0; i < cur_frm.doc.details_of_invoices_and_po.length; i++) {
+							for (var j = 0; j < sel.length; j++) {
+								if(sel[j]==cur_frm.doc.details_of_invoices_and_po[i].name){
+									var att1 = attachment_map;
+									var iter1 = att1.values();
+									for (let ele1 of iter1) {
+										var att_fld=ele1['att_fieldname'];
+										var chk_fld=ele1['chk_fieldname'];
+										var att_fld_data=cur_frm.doc.details_of_invoices_and_po[i][att_fld];
+										var chk_fld_data=cur_frm.doc.details_of_invoices_and_po[i][chk_fld];
+										var idx_data=cur_frm.doc.details_of_invoices_and_po[i].idx;
+										var rename_data = att_fld + idx_data;
+										if(chk_fld_data == 1) {
+											var url_obj = {dwnld : att_fld_data, rename : rename_data};
+											urls.push(url_obj);
+										}
+
+									}
+								}
+							}
+						}
+						console.log(urls);
+
+						var interval = setInterval(download, 400, urls);
+
+						function download(urls) {
+							let url = new Array();
+							url = urls.pop();
+
+							var a = document.createElement("a");
+							a.download =  url['dwnld'].split('/').pop();
+							a.setAttribute('download', url['rename']);
+							document.body.appendChild(a);
+							a.setAttribute('href', url['dwnld']);
+							document.body.removeChild(a);
+							a.click();
+
+							if (urls.length == 0) {
+								clearInterval(interval);
+							}
+						}
+
+
+						
+					});
+				frm.fields_dict["details_of_invoices_and_po"].grid.grid_buttons.find('.btn-custom').removeClass('btn-default').addClass('btn-primary');
+            	} 
+			}
+        })
+	},
+});	

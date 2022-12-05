@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "refund_of_hospital_due_paid_in_excess_section",
+  "company",
   "name_of_the_patient",
   "ip__uhid_no",
   "department",
@@ -38,6 +39,7 @@
   "date_of_submission_of_fees",
   "date_of_cancellation",
   "reason_of_cancellation",
+  "doc_attached",
   "column_break_27",
   "account_type",
   "account_holder_name",
@@ -48,14 +50,42 @@
   "bank_address",
   "account_no",
   "account_holder_relation_with_the_patient",
-  "attachment_doument_section",
-  "doc_attached",
-  "original_money_receipt",
-  "xerox_copy_of_any_itenty_proof",
+  "self_declarion_section_section",
+  "concern_person",
+  "relationship",
   "self_declaration_form",
-  "column_break_45",
+  "column_break_46",
+  "patients_name_self",
+  "date_of_signature",
+  "attachment_doument_section",
+  "bill_no",
+  "bill_date",
+  "column_break_52",
+  "data_61",
   "final_bill",
-  "section_break_36",
+  "refunds_and_payments_section_section",
+  "date_of_refund",
+  "refund_no",
+  "column_break_58",
+  "refund_amount",
+  "refund_sheet_attachment",
+  "section_break_52",
+  "mrn_no",
+  "data_62",
+  "column_break_65",
+  "total_amount_refunded",
+  "refund_attachment",
+  "insurance_details_section",
+  "type_of_insurance",
+  "approved_amount",
+  "column_break_71",
+  "name_of_the_insurance",
+  "insurance_details_attachment",
+  "id_proof_section_section",
+  "name_of_the_person",
+  "column_break_45",
+  "xerox_copy_of_any_itenty_proof",
+  "authorized_signature_section",
   "authorized_signature"
  ],
  "fields": [
@@ -64,7 +94,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Name of the Patient",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -72,7 +101,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "IP / UHID No.",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -81,7 +109,6 @@
    "in_list_view": 1,
    "label": "Department",
    "options": "Department",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -108,16 +135,16 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "less__approval_approval_letter_to_be_attached",
-   "fieldtype": "Attach",
+   "fieldtype": "Currency",
    "label": "Less : Approval (Approval letter to be attached)",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
    "fieldname": "approval_attachment",
    "fieldtype": "Attach",
-   "label": "Approval Attachment",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Approval Attachment"
   },
   {
    "default": "0",
@@ -187,99 +214,78 @@
   {
    "fieldname": "amount_deposited",
    "fieldtype": "Currency",
-   "label": "Amount Deposited",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Amount Deposited"
   },
   {
    "fieldname": "amount_deposited_through",
    "fieldtype": "Data",
-   "label": "Amount Deposited Through",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Amount Deposited Through"
   },
   {
    "fieldname": "date_of_submission_of_fees",
    "fieldtype": "Date",
-   "label": "Date of Submission of Fees",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Date of Submission of Fee"
   },
   {
    "fieldname": "date_of_cancellation",
    "fieldtype": "Date",
-   "label": "Date of Cancellation",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Date of Cancellation"
   },
   {
    "fieldname": "reason_of_cancellation",
    "fieldtype": "Data",
-   "label": "Reason of Cancellation",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Reason of Cancellation"
   },
   {
    "fieldname": "account_type",
    "fieldtype": "Data",
-   "label": "Account Type",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Account Type"
   },
   {
    "fieldname": "account_holder_name",
    "fieldtype": "Data",
    "label": "Account Holder Name",
    "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "joint_account_holder_name",
    "fieldtype": "Data",
-   "label": "Joint Account Holder Name",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Joint Account Holder Name"
   },
   {
    "fieldname": "ifsc_code",
    "fieldtype": "Data",
    "label": "IFSC Code",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "account_no",
    "fieldtype": "Data",
    "label": "Account No",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "account_holder_relation_with_the_patient",
    "fieldtype": "Data",
    "label": "Account Holder Relation With The Patient",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "doc_attached",
    "fieldtype": "Attach",
-   "label": "Documents to be attached with Cancellation / Refund Application form",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
-  },
-  {
-   "fieldname": "original_money_receipt",
-   "fieldtype": "Attach",
-   "label": "Original Money Receipt",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Documents to be attached with Cancellation / Refund Application for",
+   "reqd": 1
   },
   {
    "fieldname": "xerox_copy_of_any_itenty_proof",
    "fieldtype": "Attach",
    "label": "Xerox Copy of any identity Proof",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "reqd": 1
   },
   {
    "fieldname": "column_break_27",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_36",
-   "fieldtype": "Section Break"
   },
   {
    "fieldname": "authorized_signature",
@@ -299,8 +305,7 @@
    "fieldname": "posting_date",
    "fieldtype": "Date",
    "label": "Posting Date",
-   "read_only": 1,
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "read_only": 1
   },
   {
    "fieldname": "date_of_transaction",
@@ -343,7 +348,7 @@
   {
    "fieldname": "attachment_doument_section",
    "fieldtype": "Section Break",
-   "label": "Attachment Doument"
+   "label": "Final Bill Section"
   },
   {
    "fieldname": "column_break_45",
@@ -357,7 +362,8 @@
   {
    "fieldname": "final_bill",
    "fieldtype": "Attach",
-   "label": "Final Bill"
+   "label": "Final Bill",
+   "reqd": 1
   },
   {
    "fieldname": "bank_address",
@@ -376,11 +382,188 @@
    "fieldtype": "Data",
    "label": "Name of the Bank",
    "read_only": 1
+  },
+  {
+   "fieldname": "self_declarion_section_section",
+   "fieldtype": "Section Break",
+   "label": "Relationship Self Declaration"
+  },
+  {
+   "fieldname": "concern_person",
+   "fieldtype": "Data",
+   "label": "Concern Person"
+  },
+  {
+   "fieldname": "relationship",
+   "fieldtype": "Data",
+   "label": "Relationship"
+  },
+  {
+   "fieldname": "patients_name_self",
+   "fieldtype": "Data",
+   "label": "Patient's Name",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "date_of_signature",
+   "fieldtype": "Date",
+   "label": "Date of Signature"
+  },
+  {
+   "fieldname": "column_break_46",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bill_no",
+   "fieldtype": "Data",
+   "label": "Bill No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bill_date",
+   "fieldtype": "Date",
+   "label": "Bill Date",
+   "reqd": 1
+  },
+  {
+   "description": "Money deposited by the Patient",
+   "fieldname": "section_break_52",
+   "fieldtype": "Section Break",
+   "label": "Refund details Section"
+  },
+  {
+   "fieldname": "column_break_52",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "data_61",
+   "fieldtype": "Data",
+   "label": "Patient IP No",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "refunds_and_payments_section_section",
+   "fieldtype": "Section Break",
+   "label": "Refunds and payments Section"
+  },
+  {
+   "fieldname": "date_of_refund",
+   "fieldtype": "Date",
+   "label": "Date of Refund",
+   "reqd": 1
+  },
+  {
+   "fieldname": "refund_no",
+   "fieldtype": "Data",
+   "label": "Refund No.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_58",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "refund_amount",
+   "fieldtype": "Currency",
+   "label": "Refund Amount",
+   "reqd": 1
+  },
+  {
+   "fieldname": "refund_sheet_attachment",
+   "fieldtype": "Attach",
+   "label": "Refund Sheet Attachment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mrn_no",
+   "fieldtype": "Data",
+   "label": "MRN No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "data_62",
+   "fieldtype": "Data",
+   "label": "Name of the Patient",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_65",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount_refunded",
+   "fieldtype": "Currency",
+   "label": "Total Amount Refunded",
+   "reqd": 1
+  },
+  {
+   "fieldname": "refund_attachment",
+   "fieldtype": "Attach",
+   "label": "Refund Attachment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "insurance_details_section",
+   "fieldtype": "Section Break",
+   "label": "Insurance Details"
+  },
+  {
+   "default": "0",
+   "description": "Amount paid by the insurance provider and not the patient",
+   "fieldname": "approved_amount",
+   "fieldtype": "Currency",
+   "label": "Approved Amount"
+  },
+  {
+   "fieldname": "type_of_insurance",
+   "fieldtype": "Select",
+   "label": "Type of Insurance",
+   "options": "\nNormal Health Insurances\nBiju Swasthya Kalyan Yojana\nCentral Govt. Schemes\nOthers"
+  },
+  {
+   "fieldname": "column_break_71",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "name_of_the_insurance",
+   "fieldtype": "Data",
+   "label": "Name of the Insurance"
+  },
+  {
+   "fieldname": "insurance_details_attachment",
+   "fieldtype": "Attach",
+   "label": "Insurance Details Attachment"
+  },
+  {
+   "fieldname": "id_proof_section_section",
+   "fieldtype": "Section Break",
+   "label": "ID Proof Section"
+  },
+  {
+   "fieldname": "name_of_the_person",
+   "fieldtype": "Data",
+   "label": "Name of the person",
+   "reqd": 1
+  },
+  {
+   "fieldname": "authorized_signature_section",
+   "fieldtype": "Section Break",
+   "label": "Authorized Signature"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-02 18:21:04.546466",
+ "modified": "2022-12-04 21:58:45.409763",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
