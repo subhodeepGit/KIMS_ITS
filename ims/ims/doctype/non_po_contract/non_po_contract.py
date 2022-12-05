@@ -180,12 +180,12 @@ def clearance_period(supplier):
 	return data[0]['amount_clearance_period_in_days']
 
 def mandatory_check(self):
-	if self.workflow_state=="Verify and Save":
-		count=0
-		for t in self.get("details_of_invoices_and_po"):
-			count=count+1
-			# if t.po_attachment_attachment!=1: 
-			# 	frappe.throw("PO Attachment	is mandatory in row on %s"%(count))
+	# if self.workflow_state=="Verify and Save":
+	# 	count=0
+	# 	for t in self.get("details_of_invoices_and_po"):
+	# 		count=count+1
+	# 		# if t.po_attachment_attachment!=1: 
+	# 		# 	frappe.throw("PO Attachment	is mandatory in row on %s"%(count))
 	
 	if self.workflow_state=="Bill Received by Audit" and (self.audit_ref_no==None or self.audit_ref_no==""): 
 		frappe.throw("Audit Ref No.	is mandatory")
