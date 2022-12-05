@@ -51,7 +51,9 @@ class NonPOContract(Document):
 			date=datetime.date.today()
 			self.db_set("today_date",date)
 		session_user = frappe.session.user
-		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
+		if self.workflow_state!="Rejected and Transfer":
+			if 	self.workflow_state=="Passed for Payment":
+				self.payment_status="Passed for Payment"
 			if session_user:
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 				if emp_data:
@@ -143,9 +145,6 @@ class NonPOContract(Document):
 								t.workflow_data= workflow_name
 								t.grouping_of_designation=grouping_of_designation
 								t.single_user=single_user		 
-					if 	approval_status=="Journal Entry by Account Dept.":
-						self.payment_status="Passed for Payment"
-
 			else:
 				frappe.throw("Employee not found")		
 		else:
