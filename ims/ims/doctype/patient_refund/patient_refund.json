@@ -244,7 +244,6 @@
    "fieldname": "account_holder_name",
    "fieldtype": "Data",
    "label": "Account Holder Name",
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -310,7 +309,7 @@
    "fieldname": "date_of_transaction",
    "fieldtype": "Date",
    "label": "Date of Transaction",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "read_only": 1
   },
   {
    "fieldname": "utr_no",
@@ -560,7 +559,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-05 17:49:55.641477",
+ "modified": "2022-12-05 19:58:46.118160",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",

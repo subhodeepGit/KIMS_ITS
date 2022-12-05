@@ -14,7 +14,7 @@ class PatientRefund(Document):
 		self.net_refundable_in_words = money_in_words(self.net_refundable_in_figures)
 		session_user = frappe.session.user
 		if self.workflow_state!="Rejected and Transfer":
-			if 	approval_status=="Approved by Accounts Clerk":
+			if 	self.workflow_state=="Passed for Payment":
 				self.payment_status="Passed for Payment"	
 			if session_user:
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
