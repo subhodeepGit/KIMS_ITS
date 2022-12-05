@@ -8,6 +8,8 @@ from frappe import utils
 
 class PatientRefund(Document):
 	def validate(self):
+		# mand(self)
+		mandatory_check(self)
 		# self.net_refundable_in_figures=(self.amount_deposited_by_patient - self.approval_of_tpa__insurance__corporate__ostf - self.cash_refund - self.total_bill - self.approval_of_tpa__insurance__corporate__ostf - self.less__non_admissible_item__discount_amount)
 		self.net_refundable_in_words = money_in_words(self.net_refundable_in_figures)
 		session_user = frappe.session.user
@@ -21,8 +23,13 @@ class PatientRefund(Document):
 						object_var=t
 
 					if object_var!="":
-						if object_var.approval_status==self.workflow_state :
-							flag="No"
+						if self.workflow_state=="Draft" or self.workflow_state=="Verify and Save" or self.workflow_state=="Cancelled":
+							if (object_var.approval_status==self.workflow_state) and object_var.emp_id==emp_data[0]["name"]:
+								flag="No"
+						else:
+							doc_before_save = self.get_doc_before_save()
+							if doc_before_save.document_status==self.document_status:
+								flag=""
 
 					approval_status=self.workflow_state
 					previous_status=frappe.get_all("Patient Refund",{"name":self.name},["workflow_state"])
@@ -31,6 +38,32 @@ class PatientRefund(Document):
 					else:
 						previous_status=previous_status[0]['workflow_state']
 					
+
+					document_type="Patient Refund"
+					approval_status_print=""
+					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
+					if previous_status=="":
+						approval_status_print=approval_status
+					else:
+						state_info=frappe.get_all("Workflow Document State",{"parent":workflow_name},["state"],order_by="idx asc")
+						count=0
+						for s in state_info:
+							count=count+1
+							if s["state"]==approval_status:
+								break
+
+						pre_flow_list=state_info[count-1]["state"]
+						approval_status_print=pre_flow_list	
+					
+					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status_print},
+												['name',"grouping_of_designation","single_user"])
+						
+
+					grouping_of_designation=grp_info[0]['grouping_of_designation']
+					single_user=grp_info[0]['single_user']
+
+
+
 					date_of_receivable=""
 					for t in self.get("authorized_signature"):
 						date_of_receivable=t.date_of_approval
@@ -51,6 +84,8 @@ class PatientRefund(Document):
 							"approval_status":approval_status,
 							"previous_status":previous_status,
 							"transfer_to":0,
+							"grouping_of_designation":grouping_of_designation,
+							"single_user":single_user   
 						})
 					if flag=="No":
 						for t in self.get("authorized_signature"):
@@ -64,6 +99,11 @@ class PatientRefund(Document):
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
 								t.previous_status=previous_status
+								t.grouping_of_designation=grouping_of_designation
+								t.single_user=single_user
+
+					if 	approval_status=="Approved by Accounts Clerk":
+						self.payment_status="Passed for Payment"				
 
 			else:
 				frappe.throw("Employee not found")
@@ -93,3 +133,16 @@ class PatientRefund(Document):
 						frappe.throw("Employee Not Found")
 				else:
 					frappe.throw("Transfer To Employee Not Selected")
+
+
+def mandatory_check(self):
+	if self.ifsc_code!="":
+		if self.branch==None:
+			frappe.throw("IFSC Code is not Correct")
+	if self.net_refundable_in_figures<=0:
+		frappe.throw("Net Refundable should more the Zerro.")	
+
+# def mand(self):
+# 	if self.ifsc_code!="":
+# 		if self.branch==None:
+# 			frappe.throw("IFSC Code is not Correct")

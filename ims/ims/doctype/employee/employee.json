@@ -47,10 +47,11 @@
   "account_holder_name",
   "bank_ac_no",
   "bank_name",
+  "amount_clearance_period_in_days",
   "column_break_40",
   "ifsc_code",
   "branch_name",
-  "amount_clearance_period_in_days"
+  "bank_address"
  ],
  "fields": [
   {
@@ -120,7 +121,8 @@
    "fieldname": "employee_number",
    "fieldtype": "Data",
    "label": "Employee Number",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "emergency_contact_section",
@@ -265,7 +267,8 @@
   {
    "fieldname": "bank_name",
    "fieldtype": "Data",
-   "label": "Bank Name"
+   "label": "Bank Name",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_40",
@@ -279,17 +282,24 @@
   {
    "fieldname": "branch_name",
    "fieldtype": "Data",
-   "label": "Branch Name"
+   "label": "Branch Name",
+   "read_only": 1
   },
   {
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Data",
    "label": "Amount Clearance Period (in Days)"
+  },
+  {
+   "fieldname": "bank_address",
+   "fieldtype": "Data",
+   "label": "Bank Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-30 16:17:34.582136",
+ "modified": "2022-12-02 17:17:58.214622",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Employee",

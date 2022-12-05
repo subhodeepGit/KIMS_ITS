@@ -36,9 +36,10 @@ def role_permissions_manager_cration(self):
 	pre_role_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":self.doctype_name},["name",'role'])
 	for t in pre_role_permissions_manager_info: 		
 		frappe.delete_doc("Custom DocPerm",t["name"])
-	pre_role_3d_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification"},["name",'role'])
-	for t in pre_role_3d_permissions_manager_info: 		
-		frappe.delete_doc("Custom DocPerm",t["name"])	
+	if self.doctype_name!="Patient Refund":	
+		pre_role_3d_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification"},["name",'role'])
+		for t in pre_role_3d_permissions_manager_info: 		
+			frappe.delete_doc("Custom DocPerm",t["name"])	
 
 	for t in self.get("role_permission_tool_child"):
 		role_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":self.doctype_name,"role":t.designation})
@@ -66,27 +67,28 @@ def role_permissions_manager_cration(self):
 			role_permissions_manager_doc.save()
 			frappe.db.sql(""" Update `tabCustom DocPerm` set import=1 where name='%s' """%(role_permissions_manager_doc.name))
 
-		role_3rd_party_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification","role":t.designation})
-		if not role_3rd_party_permissions_manager_info:
-			role_3rd_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
-			role_3rd_permissions_manager_doc.parent="Third-Party Verification"
-			role_3rd_permissions_manager_doc.role=t.designation
-			role_3rd_permissions_manager_doc.permlevel=0
-			role_3rd_permissions_manager_doc.select=1
-			role_3rd_permissions_manager_doc.read=1
-			role_3rd_permissions_manager_doc.write=0
-			role_3rd_permissions_manager_doc.create=0
-			role_3rd_permissions_manager_doc.delete=0
-			role_3rd_permissions_manager_doc.submit=0
-			role_3rd_permissions_manager_doc.cancel=0
-			role_3rd_permissions_manager_doc.amend=0
-			role_3rd_permissions_manager_doc.report=1
-			role_3rd_permissions_manager_doc.export=0
-			role_3rd_permissions_manager_doc.share=0
-			role_3rd_permissions_manager_doc.print=1
-			role_3rd_permissions_manager_doc.email=0
-			role_3rd_permissions_manager_doc.save()
-			frappe.db.sql(""" Update `tabCustom DocPerm` set import=0 where name='%s' """%(role_permissions_manager_doc.name))	
+		if self.doctype_name!="Patient Refund":
+			role_3rd_party_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Third-Party Verification","role":t.designation})
+			if not role_3rd_party_permissions_manager_info:
+				role_3rd_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
+				role_3rd_permissions_manager_doc.parent="Third-Party Verification"
+				role_3rd_permissions_manager_doc.role=t.designation
+				role_3rd_permissions_manager_doc.permlevel=0
+				role_3rd_permissions_manager_doc.select=1
+				role_3rd_permissions_manager_doc.read=1
+				role_3rd_permissions_manager_doc.write=0
+				role_3rd_permissions_manager_doc.create=0
+				role_3rd_permissions_manager_doc.delete=0
+				role_3rd_permissions_manager_doc.submit=0
+				role_3rd_permissions_manager_doc.cancel=0
+				role_3rd_permissions_manager_doc.amend=0
+				role_3rd_permissions_manager_doc.report=1
+				role_3rd_permissions_manager_doc.export=0
+				role_3rd_permissions_manager_doc.share=0
+				role_3rd_permissions_manager_doc.print=1
+				role_3rd_permissions_manager_doc.email=0
+				role_3rd_permissions_manager_doc.save()
+				frappe.db.sql(""" Update `tabCustom DocPerm` set import=0 where name='%s' """%(role_permissions_manager_doc.name))	
 
 
 

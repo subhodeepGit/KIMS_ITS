@@ -75,7 +75,35 @@ frappe.ui.form.on("Non PO Non Contract", {
 	if (frm.doc.type_of_supplier==""){
 		frm.set_df_property("employee", "hidden", 1);
 		frm.set_df_property("supplier_code", "hidden", 1);
-	}
+		frm.set_df_property("employee_name", "hidden", 1);
+			frm.set_df_property("name_of_supplier", "hidden", 1);
+			frm.set_value('employee', '')
+			frm.set_value('supplier_code', '')
+		}
+		if (frm.doc.type_of_supplier=="Employee"){
+			frm.set_df_property("employee", "hidden", 0);
+			frm.set_df_property("employee", "reqd", 1);
+			frm.set_df_property("supplier_code", "hidden", 1);
+			frm.set_df_property("employee_name", "hidden", 0);
+			frm.set_df_property("name_of_supplier", "hidden", 1);
+			frm.set_value('supplier_code', '')
+			// 
+		}
+		else{
+			frm.set_df_property("employee", "reqd", 0);
+		}
+		if (frm.doc.type_of_supplier=="Supplier"){
+			frm.set_df_property("supplier_code", "hidden", 0);
+			frm.set_df_property("employee", "hidden", 1);
+			frm.set_df_property("supplier_code", "reqd", 1);
+			frm.set_df_property("employee", "hidden", 1);
+			frm.set_df_property("employee_name", "hidden", 1);
+			frm.set_df_property("name_of_supplier", "hidden", 0);
+			frm.set_value('employee', '')
+			}
+		else{
+			frm.set_df_property("supplier_code", "reqd", 0);
+			}
 }
 });
 frappe.ui.form.on("Non PO Non Contract", {
@@ -87,7 +115,6 @@ frappe.ui.form.on("Non PO Non Contract", {
 			frm.set_df_property("name_of_supplier", "hidden", 1);
 			frm.set_value('employee', '')
 			frm.set_value('supplier_code', '')
-
 		}
 		if (frm.doc.type_of_supplier=="Employee"){
 			frm.set_df_property("employee", "hidden", 0);
@@ -96,18 +123,23 @@ frappe.ui.form.on("Non PO Non Contract", {
 			frm.set_df_property("employee_name", "hidden", 0);
 			frm.set_df_property("name_of_supplier", "hidden", 1);
 			frm.set_value('supplier_code', '')
-			frm.set_value("amount_clearance_period_in_days","0")
 			// 
+		}
+		else{
+			frm.set_df_property("employee", "reqd", 0);
 		}
 		if (frm.doc.type_of_supplier=="Supplier"){
 			frm.set_df_property("supplier_code", "hidden", 0);
+			frm.set_df_property("employee", "hidden", 1);
 			frm.set_df_property("supplier_code", "reqd", 1);
 			frm.set_df_property("employee", "hidden", 1);
 			frm.set_df_property("employee_name", "hidden", 1);
 			frm.set_df_property("name_of_supplier", "hidden", 0);
 			frm.set_value('employee', '')
-			
-}
+			}
+		else{
+			frm.set_df_property("supplier_code", "reqd", 0);
+		}
 }
 });
 
@@ -128,6 +160,7 @@ frappe.ui.form.on('Non PO Non Contract', {
 	}
 });
 
+
 frappe.ui.form.on('Non PO Non Contract', {
 	employee: function(frm) {
 		if (frm.doc.type_of_supplier=="Employee"){
@@ -137,10 +170,124 @@ frappe.ui.form.on('Non PO Non Contract', {
 					employee:frm.doc.employee
 				},
 				callback: function(r) {
+					if(r.message){
 					frm.set_value("amount_clearance_period_in_days",r.message)
-				}
+					}
+					frm.refresh()
+					frm.refresh_field("employee")
+			}
 			})
 		}
 
 	}
 });
+
+// Child table field Mandatory when workflow state in draft
+frappe.ui.form.on('Non PO Non Contract', {
+	before_load: function(frm) {
+		frm.trigger("mandatory_field");
+		},
+		mandatory_field(frm){
+			// frm.set_df_property('note_sheet_no', 'read_only', 1);
+			if(frm.doc.workflow_state=="Draft"){
+				frm.set_value("document_status","Invoice in Draft State")
+				refresh_field("document_status");
+				var df1 = frappe.meta.get_docfield("Details of Invoices and PO","po_attachment_attachment", cur_frm.doc.name);
+				df1.reqd = 1; // not working
+			}
+			
+			if(frm.is_new()==1){
+				frm.set_df_property('note_sheet_no', 'read_only', 0)
+				frm.set_df_property('company', 'read_only', 0)
+				frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+				frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+				frm.set_df_property('for_which_department', 'read_only', 0)
+				frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+				frm.set_df_property("supplier_code",'read_only', 0)
+				frm.set_df_property("audit_ref_no",'read_only', 1)
+				frm.set_df_property("today_date",'read_only', 1)
+				frm.set_df_property("profit_center",'read_only', 1)
+				frm.set_df_property("document_number",'read_only', 1)
+				frm.set_df_property("ref_no",'read_only', 1)
+				frm.set_df_property("document_date",'read_only', 1)
+				frm.set_df_property("attach_journal_voucher",'read_only', 1)
+				// frm.set_df_property("third_party_verification", "cannot_add_rows", true);
+				// frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
+			}
+			else{
+				if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save" ){
+					frm.set_df_property('note_sheet_no', 'read_only', 0)
+					frm.set_df_property('company', 'read_only', 0)
+					frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+					frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+					frm.set_df_property('for_which_department', 'read_only', 0)
+					frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+					frm.set_df_property("supplier_code",'read_only', 0)
+				}
+				else{
+					frm.set_df_property('note_sheet_no', 'read_only', 1)
+					frm.set_df_property('company', 'read_only', 1)
+					frm.set_df_property('date_of_note_sheet', 'read_only', 1)
+					frm.set_df_property('name_of_schooldepartment', 'read_only', 1)
+					frm.set_df_property('for_which_department', 'read_only', 1)
+					frm.set_df_property("item_of_purchaseexpense",'read_only', 1)
+					frm.set_df_property("supplier_code",'read_only', 1)
+					frm.set_df_property("type_of_supplier",'read_only', 1)
+					frm.set_df_property("employee",'read_only', 1)
+					frm.set_df_property("purchase_order_no",'read_only', 1)
+					frm.set_df_property("date_of_purchase_order",'read_only', 1)
+					frm.set_df_property("master_invoice_attachment",'read_only', 1)
+					frm.set_df_property("note_sheet_attachment",'read_only', 1)
+				}
+		
+				if (frm.doc.workflow_state=="Approved by Medical Superintendent"){
+					frm.set_df_property("audit_ref_no", "reqd", 1);
+					frm.set_df_property("today_date", "reqd", 1);
+					frm.set_df_property("audit_ref_no",'read_only', 0)
+					frm.set_df_property("today_date",'read_only', 0)
+				}
+				else {
+					frm.set_df_property("audit_ref_no",'read_only', 1)
+					frm.set_df_property("today_date",'read_only', 1)
+				}
+				if (frm.doc.workflow_state=="Journal Entry by Account Dept."){
+					frm.set_df_property("profit_center",'read_only', 0)
+					frm.set_df_property("document_number",'read_only', 0)
+					frm.set_df_property("ref_no",'read_only', 0)
+					frm.set_df_property("document_date",'read_only', 0)
+					frm.set_df_property("attach_journal_voucher",'read_only', 0)
+					frm.set_df_property("profit_center",'reqd', 1)
+					frm.set_df_property("document_number",'reqd', 1)
+					frm.set_df_property("ref_no",'reqd', 1)
+					frm.set_df_property("document_date",'reqd', 1)
+					frm.set_df_property("attach_journal_voucher",'reqd', 1)
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 1)
+				}
+				else{
+					frm.set_df_property("profit_center",'read_only', 1)
+					frm.set_df_property("document_number",'read_only', 1)
+					frm.set_df_property("ref_no",'read_only', 1)
+					frm.set_df_property("document_date",'read_only', 1)
+					frm.set_df_property("attach_journal_voucher",'read_only', 1)
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 0)
+				}
+				if (frm.doc.workflow_state=="Passed for Payment"){
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 1)
+				}
+				else{
+					frm.set_df_property("amount_clearance_period_in_days",'read_only', 0)
+				}
+				// eval:(doc.workflow_state=="Approved by Director, Administration");/
+				// eval:(doc.workflow_state=="Approved by Director, Administration");today_dateToday
+				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
+				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
+// 				eval:(doc.workflow_state=="Approved by Director, Administration") || (doc.workflow_state=="Bill Received by Audit") || (doc.workflow_state=="Approved by Audit User") || (doc.workflow_state=="Approved by Pro VC") || (doc.workflow_state=="Journal Entry by Account Dept.") || (doc.workflow_state=="Passed for Payment")
+				// || (doc.workflow_state=="Approved by Auditor(Audit Verification)")
+				// eval:(doc.workflow_state=="Journal Entry by Account Dept.") || (doc.workflow_state=="Passed for Payment");
+
+			}
+		},
+		before_save: function(frm) {
+			frm.trigger("mandatory_field");
+		},
+});	
