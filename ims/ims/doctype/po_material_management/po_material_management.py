@@ -182,7 +182,7 @@ def mandatory_check(self):
 		count=0
 		for t in self.get("details_of_invoices_and_po"):
 			count=count+1
-			if t.po_attachment!=1: 
+			if t.po_attachment_attachment!=1: 
 				frappe.throw("PO Attachment	is mandatory in row on %s"%(count))
 	
 	if self.workflow_state=="Bill Received by Audit" and (self.audit_ref_no==None or self.audit_ref_no==""): 
