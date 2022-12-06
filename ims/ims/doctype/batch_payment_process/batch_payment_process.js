@@ -19,6 +19,7 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.set_df_property("approval_hierarchy", "cannot_delete_rows", true);
 		frm.set_df_property("vendor_wise_payment_details", "cannot_add_rows", true);
 		frm.set_df_property("vendor_wise_payment_details", "cannot_delete_rows", true);
+		frm.set_df_property("table_26", "cannot_add_rows", true);
 	}
 });
 frappe.ui.form.on("Batch Payment Process", {
