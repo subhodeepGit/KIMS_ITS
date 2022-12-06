@@ -314,3 +314,51 @@ frappe.ui.form.on('Patient Refund', {
 			frm.trigger("mandatory_field");
 		},
 });
+
+frappe.ui.form.on('Patient Refund', {
+    refresh: function(frm) {
+      frm.add_custom_button(__('Download Attachments'), function(){
+		var urls=[];
+        var data = frm.doc.approval_attachment;
+		urls.push(data);
+		var data1 = frm.doc.doc_attached;
+		urls.push(data1);
+		var data2 = frm.doc.self_declaration_form;
+		urls.push(data2);
+		var data3 = frm.doc.final_bill;
+		urls.push(data3);
+		var data4 = frm.doc.refund_sheet_attachment;
+		urls.push(data4);
+		var data5 = frm.doc.refund_attachment;
+		urls.push(data5);
+		var data6 = frm.doc.insurance_details_attachment;
+		urls.push(data6);
+		var data7 = frm.doc.xerox_copy_of_any_itenty_proof;
+		urls.push(data7);
+
+		urls = urls.filter(function( element ) {
+			return element !== undefined;
+		});
+
+		var interval = setInterval(download, 400, urls);
+
+		function download(urls) {
+			let url = new Array();
+			url = urls.pop();
+
+			var a = document.createElement("a");
+			a.download =  url.split('/').pop();
+			document.body.appendChild(a);
+			a.setAttribute('href', url);
+			document.body.removeChild(a);
+			a.click();
+
+			if (urls.length == 0) {
+				clearInterval(interval);
+			}
+		}
+
+    },
+	);
+  }
+});
