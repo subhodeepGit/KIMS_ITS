@@ -7,10 +7,11 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "bank_name",
   "bank_ac_no",
+  "ifsc_code",
+  "bank_name",
   "branch_details",
-  "ifsc_code"
+  "bank_address"
  ],
  "fields": [
   {
@@ -18,6 +19,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Bank Name",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -32,6 +34,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Branch Details",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -40,11 +43,17 @@
    "in_list_view": 1,
    "label": "IFSC code",
    "reqd": 1
+  },
+  {
+   "fieldname": "bank_address",
+   "fieldtype": "Data",
+   "label": "Bank Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-01 15:10:12.636705",
+ "modified": "2022-12-06 11:59:04.446349",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Bank Details For Payment",

@@ -143,18 +143,14 @@ def get_outstanding_amount(args):
 		args = json.loads(args)
 	filter=[]
 
-	filter.append(['posting_date', 'between',[args.get('from_posting_date'),args.get('to_posting_date')]])
-	filter.append(["net_final_amount_to_be_paid_in_rs",">",0])	
+	filter.append(['posting_date', 'between',[args.get('from_posting_date'),args.get('to_posting_date')]])	
 	filter.append(["workflow_state","=","Passed for Payment"])
 	filter.append(["payment_status","=","Passed for Payment"])
 	filter.append(['company',"=",args.get('company')])
 	if args.get('priority'):
 		filter.append(['priority',"=",args.get('priority')])
 
-	if args.get('outstanding_amt_greater_than') > 0:
-		filter.append(["net_final_amount_to_be_paid_in_rs",">=",args.get('outstanding_amt_greater_than')])
-	if args.get('outstanding_amt_less_than') >0:
-		filter.append(["net_final_amount_to_be_paid_in_rs","<=",args.get('outstanding_amt_less_than')])
+
 	if args.get("invoice")==None:
 		c_doctype=[{"doctype":"PO Consumable","child_doc":"Details of Invoices and PO"},{"doctype":"PO Consignment","child_doc":"Credit Note and PO"},
 					{"doctype":"PO Material Management","child_doc":"Invoices and PO"},{"doctype":"Pharmacy","child_doc":"Enclosed Bills"},
@@ -169,16 +165,19 @@ def get_outstanding_amount(args):
 	data=[]
 
 	for doctype in c_doctype:
+		filter_for=[]
+		filter_for=filter.copy()
 		if doctype['doctype']!="Patient Refund":
-			invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter,
+			filter_for.append(["net_final_amount_to_be_paid_in_rs",">",0])
+			if args.get('outstanding_amt_greater_than') > 0:
+				filter_for.append(["net_final_amount_to_be_paid_in_rs",">=",args.get('outstanding_amt_greater_than')])
+			if args.get('outstanding_amt_less_than') >0:
+				filter_for.append(["net_final_amount_to_be_paid_in_rs","<=",args.get('outstanding_amt_less_than')])
+			invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter_for,
 			fields=['name','posting_date','company','supplier_code','document_number',
 					'document_date','supplier_code','name_of_supplier',
 					'net_final_amount_to_be_paid_in_rs','workflow_state'],order_by="posting_date asc")
-			print("\n\n\n\n")
-			print(doctype['doctype'])
-			print(invoice_data)
-			print(filter)		
-			
+	
 			for t in invoice_data:
 				sup_info=frappe.db.get_all("Supplier",{"name":t['supplier_code']},["ifsc_code","bank_ac_no","account_holder_name","bank_name","bank_address"])
 				t["ifsc_code"]=sup_info[0]['ifsc_code']
@@ -186,16 +185,43 @@ def get_outstanding_amount(args):
 				t['account_holder_name']=sup_info[0]['account_holder_name']
 				t["bank_name"]=sup_info[0]['bank_name']
 				t['bank_address']=sup_info[0]['bank_address']
+				t['name_of_notesheet']=doctype['doctype']
 
 			for t in invoice_data:
-					data.append(t)
+				data.append(t)
 		else:
-			pass			
+			filter_for.append(["net_refundable_in_figures",">",0])	
+			if args.get('outstanding_amt_less_than') > 0:
+				filter_for.append(["net_refundable_in_figures",">=",args.get('outstanding_amt_greater_than')])
+			if args.get('outstanding_amt_less_than') >0:
+				filter_for.append(["net_refundable_in_figures","<=",args.get('outstanding_amt_less_than')])
+			invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter_for,
+							fields=["name","name_of_the_patient","ip__uhid_no","posting_date","ifsc_code",
+							"account_no","net_refundable_in_figures","account_holder_name","name_of_the_bank",
+							"bank_address","workflow_state","branch"])
+			
+			for t in invoice_data:
+				patient_refund={}
+				patient_refund['name_of_supplier']=t['name_of_the_patient']
+				patient_refund['supplier_code']=t['ip__uhid_no']
+				patient_refund['document_number']=""
+				patient_refund['document_date']=t['posting_date']
+				patient_refund['ifsc_code']=t['ifsc_code']
+				patient_refund['bank_ac_no']=t['account_no']
+				patient_refund['net_final_amount_to_be_paid_in_rs']=t['net_refundable_in_figures']
+				patient_refund['net_final_amount_to_be_paid_in_rs']=t['net_refundable_in_figures']
+				patient_refund['account_holder_name']=t['account_holder_name']
+				patient_refund['bank_name']=t['name_of_the_bank']
+				patient_refund['branch']=t['branch']
+				patient_refund['bank_address']=t['bank_address']
+				patient_refund['name']=t['name']
+				patient_refund['workflow_state']=t['workflow_state']
+				patient_refund['name_of_notesheet']=doctype['doctype']
+				data.append(patient_refund)
 	if not data:
 		frappe.msgprint("No Data")
 
 	return data
-
 	########################################################
 	# po_con=frappe.db.sql(""" Select supplier_code,name_of_supplier from `tabPO Consumable`
 	# where company="%s" """%(company),as_dict = True)

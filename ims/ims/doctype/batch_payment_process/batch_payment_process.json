@@ -17,9 +17,10 @@
   "column_break_5",
   "paying_bank",
   "bank_ac_no",
+  "ifsc_code",
   "branch_details",
   "bank_name",
-  "ifsc_code",
+  "bank_address",
   "audit_section",
   "audit_reference_no",
   "audit_posting_date",
@@ -235,11 +236,18 @@
    "fieldtype": "Date",
    "label": "Date",
    "read_only": 1
+  },
+  {
+   "fetch_from": "paying_bank.bank_address",
+   "fieldname": "bank_address",
+   "fieldtype": "Data",
+   "label": "Bank Address",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-01 16:46:39.291779",
+ "modified": "2022-12-06 12:02:46.462145",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",
