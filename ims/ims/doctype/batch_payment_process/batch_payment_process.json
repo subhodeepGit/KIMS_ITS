@@ -190,7 +190,7 @@
   {
    "fieldname": "note_sheet_attachment",
    "fieldtype": "Attach",
-   "label": "Note Sheet Attachment"
+   "label": "Remittance Letter Attachment"
   },
   {
    "fieldname": "section_break_25",
@@ -247,7 +247,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-06 12:02:46.462145",
+ "modified": "2022-12-06 16:37:15.310010",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",

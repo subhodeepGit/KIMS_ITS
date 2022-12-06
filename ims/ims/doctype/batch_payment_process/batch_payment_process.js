@@ -11,6 +11,31 @@
 // 		df1.hidden = 1;
 // 		}
 // });
+frappe.ui.form.on('Batch Payment Process', {
+	onload: function(frm) {
+		if(frm.doc.document_status=="UTR Update"){
+		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
+		df1.reqd = 1;
+		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
+		df1.reqd = 1;
+		}
+		else{
+		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
+		df1.reqd = 0;
+		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
+		df1.reqd = 0;
+		}
+	}
+});
+frappe.ui.form.on("Batch Payment Process", {
+	refresh(frm){
+		if(frm.doc.workflow_state=="Draft"){
+			frm.set_value("document_status","Invoice in Draft State")
+			refresh_fields("document_status");
+		}
+	},
+});
+		
 frappe.ui.form.on("Batch Payment Process", {
 	onload:function(frm){
 		//cannot able to add rows
@@ -24,11 +49,14 @@ frappe.ui.form.on("Batch Payment Process", {
 });
 frappe.ui.form.on("Batch Payment Process", {
 	onload:function(frm){
-	if(frm.doc.workflow_state=="Payment Done"){
+	if(frm.doc.document_status=="Payment Done"){
 		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
 	}
-	else{
+	if(frm.doc.document_status=="UTR Update"){
 		frm.set_df_property("vendor_wise_payment_details",'read_only', 0)
+	}
+	else{
+		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
 	}
 }
 });
@@ -59,7 +87,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			// frm.set_df_property("audit_reference_no",'read_only', 0)
 			// frm.set_df_property("audit_posting_date",'read_only', 0)
 	}
-	if(frm.doc.workflow_state!="Approved by Accounts Head(CFO)"){
+	if(frm.doc.document_status!="Submitted by CFO, KIMS"){
 		frm.set_df_property("audit_reference_no",'read_only', 1)
 		frm.set_df_property("audit_posting_date",'read_only', 1)
 }
@@ -67,7 +95,7 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.set_df_property("audit_reference_no",'read_only', 0)
 		frm.set_df_property("audit_posting_date",'read_only', 0)
 }
-		if(frm.doc.workflow_state!="Cheque Attachment"){
+		if(frm.doc.document_status!="Check Preparation And Signature"){
 			frm.set_df_property("cheque_no",'read_only', 1)
 			frm.set_df_property("cheque_date",'read_only', 1)
 			frm.set_df_property("cheque_attachment",'read_only', 1)
@@ -88,8 +116,10 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.set_value('cheque_attachment', '')
 			frm.set_value('note_sheet_attachment', '')
 			frm.set_value('contact_person', '')
+			frm.set_value('audit_reference_no', '')
+			frm.set_value('audit_posting_date', '')
 		}
-		if(frm.doc.workflow_state=="Cheque Attachment"){
+		if(frm.doc.document_status=="Check Preparation And Signature"){
 			frm.set_df_property("cheque_no",'reqd', 1)
 			frm.set_df_property("cheque_date",'reqd', 1)
 			frm.set_df_property("cheque_attachment",'reqd', 1)
@@ -103,7 +133,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.set_df_property("note_sheet_attachment",'reqd', 0)
 			frm.set_df_property("contact_person",'reqd', 0)
 		}
-		if(frm.doc.workflow_state=="Approved by Accounts Head(CFO)"){
+		if(frm.doc.document_status=="Submitted by CFO, KIMS"){
 			frm.set_df_property("audit_reference_no",'reqd', 1)
 			frm.set_df_property("audit_posting_date",'reqd', 1)
 		}
