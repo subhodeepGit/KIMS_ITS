@@ -315,10 +315,14 @@ def mand(self):
 			frappe.throw("Audit Posting Date is mandatory")
 	if self.document_status=="Payment Done":
 		for t in self.get("vendor_wise_payment_details"):
-			if t.sap_document_number=="" or t.sap_document_number==None:
-				frappe.throw("SAP Document number is mandatory in Vendor Wise Payment Details table")
-			if t.mode_of_payment=="" or t.mode_of_payment==None:
-				frappe.throw("Mode of Payment is mandatory in Vendor Wise Payment Details table")
+			if t.payment_status!="":
+				if t.payment_status=="Payment successful":
+					if t.sap_document_number=="" or t.sap_document_number==None:
+						frappe.throw("SAP Document number is mandatory in Payment Details table")
+					if t.mode_of_payment=="" or t.mode_of_payment==None:
+						frappe.throw("Mode of Payment is mandatory in Payment Details table")
+			else:
+				frappe.throw("Payment Status is mandatory in Payment Details table")			
 
 def field_update_notesheer(self):
 	doc_before_save = self.get_doc_before_save()
@@ -328,5 +332,21 @@ def field_update_notesheer(self):
 			frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
 	elif doc_before_save.document_status!=self.document_status:
 		for t in self.get("table_26"):
-			workflow_status=self.workflow_state
-			frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
+			if self.document_status=="Payment Done":
+				pass
+			else:
+				workflow_status=self.workflow_state
+				frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
+
+		if self.document_status=="Payment Done":
+			for j in self.get("vendor_wise_payment_details"):
+				for t in self.get("table_26"):
+					if t.vendor_code==j.vendor_code:
+						if j.payment_status=="Payment Failed":
+							workflow_status=j.payment_status
+							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
+							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"workflow_state","Verify and Save")
+							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"document_status","Document save")
+						else:
+							workflow_status=j.payment_status
+							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)			

@@ -11,24 +11,27 @@
 // 		df1.hidden = 1;
 // 		}
 // });
-frappe.ui.form.on('Batch Payment Process', {
-	onload: function(frm) {
-		if(frm.doc.document_status=="UTR Update"){
-		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
-		df1.reqd = 1;
-		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
-		df1.reqd = 1;
-		}
-		else{
-		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
-		df1.reqd = 0;
-		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
-		df1.reqd = 0;
-		}
-	}
-});
+// frappe.ui.form.on('Batch Payment Process', {
+// 	onload: function(frm) {
+		
+// 		if(frm.doc.document_status=="UTR Update"){
+// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
+// 			df1.reqd = 1;
+// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
+// 			df1.reqd = 1;
+// 		}
+// 		else{
+// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
+// 			df1.reqd = 0;
+// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
+// 			df1.reqd = 0;
+// 		}
+// 	}
+// });
+
 frappe.ui.form.on("Batch Payment Process", {
 	refresh(frm){
+
 		if(frm.doc.workflow_state=="Draft"){
 			frm.set_value("document_status","Invoice in Draft State")
 			refresh_fields("document_status");
@@ -142,6 +145,35 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.set_df_property("audit_posting_date",'reqd', 0)
 		}
 }
+});
+
+frappe.ui.form.on('Batch Payment Process', {
+	onload: function(frm) {
+		if(cur_frm.doc.vendor_wise_payment_details[0]["payment_status"]=="Payment Failed"){
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
+			df1.read_only = 1;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
+			df1.read_only = 1;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","utr_number", cur_frm.doc.name);
+			df1.read_only = 1;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","cash_receipt", cur_frm.doc.name);
+			df1.read_only = 1;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","cheque_no", cur_frm.doc.name);
+			df1.read_only = 1;
+		}
+		else{
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
+			df1.reqd = 0;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
+			df1.reqd = 0;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","utr_number", cur_frm.doc.name);
+			df1.read_only = 0;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","cash_receipt", cur_frm.doc.name);
+			df1.read_only = 0;
+			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","cheque_no", cur_frm.doc.name);
+			df1.read_only = 0;
+		}
+	}
 });
 
 frappe.ui.form.on("Batch Payment Process", {
