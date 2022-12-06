@@ -107,7 +107,6 @@ frappe.ui.form.on('Non PO Contract', {
 					frm.set_df_property("item_of_purchaseexpense",'read_only', 1)
 					frm.set_df_property("supplier_code",'read_only', 1)
 				}
-		
 				if (frm.doc.workflow_state=="Approved by Director, Administration"){
 					frm.set_df_property("audit_ref_no", "reqd", 1);
 					frm.set_df_property("today_date", "reqd", 1);

@@ -10,6 +10,7 @@ import json
 class BatchPaymentProcess(Document):
 	def validate(self):
 		mand(self)
+		field_update_notesheer(self)
 		if self.workflow_state=="Verified & Submitted by Note Creator":
 			merge_same_vendor(self)
 		calculate_total(self)
@@ -24,8 +25,13 @@ class BatchPaymentProcess(Document):
 						object_var=t
 
 					if object_var!="":
-						if object_var.approval_status==self.workflow_state :
-							flag="No"
+						if self.workflow_state=="Draft" or self.workflow_state=="Verify and Save" or self.workflow_state=="Cancelled":
+							if (object_var.approval_status==self.workflow_state) and object_var.emp_id==emp_data[0]["name"]:
+								flag="No"
+						else:
+							doc_before_save = self.get_doc_before_save()
+							if doc_before_save.document_status==self.document_status:
+								flag=""
 
 					approval_status=self.workflow_state
 					previous_status=frappe.get_all("Batch Payment Process",{"name":self.name},["workflow_state"])
@@ -38,6 +44,34 @@ class BatchPaymentProcess(Document):
 					for t in self.get("approval_hierarchy"):
 						date_of_receivable=t.date_of_approval
 					
+
+					document_type="Batch Payment Process"
+					approval_status_print=""
+					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
+					if previous_status=="":
+						approval_status_print=approval_status
+					else:
+						state_info=frappe.get_all("Workflow Document State",{"parent":workflow_name},["state"],order_by="idx asc")
+						count=0
+						for s in state_info:
+							count=count+1
+							if s["state"]==approval_status:
+								break
+
+						pre_flow_list=state_info[count-1]["state"]
+						approval_status_print=pre_flow_list
+
+
+					
+					grp_info=frappe.get_all("Workflow Document State",{"parent":workflow_name,"state":approval_status_print},
+												['name',"grouping_of_designation","single_user"])
+						
+
+					grouping_of_designation=grp_info[0]['grouping_of_designation']
+					single_user=grp_info[0]['single_user']
+
+
+
 					if date_of_receivable=="":
 						date_of_receivable=utils.today()
 					emp_name=emp_data[0]['salutation']+" "+emp_data[0]['full_name']
@@ -53,7 +87,10 @@ class BatchPaymentProcess(Document):
 							"department":emp_data[0]['department'],                                        
 							"approval_status":approval_status,                              
 							"previous_status":previous_status,                                 
-							"transfer_to":0,                                    
+							"transfer_to":0, 
+							"workflow_data":workflow_name,
+							"grouping_of_designation":grouping_of_designation,
+							"single_user":single_user                                       
 						})
 					if flag=="No":
 						for t in self.get("approval_hierarchy"):
@@ -67,6 +104,9 @@ class BatchPaymentProcess(Document):
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
 								t.previous_status=previous_status
+								t.workflow_data= workflow_name
+								t.grouping_of_designation=grouping_of_designation
+								t.single_user=single_user	
 
 			else:
 				frappe.throw("Employee not found")		
@@ -106,8 +146,10 @@ def get_outstanding_amount(args):
 	filter.append(['posting_date', 'between',[args.get('from_posting_date'),args.get('to_posting_date')]])
 	filter.append(["net_final_amount_to_be_paid_in_rs",">",0])	
 	filter.append(["workflow_state","=","Passed for Payment"])
+	filter.append(["payment_status","=","Passed for Payment"])
 	filter.append(['company',"=",args.get('company')])
-	filter.append(['priority',"=",args.get('priority')])
+	if args.get('priority'):
+		filter.append(['priority',"=",args.get('priority')])
 
 	if args.get('outstanding_amt_greater_than') > 0:
 		filter.append(["net_final_amount_to_be_paid_in_rs",">=",args.get('outstanding_amt_greater_than')])
@@ -116,7 +158,8 @@ def get_outstanding_amount(args):
 	if args.get("invoice")==None:
 		c_doctype=[{"doctype":"PO Consumable","child_doc":"Details of Invoices and PO"},{"doctype":"PO Consignment","child_doc":"Credit Note and PO"},
 					{"doctype":"PO Material Management","child_doc":"Invoices and PO"},{"doctype":"Pharmacy","child_doc":"Enclosed Bills"},
-					{"doctype":"Non PO Contract","child_doc":"Details of Enclosed Bills"},{"doctype":"Non PO Non Contract","child_doc":"Details Enclosed Bills"}]
+					{"doctype":"Non PO Contract","child_doc":"Details of Enclosed Bills"},{"doctype":"Non PO Non Contract","child_doc":"Details Enclosed Bills"},
+					{"doctype":"Patient Refund","child_doc":""}]
 	elif args.get("invoice")!=None:
 		c_doctype=[{"doctype":args.get("invoice")}]
 
@@ -126,21 +169,28 @@ def get_outstanding_amount(args):
 	data=[]
 
 	for doctype in c_doctype:
-		invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter,
-		fields=['name','posting_date','company','supplier_code','document_number',
-				'document_date','supplier_code','name_of_supplier',
-				'net_final_amount_to_be_paid_in_rs','workflow_state'],order_by="posting_date asc")
-		
-		for t in invoice_data:
-			sup_info=frappe.db.get_all("Supplier",{"name":t['supplier_code']},["ifsc_code","bank_ac_no","account_holder_name","bank_name","bank_address"])
-			t["ifsc_code"]=sup_info[0]['ifsc_code']
-			t["bank_ac_no"]=sup_info[0]['bank_ac_no']
-			t['account_holder_name']=sup_info[0]['account_holder_name']
-			t["bank_name"]=sup_info[0]['bank_name']
-			t['bank_address']=sup_info[0]['bank_address']
+		if doctype['doctype']!="Patient Refund":
+			invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter,
+			fields=['name','posting_date','company','supplier_code','document_number',
+					'document_date','supplier_code','name_of_supplier',
+					'net_final_amount_to_be_paid_in_rs','workflow_state'],order_by="posting_date asc")
+			print("\n\n\n\n")
+			print(doctype['doctype'])
+			print(invoice_data)
+			print(filter)		
+			
+			for t in invoice_data:
+				sup_info=frappe.db.get_all("Supplier",{"name":t['supplier_code']},["ifsc_code","bank_ac_no","account_holder_name","bank_name","bank_address"])
+				t["ifsc_code"]=sup_info[0]['ifsc_code']
+				t["bank_ac_no"]=sup_info[0]['bank_ac_no']
+				t['account_holder_name']=sup_info[0]['account_holder_name']
+				t["bank_name"]=sup_info[0]['bank_name']
+				t['bank_address']=sup_info[0]['bank_address']
 
-		for t in invoice_data:
-				data.append(t)
+			for t in invoice_data:
+					data.append(t)
+		else:
+			pass			
 	if not data:
 		frappe.msgprint("No Data")
 
@@ -237,3 +287,8 @@ def mand(self):
 			frappe.throw("Audit Reference No is mandatory")
 		if self.audit_posting_date==None or self.audit_posting_date=="":
 			frappe.throw("Audit Posting Date is mandatory")
+
+def field_update_notesheer(self):
+	doc_before_save = self.get_doc_before_save()
+	if doc_before_save.document_status!=self.document_status:
+		flag=""

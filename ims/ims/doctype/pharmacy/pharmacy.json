@@ -260,7 +260,7 @@
   },
   {
    "fieldname": "today_date",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Today Date"
   },
   {
@@ -285,7 +285,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-30 15:19:14.660043",
+ "modified": "2022-12-05 17:10:03.627084",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Pharmacy",
