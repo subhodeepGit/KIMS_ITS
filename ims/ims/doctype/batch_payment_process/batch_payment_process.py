@@ -15,7 +15,7 @@ class BatchPaymentProcess(Document):
 			merge_same_vendor(self)
 		calculate_total(self)
 		session_user = frappe.session.user
-		if self.workflow_state!="Cancelled" and self.workflow_state!="Rejected and Transfer":
+		if self.workflow_state!="Rejected and Transfer":
 			if session_user:
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 				if emp_data:
@@ -236,7 +236,7 @@ def calculate_total(self):
 		"""Calculates total amount."""
 		self.total_amount = 0
 		for d in self.table_26:
-			self.total_amount += d.amount1
+			self.total_amount += d.amount
 
 @frappe.whitelist()
 def merge_same_vendor(self):
@@ -297,7 +297,7 @@ def merge_same_vendor(self):
 					"amount":t['amount']                                                                   
 				})
 def mand(self):
-	if self.workflow_state=="Payment Done":
+	if self.document_status=="Payment Sheet Submitted to Bank":
 		if self.cheque_no==None or self.cheque_no=="":
 			frappe.throw("Cheque No	is mandatory")
 		if self.cheque_date==None or self.cheque_date=="":
@@ -308,13 +308,25 @@ def mand(self):
 			frappe.throw("Note Sheet Attachment	is mandatory")
 		if self.contact_person==None or self.contact_person=="":
 			frappe.throw("Contact Person is mandatory")
-	if self.workflow_state=="Payment Sheet prepared":
+	if self.document_status=="Payment Sheet Received By Audit":
 		if self.audit_reference_no==None or self.audit_reference_no=="":
 			frappe.throw("Audit Reference No is mandatory")
 		if self.audit_posting_date==None or self.audit_posting_date=="":
 			frappe.throw("Audit Posting Date is mandatory")
+	if self.document_status=="Payment Done":
+		for t in self.get("vendor_wise_payment_details"):
+			if t.sap_document_number=="" or t.sap_document_number==None:
+				frappe.throw("SAP Document number is mandatory in Vendor Wise Payment Details table")
+			if t.mode_of_payment=="" or t.mode_of_payment==None:
+				frappe.throw("Mode of Payment is mandatory in Vendor Wise Payment Details table")
 
 def field_update_notesheer(self):
 	doc_before_save = self.get_doc_before_save()
-	if doc_before_save.document_status!=self.document_status:
-		flag=""
+	if self.workflow_state=="Draft" or self.workflow_state=="Verify and Save" or self.workflow_state=="Cancelled":
+		for t in self.get("table_26"):
+			workflow_status=self.workflow_state
+			frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
+	elif doc_before_save.document_status!=self.document_status:
+		for t in self.get("table_26"):
+			workflow_status=self.workflow_state
+			frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
