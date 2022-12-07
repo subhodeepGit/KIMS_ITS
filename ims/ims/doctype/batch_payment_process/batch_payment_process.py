@@ -315,7 +315,7 @@ def mand(self):
 			frappe.throw("Audit Posting Date is mandatory")
 	if self.document_status=="Payment Done":
 		for t in self.get("vendor_wise_payment_details"):
-			if t.payment_status!="":
+			if t.payment_status!="" or t.payment_status!=None:
 				if t.payment_status=="Payment successful":
 					if t.sap_document_number=="" or t.sap_document_number==None:
 						frappe.throw("SAP Document number is mandatory in Payment Details table")
