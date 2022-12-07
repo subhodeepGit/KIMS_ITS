@@ -4,11 +4,19 @@
 import frappe
 from frappe.model.document import Document
 from frappe import utils
+from ims.ims.notification.custom_notification import po
 
 class POConsignment(Document):
 	def validate(self):
 
 		mandatory_check(self)
+		count = 0
+		for t in self.get("authorized_signature"):
+			if self.workflow_state == "Verified & Submitted by Note Creator":
+				if count == 0:
+					count=count+1
+					po(self)
+						
 
 		third_party_verification=self.get("third_party_verification")
 		if third_party_verification:
