@@ -289,7 +289,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-05 17:41:55.156274",
+ "modified": "2022-12-07 12:59:37.490248",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",
@@ -311,5 +311,8 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
 }

@@ -285,7 +285,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-05 17:10:03.627084",
+ "modified": "2022-12-07 12:57:42.542251",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Pharmacy",
@@ -307,5 +307,8 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
 }

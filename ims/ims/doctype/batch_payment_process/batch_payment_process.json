@@ -247,7 +247,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-06 16:37:15.310010",
+ "modified": "2022-12-07 13:01:52.835880",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Process",
@@ -269,5 +269,8 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
 }
