@@ -37,7 +37,7 @@ def designation_wise_email(self):
             elif self.doctype == "Pharmacy":
                 attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='Pharmacy PF')]
             elif self.doctype == "Non PO Contract":
-                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='Payment Entry Money Recipt')]
+                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='Non Po Contract PF')]
             elif self.doctype == "Non PO Non Contract":
                 attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='Payment Entry Money Recipt')]
             elif self.doctype == "Patient Refund":
