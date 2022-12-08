@@ -11,6 +11,7 @@
   "type_of_note_sheet",
   "documnet_no",
   "note_sheet_no",
+  "approver_comment_to_third_party",
   "column_break_5",
   "date_of_note_sheet",
   "name_of_schooldepartment",
@@ -18,7 +19,11 @@
   "document_status",
   "priority",
   "section_break_11",
-  "third_party_verification_child"
+  "third_party_verification_child",
+  "third_party_verification_review_section_section",
+  "review_comment",
+  "review_document",
+  "amended_from"
  ],
  "fields": [
   {
@@ -73,7 +78,7 @@
   {
    "fieldname": "third_party_verification_child",
    "fieldtype": "Table",
-   "label": "Third Party Verification Child",
+   "label": "Invoice Details",
    "options": "Third-Party Verification Child",
    "read_only": 1
   },
@@ -89,13 +94,48 @@
   },
   {
    "fieldname": "section_break_11",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Invoice Details Section"
+  },
+  {
+   "fieldname": "approver_comment_to_third_party",
+   "fieldtype": "Data",
+   "label": "Approver Comment to Third Party",
+   "read_only": 1
+  },
+  {
+   "fieldname": "third_party_verification_review_section_section",
+   "fieldtype": "Section Break",
+   "label": "Third Party Verification Review Section"
+  },
+  {
+   "fieldname": "review_comment",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Review Comment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "review_document",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Review Document Attachment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Third-Party Verification",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-08 13:13:06.175395",
+ "modified": "2022-12-08 15:25:10.590635",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Third-Party Verification",

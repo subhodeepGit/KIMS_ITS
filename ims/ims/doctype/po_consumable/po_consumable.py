@@ -248,6 +248,7 @@ def third_party_verification(self):
 						"for_which_department":self.for_which_department,
 						"document_status":self.document_status,
 						"priority":self.priority,
+						"approver_comment_to_third_party":t.remarks_by_creater
 					})
 					for j in self.get("details_of_invoices_and_po"):
 						ref_party_doc.append("third_party_verification_child",{
