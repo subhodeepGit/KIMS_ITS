@@ -63,6 +63,7 @@
   {
    "fieldname": "note_sheet_no",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Note Sheet No",
    "reqd": 1
   },
@@ -309,7 +310,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-07 10:52:53.834629",
+ "modified": "2022-12-08 18:13:09.978189",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",
