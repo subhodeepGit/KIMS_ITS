@@ -11,81 +11,91 @@
   "type_of_note_sheet",
   "documnet_no",
   "note_sheet_no",
+  "column_break_5",
   "date_of_note_sheet",
   "name_of_schooldepartment",
   "for_which_department",
   "document_status",
   "priority",
-  "third_party_verification_child",
-  "amended_from"
+  "section_break_11",
+  "third_party_verification_child"
  ],
  "fields": [
   {
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "read_only": 1
   },
   {
    "fieldname": "type_of_note_sheet",
    "fieldtype": "Data",
-   "label": "Type of Note sheet"
+   "label": "Type of Note sheet",
+   "read_only": 1
   },
   {
    "fieldname": "documnet_no",
    "fieldtype": "Data",
-   "label": "Documnet No"
+   "label": "Documnet No",
+   "read_only": 1
   },
   {
    "fieldname": "note_sheet_no",
    "fieldtype": "Data",
-   "label": "Note Sheet No."
+   "label": "Note Sheet No.",
+   "read_only": 1
   },
   {
    "fieldname": "date_of_note_sheet",
    "fieldtype": "Data",
-   "label": "Date Of Note Sheet"
+   "label": "Date Of Note Sheet",
+   "read_only": 1
   },
   {
    "fieldname": "name_of_schooldepartment",
    "fieldtype": "Data",
-   "label": "Name Of School/Department"
+   "label": "Name Of School/Department",
+   "read_only": 1
   },
   {
    "fieldname": "for_which_department",
    "fieldtype": "Data",
-   "label": "For which Department"
+   "label": "For which Department",
+   "read_only": 1
   },
   {
    "fieldname": "document_status",
    "fieldtype": "Data",
-   "label": "Document Status"
+   "label": "Document Status",
+   "read_only": 1
   },
   {
    "fieldname": "third_party_verification_child",
    "fieldtype": "Table",
    "label": "Third Party Verification Child",
-   "options": "Third-Party Verification Child"
+   "options": "Third-Party Verification Child",
+   "read_only": 1
   },
   {
    "fieldname": "priority",
    "fieldtype": "Data",
-   "label": "Priority"
+   "label": "Priority",
+   "read_only": 1
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Third-Party Verification",
-   "print_hide": 1,
-   "read_only": 1
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-07 13:02:08.919493",
+ "modified": "2022-12-08 13:13:06.175395",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Third-Party Verification",
