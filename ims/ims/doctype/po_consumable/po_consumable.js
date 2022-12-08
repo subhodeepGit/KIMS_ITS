@@ -371,3 +371,17 @@ frappe.ui.form.on('PO Consumable', {
 		// $('.actions-btn-group').hide(); //hide all button
 		}
 });
+
+
+frappe.ui.form.on('PO Consumable', {
+	setup: function(frm) {
+		frm.set_query("employee_id", "third_party_verification", function(doc, cdt, cdn) {
+			let d = locals[cdt][cdn];
+			return {
+				filters: [
+					['Employee', 'third_party_employee', '=', 1],
+				]
+			};
+		});
+	},
+});
