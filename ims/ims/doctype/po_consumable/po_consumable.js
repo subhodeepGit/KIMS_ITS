@@ -140,14 +140,6 @@ frappe.ui.form.on('PO Consumable', {
 					frm.set_df_property("document_date",'read_only', 1)
 					frm.set_df_property("attach_journal_voucher",'read_only', 1)
 				}
-				// eval:(doc.workflow_state=="Approved by Director, Administration");/
-				// eval:(doc.workflow_state=="Approved by Director, Administration");today_dateToday
-				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
-				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
-// 				eval:(doc.workflow_state=="Approved by Director, Administration") || (doc.workflow_state=="Bill Received by Audit") || (doc.workflow_state=="Approved by Audit User") || (doc.workflow_state=="Approved by Pro VC") || (doc.workflow_state=="Journal Entry by Account Dept.") || (doc.workflow_state=="Passed for Payment")
-				// || (doc.workflow_state=="Approved by Auditor(Audit Verification)")
-				// eval:(doc.workflow_state=="Journal Entry by Account Dept.") || (doc.workflow_state=="Passed for Payment");
-
 			}
 		},
 		before_save: function(frm) {
@@ -177,12 +169,7 @@ frappe.ui.form.on("PO Consumable", {
 // 		}
 // 	}
 // });
-// frappe.ui.form.on('PO Consumable', {
-// 	refresh: function(frm) {
-// 		// $('.primary-action').prop('hidden', true); //hide save button
-// 		$('.btn-primary').hide(); //hide all button
-// 		}
-// });
+
 
 frappe.ui.form.on('PO Consumable', {
 	supplier_code: function(frm) {
@@ -359,3 +346,28 @@ frappe.ui.form.on('PO Consumable', {
         })
 	},
 });	
+
+
+
+frappe.ui.form.on('PO Consumable', {
+	refresh: function(frm) {
+		if(frm.is_new()!=1){
+			frappe.call({
+				method: "ims.ims.doctype.po_consumable.po_consumable.get_action_acess",
+				args: {
+					self:frm.doc
+				},
+				callback: function(r) { 
+					if (r.message!=0){
+						$('.actions-btn-group').hide();
+						$('.primary-action').prop('hidden', true);
+						frm.refresh();
+					}
+					
+				}
+			})
+		}
+		// $('.primary-action').prop('hidden', true); //hide save button
+		// $('.actions-btn-group').hide(); //hide all button
+		}
+});
