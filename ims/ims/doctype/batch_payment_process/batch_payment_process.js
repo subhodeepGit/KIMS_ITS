@@ -33,7 +33,7 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.set_df_property("table_26", "cannot_add_rows", true);
 	}
 });
-frappe.ui.form.on("Batch Payment Process", {
+frappe.ui.form.on("Batch Payment Process", { 
 	onload:function(frm){
 	if(frm.doc.document_status=="Payment Done"){
 		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
