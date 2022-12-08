@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:designation",
  "creation": "2022-11-08 12:01:27.188894",
@@ -19,7 +20,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-08 12:04:23.327389",
+ "modified": "2022-12-08 17:06:30.547663",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Designation",
