@@ -11,13 +11,13 @@ class POConsignment(Document):
 
 		mandatory_check(self)
 		# designation_wise_email(self)
-		if self.workflow_state == "Verified & Submitted by Note Creator":
-			count = 0
-			for t in self.get("authorized_signature"):
-				if t.approval_status == "Verified & Submitted by Note Creator":
-					count=count+1
-			if count == 0:
-				# supplier_payment_initiazation(self)
+		# if self.workflow_state == "Verified & Submitted by Note Creator":
+		# 	count = 0
+		# 	for t in self.get("authorized_signature"):
+		# 		if t.approval_status == "Verified & Submitted by Note Creator":
+		# 			count=count+1
+		# 	if count == 0:
+		# 		supplier_payment_initiazation(self)
 
 						
 
