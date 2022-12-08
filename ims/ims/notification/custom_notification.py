@@ -29,13 +29,13 @@ def designation_wise_email(self):
             subject=sub
             message=msg
             if self.doctype == "PO T Kitchen":
-                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='PO Consumable PF 1')]
+                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='PO Consumable PF')]
             elif self.doctype == "PO Consignment":
-                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='PO Consignment 1')]
+                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='PO Consignment PF')]
             elif self.doctype == "PO Material Management":
                 attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='PO Material Management PF')]
             elif self.doctype == "Pharmacy":
-                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='Payment Entry Money Recipt')]
+                attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='Pharmacy PF')]
             elif self.doctype == "Non PO Contract":
                 attachments = [frappe.attach_print(self.doctype, self.name, file_name=self.name, print_format='Payment Entry Money Recipt')]
             elif self.doctype == "Non PO Non Contract":
