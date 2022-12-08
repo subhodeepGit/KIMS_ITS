@@ -112,15 +112,13 @@
    "fieldname": "review_comment",
    "fieldtype": "Long Text",
    "in_list_view": 1,
-   "label": "Review Comment",
-   "reqd": 1
+   "label": "Review Comment"
   },
   {
    "fieldname": "review_document",
    "fieldtype": "Attach",
    "in_list_view": 1,
-   "label": "Review Document Attachment",
-   "reqd": 1
+   "label": "Review Document Attachment"
   },
   {
    "fieldname": "amended_from",
@@ -135,7 +133,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-08 15:25:10.590635",
+ "modified": "2022-12-08 17:00:12.132259",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Third-Party Verification",

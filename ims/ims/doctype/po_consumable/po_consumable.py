@@ -240,7 +240,7 @@ def third_party_verification(self):
 					ref_party_doc=frappe.get_doc({
 						'doctype':'Third-Party Verification',
 						"company":self.company,
-						"type_of_note_sheet":"PO Consignment",
+						"type_of_note_sheet":"PO Consumable",
 						"documnet_no":self.name,
 						"note_sheet_no":self.note_sheet_no,
 						"date_of_note_sheet":self.date_of_note_sheet,
