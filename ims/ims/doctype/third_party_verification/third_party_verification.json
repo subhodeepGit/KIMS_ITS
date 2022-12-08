@@ -11,12 +11,18 @@
   "type_of_note_sheet",
   "documnet_no",
   "note_sheet_no",
+  "approver_comment_to_third_party",
+  "column_break_5",
   "date_of_note_sheet",
   "name_of_schooldepartment",
   "for_which_department",
   "document_status",
   "priority",
+  "section_break_11",
   "third_party_verification_child",
+  "third_party_verification_review_section_section",
+  "review_comment",
+  "review_document",
   "amended_from"
  ],
  "fields": [
@@ -24,53 +30,97 @@
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "read_only": 1
   },
   {
    "fieldname": "type_of_note_sheet",
    "fieldtype": "Data",
-   "label": "Type of Note sheet"
+   "label": "Type of Note sheet",
+   "read_only": 1
   },
   {
    "fieldname": "documnet_no",
    "fieldtype": "Data",
-   "label": "Documnet No"
+   "label": "Documnet No",
+   "read_only": 1
   },
   {
    "fieldname": "note_sheet_no",
    "fieldtype": "Data",
-   "label": "Note Sheet No."
+   "label": "Note Sheet No.",
+   "read_only": 1
   },
   {
    "fieldname": "date_of_note_sheet",
    "fieldtype": "Data",
-   "label": "Date Of Note Sheet"
+   "label": "Date Of Note Sheet",
+   "read_only": 1
   },
   {
    "fieldname": "name_of_schooldepartment",
    "fieldtype": "Data",
-   "label": "Name Of School/Department"
+   "label": "Name Of School/Department",
+   "read_only": 1
   },
   {
    "fieldname": "for_which_department",
    "fieldtype": "Data",
-   "label": "For which Department"
+   "label": "For which Department",
+   "read_only": 1
   },
   {
    "fieldname": "document_status",
    "fieldtype": "Data",
-   "label": "Document Status"
+   "label": "Document Status",
+   "read_only": 1
   },
   {
    "fieldname": "third_party_verification_child",
    "fieldtype": "Table",
-   "label": "Third Party Verification Child",
-   "options": "Third-Party Verification Child"
+   "label": "Invoice Details",
+   "options": "Third-Party Verification Child",
+   "read_only": 1
   },
   {
    "fieldname": "priority",
    "fieldtype": "Data",
-   "label": "Priority"
+   "label": "Priority",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break",
+   "label": "Invoice Details Section"
+  },
+  {
+   "fieldname": "approver_comment_to_third_party",
+   "fieldtype": "Data",
+   "label": "Approver Comment to Third Party",
+   "read_only": 1
+  },
+  {
+   "fieldname": "third_party_verification_review_section_section",
+   "fieldtype": "Section Break",
+   "label": "Third Party Verification Review Section"
+  },
+  {
+   "fieldname": "review_comment",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Review Comment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "review_document",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Review Document Attachment",
+   "reqd": 1
   },
   {
    "fieldname": "amended_from",
@@ -85,7 +135,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-07 13:02:08.919493",
+ "modified": "2022-12-08 15:25:10.590635",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Third-Party Verification",
