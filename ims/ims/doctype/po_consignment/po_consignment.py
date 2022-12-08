@@ -10,18 +10,14 @@ class POConsignment(Document):
 	def validate(self):
 
 		mandatory_check(self)
-		designation_wise_email(self)
+		# designation_wise_email(self)
 		if self.workflow_state == "Verified & Submitted by Note Creator":
 			count = 0
 			for t in self.get("authorized_signature"):
-				print("\n\n\n\n")
-				print(t.approval_status)
 				if t.approval_status == "Verified & Submitted by Note Creator":
 					count=count+1
-					print("/n/n/n/n/n")
-					print(count)
 			if count == 0:
-				supplier_payment_initiazation(self)
+				# supplier_payment_initiazation(self)
 
 						
 
