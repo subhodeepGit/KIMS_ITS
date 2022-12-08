@@ -17,7 +17,7 @@ class POConsignment(Document):
 				if t.approval_status == "Verified & Submitted by Note Creator":
 					count=count+1
 			if count == 0:
-				supplier_payment_initiazation(self)
+				# supplier_payment_initiazation(self)
 
 						
 
