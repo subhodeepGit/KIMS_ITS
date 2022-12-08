@@ -4,18 +4,25 @@
 import frappe
 from frappe.model.document import Document
 from frappe import utils
-from ims.ims.notification.custom_notification import po
+from ims.ims.notification.custom_notification import supplier_payment_initiazation, designation_wise_email
 
 class POConsignment(Document):
 	def validate(self):
 
 		mandatory_check(self)
-		count = 0
-		for t in self.get("authorized_signature"):
-			if self.workflow_state == "Verified & Submitted by Note Creator":
-				if count == 0:
+		designation_wise_email(self)
+		if self.workflow_state == "Verified & Submitted by Note Creator":
+			count = 0
+			for t in self.get("authorized_signature"):
+				print("\n\n\n\n")
+				print(t.approval_status)
+				if t.approval_status == "Verified & Submitted by Note Creator":
 					count=count+1
-					po(self)
+					print("/n/n/n/n/n")
+					print(count)
+			if count == 0:
+				supplier_payment_initiazation(self)
+
 						
 
 		third_party_verification=self.get("third_party_verification")
