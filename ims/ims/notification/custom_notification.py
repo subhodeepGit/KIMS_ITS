@@ -3,7 +3,7 @@ import frappe
 from frappe.utils.data import format_date
 from frappe.utils import get_url_to_form
 from frappe.utils import cint, cstr, parse_addr
-from stripe import Recipient
+# from stripe import Recipient
 
 def supplier_payment_initiazation(self):
     sub="""<p><b>Your payment is Initiated</b></p><br>"""
