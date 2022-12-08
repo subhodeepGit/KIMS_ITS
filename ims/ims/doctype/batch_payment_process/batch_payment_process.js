@@ -11,34 +11,6 @@
 // 		df1.hidden = 1;
 // 		}
 // });
-// frappe.ui.form.on('Batch Payment Process', {
-// 	onload: function(frm) {
-// 		if(frm.doc.document_status=="UTR Update"){
-// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
-// 			df1.reqd = 1;
-// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
-// 			df1.reqd = 1;
-// 		}
-// 		else{
-// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
-// 			df1.reqd = 0;
-// 			var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","mode_of_payment", cur_frm.doc.name);
-// 			df1.reqd = 0;
-// 		}
-// 	}
-// });
-frappe.ui.form.on('Vendor Wise Payment Details', {
-	payment_status: function(frm, cdt, cdn) {
-		var d = locals[cdt][cdn];
-		// frm.doc.vendor_wise_payment_details.forEach(function(d)  { 
-		var df1 = frappe.meta.get_docfield("Vendor Wise Payment Details","sap_document_number", cur_frm.doc.name);
-		alert(JSON.stringify(df1))
-		alert(JSON.stringify(df1.reqd))
-		df1.reqd = 1;
-		alert(JSON.stringify(df1.reqd))
-		// });
-	}
-});
 
 frappe.ui.form.on("Batch Payment Process", {
 	refresh(frm){
@@ -61,19 +33,19 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.set_df_property("table_26", "cannot_add_rows", true);
 	}
 });
-// frappe.ui.form.on("Batch Payment Process", {
-// 	onload:function(frm){
-// 	if(frm.doc.document_status=="Payment Done"){
-// 		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
-// 	}
-// 	if(frm.doc.document_status=="UTR Update"){
-// 		frm.set_df_property("vendor_wise_payment_details",'read_only', 0)
-// 	}
-// 	else{
-// 		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
-// 	}
-// }
-// });
+frappe.ui.form.on("Batch Payment Process", {
+	onload:function(frm){
+	if(frm.doc.document_status=="Payment Done"){
+		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
+	}
+	if(frm.doc.document_status=="UTR Update"){
+		frm.set_df_property("vendor_wise_payment_details",'read_only', 0)
+	}
+	else{
+		frm.set_df_property("vendor_wise_payment_details",'read_only', 1)
+	}
+}
+});
 frappe.ui.form.on("Batch Payment Process", {
 	onload:function(frm){
 	if(frm.doc.workflow_state!="Draft" && frm.doc.workflow_state!="Verify and Save"){
