@@ -88,7 +88,7 @@
   },
   {
    "fieldname": "item_of_purchaseexpense",
-   "fieldtype": "Text",
+   "fieldtype": "Data",
    "label": "Item Of Purchase/Expense",
    "reqd": 1
   },
@@ -287,7 +287,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-08 18:14:09.629333",
+ "modified": "2022-12-09 15:47:30.261916",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Pharmacy",
