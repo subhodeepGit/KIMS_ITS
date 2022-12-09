@@ -60,6 +60,7 @@
    "fieldname": "note_sheet_no",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Note Sheet No.",
    "reqd": 1
   },
@@ -287,7 +288,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-05 22:11:01.097246",
+ "modified": "2022-12-08 18:03:01.562743",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

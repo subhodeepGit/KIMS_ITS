@@ -61,6 +61,8 @@
   {
    "fieldname": "note_sheet_no",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Note Sheet No.",
    "reqd": 1
   },
@@ -289,7 +291,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-07 12:59:37.490248",
+ "modified": "2022-12-08 18:14:41.137605",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract",
