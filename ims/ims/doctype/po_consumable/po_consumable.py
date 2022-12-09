@@ -11,43 +11,7 @@ class POConsumable(Document):
 	def validate(self):
 
 		mandatory_check(self)
-		third_party_verification(self)
-		# third_party_verification=self.get("third_party_verification")
-		# if third_party_verification:
-		# 	for t in self.get("third_party_verification"):
-		# 		if t.final_status=="Open" and t.status_of_verification==None:
-		# 			ref_party_doc=frappe.get_doc({
-		# 				'doctype':'Third-Party Verification',
-		# 				"company":self.company,
-		# 				"type_of_note_sheet":"PO Consignment",
-		# 				"documnet_no":self.name,
-		# 				"note_sheet_no":self.note_sheet_no,
-		# 				"date_of_note_sheet":self.date_of_note_sheet,
-		# 				"name_of_schooldepartment":self.name_of_schooldepartment,
-		# 				"for_which_department":self.for_which_department,
-		# 				"document_status":self.document_status,
-		# 				"priority":self.priority,
-		# 			})
-		# 			for j in self.get("details_of_invoices_and_po"):
-		# 				ref_party_doc.append("third_party_verification_child",{
-		# 					"details_of_invoices_po":j.details_of_invoices_and_po,
-		# 					"invoice_no":j.invoice_no,
-		# 					"invoice_date":j.invoice_date,
-		# 					"invoices_amountin_rs":j.invoices_amountin_rs,
-		# 					"invoice_attachment":j.invoice_attachment,
-		# 					"credit_memo_attachment":j.credit_memo_attachment,
-		# 					"document_attachment":j.document_attachment,
-		# 					"po_attachment_attachment":j.po_attachment,
-		# 					"bill_summary_attadelivery_challanchment":j.bill_summary,
-		# 					"delivery_challan_attachment":j.delivery_challan,
-		# 					"grn_attachment":j.grn_attachment,
-		# 				})
-		# 			ref_party_doc.save()
-		# 			doc_name=ref_party_doc.name
-		# 			t.status_of_verification="Forward For Verification"
-		# 			t.document_name=doc_name
-					
-		
+		third_party_verification(self)		
 		if self.workflow_state=="Bill Received by Audit" and (self.today_date==None or self.today_date==""):
 			date=datetime.date.today()
 			self.db_set("today_date",date)
@@ -297,14 +261,3 @@ def get_action_acess(self):
 				count=count+1
 	return count		
 
-
-# @frappe.whitelist()   
-# def share_doc_with_approver(doc, user):   	
-# 	if not frappe.has_permission(doc=doc, ptype="submit", user=user):    
-# 		frappe.share.add(doc.doctype, doc.name, user, submit=1,    
-# 		flags={"ignore_share_permission": True})        
-# 		frappe.msgprint(("Shared with the approver {0}").format(    user, frappe.bold("submit"), alert=True))       	
-# 		doc_before_save = doc.get_doc_before_save()   	
-# 		if doc_before_save:    
-# 			approvers = {    "Leave Application": "leave_approver",    "Expense Claim": "expense_approver",    "Shift Request": "approver"    }  
-# 			approver = approvers.get(doc.doctype)
