@@ -18,3 +18,9 @@ frappe.ui.form.on('Third-Party Verification', {
 		}
 	}
 });
+frappe.ui.form.on('Third-Party Verification', {
+	refresh: function(frm) {
+		$('.btn btn-primary btn-sm primary-action').prop('hidden', true); 
+		// $("btn btn-primary btn-sm primary-action").hide();
+	}
+});

@@ -196,10 +196,10 @@ def third_party_verification(self):
 				session_user = frappe.session.user
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["designation"])
 				if emp_data:
-					docperm=frappe.get_all("Custom DocPerm",{"role":emp_data[0]["designation"],"parent":"Third-Party Verification"},["name"])
-					docperm_doc=frappe.get_doc("Custom DocPerm", docperm[0]['name'])
-					docperm_doc.create=1
-					docperm_doc.save()
+					# docperm=frappe.get_all("Custom DocPerm",{"role":emp_data[0]["designation"],"parent":"Third-Party Verification"},["name"])
+					# docperm_doc=frappe.get_doc("Custom DocPerm", docperm[0]['name'])
+					# docperm_doc.create=1
+					# docperm_doc.save()
 					###################### Data enrty in Third-Party Verification
 					ref_party_doc=frappe.get_doc({
 						'doctype':'Third-Party Verification',
@@ -233,9 +233,9 @@ def third_party_verification(self):
 					t.status_of_verification="Forward For Verification"
 					t.document_name=doc_name
 					################################################# Reverting role permission
-					docperm_doc=frappe.get_doc("Custom DocPerm", docperm[0]['name'])
-					docperm_doc.create=0
-					docperm_doc.save()
+					# docperm_doc=frappe.get_doc("Custom DocPerm", docperm[0]['name'])
+					# docperm_doc.create=0
+					# docperm_doc.save()
 					##################################### 3rd party Auto share with
 					user=t.employee_id
 					emp_data = frappe.get_all("Employee",{"name":user},["email"])
