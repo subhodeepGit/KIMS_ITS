@@ -11,11 +11,16 @@ class Supplier(Document):
 
 @frappe.whitelist()
 def ifsc_code(ifsc_code):
-	bank_data=[]
-	res = "https://ifsc.razorpay.com/" + ifsc_code
-	response = requests.get(res)
-	bank_data=response.json()
-	return bank_data
+	if ifsc_code!=None and ifsc_code!="":
+		bank_data=[]
+		res = "https://ifsc.razorpay.com/" + ifsc_code
+		response = requests.get(res)
+		if response.status_code!=404:
+			bank_data=response.json()
+			return bank_data
+		else:
+			frappe.msgprint("IFSC Code not Found")	
+			return bank_data
 
 def mand(self):
 	if self.ifsc_code!="" and self.ifsc_code!=None:
