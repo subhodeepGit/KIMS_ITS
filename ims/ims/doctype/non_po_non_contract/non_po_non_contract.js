@@ -357,3 +357,40 @@ frappe.ui.form.on('Non PO Non Contract', {
         })
 	},
 });	
+
+frappe.ui.form.on('Non PO Non Contract', {
+	refresh: function(frm) {
+		if(frm.is_new()!=1){
+			frappe.call({
+				method: "ims.ims.doctype.non_po_non_contract.non_po_non_contract.get_action_acess",
+				args: {
+					self:frm.doc
+				},
+				callback: function(r) { 
+					if (r.message!=0){
+						$('.actions-btn-group').hide();
+						$('.primary-action').prop('hidden', true);
+						frm.refresh();
+					}
+					
+				}
+			})
+		}
+		// $('.primary-action').prop('hidden', true); //hide save button
+		// $('.actions-btn-group').hide(); //hide all button
+		}
+});
+
+
+frappe.ui.form.on('Non PO Non Contract', {
+	setup: function(frm) {
+		frm.set_query("employee_id", "third_party_verification", function(doc, cdt, cdn) {
+			let d = locals[cdt][cdn];
+			return {
+				filters: [
+					['Employee', 'third_party_employee', '=', 1],
+				]
+			};
+		});
+	},
+});
