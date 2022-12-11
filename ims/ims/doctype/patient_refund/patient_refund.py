@@ -136,6 +136,7 @@ class PatientRefund(Document):
 								frappe.db.commit()
 
 						frappe.db.sql(""" update `tabPatient Refund` set workflow_state="%s" where name="%s" """%(check,self.name))
+						frappe.db.sql(""" update `tabPatient Refund` set document_status="%s" where name="%s" """%("Rejected and Transfer",self.name))
 						frappe.db.commit()
 						frappe.throw("Your Rejection and Transfer is Completed, So Please Referesh your page")
 					else:

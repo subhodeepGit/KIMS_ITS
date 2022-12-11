@@ -281,8 +281,6 @@ def workflow_creation(self):
 						"grouping_of_designation":grouping_of_designation
 					})
 				############################# pass for payment
-				print("\n\n\n\n")
-				print(name)
 				if self.doctype_name=="Batch Payment Process":
 					name="Payment Done"
 					update_value="Payment Done"
@@ -361,7 +359,7 @@ def workflow_creation(self):
 					if j.reject_and_transfer==1:	
 						state=name
 						action="Reject and Transfer"
-						next_state=next_state		
+						next_state="Rejected and Transfer"		
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
@@ -426,7 +424,7 @@ def workflow_creation(self):
 					if t.reject_and_transfer==1:	
 						state=name
 						action="Reject and Transfer"
-						next_state=next_state			
+						next_state="Rejected and Transfer"		
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
@@ -473,7 +471,7 @@ def workflow_creation(self):
 				if t.reject_and_transfer==1:	
 					state=name
 					action="Reject and Transfer"
-					next_state=next_state		
+					next_state="Rejected and Transfer"			
 					workflow_doc.append("transitions",{
 						"state":state,
 						"action":action,
@@ -540,7 +538,7 @@ def workflow_creation(self):
 					if t.reject_and_transfer==1:	
 						state=name
 						action="Reject and Transfer"
-						next_state=next_state		
+						next_state="Rejected and Transfer"	
 						workflow_doc.append("transitions",{
 							"state":state,
 							"action":action,
