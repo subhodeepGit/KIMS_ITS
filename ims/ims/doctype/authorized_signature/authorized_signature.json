@@ -69,6 +69,7 @@
    "fieldname": "remarks",
    "fieldtype": "Small Text",
    "label": "Remarks",
+   "mandatory_depends_on": "eval:doc.transfer_to==1",
    "read_only_depends_on": "eval:(parent.workflow_state==\"Passed for Payment\")"
   },
   {
@@ -139,7 +140,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-18 13:00:10.049830",
+ "modified": "2022-12-11 20:36:58.181895",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Authorized Signature",

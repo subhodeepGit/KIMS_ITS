@@ -19,6 +19,16 @@ class PatientRefund(Document):
 			if session_user:
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 				if emp_data:
+
+					##################### Rejected and Transfer Check
+					for t in self.get("authorized_signature"):
+						doc_before_save = self.get_doc_before_save()
+						if doc_before_save.document_status!=self.document_status:
+							if t.transfer_to==1 and t.disapproval_check==1:
+								pass
+							if t.transfer_to==1 and t.disapproval_check==0:
+								frappe.throw("Rejected and Transfer to state <b>%s</b> is checked in line no :-<b> %s </b> for the table Authorized Signature."%(t.approval_status,t.idx))
+					##############################
 					flag="Yes"
 					object_var=""
 					for t in self.get("authorized_signature"):
