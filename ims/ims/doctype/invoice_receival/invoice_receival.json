@@ -1,0 +1,145 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "INV-.DD./.MM./.YYYY.-.####",
+ "creation": "2022-12-12 11:27:40.561067",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "invoice_no",
+  "invoice_date",
+  "invoices_amountin_rs",
+  "supplier_code",
+  "supplier_name",
+  "invoice_attachment",
+  "posting_date",
+  "remarks_if_any",
+  "column_break_8",
+  "invoice_status",
+  "note_sheet_status",
+  "note_no",
+  "type_of_note_sheet",
+  "batch_payment_no",
+  "payment_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "invoice_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Invoice No.",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice_date",
+   "fieldtype": "Date",
+   "label": "Invoice Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoices_amountin_rs",
+   "fieldtype": "Currency",
+   "label": "Invoices Amount(in Rs)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Supplier Code",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier_code.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "invoice_status",
+   "fieldtype": "Data",
+   "label": "Invoice Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "note_sheet_status",
+   "fieldtype": "Data",
+   "label": "Note Sheet Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "note_no",
+   "fieldtype": "Data",
+   "label": "Note No.",
+   "read_only": 1
+  },
+  {
+   "fieldname": "type_of_note_sheet",
+   "fieldtype": "Data",
+   "label": "Type of Note Sheet",
+   "read_only": 1
+  },
+  {
+   "fieldname": "batch_payment_no",
+   "fieldtype": "Data",
+   "label": "Batch Payment No.",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "label": "Payment Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "invoice_attachment",
+   "fieldtype": "Attach",
+   "label": "Invoice Attachment",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remarks_if_any",
+   "fieldtype": "Data",
+   "label": "Remarks, If Any"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-12 15:10:07.514636",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Invoice Receival",
+ "naming_rule": "By script",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

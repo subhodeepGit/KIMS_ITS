@@ -385,3 +385,17 @@ frappe.ui.form.on('PO Consumable', {
 		});
 	},
 });
+
+frappe.ui.form.on('PO Consumable', {
+	setup:function(frm) { 
+		frm.set_query("invoice_receival_no","details_of_invoices_and_po", function(_doc, cdt, cdn) {
+			return {
+			filters: [
+				["supplier_code",'=', frm.doc.supplier_code],
+				['Invoice Receival', 'type_of_note_sheet', '!=', "T-Kitchen"]
+			],
+			};   
+		}); 
+	},
+	
+});

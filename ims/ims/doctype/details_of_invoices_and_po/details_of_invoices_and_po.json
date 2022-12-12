@@ -6,8 +6,9 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "details_of_invoices_and_po",
+  "invoice_receival_no",
   "invoice_no",
+  "details_of_invoices_and_po",
   "column_break_4",
   "invoice_date",
   "invoices_amountin_rs",
@@ -44,6 +45,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "invoice_receival_no.invoice_no",
    "fieldname": "invoice_no",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -51,6 +53,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "invoice_receival_no.invoice_date",
    "fieldname": "invoice_date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -58,6 +61,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "invoice_receival_no.invoices_amountin_rs",
    "fieldname": "invoices_amountin_rs",
    "fieldtype": "Currency",
    "in_list_view": 1,
@@ -66,6 +70,7 @@
   },
   {
    "depends_on": "eval:doc.invoice_attachment_1==1",
+   "fetch_from": "invoice_receival_no.invoice_attachment",
    "fieldname": "invoice_attachment",
    "fieldtype": "Attach",
    "label": "Invoice",
@@ -211,12 +216,19 @@
    "fieldtype": "Attach",
    "label": "Purchase Notesheet Attachment",
    "mandatory_depends_on": "eval:doc.purchase_notesheet==1"
+  },
+  {
+   "fieldname": "invoice_receival_no",
+   "fieldtype": "Link",
+   "label": "Invoice Receival No.",
+   "options": "Invoice Receival",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-28 15:06:18.350825",
+ "modified": "2022-12-12 15:03:47.542164",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Details of Invoices and PO",

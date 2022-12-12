@@ -9,6 +9,7 @@ from frappe.utils import cint, date_diff, datetime, get_datetime, today
 
 class POConsumable(Document):
 	def validate(self):
+		status_update(self)
 
 		mandatory_check(self)
 		third_party_verification(self)		
@@ -261,3 +262,11 @@ def get_action_acess(self):
 				count=count+1
 	return count		
 
+def status_update(self):
+		for t in self.get("details_of_invoices_and_po"):
+			workflow_status=self.workflow_state
+			name=self.name
+			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"invoice_status",workflow_status)
+			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_sheet_status",self.document_status)
+			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_no",name)
+			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"type_of_note_sheet","T-Kitchen")
