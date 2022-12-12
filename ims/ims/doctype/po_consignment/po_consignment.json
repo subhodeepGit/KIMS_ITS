@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "PO- CONSGT.-.#####",
+ "autoname": "PO- CONSGT.-.DD./.MM./.YYYY.-.####",
  "creation": "2022-10-28 13:22:00.209541",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -310,7 +310,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-08 18:13:09.978189",
+ "modified": "2022-12-12 14:56:28.844045",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consignment",

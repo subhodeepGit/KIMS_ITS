@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "PO-MM.-.####",
+ "autoname": "PO-MM.-.DD./.MM./.YYYY.-.####",
  "creation": "2022-10-28 12:53:19.163285",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -292,7 +292,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-09 10:01:26.137776",
+ "modified": "2022-12-12 14:57:49.864134",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
