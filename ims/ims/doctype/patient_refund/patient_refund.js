@@ -154,11 +154,51 @@ frappe.ui.form.on('Patient Refund', {
 	},
 })
 frappe.ui.form.on('Patient Refund', {
+	setup:function(frm){
+		const date = new Date();
+		let day = date.getDate();
+		let month = date.getMonth() + 1;
+		let year = date.getFullYear();
+		// This arrangement can be altered based on how we want the date's format to appear.
+		let currentDate = `${day}-${month}-${year}`;
+		frm.set_query('type_of_insurance',function(){
+			return{
+				filters:[
+				['Reason of Refund Master', 'validity_start_date', '<=', currentDate],
+				['Reason of Refund Master', 'validity_end_date', '>=', currentDate ]
+			]
+			}
+		})
+		frm.set_query('name_of_the_insurance',function(){
+			return{
+				filters:[
+				['Health Insurance Name', 'validity_start_date', '<=', currentDate],
+				['Health Insurance Name', 'validity_end_date', '>=', currentDate ]
+			]
+			}
+		})
+	},
 	type_of_insurance:function(frm){
+
 		if (frm.doc.type_of_insurance!=""){
-			frm.set_df_property("approved_amount",'reqd', 1)
-			frm.set_df_property("name_of_the_insurance",'reqd', 1)
-			frm.set_df_property("insurance_details_attachment",'reqd', 1)
+			frappe.call({
+				method: 'ims.ims.doctype.patient_refund.patient_refund.insurance_check',
+				args: {
+					type_of_insurance:frm.doc.type_of_insurance,
+				},
+				callback: function(r) { 
+					if (r.message){
+						var out_put=r.message[0]
+						// console.log(out_put['insurance_mandatory_check'])
+						frm.set_df_property("approved_amount",'reqd', out_put['insurance_mandatory_check'])
+						frm.set_df_property("name_of_the_insurance",'reqd', out_put['insurance_mandatory_check'])
+						frm.set_df_property("insurance_details_attachment",'reqd', out_put['insurance_mandatory_check'])
+					}
+				}
+			})
+			// frm.set_df_property("approved_amount",'reqd', 1)
+			// frm.set_df_property("name_of_the_insurance",'reqd', 1)
+			// frm.set_df_property("insurance_details_attachment",'reqd', 1)
 		}
 		else{
 			frm.set_df_property("approved_amount",'reqd', 0)

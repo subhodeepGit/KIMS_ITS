@@ -517,9 +517,10 @@
   },
   {
    "fieldname": "type_of_insurance",
-   "fieldtype": "Select",
-   "label": "Type of Insurance",
-   "options": "\nNormal Health Insurances\nBiju Swasthya Kalyan Yojana\nCentral Govt. Schemes\nOthers"
+   "fieldtype": "Link",
+   "label": "Reason of Refund",
+   "options": "Reason of Refund Master",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_71",
@@ -527,8 +528,9 @@
   },
   {
    "fieldname": "name_of_the_insurance",
-   "fieldtype": "Data",
-   "label": "Name of the Insurance"
+   "fieldtype": "Link",
+   "label": "Name of the Insurance",
+   "options": "Health Insurance Name"
   },
   {
    "fieldname": "insurance_details_attachment",
@@ -561,7 +563,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-12 16:16:48.716161",
+ "modified": "2022-12-12 17:33:18.882882",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",

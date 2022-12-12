@@ -157,3 +157,12 @@ def mandatory_check(self):
 # 	if self.ifsc_code!="":
 # 		if self.branch==None:
 # 			frappe.throw("IFSC Code is not Correct")
+
+@frappe.whitelist()
+def insurance_check(type_of_insurance):
+	print("\n\n\n\n\n")
+	if type_of_insurance!="" and type_of_insurance!=None:
+		insurance_mandatory_check=frappe.get_all("Reason of Refund Master",{"name":type_of_insurance},["insurance_mandatory_check"])
+		print(insurance_mandatory_check)
+		return insurance_mandatory_check
+	
