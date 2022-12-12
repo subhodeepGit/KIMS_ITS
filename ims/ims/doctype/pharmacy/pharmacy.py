@@ -6,11 +6,26 @@ from frappe.model.document import Document
 from frappe import utils
 from frappe.utils import cint, date_diff, datetime, get_datetime, today
 import frappe.share 
+from ims.ims.notification.custom_notification import supplier_payment_initiazation, designation_wise_email, supplier_passforpayment
 
 class Pharmacy(Document):
 	def validate(self):
 
 		mandatory_check(self)
+
+		designation_wise_email(self)
+		
+		if self.workflow_state == "Verified & Submitted by Note Creator":
+			count = 0
+			for t in self.get("authorized_signature"):
+				if t.approval_status == "Verified & Submitted by Note Creator":
+					count=count+1
+			if count == 0:
+				supplier_payment_initiazation(self)
+		
+		if self.workflow_state == "Passed for Payment":
+			supplier_passforpayment(self)
+
 		third_party_verification(self)		
 		if self.workflow_state=="Bill Received by Audit" and (self.today_date==None or self.today_date==""):
 			date=datetime.date.today()

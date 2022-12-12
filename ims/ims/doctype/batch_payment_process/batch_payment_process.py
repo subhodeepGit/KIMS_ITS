@@ -6,10 +6,15 @@ from frappe.model.document import Document
 from frappe import utils
 from six import iteritems, string_types
 import json
+from ims.ims.notification.custom_notification import supplier_passforpayment
 
 class BatchPaymentProcess(Document):
 	def validate(self):
 		mand(self)
+		
+		if self.workflow_state == "Payment Done":
+			supplier_passforpayment(self)
+
 		field_update_notesheer(self)
 		if self.workflow_state=="Verified & Submitted by Note Creator":
 			merge_same_vendor(self)
