@@ -392,7 +392,7 @@ frappe.ui.form.on('PO Consumable', {
 			return {
 			filters: [
 				["supplier_code",'=', frm.doc.supplier_code],
-				['Invoice Receival', 'type_of_note_sheet', '!=', "T-Kitchen"]
+				['Invoice Receival', 'type_of_note_sheet', '=', ""]
 			],
 			};   
 		}); 
