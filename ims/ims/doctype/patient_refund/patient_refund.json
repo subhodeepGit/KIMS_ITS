@@ -9,6 +9,7 @@
  "field_order": [
   "refund_of_hospital_due_paid_in_excess_section",
   "company",
+  "type_of_insurance",
   "name_of_the_patient",
   "ip__uhid_no",
   "department",
@@ -76,7 +77,6 @@
   "total_amount_refunded",
   "refund_attachment",
   "insurance_details_section",
-  "type_of_insurance",
   "approved_amount",
   "column_break_71",
   "name_of_the_insurance",
@@ -506,7 +506,7 @@
   {
    "fieldname": "insurance_details_section",
    "fieldtype": "Section Break",
-   "label": "Insurance Details"
+   "label": "TPA / Insurance / Corporate / OSTF"
   },
   {
    "default": "0",
@@ -561,7 +561,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-12 15:03:32.574573",
+ "modified": "2022-12-12 16:16:48.716161",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
