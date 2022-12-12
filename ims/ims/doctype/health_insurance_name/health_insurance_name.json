@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:health_insurance_name",
+ "creation": "2022-12-12 15:44:16.575118",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "health_insurance_name",
+  "company_name",
+  "contact_person_name",
+  "contact_person_email",
+  "column_break_5",
+  "validity_start_date",
+  "validity_end_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "health_insurance_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Health Insurance Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name"
+  },
+  {
+   "fieldname": "contact_person_name",
+   "fieldtype": "Phone",
+   "label": "Contact Person Name"
+  },
+  {
+   "fieldname": "contact_person_email",
+   "fieldtype": "Data",
+   "label": "Contact Person Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "validity_start_date",
+   "fieldtype": "Date",
+   "label": "Validity Start Date",
+   "reqd": 1
+  },
+  {
+   "default": "9999-12-30",
+   "fieldname": "validity_end_date",
+   "fieldtype": "Date",
+   "label": "Validity End Date",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-12-12 15:47:44.737115",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Health Insurance Name",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -136,6 +136,7 @@ class PatientRefund(Document):
 								frappe.db.commit()
 
 						frappe.db.sql(""" update `tabPatient Refund` set workflow_state="%s" where name="%s" """%(check,self.name))
+						frappe.db.commit()
 						frappe.db.sql(""" update `tabPatient Refund` set document_status="%s" where name="%s" """%("Rejected and Transfer",self.name))
 						frappe.db.commit()
 						frappe.throw("Your Rejection and Transfer is Completed, So Please Referesh your page")
@@ -156,3 +157,10 @@ def mandatory_check(self):
 # 	if self.ifsc_code!="":
 # 		if self.branch==None:
 # 			frappe.throw("IFSC Code is not Correct")
+
+@frappe.whitelist()
+def insurance_check(type_of_insurance):
+	if type_of_insurance!="" and type_of_insurance!=None:
+		insurance_mandatory_check=frappe.get_all("Reason of Refund Master",{"name":type_of_insurance},["insurance_mandatory_check"])
+		return insurance_mandatory_check
+	

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "PHRMCY.-.####",
+ "autoname": "PHRMCY.-.DD./.MM./.YYYY.-.####",
  "creation": "2022-10-28 15:29:32.430909",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -287,7 +287,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-09 15:47:30.261916",
+ "modified": "2022-12-12 14:58:51.016850",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Pharmacy",
