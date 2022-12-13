@@ -116,7 +116,13 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
+	"cron": {
+		"*/1 * * * *": [
+			"ims.tasks.cron"
+		]
+	},
+}
 #	"all": [
 #		"ims.tasks.all"
 #	],
