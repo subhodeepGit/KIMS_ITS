@@ -93,6 +93,14 @@ class BatchPaymentProcess(Document):
 
 
 					if flag=="Yes":
+						approval_email_status="Mail Not Send"
+						notesheet_cancellation_email_status=""
+						if self.workflow_state=="Draft" or self.workflow_state=="Verify and Save":
+							approval_email_status=""
+							notesheet_cancellation_email_status=""
+						if self.workflow_state=="Cancelled":
+							approval_email_status=""
+							notesheet_cancellation_email_status="Mail Not Send"	
 						self.append("approval_hierarchy",{                                     
 							"emp_id":emp_data[0]['name'],                                       
 							"emp_name":emp_name,                                        
@@ -105,7 +113,9 @@ class BatchPaymentProcess(Document):
 							"transfer_to":0, 
 							"workflow_data":workflow_name,
 							"grouping_of_designation":grouping_of_designation,
-							"single_user":single_user                                       
+							"single_user":single_user,
+							"approval_email_status":approval_email_status,
+							"notesheet_cancellation_email_status":notesheet_cancellation_email_status                                       
 						})
 					if flag=="No":
 						for t in self.get("approval_hierarchy"):
