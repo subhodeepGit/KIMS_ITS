@@ -150,8 +150,8 @@ class NonPOContract(Document):
 						emp_name=emp_data[0]['salutation']+" "+emp_data[0]['full_name']
 						for t in self.get("authorized_signature"):
 							if t.name>=name:
-								frappe.db.sql(""" update `tabAuthorized Signature` set disapproval_check=1,disapproval_emp_name="%s",disapproval_emp="%s" 
-												where name="%s" """%(emp_name,emp_data[0]['name'],t.name))
+								frappe.db.sql(""" update `tabAuthorized Signature` set disapproval_check=1,disapproval_emp_name="%s",disapproval_emp="%s" ,
+												rejection_email_status="Mail Not Send" where name="%s" """%(emp_name,emp_data[0]['name'],t.name))
 								frappe.db.commit()
 
 						frappe.db.sql(""" update `tabNon PO Contract` set workflow_state="%s" where name="%s" """%(check,self.name))
