@@ -5,13 +5,12 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import money_in_words
 from frappe import utils
-from ims.ims.notification.custom_notification import supplier_payment_initiazation, designation_wise_email, supplier_passforpayment
+from ims.ims.notification.custom_notification import supplier_payment_initiazation, supplier_passforpayment
 
 class PatientRefund(Document):
 	def validate(self):
 		# mand(self)
 		mandatory_check(self)
-		designation_wise_email(self)
 		
 		if self.workflow_state == "Verified & Submitted by Note Creator":
 			count = 0
@@ -36,12 +35,15 @@ class PatientRefund(Document):
 
 					##################### Rejected and Transfer Check
 					for t in self.get("authorized_signature"):
-						doc_before_save = self.get_doc_before_save()
-						if doc_before_save.document_status!=self.document_status:
-							if t.transfer_to==1 and t.disapproval_check==1:
-								pass
-							if t.transfer_to==1 and t.disapproval_check==0:
-								frappe.throw("Rejected and Transfer to state <b>%s</b> is checked in line no :-<b> %s </b> for the table Authorized Signature."%(t.approval_status,t.idx))
+						if self.workflow_state=="Draft":
+							pass
+						else:
+							doc_before_save = self.get_doc_before_save()
+							if doc_before_save.document_status!=self.document_status:
+								if t.transfer_to==1 and t.disapproval_check==1:
+									pass
+								if t.transfer_to==1 and t.disapproval_check==0:
+									frappe.throw("Rejected and Transfer to state <b>%s</b> is checked in line no :-<b> %s </b> for the table Authorized Signature."%(t.approval_status,t.idx))
 					##############################
 					flag="Yes"
 					object_var=""
