@@ -21,11 +21,13 @@ def supplier_passforpayment(self):
     send_mail(frappe.get_all("Supplier",{"name":self.supplier_code},["email_id"])[0]["email_id"],sub,msg,attachments)
 
 def supplier_finalpayment(self):
-    sub="""<p><b>Your payment is Done</b></p><br>"""
+    sub="""Your payment is Done"""
     msg="""<b>Thank You</b><br>"""
     attachments = None
-    vendor_email = frappe.get_all("Vendor Wise Payment Details",{"parent":self.name},["vendor_code"][0]["vendor_code"])
-    send_mail(frappe.get_all("Supplier",{"parent":vendor_email},["email"][0]["email"]),sub,msg,attachments)
+    vendor_code = frappe.get_all("Vendor Wise Payment Details",{"parent":self.name},["vendor_code"])
+    vendor=vendor_code[0]["vendor_code"]
+    vendor_email=frappe.get_all("Supplier",{"name":vendor},["email_id"])
+    send_mail(vendor_email[0]["email_id"],sub,msg,attachments)
 
 def designation_wise_email(self):
     sub="""<p><b>Workflow received for Approval</b></p><br>"""
