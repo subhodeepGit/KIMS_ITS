@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "PAT-RFD.-.DD./.MM./.YYYY.-.####",
+ "autoname": "PAT-RFD-.DD./.MM./.YYYY.-.####",
  "creation": "2022-10-28 15:37:13.088824",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -563,7 +563,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-12 17:33:18.882882",
+ "modified": "2022-12-13 13:34:11.365483",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",

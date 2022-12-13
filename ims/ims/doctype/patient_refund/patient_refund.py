@@ -5,24 +5,11 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import money_in_words
 from frappe import utils
-from ims.ims.notification.custom_notification import supplier_payment_initiazation, designation_wise_email, supplier_passforpayment
 
 class PatientRefund(Document):
 	def validate(self):
 		# mand(self)
 		mandatory_check(self)
-		designation_wise_email(self)
-		
-		if self.workflow_state == "Verified & Submitted by Note Creator":
-			count = 0
-			for t in self.get("authorized_signature"):
-				if t.approval_status == "Verified & Submitted by Note Creator":
-					count=count+1
-			if count == 0:
-				supplier_payment_initiazation(self)
-		
-		if self.workflow_state == "Passed for Payment":
-			supplier_passforpayment(self)
 
 		# self.net_refundable_in_figures=(self.amount_deposited_by_patient - self.approval_of_tpa__insurance__corporate__ostf - self.cash_refund - self.total_bill - self.approval_of_tpa__insurance__corporate__ostf - self.less__non_admissible_item__discount_amount)
 		self.net_refundable_in_words = money_in_words(self.net_refundable_in_figures)
@@ -36,12 +23,15 @@ class PatientRefund(Document):
 
 					##################### Rejected and Transfer Check
 					for t in self.get("authorized_signature"):
-						doc_before_save = self.get_doc_before_save()
-						if doc_before_save.document_status!=self.document_status:
-							if t.transfer_to==1 and t.disapproval_check==1:
-								pass
-							if t.transfer_to==1 and t.disapproval_check==0:
-								frappe.throw("Rejected and Transfer to state <b>%s</b> is checked in line no :-<b> %s </b> for the table Authorized Signature."%(t.approval_status,t.idx))
+						if self.workflow_state=="Draft":
+							pass
+						else:
+							doc_before_save = self.get_doc_before_save()
+							if doc_before_save.document_status!=self.document_status:
+								if t.transfer_to==1 and t.disapproval_check==1:
+									pass
+								if t.transfer_to==1 and t.disapproval_check==0:
+									frappe.throw("Rejected and Transfer to state <b>%s</b> is checked in line no :-<b> %s </b> for the table Authorized Signature."%(t.approval_status,t.idx))
 					##############################
 					flag="Yes"
 					object_var=""
@@ -95,7 +85,7 @@ class PatientRefund(Document):
 						date_of_receivable=t.date_of_approval
 					
 					if date_of_receivable=="":
-						date_of_receivable=utils.today()
+						date_of_receivable=utils.now()
 					emp_name=emp_data[0]['salutation']+" "+emp_data[0]['full_name']
 
 
@@ -104,7 +94,7 @@ class PatientRefund(Document):
 							"emp_id":emp_data[0]['name'],
 							"emp_name":emp_name,
 							"designation":emp_data[0]['designation'],
-							"date_of_approval":utils.today(),
+							"date_of_approval":utils.now(),
 							"date_of_receivable":date_of_receivable,
 							"department":emp_data[0]['department'],
 							"approval_status":approval_status,
@@ -120,7 +110,7 @@ class PatientRefund(Document):
 								t.emp_id=emp_data[0]['name']
 								t.emp_name=emp_name
 								t.designation=emp_data[0]['designation']
-								t.date_of_approval=utils.today()
+								t.date_of_approval=utils.now()
 								t.date_of_receivable=date_of_receivable
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
