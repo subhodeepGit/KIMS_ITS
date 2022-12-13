@@ -95,7 +95,7 @@ class PatientRefund(Document):
 						date_of_receivable=t.date_of_approval
 					
 					if date_of_receivable=="":
-						date_of_receivable=utils.today()
+						date_of_receivable=utils.now()
 					emp_name=emp_data[0]['salutation']+" "+emp_data[0]['full_name']
 
 
@@ -104,7 +104,7 @@ class PatientRefund(Document):
 							"emp_id":emp_data[0]['name'],
 							"emp_name":emp_name,
 							"designation":emp_data[0]['designation'],
-							"date_of_approval":utils.today(),
+							"date_of_approval":utils.now(),
 							"date_of_receivable":date_of_receivable,
 							"department":emp_data[0]['department'],
 							"approval_status":approval_status,
@@ -120,7 +120,7 @@ class PatientRefund(Document):
 								t.emp_id=emp_data[0]['name']
 								t.emp_name=emp_name
 								t.designation=emp_data[0]['designation']
-								t.date_of_approval=utils.today()
+								t.date_of_approval=utils.now()
 								t.date_of_receivable=date_of_receivable
 								t.department=emp_data[0]['department']
 								t.approval_status=approval_status
