@@ -1,7 +1,11 @@
 {
  "actions": [],
  "allow_rename": 1,
+<<<<<<< HEAD
  "autoname": "PO-TKIT-.DD./.MM./.YYYY.-.#####",
+=======
+ "autoname": "T-KCHN-.DD./.MM./.YYYY.-.#####",
+>>>>>>> f1c4a25a17245174d1bc4b7a02e3b01bc630721b
  "creation": "2022-10-28 09:50:40.948038",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -288,7 +292,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2022-12-13 17:24:22.374071",
+=======
+ "modified": "2022-12-13 17:36:44.413694",
+>>>>>>> f1c4a25a17245174d1bc4b7a02e3b01bc630721b
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

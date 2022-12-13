@@ -13,8 +13,8 @@ class InvoiceReceival(Document):
 
 	def on_cancel(self):
 		self.db_set("invoice_status","Cancelled")
-		if self.batch_payment_no!="":
+		if self.batch_payment_no!="" and self.batch_payment_no!=None:
 			frappe.throw("Data link with <b>{0}</b> Batch Payment Process, Unlink data before <b>Cancel</b>".format(self.get('batch_payment_no')))
-		if self.note_no!="":
+		if self.note_no!="" and self.note_no!=None:
 			frappe.throw("Data link with <b>{0}</b> NoteSheet, Unlink data before <b>Cancel</b>".format(self.get('note_no')))
 		
