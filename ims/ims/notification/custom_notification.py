@@ -29,6 +29,14 @@ def supplier_finalpayment(self):
     vendor_email=frappe.get_all("Supplier",{"name":vendor},["email_id"])
     send_mail(vendor_email[0]["email_id"],sub,msg,attachments)
 
+def thirdparty_email(user):
+    receipient = user
+    sub = "<b>NoteSheet received for Verification</b>"
+    msg = "<b>Thank You</b>"
+    attachments = None
+    send_mail(receipient,sub,msg,attachments)
+
+
 def designation_wise_email(self):
     sub="""<p><b>Workflow received for Approval</b></p><br>"""
     msg="""<b>Thank You</b><br>"""
