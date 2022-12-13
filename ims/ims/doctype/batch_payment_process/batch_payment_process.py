@@ -372,11 +372,11 @@ def status_update(self):
 	workflow_status=self.workflow_state
 	name=self.name
 	for t in self.get("table_26"):
-		data = frappe.get_all("Invoice Receival",{"note_no":t.invoice_tracking_number},["name"])
-		if data:
+		invoice = frappe.get_all("Invoice Receival",{"note_no":t.invoice_tracking_number},["name"])
+		if invoice:
 			if workflow_status!="Cancelled":
-				frappe.db.set_value("Invoice Receival",data,"batch_payment_no",name)
-				frappe.db.set_value("Invoice Receival",data,"payment_status",workflow_status)
+				frappe.db.set_value("Invoice Receival",invoice,"batch_payment_no",name)
+				frappe.db.set_value("Invoice Receival",invoice,"payment_status",workflow_status)
 			else:
-				frappe.db.set_value("Invoice Receival",data,"batch_payment_no","")
-				frappe.db.set_value("Invoice Receival",data,"payment_status","")
+				frappe.db.set_value("Invoice Receival",invoice,"batch_payment_no","")
+				frappe.db.set_value("Invoice Receival",invoice,"payment_status","")
