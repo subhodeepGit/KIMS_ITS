@@ -392,7 +392,7 @@ frappe.ui.form.on('PO Consumable', {
 			return {
 			filters: [
 				["supplier_code",'=', frm.doc.supplier_code],
-				['Invoice Receival', 'type_of_note_sheet', '=', ""]
+				['Invoice Receival', 'invoice_status', '=', "Passed for Notesheet"]
 			],
 			};   
 		}); 

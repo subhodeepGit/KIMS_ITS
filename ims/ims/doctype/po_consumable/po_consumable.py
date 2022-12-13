@@ -288,10 +288,16 @@ def get_action_acess(self):
 	return count		
 
 def status_update(self):
+		workflow_status=self.workflow_state
+		name=self.name
 		for t in self.get("details_of_invoices_and_po"):
-			workflow_status=self.workflow_state
-			name=self.name
-			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"invoice_status",workflow_status)
-			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_sheet_status",self.document_status)
-			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_no",name)
-			frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"type_of_note_sheet","T-Kitchen")
+			if workflow_status!="Cancelled":
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"invoice_status","NoteSheet Prepared")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_sheet_status",workflow_status)
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_no",name)
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"type_of_note_sheet","T-Kitchen")
+			else:
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"invoice_status","Passed for Notesheet")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_sheet_status","")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_no","")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"type_of_note_sheet","")

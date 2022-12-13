@@ -11,6 +11,7 @@ from ims.ims.notification.custom_notification import supplier_finalpayment
 class BatchPaymentProcess(Document):
 	def validate(self):
 		mand(self)
+		status_update(self)
 		
 		if self.workflow_state == "Payment Done":
 			supplier_finalpayment(self)
@@ -366,3 +367,16 @@ def field_update_notesheer(self):
 						else:
 							workflow_status=j.payment_status
 							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)			
+
+def status_update(self):
+	workflow_status=self.workflow_state
+	name=self.name
+	for t in self.get("table_26"):
+		data = frappe.get_all("Invoice Receival",{"note_no":t.invoice_tracking_number},["name"])
+		if data:
+			if workflow_status!="Cancelled":
+				frappe.db.set_value("Invoice Receival",data,"batch_payment_no",name)
+				frappe.db.set_value("Invoice Receival",data,"payment_status",workflow_status)
+			else:
+				frappe.db.set_value("Invoice Receival",data,"batch_payment_no","")
+				frappe.db.set_value("Invoice Receival",data,"payment_status","")
