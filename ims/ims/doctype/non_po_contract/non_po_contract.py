@@ -5,14 +5,13 @@ import frappe
 from frappe.model.document import Document
 from frappe import utils
 from frappe.utils import cint, date_diff, datetime, get_datetime, today
-from ims.ims.notification.custom_notification import supplier_payment_initiazation, designation_wise_email, supplier_passforpayment
+from ims.ims.notification.custom_notification import supplier_payment_initiazation, supplier_passforpayment, thirdparty_email
 
 class NonPOContract(Document):
 	def validate(self):
 
 		mandatory_check(self)
 
-		designation_wise_email(self)
 		
 		if self.workflow_state == "Verified & Submitted by Note Creator":
 			count = 0
@@ -259,7 +258,8 @@ def third_party_verification(self):
 										submit=1,
 										read=1,
 										write=1,    
-										flags={"ignore_share_permission": True}) 
+										flags={"ignore_share_permission": True})
+					thirdparty_email(user) 
 				else:
 					frappe.throw("Employee Not Found")	
 

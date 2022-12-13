@@ -7,21 +7,25 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "company",
+  "type_of_invoice",
   "invoice_no",
   "invoice_date",
   "invoices_amountin_rs",
   "supplier_code",
   "supplier_name",
   "invoice_attachment",
-  "posting_date",
   "remarks_if_any",
   "column_break_8",
+  "posting_date",
   "invoice_status",
   "note_sheet_status",
   "note_no",
   "type_of_note_sheet",
   "batch_payment_no",
-  "payment_status"
+  "payment_status",
+  "section_break_16",
+  "amended_from"
  ],
  "fields": [
   {
@@ -108,18 +112,45 @@
   {
    "fieldname": "invoice_attachment",
    "fieldtype": "Attach",
-   "label": "Invoice Attachment",
-   "reqd": 1
+   "label": "Invoice Attachment"
   },
   {
    "fieldname": "remarks_if_any",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "label": "Remarks, If Any"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Invoice Receival",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "type_of_invoice",
+   "fieldtype": "Select",
+   "label": "Type Of Invoice",
+   "options": "\nT-Kitchen\nPO Consignment\nPO Material Management\nPharmacy\nNon PO Contract\nNon PO Non Contract\nPatient Refund\nBatch Payment Process"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2022-12-12 15:10:07.514636",
+ "modified": "2022-12-13 11:52:47.749765",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Receival",

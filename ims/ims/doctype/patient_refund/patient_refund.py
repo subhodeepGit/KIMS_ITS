@@ -5,23 +5,11 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import money_in_words
 from frappe import utils
-from ims.ims.notification.custom_notification import supplier_payment_initiazation, supplier_passforpayment
 
 class PatientRefund(Document):
 	def validate(self):
 		# mand(self)
 		mandatory_check(self)
-		
-		if self.workflow_state == "Verified & Submitted by Note Creator":
-			count = 0
-			for t in self.get("authorized_signature"):
-				if t.approval_status == "Verified & Submitted by Note Creator":
-					count=count+1
-			if count == 0:
-				supplier_payment_initiazation(self)
-		
-		if self.workflow_state == "Passed for Payment":
-			supplier_passforpayment(self)
 
 		# self.net_refundable_in_figures=(self.amount_deposited_by_patient - self.approval_of_tpa__insurance__corporate__ostf - self.cash_refund - self.total_bill - self.approval_of_tpa__insurance__corporate__ostf - self.less__non_admissible_item__discount_amount)
 		self.net_refundable_in_words = money_in_words(self.net_refundable_in_figures)
