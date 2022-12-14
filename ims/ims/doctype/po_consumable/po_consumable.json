@@ -1,11 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
-<<<<<<< HEAD
- "autoname": "PO-TKIT-.DD./.MM./.YYYY.-.#####",
-=======
  "autoname": "T-KCHN-.DD./.MM./.YYYY.-.#####",
->>>>>>> f1c4a25a17245174d1bc4b7a02e3b01bc630721b
  "creation": "2022-10-28 09:50:40.948038",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -91,6 +87,29 @@
    "reqd": 1
   },
   {
+   "fieldname": "document_status",
+   "fieldtype": "Data",
+   "label": "Document Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Data",
+   "label": "Payment Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "read_only": 1
+  },
+  {
    "fieldname": "item_of_purchaseexpense",
    "fieldtype": "Data",
    "label": "Item Of Purchase/Expense",
@@ -140,8 +159,23 @@
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   },
   {
-   "fieldname": "column_break_7",
+   "fieldname": "audit_section_section",
+   "fieldtype": "Section Break",
+   "label": "Audit Section"
+  },
+  {
+   "fieldname": "audit_ref_no",
+   "fieldtype": "Data",
+   "label": "Audit Ref No"
+  },
+  {
+   "fieldname": "column_break_18",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "today_date",
+   "fieldtype": "Date",
+   "label": "Today Date"
   },
   {
    "fieldname": "section_break_15",
@@ -155,12 +189,6 @@
    "options": "Details of Invoices and PO",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
-  },
-  {
-   "fieldname": "document_status",
-   "fieldtype": "Data",
-   "label": "Document Status",
-   "read_only": 1
   },
   {
    "depends_on": "eval:doc.details_of_invoices_and_po",
@@ -202,18 +230,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "section_break_24",
-   "fieldtype": "Section Break",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
-  },
-  {
-   "fieldname": "authorized_signature",
-   "fieldtype": "Table",
-   "label": "Authorized Signature",
-   "options": "Authorized Signature",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
-  },
-  {
    "fieldname": "journal_voucher_section",
    "fieldtype": "Section Break",
    "label": "Journal Voucher"
@@ -243,35 +259,9 @@
    "label": "Document Date"
   },
   {
-   "default": "Today",
-   "fieldname": "posting_date",
-   "fieldtype": "Date",
-   "label": "Posting Date",
-   "read_only": 1
-  },
-  {
    "fieldname": "attach_journal_voucher",
    "fieldtype": "Attach",
    "label": "Attach Journal Voucher"
-  },
-  {
-   "fieldname": "audit_section_section",
-   "fieldtype": "Section Break",
-   "label": "Audit Section"
-  },
-  {
-   "fieldname": "audit_ref_no",
-   "fieldtype": "Data",
-   "label": "Audit Ref No"
-  },
-  {
-   "fieldname": "today_date",
-   "fieldtype": "Date",
-   "label": "Today Date"
-  },
-  {
-   "fieldname": "column_break_18",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_36",
@@ -284,19 +274,21 @@
    "options": "Reference of  Note sheet Verification"
   },
   {
-   "fieldname": "payment_status",
-   "fieldtype": "Data",
-   "label": "Payment Status",
-   "read_only": 1
+   "fieldname": "section_break_24",
+   "fieldtype": "Section Break",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") "
+  },
+  {
+   "fieldname": "authorized_signature",
+   "fieldtype": "Table",
+   "label": "Authorized Signature",
+   "options": "Authorized Signature",
+   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
-<<<<<<< HEAD
- "modified": "2022-12-13 17:24:22.374071",
-=======
- "modified": "2022-12-13 17:36:44.413694",
->>>>>>> f1c4a25a17245174d1bc4b7a02e3b01bc630721b
+ "modified": "2022-12-14 10:43:26.623312",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
