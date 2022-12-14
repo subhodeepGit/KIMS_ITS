@@ -10,7 +10,7 @@ from ims.ims.notification.custom_notification import supplier_payment_initiazati
 
 class Pharmacy(Document):
 	def validate(self):
-
+		status_update(self)
 		mandatory_check(self)
 
 		
