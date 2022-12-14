@@ -8,6 +8,13 @@ from frappe.utils import cint, date_diff, datetime, get_datetime, today
 from ims.ims.notification.custom_notification import supplier_payment_initiazation, supplier_passforpayment, thirdparty_email
 
 class NonPOContract(Document):
+	def before_validate(self):
+		for z in frappe.get_all("Details of Enclosed Bills",{"parent":self.name},["invoice_receival_no"]):
+			frappe.db.set_value("Invoice Receival",z.invoice_receival_no,"invoice_status","Passed for Notesheet")
+			frappe.db.set_value("Invoice Receival",z.invoice_receival_no,"note_sheet_status","")
+			frappe.db.set_value("Invoice Receival",z.invoice_receival_no,"note_no","")
+			frappe.db.set_value("Invoice Receival",z.invoice_receival_no,"type_of_note_sheet","")
+
 	def validate(self):
 		status_update(self)
 		mandatory_check(self)
@@ -127,6 +134,7 @@ class NonPOContract(Document):
 							"approval_email_status":approval_email_status,
 							"notesheet_cancellation_email_status":notesheet_cancellation_email_status                                      
 						})
+						frappe.msgprint("Your Document has been %s"%(self.workflow_state))
 					if flag=="No":
 						for t in self.get("authorized_signature"):
 							if t.name==object_var.name:

@@ -9,6 +9,13 @@ import json
 from ims.ims.notification.custom_notification import supplier_finalpayment
 
 class BatchPaymentProcess(Document):
+	def before_validate(self):
+		for z in frappe.get_all("Batch Payment Child",{"parent":self.name},["invoice_tracking_number"]):
+			invoice = frappe.get_all("Invoice Receival",{"note_no":z.invoice_tracking_number},["name"])
+			if invoice:
+				frappe.db.set_value("Invoice Receival",invoice,"batch_payment_no","")
+				frappe.db.set_value("Invoice Receival",invoice,"payment_status","")
+
 	def validate(self):
 		mand(self)
 		status_update(self)
@@ -117,6 +124,7 @@ class BatchPaymentProcess(Document):
 							"approval_email_status":approval_email_status,
 							"notesheet_cancellation_email_status":notesheet_cancellation_email_status                                       
 						})
+						frappe.msgprint("Your Document has been %s"%(self.workflow_state))
 					if flag=="No":
 						for t in self.get("approval_hierarchy"):
 							if t.name==object_var.name:
