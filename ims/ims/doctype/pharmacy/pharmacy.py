@@ -284,3 +284,18 @@ def get_action_acess(self):
 			if t['final_status']=="Open":
 				count=count+1
 	return count	
+
+def status_update(self):
+		workflow_status=self.workflow_state
+		name=self.name
+		for t in self.get("details_of_enclosed_bills"):
+			if workflow_status!="Cancelled":
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"invoice_status","NoteSheet Prepared")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_sheet_status",workflow_status)
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_no",name)
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"type_of_note_sheet","Pharmacy")
+			else:
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"invoice_status","Passed for Notesheet")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_sheet_status","")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"note_no","")
+				frappe.db.set_value("Invoice Receival",t.invoice_receival_no,"type_of_note_sheet","")
