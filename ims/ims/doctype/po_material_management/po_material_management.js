@@ -286,3 +286,17 @@ frappe.ui.form.on('PO Material Management', {
 		});
 	},
 });
+
+frappe.ui.form.on('PO Material Management', {
+	setup:function(frm) { 
+		frm.set_query("invoice_receival_no","details_of_invoices_and_po", function(_doc, cdt, cdn) {
+			return {
+			filters: [
+				["supplier_code",'=', frm.doc.supplier_code],
+				['Invoice Receival', 'invoice_status', '=', "Passed for Notesheet"]
+			],
+			};   
+		}); 
+	},
+	
+});

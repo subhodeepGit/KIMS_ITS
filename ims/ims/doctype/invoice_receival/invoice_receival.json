@@ -145,13 +145,13 @@
    "fieldname": "type_of_invoice",
    "fieldtype": "Select",
    "label": "Type Of Invoice",
-   "options": "\nT-Kitchen\nPO Consignment\nPO Material Management\nPharmacy\nNon PO Contract\nNon PO Non Contract\nPatient Refund\nBatch Payment Process"
+   "options": "\nT-Kitchen\nPO Consignment\nPO Material Management\nPharmacy\nNon PO Contract\nNon PO Non Contract"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-13 17:10:06.078570",
+ "modified": "2022-12-13 18:03:17.953129",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Receival",
