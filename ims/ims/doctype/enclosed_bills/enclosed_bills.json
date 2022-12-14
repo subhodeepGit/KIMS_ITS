@@ -270,6 +270,7 @@
   {
    "fieldname": "invoice_receival_no",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Invoice Receival No.",
    "options": "Invoice Receival",
    "reqd": 1
@@ -278,7 +279,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-14 12:41:22.452569",
+ "modified": "2022-12-14 12:46:23.569239",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Enclosed Bills",

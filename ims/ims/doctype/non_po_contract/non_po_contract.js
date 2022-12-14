@@ -280,3 +280,17 @@ frappe.ui.form.on('Non PO Contract', {
 		});
 	},
 });
+
+frappe.ui.form.on('Non PO Contract', {
+	setup:function(frm) { 
+		frm.set_query("invoice_receival_no","details_of_enclosed_bills", function(_doc, cdt, cdn) {
+			return {
+			filters: [
+				["supplier_code",'=', frm.doc.supplier_code],
+				['Invoice Receival', 'invoice_status', '=', "Passed for Notesheet"]
+			],
+			};   
+		}); 
+	},
+	
+});
