@@ -109,13 +109,24 @@ def cron():
             ####################################### End Pass for Payment section   
             ####################################### Payment status from batch payment 
             # (Logic:- which of the invoice emp has approved and batch payment is completed with spacification of payment status of the success or failure note sheet spacific as on sys date )
-            import datetime
-            today_day=datetime.datetime(2022, 12, 8, 0, 0)
-            for t in data:
-                if t["approval_status"]=="Payment Done":
-                    doc_date=frappe.get_all(t['parenttype'],{"name":t['parent']},['name','document_status'])
-                    print(doc_date)
-                    pass                      
+            # import datetime
+            # today_day=datetime.datetime(2022, 12, 8, 0, 0)
+            # for t in data:
+            #     if t["approval_status"]=="Payment Done":
+            #         doc_date=frappe.get_all(t['parenttype'],{"name":t['parent']},['name','document_status'])
+            #         print(doc_date)
+            #         pass
+            # print(emp_wf['name'])
+            # print(emp_wf['full_name'])
+            # print(data)
+            # payment_data_bep=frappe.get_all("Authorized Signature",{"approval_status":"Payment Done"})
+            # print(payment_data_bep)
+            # today_date=
+            payment_data_bep=frappe.get_all("Authorized Signature",{"date_of_approval":['between', ['2022-12-15 00:00:00','2022-12-15 23:59:59']],"approval_status":"Payment Done"})
+            print(payment_data_bep)
+
+
+                                
 
                            
 
