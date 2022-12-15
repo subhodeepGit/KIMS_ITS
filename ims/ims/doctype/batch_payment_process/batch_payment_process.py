@@ -24,6 +24,7 @@ class BatchPaymentProcess(Document):
 	def validate(self):
 		mand(self)
 		status_update(self)
+		child_mand(self)
 		
 		if self.workflow_state == "Payment Done":
 			supplier_finalpayment(self)
@@ -365,7 +366,13 @@ def mand(self):
 					if t.mode_of_payment=="" or t.mode_of_payment==None:
 						frappe.throw("Mode of Payment is mandatory in Payment Details table")
 			else:
-				frappe.throw("Payment Status is mandatory in Payment Details table")			
+				frappe.throw("Payment Status is mandatory in Payment Details table")	
+
+def child_mand(self):
+	if self.document_status=="Payment Done":
+		for t in self.get("vendor_wise_payment_details"):
+			if t.payment_status=="" or t.payment_status==None:
+				frappe.throw("Payment Status is Required in Vendor Wise Payment Details table")
 
 def field_update_notesheer(self):
 	doc_before_save = self.get_doc_before_save()
