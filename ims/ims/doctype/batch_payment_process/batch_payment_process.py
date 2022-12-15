@@ -182,7 +182,7 @@ class BatchPaymentProcess(Document):
 					frappe.throw("Transfer To Employee Not Selected")
 
 @frappe.whitelist()
-def get_outstanding_amount(args):
+def get_outstanding_amount(args,name):
 	if isinstance(args, string_types):
 		args = json.loads(args)
 	filter=[]
@@ -262,6 +262,27 @@ def get_outstanding_amount(args):
 				patient_refund['workflow_state']=t['workflow_state']
 				patient_refund['name_of_notesheet']=doctype['doctype']
 				data.append(patient_refund)
+
+			for x in frappe.get_all("Batch Payment Child",{"parent":name},["approve","invoice_tracking_number","name_of_notesheet",
+			               			"document_no","document_date","vendor_code","vendor_name","ac_holder_name","bank_name",
+									"branch","ac_no","ifsc_code","amount","amount1"]):
+				all_ready={}
+				all_ready['workflow_state']=x['approve']	
+				all_ready['name_of_notesheet']=x['name_of_notesheet']
+				all_ready['name']=x['invoice_tracking_number']
+				all_ready['document_number']=x['document_no']
+				all_ready['document_date']=x['document_date']
+				all_ready['supplier_code']=x['vendor_code']
+				all_ready['name_of_supplier']=x['vendor_name']
+				all_ready['account_holder_name']=x['ac_holder_name']
+				all_ready['bank_name']=x['bank_name']
+				all_ready['bank_address']=x['branch']
+				all_ready['bank_ac_no']=x['ac_no']
+				all_ready['ifsc_code']=x['ifsc_code']
+				all_ready['net_final_amount_to_be_paid_in_rs']=x['amount']
+				all_ready['net_final_amount_to_be_paid_in_rs']=x['amount1']			
+				data.append(all_ready)
+
 	if not data:
 		frappe.msgprint("No Data")
 
