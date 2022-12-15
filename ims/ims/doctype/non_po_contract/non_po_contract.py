@@ -16,6 +16,8 @@ class NonPOContract(Document):
 			frappe.db.set_value("Invoice Receival",z.invoice_receival_no,"type_of_note_sheet","")
 
 	def validate(self):
+		if self.net_final_amount_to_be_paid_in_rs <= 0 :
+			frappe.throw("Net Amount cannot be <b> less than Zero or Zero </b>")
 		status_update(self)
 		mandatory_check(self)
 

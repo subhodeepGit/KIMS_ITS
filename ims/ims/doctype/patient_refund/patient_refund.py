@@ -113,6 +113,7 @@ class PatientRefund(Document):
 							"approval_email_status":approval_email_status,
 							"notesheet_cancellation_email_status":notesheet_cancellation_email_status
 						})
+						frappe.msgprint("Your Document has been %s"%(self.workflow_state))
 					if flag=="No":
 						for t in self.get("authorized_signature"):
 							if t.name==object_var.name:

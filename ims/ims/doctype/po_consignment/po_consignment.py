@@ -15,8 +15,11 @@ class POConsignment(Document):
 			frappe.db.set_value("Invoice Receival",z.invoice_receival_no,"type_of_note_sheet","")
 
 	def validate(self):
+		if self.net_final_amount_to_be_paid_in_rs <= 0 :
+			frappe.throw("Net Amount cannot be <b> less than Zero or Zero </b>")
 		status_update(self)
 		mandatory_check(self)
+
 		
 		if self.workflow_state == "Verified & Submitted by Note Creator":
 			count = 0
@@ -175,8 +178,10 @@ class POConsignment(Document):
 
 @frappe.whitelist()
 def clearance_period(supplier):
-	data=frappe.get_all("Supplier",{"name":supplier},["amount_clearance_period_in_days"])
-	return data[0]['amount_clearance_period_in_days']
+	if supplier!=None or supplier!="":
+		data=frappe.get_all("Supplier",{"name":supplier},["amount_clearance_period_in_days"])
+		if data:
+			return data[0]['amount_clearance_period_in_days']
 
 def mandatory_check(self):
 	if self.workflow_state=="Verify and Save":

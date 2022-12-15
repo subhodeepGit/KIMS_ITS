@@ -15,6 +15,11 @@ class BatchPaymentProcess(Document):
 			if invoice:
 				frappe.db.set_value("Invoice Receival",invoice,"batch_payment_no","")
 				frappe.db.set_value("Invoice Receival",invoice,"payment_status","")
+		for t in frappe.get_all("Batch Payment Child",{"parent":self.name},["invoice_tracking_number","name_of_notesheet"]):
+			doctype_data = frappe.get_all(t["name_of_notesheet"],{"name":t.invoice_tracking_number},["name"])
+			if doctype_data :
+				frappe.db.set_value(t["name_of_notesheet"],doctype_data,"payment_status","Passed for Payment")
+				frappe.db.set_value(t["name_of_notesheet"],doctype_data,"batch_payment_no","")
 
 	def validate(self):
 		mand(self)
@@ -33,13 +38,16 @@ class BatchPaymentProcess(Document):
 				emp_data = frappe.get_all("Employee",{"email":session_user,"enabled":1},["name","full_name","salutation","designation","department"])
 				if emp_data:
 					##################### Rejected and Transfer Check
-					for t in self.get("authorized_signature"):
-						doc_before_save = self.get_doc_before_save()
-						if doc_before_save.document_status!=self.document_status:
-							if t.transfer_to==1 and t.disapproval_check==1:
-								pass
-							if t.transfer_to==1 and t.disapproval_check==0:
-								frappe.throw("Rejected and Transfer to state <b>%s</b> is checked in line no :-<b> %s </b> for the table Authorized Signature."%(t.approval_status,t.idx))
+					for t in self.get("approval_hierarchy"):
+						if self.workflow_state=="Draft":
+							pass
+						else:
+							doc_before_save = self.get_doc_before_save()
+							if doc_before_save.document_status!=self.document_status:
+								if t.transfer_to==1 and t.disapproval_check==1:
+									pass
+								if t.transfer_to==1 and t.disapproval_check==0:
+									frappe.throw("Rejected and Transfer to state <b>%s</b> is checked in line no :-<b> %s </b> for the table Authorized Signature."%(t.approval_status,t.idx))
 					##############################
 					flag="Yes"
 					object_var=""
@@ -180,7 +188,7 @@ def get_outstanding_amount(args):
 
 	filter.append(['posting_date', 'between',[args.get('from_posting_date'),args.get('to_posting_date')]])	
 	filter.append(["workflow_state","=","Passed for Payment"])
-	filter.append(["payment_status","=","Passed for Payment"])
+	filter.append(["payment_status","in",("Passed for Payment","Cancelled")])
 	filter.append(['company',"=",args.get('company')])
 	if args.get('priority'):
 		filter.append(['priority',"=",args.get('priority')])
@@ -365,6 +373,8 @@ def field_update_notesheer(self):
 		for t in self.get("table_26"):
 			workflow_status=self.workflow_state
 			frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
+			frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"batch_payment_no",self.name)
+
 	elif doc_before_save.document_status!=self.document_status:
 		for t in self.get("table_26"):
 			if self.document_status=="Payment Done":
@@ -372,6 +382,7 @@ def field_update_notesheer(self):
 			else:
 				workflow_status=self.workflow_state
 				frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
+				frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"batch_payment_no",self.name)
 
 		if self.document_status=="Payment Done":
 			for j in self.get("vendor_wise_payment_details"):
@@ -382,9 +393,11 @@ def field_update_notesheer(self):
 							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)
 							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"workflow_state","Verify and Save")
 							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"document_status","Document save")
+							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"batch_payment_no",self.name)
 						else:
 							workflow_status=j.payment_status
-							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)			
+							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"payment_status",workflow_status)	
+							frappe.db.set_value(t.name_of_notesheet,t.invoice_tracking_number,"batch_payment_no",self.name)		
 
 def status_update(self):
 	workflow_status=self.workflow_state

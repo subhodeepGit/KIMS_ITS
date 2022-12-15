@@ -253,7 +253,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			
 			callback: function(r) {
 				if(r.message){
-					frappe.model.clear_table(frm.doc, 'table_26');
+					// frappe.model.clear_table(frm.doc, 'table_26');
 					(r.message).forEach(element => {
 						var c = frm.add_child("table_26")
 						c.vendor_name=element.name_of_supplier
@@ -273,7 +273,7 @@ frappe.ui.form.on("Batch Payment Process", {
 					});
 				} 
 				frm.refresh();
-				frm.refresh_field("table_26")
+				// frm.refresh_field("table_26")
 			}
 		});
 	},

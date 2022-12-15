@@ -231,23 +231,17 @@
   {
    "fieldname": "profit_center",
    "fieldtype": "Data",
-   "label": "Profit Center",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Profit Center"
   },
   {
    "fieldname": "document_number",
    "fieldtype": "Data",
-   "label": "Document Number",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Document Number"
   },
   {
    "fieldname": "ref_no",
    "fieldtype": "Data",
-   "label": "Ref. No",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Ref. No"
   },
   {
    "fieldname": "column_break_32",
@@ -256,9 +250,7 @@
   {
    "fieldname": "document_date",
    "fieldtype": "Date",
-   "label": "Document Date",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Document Date"
   },
   {
    "default": "Today",
@@ -270,9 +262,7 @@
   {
    "fieldname": "attach_journal_voucher",
    "fieldtype": "Attach",
-   "label": "Attach Journal Voucher",
-   "mandatory_depends_on": "eval:(doc.workflow_state==\"Journal Entry by Account Dept.\") || (doc.workflow_state==\"Passed for Payment\");",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Attach Journal Voucher"
   },
   {
    "fieldname": "third_party_verification",
@@ -298,7 +288,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-15 12:31:51.587930",
+ "modified": "2022-12-15 13:56:04.515701",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
