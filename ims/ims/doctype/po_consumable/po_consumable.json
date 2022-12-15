@@ -14,6 +14,7 @@
   "for_which_department",
   "document_status",
   "payment_status",
+  "batch_payment_no",
   "column_break_7",
   "posting_date",
   "item_of_purchaseexpense",
@@ -284,11 +285,17 @@
    "label": "Authorized Signature",
    "options": "Authorized Signature",
    "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+  },
+  {
+   "fieldname": "batch_payment_no",
+   "fieldtype": "Data",
+   "label": "Batch Payment No",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-14 10:43:26.623312",
+ "modified": "2022-12-15 12:29:56.050197",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",

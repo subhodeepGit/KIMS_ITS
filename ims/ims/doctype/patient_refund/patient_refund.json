@@ -20,6 +20,7 @@
   "approval_attachment",
   "document_status",
   "payment_status",
+  "batch_payment_no",
   "column_break_5",
   "cash_refund",
   "less__non_admissible_item__discount_amount",
@@ -559,11 +560,17 @@
    "label": "Company",
    "options": "Company",
    "reqd": 1
+  },
+  {
+   "fieldname": "batch_payment_no",
+   "fieldtype": "Data",
+   "label": "Batch Payment No",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-13 13:34:11.365483",
+ "modified": "2022-12-15 12:37:45.107493",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",

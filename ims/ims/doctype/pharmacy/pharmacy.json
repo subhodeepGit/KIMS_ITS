@@ -15,6 +15,7 @@
   "item_of_purchaseexpense",
   "document_status",
   "payment_status",
+  "batch_payment_no",
   "column_break_7",
   "posting_date",
   "supplier_code",
@@ -283,11 +284,17 @@
   {
    "fieldname": "column_break_35",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "batch_payment_no",
+   "fieldtype": "Data",
+   "label": "Batch Payment No",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-12 14:58:51.016850",
+ "modified": "2022-12-15 12:32:55.032548",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Pharmacy",
