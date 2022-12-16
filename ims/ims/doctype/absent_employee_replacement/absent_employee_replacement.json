@@ -1,0 +1,153 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "AER-.DD./.MM./.YYYY.-.####",
+ "creation": "2022-12-16 13:16:40.151857",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "from_employee",
+  "name1",
+  "email",
+  "role",
+  "from_date",
+  "column_break_2",
+  "to_employee",
+  "name2",
+  "email1",
+  "role1",
+  "to_date",
+  "section_break_12",
+  "reason_if_any",
+  "section_break_3",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "From Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Absent Employee Replacement",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "to_employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "from_employee.full_name",
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "to_employee.full_name",
+   "fieldname": "name2",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "from_employee.email",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "to_employee.email",
+   "fieldname": "email1",
+   "fieldtype": "Data",
+   "label": "Email",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "from_employee.role",
+   "fieldname": "role",
+   "fieldtype": "Data",
+   "label": "Role",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "to_employee.role",
+   "fieldname": "role1",
+   "fieldtype": "Data",
+   "label": "Role",
+   "read_only": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_12",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "reason_if_any",
+   "fieldtype": "Text",
+   "label": "Reason, If any"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-12-16 18:01:50.683397",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "Absent Employee Replacement",
+ "naming_rule": "By script",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
