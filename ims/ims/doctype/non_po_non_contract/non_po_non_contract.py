@@ -219,7 +219,7 @@ def get_table_attachments():
 	attachments = []
 
 	for t in frappe.get_all("DocField",{"parent": "Details Enclosed Bills","fieldtype":"Attach"},["fieldname","mandatory_depends_on"]):
-		if t['mandatory_depends_on']!=None or t['mandatory_depends_on']!="":
+		if t['mandatory_depends_on']!=None and t['mandatory_depends_on']!="":
 			a=t['mandatory_depends_on'].split(":")
 			a=a[1].split(".")
 			a=a[1].split("=")

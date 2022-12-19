@@ -36,7 +36,9 @@
   "grn_attachment",
   "grn",
   "purchase_notesheet",
-  "purchase_notesheet_attachment"
+  "purchase_notesheet_attachment",
+  "debit_note",
+  "debit_note_attachment"
  ],
  "fields": [
   {
@@ -242,12 +244,25 @@
    "fieldtype": "Date",
    "label": "Posting Date",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "debit_note",
+   "fieldtype": "Check",
+   "label": "Debit Note"
+  },
+  {
+   "depends_on": "eval:doc.debit_note==1",
+   "fieldname": "debit_note_attachment",
+   "fieldtype": "Attach",
+   "label": "Debit Note Attachment",
+   "mandatory_depends_on": "eval:doc.debit_note==1"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-13 17:46:56.747164",
+ "modified": "2022-12-19 12:26:30.969494",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoices and PO",
