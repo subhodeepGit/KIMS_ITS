@@ -203,8 +203,10 @@ def get_outstanding_amount(args,name):
 	elif args.get("invoice")!=None:
 		c_doctype=[{"doctype":args.get("invoice")}]
 
-	if args.get('vendor'):
-		filter.append(['supplier_code',"=",args.get('vendor')])		
+	# if args.get('vendor'):
+	# 	filter.append(['supplier_code',"=",args.get('vendor')])
+	# if args.get('employee'):
+	# 	filter.append(['employee',"=",args.get('employee')])		
 
 	data=[]
 
@@ -212,27 +214,87 @@ def get_outstanding_amount(args,name):
 		filter_for=[]
 		filter_for=filter.copy()
 		if doctype['doctype']!="Patient Refund":
+			if args.get('vendor'):
+				filter_for.append(['supplier_code',"=",args.get('vendor')])	
 			filter_for.append(["net_final_amount_to_be_paid_in_rs",">",0])
 			if args.get('outstanding_amt_greater_than') > 0:
 				filter_for.append(["net_final_amount_to_be_paid_in_rs",">=",args.get('outstanding_amt_greater_than')])
 			if args.get('outstanding_amt_less_than') >0:
 				filter_for.append(["net_final_amount_to_be_paid_in_rs","<=",args.get('outstanding_amt_less_than')])
-			invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter_for,
-			fields=['name','posting_date','company','supplier_code','document_number',
-					'document_date','supplier_code','name_of_supplier',
-					'net_final_amount_to_be_paid_in_rs','workflow_state'],order_by="posting_date asc")
-	
-			for t in invoice_data:
-				sup_info=frappe.db.get_all("Supplier",{"name":t['supplier_code']},["ifsc_code","bank_ac_no","account_holder_name","bank_name","bank_address"])
-				t["ifsc_code"]=sup_info[0]['ifsc_code']
-				t["bank_ac_no"]=sup_info[0]['bank_ac_no']
-				t['account_holder_name']=sup_info[0]['account_holder_name']
-				t["bank_name"]=sup_info[0]['bank_name']
-				t['bank_address']=sup_info[0]['bank_address']
-				t['name_of_notesheet']=doctype['doctype']
+			if doctype['doctype']=="Non PO Non Contract":
+				invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter_for,
+				fields=['name','posting_date','company','supplier_code','document_number',
+						'document_date','supplier_code','name_of_supplier',
+						'net_final_amount_to_be_paid_in_rs','workflow_state','type_of_supplier','employee','employee_name'],order_by="posting_date asc")
 
-			for t in invoice_data:
-				data.append(t)
+				for t in invoice_data:
+					if t['type_of_supplier']=="Supplier":
+						sup_info=frappe.db.get_all("Supplier",{"name":t['supplier_code']},["ifsc_code","bank_ac_no","account_holder_name","bank_name","bank_address"])
+						t["ifsc_code"]=sup_info[0]['ifsc_code']
+						t["bank_ac_no"]=sup_info[0]['bank_ac_no']
+						t['account_holder_name']=sup_info[0]['account_holder_name']
+						t["bank_name"]=sup_info[0]['bank_name']
+						t['bank_address']=sup_info[0]['bank_address']
+						t['name_of_notesheet']=doctype['doctype']
+					if t['type_of_supplier']=="Employee":
+						emp_info=frappe.db.get_all("Employee",{"name":t['employee']},["ifsc_code","bank_ac_no","account_holder_name","bank_address","branch_name","bank_name"])
+						t["ifsc_code"]=emp_info[0]['ifsc_code']
+						t["bank_ac_no"]=emp_info[0]['bank_ac_no']
+						t['account_holder_name']=emp_info[0]['account_holder_name']
+						t["bank_name"]=emp_info[0]['bank_name']
+						t['bank_address']=emp_info[0]['branch_name']
+						t['name_of_notesheet']=doctype['doctype']
+
+				for t in invoice_data:
+					emp={}
+					if t['type_of_supplier']=="Supplier":
+						emp['workflow_state']=t['workflow_state']	
+						emp['name_of_notesheet']=doctype['doctype']
+						emp['name']=t['name']
+						emp['document_number']=t['document_number']
+						emp['document_date']=t['document_date']
+						emp['supplier_code']=t['supplier_code']
+						emp['name_of_supplier']=t['name_of_supplier']
+						emp['account_holder_name']=t['account_holder_name']
+						emp['bank_name']=t['bank_name']
+						emp['bank_address']=t['bank_address']
+						emp['bank_ac_no']=t['bank_ac_no']
+						emp['ifsc_code']=t['ifsc_code']
+						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
+						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
+					if t['type_of_supplier']=="Employee":
+						emp['workflow_state']=t['workflow_state']	
+						emp['name_of_notesheet']=doctype['doctype']
+						emp['name']=t['name']
+						emp['document_number']=t['document_number']
+						emp['document_date']=t['document_date']
+						emp['supplier_code']=t['employee']
+						emp['name_of_supplier']=t['employee_name']
+						emp['account_holder_name']=t['account_holder_name']
+						emp['bank_name']=t['bank_name']
+						emp['bank_address']=t['bank_address']
+						emp['bank_ac_no']=t['bank_ac_no']
+						emp['ifsc_code']=t['ifsc_code']
+						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
+						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
+					data.append(emp)
+			else:
+				invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter_for,
+				fields=['name','posting_date','company','supplier_code','document_number',
+						'document_date','supplier_code','name_of_supplier',
+						'net_final_amount_to_be_paid_in_rs','workflow_state'],order_by="posting_date asc")
+		
+				for t in invoice_data:
+					sup_info=frappe.db.get_all("Supplier",{"name":t['supplier_code']},["ifsc_code","bank_ac_no","account_holder_name","bank_name","bank_address"])
+					t["ifsc_code"]=sup_info[0]['ifsc_code']
+					t["bank_ac_no"]=sup_info[0]['bank_ac_no']
+					t['account_holder_name']=sup_info[0]['account_holder_name']
+					t["bank_name"]=sup_info[0]['bank_name']
+					t['bank_address']=sup_info[0]['bank_address']
+					t['name_of_notesheet']=doctype['doctype']
+
+				for t in invoice_data:		
+					data.append(t)
 		else:
 			filter_for.append(["net_refundable_in_figures",">",0])	
 			if args.get('outstanding_amt_less_than') > 0:
@@ -261,7 +323,9 @@ def get_outstanding_amount(args,name):
 				patient_refund['name']=t['name']
 				patient_refund['workflow_state']=t['workflow_state']
 				patient_refund['name_of_notesheet']=doctype['doctype']
-				data.append(patient_refund)
+				if not args.get('vendor'):
+					if not args.get('employee'):
+						data.append(patient_refund)
 
 			for x in frappe.get_all("Batch Payment Child",{"parent":name},["approve","invoice_tracking_number","name_of_notesheet",
 			               			"document_no","document_date","vendor_code","vendor_name","ac_holder_name","bank_name",

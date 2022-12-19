@@ -180,18 +180,21 @@ frappe.ui.form.on("Batch Payment Process", {
 			{fieldtype:"Section Break", label: __("Type of Invoice")},
 			{fieldtype:"Select", label: __("Invoice"),
 				fieldname:"invoice", options: ["","PO Consumable","PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract","Patient Refund"]},
-			{fieldtype:"Section Break", label: __("Type of Invoice")},
+			{fieldtype:"Section Break", label: __("Type of Priority")},
 			{fieldtype:"Select", label: __("Priority"),
 				fieldname:"priority", options: ["","Urgent","Normal","High Priority","Low Priority"]},
-			{fieldtype:"Section Break", label: __("Vendor")},
+			{fieldtype:"Section Break", label: __("Type Of Supplier")},
+			{fieldtype:"Select", label: __("Type Of Supplier"),
+				fieldname:"type_of_supplier", options: ["","Employee","Supplier"]},
 			{fieldtype:"Link", label: __("Vendor"),fieldname:"vendor", options: "Supplier",
 				default:frm.doc.supplier_code,
 				"get_query": function() {
 					return {
 						"filters": {"company": frm.doc.company}
 					}
-				}
+				},
 			},
+			{fieldtype:"Link", label: __("Employee"),fieldname:"employee", options: "Employee",},
 			{fieldtype:"Section Break", label: __("Outstanding Amount")},
 			{fieldtype:"Float", label: __("Greater Than Amount"),
 				fieldname:"outstanding_amt_greater_than", default: 0},
@@ -238,6 +241,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			"posting_date": frm.doc.posting_date,
 			"priority": frm.doc.priority,
 			"vendor": frm.doc.supplier_code,
+			"employee": frm.doc.employee,
 		}
 
 		for (let key in filters) {
@@ -257,6 +261,8 @@ frappe.ui.form.on("Batch Payment Process", {
 					frappe.model.clear_table(frm.doc, 'table_26');
 					(r.message).forEach(element => {
 						var c = frm.add_child("table_26")
+						c.vendor_name=element.employee
+						c.vendor_code=element.employee_name
 						c.vendor_name=element.name_of_supplier
 						c.vendor_code=element.supplier_code
 						c.document_no=element.document_number
