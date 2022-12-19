@@ -120,6 +120,9 @@ scheduler_events = {
 	"cron": {
 		"*/1 * * * *": [
 			"ims.tasks.cron"
+		],
+		"@hourly": [
+			"ims.ims.employee_permission_schedular.employee_user"
 		]
 	},
 }
