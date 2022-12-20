@@ -183,9 +183,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			{fieldtype:"Section Break", label: __("Type of Priority")},
 			{fieldtype:"Select", label: __("Priority"),
 				fieldname:"priority", options: ["","Urgent","Normal","High Priority","Low Priority"]},
-			{fieldtype:"Section Break", label: __("Type Of Supplier")},
-			{fieldtype:"Select", label: __("Type Of Supplier"),
-				fieldname:"type_of_supplier", options: ["","Employee","Supplier"]},
+			{fieldtype:"Section Break", label: __("Type Of Supplier(Select One)")},
 			{fieldtype:"Link", label: __("Vendor"),fieldname:"vendor", options: "Supplier",
 				default:frm.doc.supplier_code,
 				"get_query": function() {
@@ -194,7 +192,16 @@ frappe.ui.form.on("Batch Payment Process", {
 					}
 				},
 			},
-			{fieldtype:"Link", label: __("Employee"),fieldname:"employee", options: "Employee",},
+			{fieldtype:"Column Break"},
+			{fieldtype:"Link", label: __("Employee"),fieldname:"employee", options: "Employee"},
+			{fieldtype:"Column Break"},
+			{fieldtype:"Link", label: __("Patient Refund"),fieldname:"patient_refund", options: "Patient Refund",
+			"get_query": function() {
+				return {
+					"filters": {"company": frm.doc.company}
+					}
+				},
+			},
 			{fieldtype:"Section Break", label: __("Outstanding Amount")},
 			{fieldtype:"Float", label: __("Greater Than Amount"),
 				fieldname:"outstanding_amt_greater_than", default: 0},
@@ -206,6 +213,8 @@ frappe.ui.form.on("Batch Payment Process", {
 			frappe.flags.allocate_payment_amount = true;
 			frm.events.validate_filters_data(frm, filters);
 			frm.doc.vendor = filters.supplier_code;
+			frm.doc.employee = filters.employee;
+			frm.doc.patient_refund = filters.patient_refund
 			frm.events.get_outstanding_documents(frm, filters);
 		}, __("Filters"), __("Get Outstanding Documents"));
 	},
@@ -242,6 +251,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			"priority": frm.doc.priority,
 			"vendor": frm.doc.supplier_code,
 			"employee": frm.doc.employee,
+			"patient_refund":frm.doc.patient_refund,
 		}
 
 		for (let key in filters) {

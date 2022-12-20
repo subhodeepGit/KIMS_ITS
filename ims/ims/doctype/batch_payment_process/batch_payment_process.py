@@ -191,8 +191,9 @@ def get_outstanding_amount(args,name):
 	filter.append(["workflow_state","=","Passed for Payment"])
 	filter.append(["payment_status","in",("Passed for Payment","Cancelled")])
 	filter.append(['company',"=",args.get('company')])
-	if args.get('priority'):
-		filter.append(['priority',"=",args.get('priority')])
+	# if args.get('priority'):
+	# 	filter.append(['priority',"=",args.get('priority')])
+	
 
 
 	if args.get("invoice")==None:
@@ -202,18 +203,32 @@ def get_outstanding_amount(args,name):
 					{"doctype":"Patient Refund","child_doc":""}]
 	elif args.get("invoice")!=None:
 		c_doctype=[{"doctype":args.get("invoice")}]
+	
+	if args.get('vendor') and args.get('employee') and args.get('patient_refund'):
+		frappe.throw("Please Select one filed in Type Of Supplier")
+	if args.get('vendor') and args.get('employee'):
+		frappe.throw("Please Select one filed in Type Of Supplier")
+	if args.get('employee') and args.get('patient_refund'):
+		frappe.throw("Please Select one filed in Type Of Supplier")
+	if args.get('vendor') and args.get('patient_refund'):
+		frappe.throw("Please Select one filed in Type Of Supplier")
 
 	# if args.get('vendor'):
 	# 	filter.append(['supplier_code',"=",args.get('vendor')])
 	# if args.get('employee'):
-	# 	filter.append(['employee',"=",args.get('employee')])		
+	# 	filter.append(['employee',"=",args.get('employee')])	
+	# if args.get('patient_refund'):
+	# 	filter.append(['name',"=",args.get('patient_refund')])	
 
 	data=[]
 
 	for doctype in c_doctype:
 		filter_for=[]
 		filter_for=filter.copy()
+
 		if doctype['doctype']!="Patient Refund":
+			if args.get('priority'):
+				filter_for.append(['priority',"=",args.get('priority')])
 			if args.get('vendor'):
 				filter_for.append(['supplier_code',"=",args.get('vendor')])	
 			filter_for.append(["net_final_amount_to_be_paid_in_rs",">",0])
@@ -222,6 +237,8 @@ def get_outstanding_amount(args,name):
 			if args.get('outstanding_amt_less_than') >0:
 				filter_for.append(["net_final_amount_to_be_paid_in_rs","<=",args.get('outstanding_amt_less_than')])
 			if doctype['doctype']=="Non PO Non Contract":
+				if args.get('employee'):
+					filter_for.append(['employee',"=",args.get('employee')])	
 				invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter_for,
 				fields=['name','posting_date','company','supplier_code','document_number',
 						'document_date','supplier_code','name_of_supplier',
@@ -262,6 +279,9 @@ def get_outstanding_amount(args,name):
 						emp['ifsc_code']=t['ifsc_code']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
+						if not args.get('patient_refund'):
+							if not args.get('employee'):
+								data.append(emp)
 					if t['type_of_supplier']=="Employee":
 						emp['workflow_state']=t['workflow_state']	
 						emp['name_of_notesheet']=doctype['doctype']
@@ -277,8 +297,10 @@ def get_outstanding_amount(args,name):
 						emp['ifsc_code']=t['ifsc_code']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
-					data.append(emp)
-			else:
+						if not args.get('patient_refund'):
+							if not args.get('vendor'):
+								data.append(emp)
+			else:	
 				invoice_data=frappe.db.get_all(doctype['doctype'],filters=filter_for,
 				fields=['name','posting_date','company','supplier_code','document_number',
 						'document_date','supplier_code','name_of_supplier',
@@ -293,9 +315,13 @@ def get_outstanding_amount(args,name):
 					t['bank_address']=sup_info[0]['bank_address']
 					t['name_of_notesheet']=doctype['doctype']
 
-				for t in invoice_data:		
-					data.append(t)
+				for t in invoice_data:
+					if not args.get('employee'):
+						if not args.get('patient_refund'):
+							data.append(t)
 		else:
+			# if args.get('patient_refund'):
+			# 	filter.append(['name',"=",args.get('patient_refund')])
 			filter_for.append(["net_refundable_in_figures",">",0])	
 			if args.get('outstanding_amt_less_than') > 0:
 				filter_for.append(["net_refundable_in_figures",">=",args.get('outstanding_amt_greater_than')])
@@ -325,7 +351,8 @@ def get_outstanding_amount(args,name):
 				patient_refund['name_of_notesheet']=doctype['doctype']
 				if not args.get('vendor'):
 					if not args.get('employee'):
-						data.append(patient_refund)
+						if not args.get('priority'):
+							data.append(patient_refund)
 
 			for x in frappe.get_all("Batch Payment Child",{"parent":name},["approve","invoice_tracking_number","name_of_notesheet",
 			               			"document_no","document_date","vendor_code","vendor_name","ac_holder_name","bank_name",
