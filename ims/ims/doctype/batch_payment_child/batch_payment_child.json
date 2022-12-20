@@ -41,14 +41,14 @@
    "fieldname": "vendor_code",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Vendor Code / IP / UHID No.",
+   "label": "Vendor Code / IP / UHID No. / Employee Code",
    "read_only": 1
   },
   {
    "fieldname": "vendor_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Vendor Name / Patient Name",
+   "label": "Vendor Name / Patient Name / Employee Name",
    "read_only": 1
   },
   {
@@ -124,7 +124,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-06 12:07:25.622335",
+ "modified": "2022-12-19 13:20:27.096060",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Child",
