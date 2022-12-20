@@ -203,14 +203,8 @@ def get_outstanding_amount(args,name):
 					{"doctype":"Patient Refund","child_doc":""}]
 	elif args.get("invoice")!=None:
 		c_doctype=[{"doctype":args.get("invoice")}]
-	
-	if args.get('vendor') and args.get('employee') and args.get('patient_refund'):
-		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
-	if args.get('vendor') and args.get('employee'):
-		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
-	if args.get('employee') and args.get('patient_refund'):
-		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
-	if args.get('vendor') and args.get('patient_refund'):
+
+	if (args.get('vendor') and args.get('patient_refund')) or (args.get('employee') and args.get('patient_refund')) or (args.get('vendor') and args.get('employee')):
 		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
 
 	# if args.get('vendor'):
