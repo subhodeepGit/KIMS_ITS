@@ -320,8 +320,8 @@ def get_outstanding_amount(args,name):
 						if not args.get('patient_refund'):
 							data.append(t)
 		else:
-			# if args.get('patient_refund'):
-			# 	filter.append(['name',"=",args.get('patient_refund')])
+			if args.get('patient_refund'):
+				filter_for.append(['name',"=",args.get('patient_refund')])
 			filter_for.append(["net_refundable_in_figures",">",0])	
 			if args.get('outstanding_amt_less_than') > 0:
 				filter_for.append(["net_refundable_in_figures",">=",args.get('outstanding_amt_greater_than')])
