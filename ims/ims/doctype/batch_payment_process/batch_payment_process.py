@@ -205,13 +205,13 @@ def get_outstanding_amount(args,name):
 		c_doctype=[{"doctype":args.get("invoice")}]
 	
 	if args.get('vendor') and args.get('employee') and args.get('patient_refund'):
-		frappe.throw("Please Select one filed in Type Of Supplier")
+		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
 	if args.get('vendor') and args.get('employee'):
-		frappe.throw("Please Select one filed in Type Of Supplier")
+		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
 	if args.get('employee') and args.get('patient_refund'):
-		frappe.throw("Please Select one filed in Type Of Supplier")
+		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
 	if args.get('vendor') and args.get('patient_refund'):
-		frappe.throw("Please Select one filed in Type Of Supplier")
+		frappe.msgprint("Please Select one filed in Type Of Supplier on Pop-Up Screen")
 
 	# if args.get('vendor'):
 	# 	filter.append(['supplier_code',"=",args.get('vendor')])
@@ -375,7 +375,7 @@ def get_outstanding_amount(args,name):
 				data.append(all_ready)
 
 	if not data:
-		frappe.msgprint("No Data")
+		frappe.msgprint("You have No Data in NoteSheet")
 
 	return data
 	########################################################
