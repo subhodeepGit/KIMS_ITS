@@ -1,0 +1,23 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2022-12-20 17:58:30.516499",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "modified": "2022-12-20 17:58:30.516499",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "PO Material Management Reports",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select *\nfrom\n    `tabInvoices and PO`sr, `tabPO Material Management`tn",
+ "ref_doctype": "PO Material Management",
+ "report_name": "PO Material Management Reports",
+ "report_type": "Query Report",
+ "roles": []
+}

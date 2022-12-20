@@ -1,0 +1,51 @@
+{
+ "chart_name": "PO Material Management Charts",
+ "chart_type": "Report",
+ "creation": "2022-12-20 18:03:01.918844",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "dynamic_filters_json": "{}",
+ "filters_json": "{}",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "modified": "2022-12-20 18:03:01.918844",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "PO Material Management Charts",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "report_name": "PO Material Management Reports",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "x_field": "note_sheet_no",
+ "y_axis": [
+  {
+   "y_field": "amount_clearance_period_in_days"
+  },
+  {
+   "y_field": "invoices_amountin_rs"
+  },
+  {
+   "y_field": "total_amount_in_rs"
+  },
+  {
+   "y_field": "advance_amount_already_paid_in_rs"
+  },
+  {
+   "y_field": "tds_amount_to_be_deducted_in_rs"
+  },
+  {
+   "y_field": "net_final_amount_to_be_paid_in_rs"
+  }
+ ]
+}

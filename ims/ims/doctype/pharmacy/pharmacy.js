@@ -47,6 +47,23 @@ frappe.ui.form.on("Pharmacy", {
 			frm.set_df_property("third_party_verification", "cannot_add_rows", true);
 			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
 		}
+		if(frm.doc.workflow_state=="Passed for Payment" || frm.doc.workflow_state=="Cancelled"){
+			frm.set_df_property('master_invoice_attachment', 'read_only', 1)
+			frm.set_df_property('note_sheet_attachment', 'read_only', 1)
+			frm.set_df_property('credit_note_attached', 'read_only', 1)
+			frm.set_df_property('amount_clearance_period_in_days', 'read_only', 1)
+			frm.set_df_property('priority', 'read_only', 1)
+			frm.set_df_property('purchase_order_no', 'read_only', 1)
+			frm.set_df_property('date_of_purchase_order', 'read_only', 1)
+		}else{
+			frm.set_df_property('master_invoice_attachment', 'read_only', 0)
+			frm.set_df_property('note_sheet_attachment', 'read_only', 0)
+			frm.set_df_property('credit_note_attached', 'read_only', 0)
+			frm.set_df_property('amount_clearance_period_in_days', 'read_only', 0)
+			frm.set_df_property('priority', 'read_only', 0)
+			frm.set_df_property('purchase_order_no', 'read_only', 0)
+			frm.set_df_property('date_of_purchase_order', 'read_only', 0)
+		}
 	}
 });
 

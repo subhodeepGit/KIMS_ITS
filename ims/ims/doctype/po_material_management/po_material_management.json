@@ -283,12 +283,13 @@
   {
    "fieldname": "batch_payment_no",
    "fieldtype": "Data",
-   "label": "Batch Payment No"
+   "label": "Batch Payment No",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-15 13:56:04.515701",
+ "modified": "2022-12-20 18:19:20.089900",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
