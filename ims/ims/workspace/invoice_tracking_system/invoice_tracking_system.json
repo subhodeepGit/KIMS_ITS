@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Invoice Tracking System</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Invoice\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"PO Based invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Non PO based Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Other Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Payment Workflow\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Third Party Verification\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Absent Employee Replacement\",\"col\":4}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Invoice Tracking System</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":9}},{\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Invoice\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"PO Based invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Non PO based Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Other Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Payment Workflow\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Third Party Verification\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Absent Employee Replacement\",\"col\":4}}]",
  "creation": "2022-11-03 11:00:43.773444",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -342,7 +342,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-12-19 13:19:54.044899",
+ "modified": "2022-12-21 12:34:14.776020",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Tracking System",
@@ -352,6 +352,14 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 30.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Dashboard",
+   "link_to": "ITS Dashboard",
+   "type": "Dashboard"
+  }
+ ],
  "title": "Invoice Tracking System"
 }

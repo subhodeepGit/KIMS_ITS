@@ -62,6 +62,14 @@ frappe.ui.form.on('Patient Refund', "ip__uhid_no", function(frm) {
 	refresh_field("patient_ip_no");
 	frm.set_value("data_61",ip);
 	refresh_field("data_61");
+	frm.set_value("mrn_no",ip);
+	refresh_field("mrn_no");
+});
+frappe.ui.form.on('Patient Refund', "account_holder_name", function(frm) {
+	var ip ="";
+	ip = cur_frm.doc.account_holder_name;
+	frm.set_value("name_of_the_person",ip);
+	refresh_field("name_of_the_person");
 });
 frappe.ui.form.on('Patient Refund', "name_of_the_patient", function(frm) {
 	var name_patient = "";
@@ -246,14 +254,12 @@ frappe.ui.form.on('Patient Refund', {
 				frm.set_df_property("refund_no",'read_only', 0)
 				frm.set_df_property("refund_amount",'read_only', 0)
 				frm.set_df_property("refund_sheet_attachment",'read_only', 0)
-				frm.set_df_property("mrn_no",'read_only', 0)
 				frm.set_df_property("total_amount_refunded",'read_only', 0)
 				frm.set_df_property("refund_attachment",'read_only', 0)
 				frm.set_df_property("type_of_insurance",'read_only', 0)
 				frm.set_df_property("approved_amount",'read_only', 0)
 				frm.set_df_property("name_of_the_insurance",'read_only', 0)
 				frm.set_df_property("insurance_details_attachment",'read_only', 0)
-				frm.set_df_property("name_of_the_person",'read_only', 0)
 				frm.set_df_property("xerox_copy_of_any_itenty_proof",'read_only', 0)
 				frm.set_df_property("reason_of_cancellation",'read_only', 0)
 				frm.set_df_property("ifsc_code",'read_only', 0)
@@ -291,14 +297,12 @@ frappe.ui.form.on('Patient Refund', {
 					frm.set_df_property("refund_no",'read_only', 0)
 					frm.set_df_property("refund_amount",'read_only', 0)
 					frm.set_df_property("refund_sheet_attachment",'read_only', 0)
-					frm.set_df_property("mrn_no",'read_only', 0)
 					frm.set_df_property("total_amount_refunded",'read_only', 0)
 					frm.set_df_property("refund_attachment",'read_only', 0)
 					frm.set_df_property("type_of_insurance",'read_only', 0)
 					frm.set_df_property("approved_amount",'read_only', 0)
 					frm.set_df_property("name_of_the_insurance",'read_only', 0)
 					frm.set_df_property("insurance_details_attachment",'read_only', 0)
-					frm.set_df_property("name_of_the_person",'read_only', 0)
 					frm.set_df_property("xerox_copy_of_any_itenty_proof",'read_only', 0)
 					frm.set_df_property("reason_of_cancellation",'read_only', 0)
 					frm.set_df_property("ifsc_code",'read_only', 0)
@@ -331,14 +335,12 @@ frappe.ui.form.on('Patient Refund', {
 					frm.set_df_property("refund_no",'read_only', 1)
 					frm.set_df_property("refund_amount",'read_only', 1)
 					frm.set_df_property("refund_sheet_attachment",'read_only', 1)
-					frm.set_df_property("mrn_no",'read_only', 1)
 					frm.set_df_property("total_amount_refunded",'read_only', 1)
 					frm.set_df_property("refund_attachment",'read_only', 1)
 					frm.set_df_property("type_of_insurance",'read_only', 1)
 					frm.set_df_property("approved_amount",'read_only', 1)
 					frm.set_df_property("name_of_the_insurance",'read_only', 1)
 					frm.set_df_property("insurance_details_attachment",'read_only', 1)
-					frm.set_df_property("name_of_the_person",'read_only', 1)
 					frm.set_df_property("xerox_copy_of_any_itenty_proof",'read_only', 1)
 					frm.set_df_property("reason_of_cancellation",'read_only', 1)
 					frm.set_df_property("ifsc_code",'read_only', 1)

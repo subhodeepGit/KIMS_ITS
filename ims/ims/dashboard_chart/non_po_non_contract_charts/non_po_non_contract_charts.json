@@ -1,7 +1,7 @@
 {
- "chart_name": "PO Material Management Charts",
+ "chart_name": "Non PO Non Contract Charts",
  "chart_type": "Report",
- "creation": "2022-12-20 18:03:01.918844",
+ "creation": "2022-12-21 12:06:16.619509",
  "docstatus": 0,
  "doctype": "Dashboard Chart",
  "dynamic_filters_json": "{}",
@@ -10,13 +10,13 @@
  "idx": 0,
  "is_public": 1,
  "is_standard": 1,
- "modified": "2022-12-21 10:53:00.403588",
+ "modified": "2022-12-21 12:06:16.619509",
  "modified_by": "Administrator",
  "module": "Ims",
- "name": "PO Material Management Charts",
+ "name": "Non PO Non Contract Charts",
  "number_of_groups": 0,
  "owner": "Administrator",
- "report_name": "PO Material Management Reports",
+ "report_name": "Non PO Non Contract Report",
  "roles": [
   {
    "role": "All"
@@ -33,7 +33,7 @@
    "y_field": "amount_clearance_period_in_days"
   },
   {
-   "y_field": "invoices_amountin_rs"
+   "y_field": "invoice_amount"
   },
   {
    "y_field": "total_amount_in_rs"
