@@ -151,6 +151,7 @@
   {
    "fieldname": "rejection_email_status",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Rejection Email Status",
    "read_only": 1
   },
@@ -165,7 +166,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-21 12:21:06.563363",
+ "modified": "2022-12-21 20:13:25.188387",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Authorized Signature",

@@ -294,15 +294,67 @@ def report_scheduler(emp_wf,inward_letter,final_passed_for_payment,payment_secti
     ########################################################### END Final payment Section   ############################################## 
     # emp_wf=['name','role','full_name','employee_number','email','department']
     receipient = emp_wf['email']
-    sub = """<b> MIS Report for Employee %s as on %s </b>"""%(emp_wf['email'],date_time)
+    sub = """ MIS Report for Employee %s as on %s """%(emp_wf['name'],date_time)
     msg = msg
     attachments = None
     send_mail(receipient,sub,msg,attachments)    
              
 
         
-    
+def report_scheduler_reject_trasfer(emp_date_workflow,flag_data,field): 
+    date_time=str(utils.now())[:19]
+    msg=""""""
+    ################################################################# Payment Status  ##################################################
+    ####### Section Head
+    sub = """ Report for Rejected and Fransferred %s as on %s """%(emp_date_workflow[0]['name'],date_time)
+    msg =msg+ "<p><b> Following Note Sheet is Rejected and Transferred as on %s</b></p> <br><br>"%(date_time)
+    ########## end of Section Head
+    c=""
+    for t in flag_data:
+        coloum=[]
+        for j in field:
+            if j['parent']==t['doc_type']:
+                coloum.append(j)
+        ################### Table name in HTML  
+        table_head="""<p>Notesheet Name %s</p><br>"""%(t['doc_type'])
+        ################### end Table name in HTML
 
+        ############ Coloum Name   
+        c1=""" <table border=1>
+                    <tr>
+                    <th>Document No</th>"""
+        c2=""            
+        for j in coloum:
+            c2=c2+"""<th>%s</th>"""%(j['label'])
+        c2=c2+"""<th>Present Approval Status</th>"""
+        c2=c2+"""<th>Remarks</th>"""
+        c1=c1+c2
+        c1=c1+"""</tr>"""
+        ################# end Coloum Name
+        ############### Data of the coloum 
+        c3="""<td>%s</td>"""%(t['name'])
+        for j in coloum:
+            # print(t[j['fieldname']])
+            c3=c3+"""<td>%s</td>"""%(t[j['fieldname']])
+
+        c3=c3+"""<td>%s</td>"""%(t['approval_status'])  
+        c3=c3+"""<td>%s</td>"""%(t['remarks']) 
+
+        c3="<tr>"+c3+"</tr>"    
+
+        c1=table_head+c1+c3+"""</table><br>"""
+        c=c1
+
+    if c!="":
+        msg=msg+c
+    else:
+        msg=msg+"""<br><p>No Doument found</p><br>""" 
+
+    receipient = emp_date_workflow[0]['email']
+
+    # attachments=[frappe.attach_print(flag_data[0]['doc_type'],flag_data[0]['name'], file_name="demo", print_format="PO Consignment PF")]
+    attachments=""
+    send_mail(receipient,sub,msg,attachments)       
 
                  
 
