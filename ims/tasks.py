@@ -417,8 +417,56 @@ def reject_transfer():
         frappe.db.commit()   
             
 
+def notification_for_approval():
+    # bench --site erp.soulunileaders.com execute ims.tasks.notification_for_approval
+    print("\n\n\n")
+    doctype_name=['PO Consumable',"PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract",
+                "Patient Refund"]
 
+    genral_field_list= ['name','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount_in_rs',
+                        'tds_amount_to_be_deducted_in_rs','advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status']
+    po_consignment_field_list=['name','note_sheet_no','posting_date','item_of_purchaseexpense','total_hospital_margin_amount','supplier_code','name_of_supplier',
+                                            'to_pay_total','total_amount_in_rs','less_credit_note_amount_in_rs','net_final_amount_to_be_paid_in_rs','document_status']                                      
+    pharmacy_field_list=['name','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount'
+                                    ,'advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status']
+    patient_refund_field_list=['name',"type_of_insurance","name_of_the_patient","ip__uhid_no","posting_date","total_bill","approval_of_tpa__insurance__corporate__ostf",
+                                    "amount_deposited_by_patient","net_refundable_in_figures",'document_status']
+    batch_payment_process=['name',"date","document_status","account_reference_no","bank_ac_no","bank_name","bank_address","account_reference_no",
+                                            "account_post_date","audit_reference_no","audit_posting_date","cheque_no","cheque_date","total_amount"]
 
+    doctype_name_filed_map=[{"parent":'PO Consumable',"fieldname":genral_field_list},{"parent":"PO Consignment","fieldname":po_consignment_field_list},
+                    {"parent":"PO Material Management","fieldname":genral_field_list},{"parent":"Pharmacy","fieldname":pharmacy_field_list}
+                    ,{"parent":"Non PO Contract","fieldname":genral_field_list},{"parent":"Non PO Non Contract","fieldname":genral_field_list},
+                {"parent":"Patient Refund","fieldname":patient_refund_field_list},{"parent":"Batch Payment Process","fieldname":batch_payment_process}]
+
+    field=[]
+    for t in doctype_name_filed_map:
+        fieldname=t["fieldname"]
+        for j in fieldname:
+            dofield=frappe.get_all("DocField",filters=[["parent","=",t['parent']],["fieldname","=",j]],fields=["label","fieldname","parent"])
+            if dofield:
+                field.append(dofield[0])
+    
+    priority=[{"type_priority":"Urgent","percentage":40},{"type_priority":"Normal","percentage":100},
+                {"type_priority":"High Priority","percentage":20},{"type_priority":"Low Priority","percentage":150}]
+
+    for pro in priority:
+        # print(pro)
+        for doc in doctype_name:
+            # print(doc)
+            if doc!="Patient Refund":
+                type_priority=pro['type_priority']
+                percentage=pro['percentage']
+                data=frappe.get_all(doc,[["priority","=",pro['type_priority']],["payment_status","!=","Payment successful"],
+                                        ["document_status","!=","Document cancelled Note Keeper"]],
+                                        ['name','posting_date','amount_clearance_period_in_days','priority','workflow_state',
+                                        "payment_status","document_status"])
+                if data:                        
+                    data[0]['doc_type']=doc                        
+                    print(data)                        
+            else:
+                type_priority="High Priority"
+                percentage=20
 
     
             
