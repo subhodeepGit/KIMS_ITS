@@ -121,6 +121,9 @@ scheduler_events = {
 		"30 8,12,16 * * *": [
 			"ims.tasks.cron_tab"
 		],
+		"30 8,12,16 * * *": [
+			"ims.tasks.reject_transfer"
+		],
 		"*/5 * * * *": [
 			"ims.ims.employee_permission_schedular.employee_user"
 		]

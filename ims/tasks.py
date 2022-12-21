@@ -309,8 +309,7 @@ def cron_tab():
                             for j in doc_dict[t]:
                                 flag_data=frappe.get_all(t,{"name":j},batch_payment_process)
                                 flag_data[0]['doc_type']=t
-                                cancelation_section.append(flag_data[0])
-            # print(cancelation_section)                    
+                                cancelation_section.append(flag_data[0])                  
             ############################################ end Cancelation of all Doc record
             report_scheduler(emp_wf,inward_letter,final_passed_for_payment,payment_section,
                             cancelation_section,final_passed_payment,field)                                      
