@@ -260,7 +260,7 @@ def workflow_creation(self):
 			grouping_of_designation=t.grouping_of_designation
 			single_user=t.single_user
 			list_state=[{"state":"Draft","update_value":"Invoice in Draft State"},{"state":"Verify and Save","update_value":"Document save"},
-						{"state":"Cancelled","update_value":"Document cancelled Note Keeper"}]
+						{"state":"Cancelled","update_value":"Document cancelled By Note Keeper"}]
 			for state in list_state:
 				workflow_doc.append("states",{
 					"state":state["state"],
