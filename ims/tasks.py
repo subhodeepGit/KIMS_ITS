@@ -4,7 +4,7 @@ from ims.ims.notification.custom_notification import report_scheduler
 
 
 
-def cron():
+def cron_tab():
     # bench --site erp.soulunileaders.com execute ims.tasks.cron
     doctype_name=['PO Consumable',"PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract",
                 "Patient Refund","Batch Payment Process"]
@@ -316,7 +316,9 @@ def cron():
                             cancelation_section,final_passed_payment,field)                                      
 
                 
-
+def reject_transfer():
+    print("\n\n\n\n")
+    
             
 
 
