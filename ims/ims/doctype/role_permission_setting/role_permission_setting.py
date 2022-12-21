@@ -25,7 +25,7 @@ def role_permissions_manager_cration(t_object,role):
 		role_permissions_manager_doc.write=t_object.write
 		role_permissions_manager_doc.create=t_object.create
 		role_permissions_manager_doc.delete=t_object.del_data
-		role_permissions_manager_doc.submit=0
+		role_permissions_manager_doc.submit=t_object.submittable
 		role_permissions_manager_doc.cancel=0
 		role_permissions_manager_doc.amend=0
 		role_permissions_manager_doc.report=t_object.report
@@ -45,7 +45,7 @@ def role_permissions_manager_cration(t_object,role):
 		role_permissions_manager_doc.write=t_object.write
 		role_permissions_manager_doc.create=t_object.create
 		role_permissions_manager_doc.delete=t_object.del_data
-		role_permissions_manager_doc.submit=0
+		role_permissions_manager_doc.submit=t_object.submittable
 		role_permissions_manager_doc.cancel=0
 		role_permissions_manager_doc.amend=0
 		role_permissions_manager_doc.report=t_object.report
