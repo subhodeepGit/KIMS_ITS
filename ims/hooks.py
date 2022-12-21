@@ -118,10 +118,10 @@ doc_events = {
 
 scheduler_events = {
 	"cron": {
-		"*/1 * * * *": [
-			"ims.tasks.cron"
+		"30 8,12,16 * * *": [
+			"ims.tasks.cron_tab"
 		],
-		"@hourly": [
+		"*/5 * * * *": [
 			"ims.ims.employee_permission_schedular.employee_user"
 		]
 	},

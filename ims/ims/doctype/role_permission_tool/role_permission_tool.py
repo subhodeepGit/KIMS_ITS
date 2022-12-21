@@ -48,7 +48,7 @@ def role_permissions_manager_cration(self):
 		pre_role_3d_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Reason of Refund Master"},["name",'role'])
 		for t in pre_role_3d_permissions_manager_info: 		
 			frappe.delete_doc("Custom DocPerm",t["name"])	
-		pre_role_3d_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Health Insurance Namer"},["name",'role'])
+		pre_role_3d_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Health Insurance Name"},["name",'role'])
 		for t in pre_role_3d_permissions_manager_info:
 			frappe.delete_doc("Custom DocPerm",t["name"])				
 	
@@ -123,7 +123,7 @@ def role_permissions_manager_cration(self):
 				role_3rd_permissions_manager_doc.print=1
 				role_3rd_permissions_manager_doc.email=0
 				role_3rd_permissions_manager_doc.save()
-			role_3rd_party_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Health Insurance Namer","role":t.designation})
+			role_3rd_party_permissions_manager_info=frappe.get_all("Custom DocPerm",{"parent":"Health Insurance Name","role":t.designation})
 			if not role_3rd_party_permissions_manager_info:
 				role_3rd_permissions_manager_doc = frappe.new_doc("Custom DocPerm")
 				role_3rd_permissions_manager_doc.parent="Health Insurance Namer"
