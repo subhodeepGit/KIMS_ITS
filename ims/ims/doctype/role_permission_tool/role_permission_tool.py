@@ -377,6 +377,7 @@ def workflow_creation(self):
 			list_state=[{"state":"Draft","action":"Verify and Save","next_state":"Verify and Save"},
 					{"state":"Draft","action":"Cancel","next_state":"Cancelled"},
 					{"state":"Verify and Save","action":"Submit","next_state":"Verified & Submitted by Note Creator"},
+					{"state":"Verify and Save","action":"Cancel","next_state":"Cancelled"},
 					]
 			for states in list_state:		
 				state=states['state']
