@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2022-12-21 13:54:43.841652",
+ "modified": "2022-12-22 10:50:55.795762",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Contract Reports",
@@ -21,28 +21,7 @@
  "report_type": "Query Report",
  "roles": [
   {
-   "role": "Note Keeper(Accounts Clerk)"
-  },
-  {
-   "role": "CFO, KIMS"
-  },
-  {
-   "role": "Director, Administration"
-  },
-  {
-   "role": "Audit User"
-  },
-  {
-   "role": "Auditor(Audit Verification)"
-  },
-  {
-   "role": "Pro VC"
-  },
-  {
-   "role": "Accounts Clerk"
-  },
-  {
-   "role": "System Manager"
+   "role": "All"
   }
  ]
 }

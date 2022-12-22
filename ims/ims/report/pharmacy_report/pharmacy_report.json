@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2022-12-21 15:14:51.374185",
+ "modified": "2022-12-22 10:50:38.685278",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Pharmacy Report",
@@ -22,6 +22,9 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "All"
   }
  ]
 }

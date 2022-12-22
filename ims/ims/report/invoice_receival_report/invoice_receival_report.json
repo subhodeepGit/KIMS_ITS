@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2022-12-20 16:13:45.422519",
+ "modified": "2022-12-22 10:49:46.517071",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Receival Report",
@@ -19,5 +19,9 @@
  "ref_doctype": "Invoice Receival",
  "report_name": "Invoice Receival Report",
  "report_type": "Query Report",
- "roles": []
+ "roles": [
+  {
+   "role": "All"
+  }
+ ]
 }

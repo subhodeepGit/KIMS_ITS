@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2022-12-21 12:23:29.026398",
+ "modified": "2022-12-22 10:51:30.298651",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund Report",
@@ -21,37 +21,10 @@
  "report_type": "Query Report",
  "roles": [
   {
-   "role": "Manager(Lobby)"
-  },
-  {
-   "role": "Director, OPS"
-  },
-  {
-   "role": "Medical Superintendent"
-  },
-  {
-   "role": "Accounts Clerk"
-  },
-  {
-   "role": "CFO, KIMS"
-  },
-  {
-   "role": "Manager(Lobby)"
-  },
-  {
-   "role": "Medical Superintendent"
-  },
-  {
-   "role": "Director, OPS"
-  },
-  {
-   "role": "Accounts Clerk"
-  },
-  {
-   "role": "CFO, KIMS"
-  },
-  {
    "role": "System Manager"
+  },
+  {
+   "role": "All"
   }
  ]
 }

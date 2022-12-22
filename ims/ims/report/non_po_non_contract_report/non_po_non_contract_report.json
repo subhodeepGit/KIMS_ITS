@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2022-12-21 13:48:39.027738",
+ "modified": "2022-12-22 10:51:09.632707",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract Report",
@@ -22,6 +22,9 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "All"
   }
  ]
 }
