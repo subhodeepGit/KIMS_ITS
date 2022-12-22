@@ -1,5 +1,6 @@
 import frappe
 from frappe import utils
+from datetime import timedelta,date
 from ims.ims.notification.custom_notification import report_scheduler,report_scheduler_reject_trasfer
 
 
@@ -415,7 +416,10 @@ def reject_transfer():
     for re in rejection_email:
         frappe.db.sql(""" update `tabAuthorized Signature` set rejection_email_status="Mail Send" where name="%s" """%(re['name']))
         frappe.db.commit()   
-            
+
+
+def is_what_percent_of(num_a, num_b):
+    return (num_a / num_b) * 100
 
 def notification_for_approval():
     # bench --site erp.soulunileaders.com execute ims.tasks.notification_for_approval
@@ -447,26 +451,85 @@ def notification_for_approval():
             if dofield:
                 field.append(dofield[0])
     
-    priority=[{"type_priority":"Urgent","percentage":40},{"type_priority":"Normal","percentage":100},
-                {"type_priority":"High Priority","percentage":20},{"type_priority":"Low Priority","percentage":150}]
+    priority=[{"type_priority":"Urgent","percentage":20},{"type_priority":"Normal","percentage":100},
+                {"type_priority":"High Priority","percentage":40},{"type_priority":"Low Priority","percentage":150}]
 
+    list_notsheet_not_paid=[]
     for pro in priority:
-        # print(pro)
         for doc in doctype_name:
-            # print(doc)
             if doc!="Patient Refund":
                 type_priority=pro['type_priority']
                 percentage=pro['percentage']
                 data=frappe.get_all(doc,[["priority","=",pro['type_priority']],["payment_status","!=","Payment successful"],
-                                        ["document_status","!=","Document cancelled Note Keeper"]],
+                                        ["workflow_state","!=","Cancelled"]],
                                         ['name','posting_date','amount_clearance_period_in_days','priority','workflow_state',
-                                        "payment_status","document_status"])
-                if data:                        
-                    data[0]['doc_type']=doc                        
-                    print(data)                        
+                                        "payment_status","document_status",'batch_payment_no'])                       
+                for t in data:
+                    if t['workflow_state']!="Draft" and t['workflow_state']!="Verify and Save":
+                        no_days=(date.today()-t['posting_date']).days
+                        
+                        result = is_what_percent_of(no_days, t['amount_clearance_period_in_days'])
+
+                        if pro['percentage']<=result:
+                            t['doc_type']=doc
+                            t['threshold_percentage']=percentage
+                            t['present_threshold_percentage']=result
+                            t['no_days_consumed']=no_days
+                            list_notsheet_not_paid.append(t)                 
             else:
-                type_priority="High Priority"
-                percentage=20
+                type_priority="Urgent"
+                no_days=7
+                percentage=100
+                data=frappe.get_all(doc,[["payment_status","!=","Payment successful"],
+                                        ["workflow_state","!=","Cancelled"]],
+                                        ['name','posting_date','workflow_state',"payment_status","document_status",'batch_payment_no'])                       
+                for t in data:
+                    if t['workflow_state']!="Draft" and t['workflow_state']!="Verify and Save":
+                        no_days_consumed=(date.today()-t['posting_date']).days
+                        result = is_what_percent_of(no_days_consumed,no_days)
+                        mail_cut_of_days=t['posting_date']+ timedelta(days=no_days)
+                        if mail_cut_of_days<=date.today():
+                            t['amount_clearance_period_in_days']=no_days
+                            t['priority']=type_priority
+                            t['doc_type']=doc
+                            t['no_days_consumed']=no_days_consumed
+                            t['threshold_percentage']=percentage
+                            t['present_threshold_percentage']=result
+                            list_notsheet_not_paid.append(t)    
+    # print(list_notsheet_not_paid) 
+    # emp_date_workflow=frappe.get_all("Employee",[["enabled","=",1],["role","!=","Null"]],
+    #                                     ['name','role','full_name','employee_number','email','department'])  
+
+    list_doc=[]
+    for t in list_notsheet_not_paid:
+        list_doc.append(t['doc_type'])
+    list_doc=list(set(list_doc)) 
+    doc_dict={} 
+    for t in list_doc:
+        doc_dict[t]=[]
+
+    for t in list_notsheet_not_paid:
+        doc_dict[t['doc_type']].append(t['name'])
+
+    for t in doc_dict:
+        doc_dict[t]=list(set(doc_dict[t]))
+
+    list_emp=[]
+    for t in doc_dict:
+        # print(t)
+        for j in doc_dict[t]:
+            data=frappe.get_all("Authorized Signature",{"parent":j},['emp_id','approval_status','previous_status','parent','parenttype'])
+            # print(data)
+            if data:
+                for k in data:
+                    list_emp.append(k)
+    print(list_emp)
+
+    # e
+
+        
+       
+
 
     
             

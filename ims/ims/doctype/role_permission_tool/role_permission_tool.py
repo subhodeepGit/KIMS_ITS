@@ -154,7 +154,7 @@ def role_permissions_manager_cration(self):
 			role_3rd_permissions_manager_doc.write=1
 			role_3rd_permissions_manager_doc.create=1
 			role_3rd_permissions_manager_doc.delete=0
-			role_3rd_permissions_manager_doc.submit=0
+			role_3rd_permissions_manager_doc.submit=1
 			role_3rd_permissions_manager_doc.cancel=0
 			role_3rd_permissions_manager_doc.amend=0
 			role_3rd_permissions_manager_doc.report=1
