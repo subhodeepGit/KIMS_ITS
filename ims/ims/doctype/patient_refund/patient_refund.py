@@ -129,8 +129,8 @@ class PatientRefund(Document):
 								t.grouping_of_designation=grouping_of_designation
 								t.single_user=single_user			
 
-			else:
-				frappe.throw("Employee not found")
+				else:
+					frappe.throw("Employee not found")
 		else:
 			if self.workflow_state=="Rejected and Transfer":
 				check=""
@@ -177,5 +177,6 @@ def mandatory_check(self):
 def insurance_check(type_of_insurance):
 	if type_of_insurance!="" and type_of_insurance!=None:
 		insurance_mandatory_check=frappe.get_all("Reason of Refund Master",{"name":type_of_insurance},["insurance_mandatory_check"])
-		return insurance_mandatory_check
+		if insurance_mandatory_check:
+			return insurance_mandatory_check
 	

@@ -94,6 +94,7 @@
   {
    "fieldname": "supplier_code",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Supplier Code",
    "options": "Supplier",
    "reqd": 1
@@ -110,7 +111,6 @@
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -118,7 +118,6 @@
    "fieldtype": "Select",
    "label": "Priority",
    "options": "\nUrgent\nNormal\nHigh Priority\nLow Priority",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -171,8 +170,7 @@
    "default": "0",
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
-   "label": "TDS Amount To Be Deducted (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "TDS Amount To Be Deducted (In Rs.)"
   },
   {
    "fieldname": "column_break_21",
@@ -182,8 +180,7 @@
    "default": "0",
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Advance Amount Already Paid (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Advance Amount Already Paid (In Rs.)"
   },
   {
    "default": "0",
@@ -211,6 +208,7 @@
   {
    "fieldname": "audit_ref_no",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Audit Ref No"
   },
   {
@@ -236,6 +234,7 @@
   {
    "fieldname": "document_number",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Document Number"
   },
   {
@@ -289,7 +288,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-20 18:19:20.089900",
+ "modified": "2022-12-22 13:12:46.647326",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",

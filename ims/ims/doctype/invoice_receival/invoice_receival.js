@@ -71,3 +71,14 @@ frappe.ui.form.on('Invoice Receival', {
 		}
 	}
 });
+frappe.ui.form.on('Invoice Receival', {
+	validate: function(frm) {
+		if(frm.doc.note_sheet_status!="" || frm.doc.note_no!="" ||frm.doc.type_of_note_sheet!="" ||frm.doc.batch_payment_no!="" ||frm.doc.payment_status!=""){
+			frm.set_value('note_sheet_status', '')
+			frm.set_value('note_no', '')
+			frm.set_value('type_of_note_sheet', '')
+			frm.set_value('batch_payment_no', '')
+			frm.set_value('payment_status', '')
+		}
+	}
+});

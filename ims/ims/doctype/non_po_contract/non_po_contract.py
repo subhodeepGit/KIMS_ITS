@@ -18,6 +18,8 @@ class NonPOContract(Document):
 	def validate(self):
 		if self.net_final_amount_to_be_paid_in_rs <= 0 :
 			frappe.throw("Net Amount cannot be <b> less than Zero or Zero </b>")
+		if self.amount_clearance_period_in_days <= 0 :
+			frappe.throw("Amount Clearance Period (in Days) cannot be <b> less than Zero or Zero </b>")
 		status_update(self)
 		mandatory_check(self)
 
@@ -152,8 +154,8 @@ class NonPOContract(Document):
 								t.workflow_data= workflow_name
 								t.grouping_of_designation=grouping_of_designation
 								t.single_user=single_user		 
-			else:
-				frappe.throw("Employee not found")		
+				else:
+					frappe.throw("Employee not found")		
 		else:
 			if self.workflow_state=="Rejected and Transfer":
 				check=""
@@ -186,7 +188,8 @@ class NonPOContract(Document):
 @frappe.whitelist()
 def clearance_period(supplier):
 	data=frappe.get_all("Supplier",{"name":supplier},["amount_clearance_period_in_days"])
-	return data[0]['amount_clearance_period_in_days']
+	if data:
+		return data[0]['amount_clearance_period_in_days']
 
 def mandatory_check(self):
 	# if self.workflow_state=="Verify and Save":
