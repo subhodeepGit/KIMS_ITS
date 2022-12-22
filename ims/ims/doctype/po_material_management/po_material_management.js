@@ -69,6 +69,7 @@ frappe.ui.form.on("PO Material Management", {
 		if (frm.doc.workflow_state=="Passed for Payment" || frm.doc.workflow_state=="Draft"){
 			frm.set_df_property("third_party_verification", "cannot_add_rows", true);
 			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
+			frm.set_df_property('third_party_verification', 'read_only', 1)
 		}
 		if(frm.is_new()==1){
 			frm.set_df_property('note_sheet_no', 'read_only', 0)

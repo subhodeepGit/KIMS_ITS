@@ -19,7 +19,7 @@ def ifsc_code(ifsc_code):
 			bank_data=response.json()
 			return bank_data
 		else:
-			frappe.msgprint("IFSC Code not Found")	
+			# frappe.msgprint("IFSC Code not Found")	
 			return bank_data
 
 def mand(self):
