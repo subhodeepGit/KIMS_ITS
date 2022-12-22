@@ -106,7 +106,7 @@
    "depends_on": "eval:doc.invoice_attachment==1",
    "fetch_from": "invoice_receival_no.invoice_attachment",
    "fieldname": "invoice",
-   "fieldtype": "Data",
+   "fieldtype": "Attach",
    "label": "Invoice",
    "mandatory_depends_on": "eval:doc.invoice_attachment==1",
    "read_only": 1
@@ -262,7 +262,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-19 12:26:30.969494",
+ "modified": "2022-12-22 17:48:21.724801",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoices and PO",

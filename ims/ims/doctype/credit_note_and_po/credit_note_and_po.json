@@ -257,7 +257,7 @@
    "depends_on": "eval:doc.invoice_attachment_1==1",
    "fetch_from": "invoice_receival_no.invoice_attachment",
    "fieldname": "invoice",
-   "fieldtype": "Data",
+   "fieldtype": "Attach",
    "label": "Invoice",
    "mandatory_depends_on": "eval:doc.invoice_attachment_1==1",
    "read_only": 1
@@ -344,7 +344,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-13 17:28:06.435886",
+ "modified": "2022-12-22 17:55:41.479163",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Credit Note and PO",

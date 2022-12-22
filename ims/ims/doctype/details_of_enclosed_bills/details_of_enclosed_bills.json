@@ -205,7 +205,7 @@
    "depends_on": "eval:doc.invoice_attachment_1==1",
    "fetch_from": "invoice_receival_no.invoice_attachment",
    "fieldname": "invoice",
-   "fieldtype": "Data",
+   "fieldtype": "Attach",
    "label": "Invoice",
    "mandatory_depends_on": "eval:doc.invoice_attachment_1==1",
    "read_only": 1
@@ -278,7 +278,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-14 12:57:12.712572",
+ "modified": "2022-12-22 17:57:20.145851",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Details of Enclosed Bills",
