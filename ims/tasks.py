@@ -1,6 +1,6 @@
 import frappe
 from frappe import utils
-from ims.ims.notification.custom_notification import report_scheduler
+from ims.ims.notification.custom_notification import report_scheduler,report_scheduler_reject_trasfer
 
 
 
@@ -309,15 +309,13 @@ def cron_tab():
                             for j in doc_dict[t]:
                                 flag_data=frappe.get_all(t,{"name":j},batch_payment_process)
                                 flag_data[0]['doc_type']=t
-                                cancelation_section.append(flag_data[0])
-            # print(cancelation_section)                    
+                                cancelation_section.append(flag_data[0])                  
             ############################################ end Cancelation of all Doc record
             report_scheduler(emp_wf,inward_letter,final_passed_for_payment,payment_section,
                             cancelation_section,final_passed_payment,field)                                      
 
                 
 def reject_transfer():
-    print("\n\n\n\n")
     # bench --site erp.soulunileaders.com execute ims.tasks.reject_transfer
     doctype_name=['PO Consumable',"PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract",
                 "Patient Refund","Batch Payment Process"]
@@ -333,9 +331,108 @@ def reject_transfer():
     batch_payment_process=['name',"date","document_status","account_reference_no","bank_ac_no","bank_name","bank_address","account_reference_no",
                                             "account_post_date","audit_reference_no","audit_posting_date","cheque_no","cheque_date","total_amount"]
 
-    emp_date_workflow=frappe.get_all("Employee",[["enabled","=",1],["role","!=","Null"]],
-                                        ['name','role','full_name','employee_number','email','department'])
-    active_workflow=frappe.get_all("Workflow",{"is_active":1},['name','document_type'])
+    doctype_name_filed_map=[{"parent":'PO Consumable',"fieldname":genral_field_list},{"parent":"PO Consignment","fieldname":po_consignment_field_list},
+                    {"parent":"PO Material Management","fieldname":genral_field_list},{"parent":"Pharmacy","fieldname":pharmacy_field_list}
+                    ,{"parent":"Non PO Contract","fieldname":genral_field_list},{"parent":"Non PO Non Contract","fieldname":genral_field_list},
+                {"parent":"Patient Refund","fieldname":patient_refund_field_list},{"parent":"Batch Payment Process","fieldname":batch_payment_process}]
+
+    field=[]
+    for t in doctype_name_filed_map:
+        fieldname=t["fieldname"]
+        for j in fieldname:
+            dofield=frappe.get_all("DocField",filters=[["parent","=",t['parent']],["fieldname","=",j]],fields=["label","fieldname","parent"])
+            if dofield:
+                field.append(dofield[0])
+    
+    rejection_email=frappe.get_all("Authorized Signature",{"rejection_email_status":"Mail Not Send"},
+                                ['name',"parent","emp_id",'parenttype','transfer_to','disapproval_check',
+                                "rejection_email_status","approval_status","remarks"])
+
+    # {'name': 406, 'parent': 'PO-CON-21/12/2022-00001', 'emp_id': 'EMP-00027', 'parenttype': 'PO Consignment'}
+    # {'name': 406, 'parent': 'PO-CON-21/12/2022-00001', 'emp_id': 'EMP-00027', 'parenttype': 'PO Consignment', 'transfer_to': 1, 'disapproval_check': 1}
+    # {'name': 407, 'parent': 'PO-CON-21/12/2022-00001', 'emp_id': 'EMP-00027', 'parenttype': 'PO Consignment', 'transfer_to': 0, 'disapproval_check': 1}
+
+    for re in rejection_email:
+        emp_date_workflow=frappe.get_all("Employee",[["name","=",re['emp_id']]],['name','role','full_name','employee_number','email','department'])
+        approval_status=''
+        remarks=''
+        for t in rejection_email:
+            if t['parent']==re['parent'] and t['transfer_to']==1 and t['disapproval_check']==1:
+                approval_status=t['approval_status']
+                remarks=t['remarks']
+
+        list_data=[]
+        if re['parenttype']=="PO Consumable":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},genral_field_list)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])
+        elif re['parenttype']=="PO Consignment":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},po_consignment_field_list)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])
+        elif re['parenttype']=="PO Material Management":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},genral_field_list)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])
+        elif re['parenttype']=="Pharmacy":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},pharmacy_field_list)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])
+        elif re['parenttype']=="Non PO Contract":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},genral_field_list)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])
+        elif re['parenttype']=="Non PO Non Contract":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},genral_field_list)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])
+        elif re['parenttype']=="Patient Refund":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},patient_refund_field_list)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])   
+        elif re['parenttype']=="Batch Payment Process":
+            flag_data=frappe.get_all(re['parenttype'],{"name":re['parent']},batch_payment_process)
+            flag_data[0]['doc_type']=re['parenttype']
+            flag_data[0]['approval_status']=approval_status
+            flag_data[0]['remarks']=remarks
+            list_data.append(flag_data[0])   
+        report_scheduler_reject_trasfer(emp_date_workflow,flag_data,field)
+
+    for re in rejection_email:
+        frappe.db.sql(""" update `tabAuthorized Signature` set rejection_email_status="Mail Send" where name="%s" """%(re['name']))
+        frappe.db.commit()   
+            
+
+def notification_for_approval():
+    # bench --site erp.soulunileaders.com execute ims.tasks.notification_for_approval
+    print("\n\n\n")
+    doctype_name=['PO Consumable',"PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract",
+                "Patient Refund"]
+
+    genral_field_list= ['name','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount_in_rs',
+                        'tds_amount_to_be_deducted_in_rs','advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status']
+    po_consignment_field_list=['name','note_sheet_no','posting_date','item_of_purchaseexpense','total_hospital_margin_amount','supplier_code','name_of_supplier',
+                                            'to_pay_total','total_amount_in_rs','less_credit_note_amount_in_rs','net_final_amount_to_be_paid_in_rs','document_status']                                      
+    pharmacy_field_list=['name','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount'
+                                    ,'advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status']
+    patient_refund_field_list=['name',"type_of_insurance","name_of_the_patient","ip__uhid_no","posting_date","total_bill","approval_of_tpa__insurance__corporate__ostf",
+                                    "amount_deposited_by_patient","net_refundable_in_figures",'document_status']
+    batch_payment_process=['name',"date","document_status","account_reference_no","bank_ac_no","bank_name","bank_address","account_reference_no",
+                                            "account_post_date","audit_reference_no","audit_posting_date","cheque_no","cheque_date","total_amount"]
 
     doctype_name_filed_map=[{"parent":'PO Consumable',"fieldname":genral_field_list},{"parent":"PO Consignment","fieldname":po_consignment_field_list},
                     {"parent":"PO Material Management","fieldname":genral_field_list},{"parent":"Pharmacy","fieldname":pharmacy_field_list}
@@ -348,10 +445,29 @@ def reject_transfer():
         for j in fieldname:
             dofield=frappe.get_all("DocField",filters=[["parent","=",t['parent']],["fieldname","=",j]],fields=["label","fieldname","parent"])
             if dofield:
-                field.append(dofield[0])      
-
-    print(field)
+                field.append(dofield[0])
     
+    priority=[{"type_priority":"Urgent","percentage":40},{"type_priority":"Normal","percentage":100},
+                {"type_priority":"High Priority","percentage":20},{"type_priority":"Low Priority","percentage":150}]
+
+    for pro in priority:
+        # print(pro)
+        for doc in doctype_name:
+            # print(doc)
+            if doc!="Patient Refund":
+                type_priority=pro['type_priority']
+                percentage=pro['percentage']
+                data=frappe.get_all(doc,[["priority","=",pro['type_priority']],["payment_status","!=","Payment successful"],
+                                        ["document_status","!=","Document cancelled Note Keeper"]],
+                                        ['name','posting_date','amount_clearance_period_in_days','priority','workflow_state',
+                                        "payment_status","document_status"])
+                if data:                        
+                    data[0]['doc_type']=doc                        
+                    print(data)                        
+            else:
+                type_priority="High Priority"
+                percentage=20
+
     
             
 
