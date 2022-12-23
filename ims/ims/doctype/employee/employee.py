@@ -19,6 +19,7 @@ class Employee(Document):
 				self.db_set("new_password",None)	
 
 	def on_trash(self):
+		delete_user_permission(self)
 		data = frappe.db.get_all("User", {'email':self.email},{'name'})
 		if data:
 			for usr in frappe.db.get_all("User", {'email':self.email},{'name'}):
@@ -26,9 +27,11 @@ class Employee(Document):
 
 	def after_insert(self):
 		self.create_emp_user()
+		add_user_permission(self)
 	
 	def on_change(self):
 		new_email(self)
+		# add_user_permission(self)
 		
 	def before_save(self):
 		emply = frappe.get_all("Employee",{"name":self.name},{"role","third_party_employee"})
@@ -121,3 +124,33 @@ def mand(self):
 	if self.bank_ac_no!="" and self.bank_ac_no!=None:
 		if self.ifsc_code=="":
 			frappe.throw("IFSC Code is Required")
+	
+def add_user_permission(self):
+	data = frappe.get_all("User Permission",{"user":self.email},["allow","for_value"])
+	if data:
+		if data[0]["allow"]==self.doctype and data[0]["for_value"]==self.name:
+			pass
+		else:
+			frappe.get_doc(dict(
+				doctype="User Permission",
+				user=self.email,
+				allow="Employee",
+				for_value=self.name,
+				apply_to_all_doctypes=1,
+				is_default=1,
+			)
+		).insert(ignore_permissions=False)
+	else:
+		frappe.get_doc(dict(
+				doctype="User Permission",
+				user=self.email,
+				allow="Employee",
+				for_value=self.name,
+				apply_to_all_doctypes=1,
+				is_default=1,
+			)
+		).insert(ignore_permissions=False)
+
+def delete_user_permission(self):
+	for t in frappe.get_all("User Permission",{"allow":self.doctype,"for_value":self.name}):
+		frappe.delete_doc("User Permission",t.name)
