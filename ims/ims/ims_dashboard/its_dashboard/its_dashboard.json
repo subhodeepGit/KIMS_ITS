@@ -1,0 +1,49 @@
+{
+ "cards": [],
+ "charts": [
+  {
+   "chart": "Invoice Receival Charts",
+   "width": "Half"
+  },
+  {
+   "chart": "T-Kitchen Charts",
+   "width": "Half"
+  },
+  {
+   "chart": "PO Consignment Charts",
+   "width": "Half"
+  },
+  {
+   "chart": "PO Material Management Charts",
+   "width": "Half"
+  },
+  {
+   "chart": "Pharmacy Charts",
+   "width": "Half"
+  },
+  {
+   "chart": "Non PO Contract Charts",
+   "width": "Half"
+  },
+  {
+   "chart": "Non PO Non Contract Charts",
+   "width": "Full"
+  },
+  {
+   "chart": "Patient Refund Charts",
+   "width": "Full"
+  }
+ ],
+ "creation": "2022-12-20 16:16:02.807745",
+ "dashboard_name": "ITS Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2022-12-23 11:30:32.094089",
+ "modified_by": "Administrator",
+ "module": "Ims",
+ "name": "ITS Dashboard",
+ "owner": "Administrator"
+}
