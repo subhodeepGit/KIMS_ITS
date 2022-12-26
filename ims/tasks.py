@@ -1,7 +1,7 @@
 import frappe
 from frappe import utils
 from datetime import timedelta,date
-from ims.ims.notification.custom_notification import report_scheduler,report_scheduler_reject_trasfer
+from ims.ims.notification.custom_notification import report_scheduler,report_scheduler_reject_trasfer,report_holder_notesheet
 
 
 
@@ -423,16 +423,17 @@ def is_what_percent_of(num_a, num_b):
 
 def notification_for_approval():
     # bench --site erp.soulunileaders.com execute ims.tasks.notification_for_approval
-    print("\n\n\n")
     doctype_name=['PO Consumable',"PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract",
                 "Patient Refund"]
 
     genral_field_list= ['name','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount_in_rs',
-                        'tds_amount_to_be_deducted_in_rs','advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status']
+                        'tds_amount_to_be_deducted_in_rs','advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status',
+                        'amount_clearance_period_in_days']
     po_consignment_field_list=['name','note_sheet_no','posting_date','item_of_purchaseexpense','total_hospital_margin_amount','supplier_code','name_of_supplier',
                                             'to_pay_total','total_amount_in_rs','less_credit_note_amount_in_rs','net_final_amount_to_be_paid_in_rs','document_status']                                      
     pharmacy_field_list=['name','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount'
-                                    ,'advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status']
+                                    ,'advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status',
+                                    'amount_clearance_period_in_days']
     patient_refund_field_list=['name',"type_of_insurance","name_of_the_patient","ip__uhid_no","posting_date","total_bill","approval_of_tpa__insurance__corporate__ostf",
                                     "amount_deposited_by_patient","net_refundable_in_figures",'document_status']
     batch_payment_process=['name',"date","document_status","account_reference_no","bank_ac_no","bank_name","bank_address","account_reference_no",
@@ -453,7 +454,7 @@ def notification_for_approval():
     
     priority=[{"type_priority":"Urgent","percentage":20},{"type_priority":"Normal","percentage":100},
                 {"type_priority":"High Priority","percentage":40},{"type_priority":"Low Priority","percentage":150}]
-
+    ########################################### "priority" wise taking the record 
     list_notsheet_not_paid=[]
     for pro in priority:
         for doc in doctype_name:
@@ -471,7 +472,7 @@ def notification_for_approval():
                         result = is_what_percent_of(no_days, t['amount_clearance_period_in_days'])
 
                         if pro['percentage']<=result:
-                            t['doc_type']=doc
+                            t['parenttype']=doc
                             t['threshold_percentage']=percentage
                             t['present_threshold_percentage']=result
                             t['no_days_consumed']=no_days
@@ -491,43 +492,211 @@ def notification_for_approval():
                         if mail_cut_of_days<=date.today():
                             t['amount_clearance_period_in_days']=no_days
                             t['priority']=type_priority
-                            t['doc_type']=doc
+                            t['parenttype']=doc
                             t['no_days_consumed']=no_days_consumed
                             t['threshold_percentage']=percentage
                             t['present_threshold_percentage']=result
                             list_notsheet_not_paid.append(t)    
-    # print(list_notsheet_not_paid) 
-    # emp_date_workflow=frappe.get_all("Employee",[["enabled","=",1],["role","!=","Null"]],
-    #                                     ['name','role','full_name','employee_number','email','department'])  
-
+    ###########################################  end "priority" wise taking the record 
+    #################################### Taking urgent emp record #####################
     list_doc=[]
     for t in list_notsheet_not_paid:
-        list_doc.append(t['doc_type'])
+        list_doc.append(t['parenttype'])
     list_doc=list(set(list_doc)) 
     doc_dict={} 
     for t in list_doc:
         doc_dict[t]=[]
 
     for t in list_notsheet_not_paid:
-        doc_dict[t['doc_type']].append(t['name'])
+        doc_dict[t['parenttype']].append(t['name'])
 
     for t in doc_dict:
         doc_dict[t]=list(set(doc_dict[t]))
 
     list_emp=[]
     for t in doc_dict:
-        # print(t)
         for j in doc_dict[t]:
             data=frappe.get_all("Authorized Signature",{"parent":j},['emp_id','approval_status','previous_status','parent','parenttype'])
-            # print(data)
             if data:
                 for k in data:
-                    list_emp.append(k)
-    print(list_emp)
+                    if k['approval_status']!="Draft" and k['approval_status']!="Verify and Save":
+                        list_emp.append({'emp_id':k['emp_id'],'parent':k['parent'],'parenttype':k['parenttype']})
+ 
+    emp_list=[]
+    for t in list_emp:
+        emp_list.append(t['emp_id'])
+    emp_list=list(set(emp_list))
 
-    # e
+    emp_dict={}
 
-        
+    for t in emp_list:
+        emp_dict[t]=[]
+
+    for t in list_emp:
+        emp_dict[t['emp_id']].append(t)
+           
+    
+    for list_of_dictionaries in emp_dict:
+        new_list = []
+        for dictionary in emp_dict[list_of_dictionaries]:
+            if dictionary not in new_list:
+                new_list.append(dictionary)
+        emp_dict[list_of_dictionaries]=  new_list
+
+    for emp in emp_dict:
+        for t in emp_dict[emp]:
+            for j in list_notsheet_not_paid:
+                if t['parent']==j["name"]:
+                    # {'name': 'PO- CONSGT-00001', 'posting_date': datetime.date(2022, 12, 8), 
+                    # 'amount_clearance_period_in_days': 10, 'priority': 'Normal', 'workflow_state': 'Passed for Payment', 
+                    # 'payment_status': None, 'document_status': 'Passed for Payment', 'batch_payment_no': None, 
+                    # 'doc_type': 'PO Consignment', 'threshold_percentage': 100, 'present_threshold_percentage': 140.0, 'no_days_consumed': 14}
+                    t['priority']=j['priority']
+                    t['workflow_state']=j['workflow_state']
+                    t['payment_status']=j['payment_status']
+                    t['document_status']=j['document_status']
+                    t['batch_payment_no']=j['batch_payment_no']
+                    t['threshold_percentage']=j['threshold_percentage']
+                    t['present_threshold_percentage']=j['present_threshold_percentage']
+                    t['no_days_consumed']=j['no_days_consumed']
+                    t['future_role']=""
+                    break
+
+    for t in emp_dict:
+        new_list = []
+        for j in emp_dict[t]:
+            if j['priority']=="Urgent":
+                new_list.append(j)
+        emp_dict[t]=new_list
+    # print(emp_dict) ##### Receiving "Urgent" mail form the Authorized Signature
+    #################################### End Taking urgent emp record #####################
+    #################################### Holding of Notesheet role #################################
+    for t in list_notsheet_not_paid:
+        role=""
+        if t['payment_status']!="Payment successful":
+            if t['workflow_state']=="Passed for Payment":
+                work_flow_data=frappe.get_all("Workflow",{"document_type":"Batch Payment Process",'is_active':1},["name"])
+                work_flow_data=frappe.get_all("Workflow Document State",{"parent":work_flow_data[0]['name']},["state","allow_edit"])
+                
+                if t['batch_payment_no']==None:
+                    role=work_flow_data[0]["allow_edit"]
+                else:
+                    for j in work_flow_data:
+                        if j['state']==t['workflow_state']:
+                            role=j['allow_edit']        
+            else:
+                work_flow_data=frappe.get_all("Workflow",{"document_type":t['parenttype'],'is_active':1},["name"])
+                work_flow_data=frappe.get_all("Workflow Document State",{"parent":work_flow_data[0]['name']},["state","allow_edit"])
+                for j in work_flow_data:
+                    if j['state']==t['workflow_state']:
+                        role=j['allow_edit']
+        t['future_role']=role  
+    
+    future_emp_list=[]
+    for t in list_notsheet_not_paid:
+        emp_data=frappe.get_all("Employee",{"role":t['future_role']},["name","role"])
+        for j in emp_data:
+            future_emp_list.append(j)
+
+    future_emp_new_list = []
+
+    for dictionary in future_emp_list:
+        if dictionary not in future_emp_new_list:
+            future_emp_new_list.append(dictionary)    
+    
+    for t in future_emp_new_list:
+        if t['name'] in emp_dict.keys():
+            list_table_emp_mail=emp_dict[t['name']]
+            for j in list_notsheet_not_paid:
+                if j['future_role']==t['role']:
+                    j['future_role']=""
+                    j['emp_id']=t['name']
+                    list_table_emp_mail.append(j)
+        else:
+            emp_dict[t['name']]=[]
+            list_table_emp_mail=emp_dict[t['name']]
+            for j in list_notsheet_not_paid:
+                if j['future_role']==t['role']:
+                    j['future_role']=""
+                    j['emp_id']=t['name']
+                    list_table_emp_mail.append(j)
+
+
+    for list_of_dictionaries in emp_dict:
+        new_list = []
+        for dictionary in emp_dict[list_of_dictionaries]:
+            if dictionary not in new_list:
+                new_list.append(dictionary)
+        emp_dict[list_of_dictionaries]=  new_list
+    #################################### end Holding of Notesheet role #################################
+    #################################### Notesheet role of Batch payment not started for batch payment #################################
+    list_for_batch_payment=[]
+    for t in list_notsheet_not_paid:
+        if t['batch_payment_no']==None:
+            list_for_batch_payment.append(t)
+    batch_payment_note_creator_name=frappe.get_all("Workflow",{"document_type":"Batch Payment Process","is_active":1},['name'])[0]['name']   
+    emp_list_data=[]
+    if batch_payment_note_creator_name:
+        batch_payment_note_creator_role=frappe.get_all('Workflow Document State',{"parent":batch_payment_note_creator_name},['allow_edit'])[0]['allow_edit']
+        emp_list_data=frappe.get_all("Employee",{"role":batch_payment_note_creator_role},['name','role'])    
+
+    for t in emp_list_data:
+        if t['name'] in emp_dict.keys():
+            list_table_emp_mail=emp_dict[t['name']]
+            for j in list_notsheet_not_paid:
+                if j['future_role']==t['role']:
+                    j['future_role']=""
+                    j['emp_id']=t['name']
+                    list_table_emp_mail.append(j)
+        else:
+            emp_dict[t['name']]=[]
+            list_table_emp_mail=emp_dict[t['name']]
+            for j in list_notsheet_not_paid:
+                if j['future_role']==t['role']:
+                    j['future_role']=""
+                    j['emp_id']=t['name']
+                    list_table_emp_mail.append(j)
+
+
+    for list_of_dictionaries in emp_dict:
+        new_list = []
+        for dictionary in emp_dict[list_of_dictionaries]:
+            if dictionary not in new_list:
+                new_list.append(dictionary)
+        emp_dict[list_of_dictionaries]=  new_list
+
+    #################################### Notesheet role of Batch payment not started for batch payment #################################
+    for t in emp_dict:
+        emp_data=frappe.get_all("Employee",{"name":t,"enabled":1},['name','role','full_name','employee_number','email','department'])
+        if emp_data:
+            notsheet_data=emp_dict[t]
+            list_data_for_mail=[]
+            for k in notsheet_data:
+                for j in doctype_name_filed_map:
+                    if j['parent']==k['parenttype']:
+                        try:
+                            data=frappe.get_all(j['parent'],{"name":k['parent']},j['fieldname'])
+                            for l in data:
+                                l['doctype']=k['parenttype']
+                                l['threshold_percentage']=k['threshold_percentage']
+                                l['present_threshold_percentage']=k['present_threshold_percentage']
+                                l['no_days_consumed']=k['no_days_consumed']
+                                l['priority']=k['priority']
+                                list_data_for_mail.append(l)
+                        except:
+                            data=frappe.get_all(j['parent'],{"name":k['name']},j['fieldname'])  
+                            for l in data:
+                                l['doctype']=k['parenttype']
+                                l['threshold_percentage']=k['threshold_percentage']
+                                l['present_threshold_percentage']=k['present_threshold_percentage']
+                                l['no_days_consumed']=k['no_days_consumed']
+                                l['priority']=k['priority']
+                                list_data_for_mail.append(l)
+
+            report_holder_notesheet(emp_data,list_data_for_mail,field)     
+
+
+         
        
 
 
