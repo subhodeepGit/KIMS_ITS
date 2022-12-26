@@ -71,6 +71,14 @@ frappe.ui.form.on("PO Material Management", {
 			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
 			frm.set_df_property('third_party_verification', 'read_only', 1)
 		}
+		if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
+			frm.set_df_property("details_of_invoices_and_po", "cannot_add_rows", false);
+			frm.set_df_property("details_of_invoices_and_po", "cannot_delete_rows", false);
+			}
+			else{
+			frm.set_df_property("details_of_invoices_and_po", "cannot_add_rows", true);
+			frm.set_df_property("details_of_invoices_and_po", "cannot_delete_rows", true);
+			}
 		if(frm.is_new()==1){
 			frm.set_df_property('note_sheet_no', 'read_only', 0)
 			frm.set_df_property('company', 'read_only', 0)
@@ -152,6 +160,36 @@ frappe.ui.form.on("PO Material Management", {
 			}
 		}
 	}
+});
+frappe.ui.form.on("PO Material Management", {
+	before_load: function(frm) {
+		if(frm.is_new()==1 || frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "invoice_receival_no", cur_frm.doc.name);
+		df_rate.read_only = 0;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_no", cur_frm.doc.name);
+		df_rate.read_only = 0;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_date", cur_frm.doc.name);
+		df_rate.read_only = 0;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_attachment", cur_frm.doc.name);
+		df_rate.read_only = 0;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_attachment_attachment", cur_frm.doc.name);
+		df_rate.read_only = 0;
+		frm.refresh_fields();
+		}
+		else{
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "invoice_receival_no", cur_frm.doc.name);
+		df_rate.read_only = 1;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_no", cur_frm.doc.name);
+		df_rate.read_only = 1;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_date", cur_frm.doc.name);
+		df_rate.read_only = 1;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_attachment", cur_frm.doc.name);
+		df_rate.read_only = 1;
+		var df_rate = frappe.meta.get_docfield("Invoices and PO", "po_attachment_attachment", cur_frm.doc.name);
+		df_rate.read_only = 1;
+		frm.refresh_fields();
+		}
+}
 });
 
 // Child table field Mandatory when workflow state in draft
