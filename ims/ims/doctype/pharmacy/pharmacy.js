@@ -43,6 +43,24 @@ frappe.ui.form.on("Pharmacy", {
 		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
 		//cannot able to delete rows 
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
+		if(frm.is_new()==1 || frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
+			var df_rate = frappe.meta.get_docfield("Enclosed Bills", "invoice_receival_no", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po_attachment", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			frm.refresh_fields();
+			}
+			else{
+			var df_rate = frappe.meta.get_docfield("Enclosed Bills", "invoice_receival_no", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po_attachment", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			frm.refresh_fields();
+			}
 		if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
 		frm.set_df_property("details_of_enclosed_bills", "cannot_add_rows", false);
 		frm.set_df_property("details_of_enclosed_bills", "cannot_delete_rows", false);
@@ -112,7 +130,24 @@ frappe.ui.form.on("Pharmacy", {
 			else {
 				frm.set_df_property("audit_ref_no",'read_only', 1)
 				frm.set_df_property("today_date",'read_only', 1)
-			}
+			}if(frm.is_new()==1 || frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
+				var df_rate = frappe.meta.get_docfield("Enclosed Bills", "invoice_receival_no", cur_frm.doc.name);
+				df_rate.read_only = 0;
+				var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po", cur_frm.doc.name);
+				df_rate.read_only = 0;
+				var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po_attachment", cur_frm.doc.name);
+				df_rate.read_only = 0;
+				frm.refresh_fields();
+				}
+				else{
+				var df_rate = frappe.meta.get_docfield("Enclosed Bills", "invoice_receival_no", cur_frm.doc.name);
+				df_rate.read_only = 1;
+				var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po", cur_frm.doc.name);
+				df_rate.read_only = 1;
+				var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po_attachment", cur_frm.doc.name);
+				df_rate.read_only = 1;
+				frm.refresh_fields();
+				}
 			if (frm.doc.workflow_state=="Journal Entry by Account Dept."){
 				frm.set_df_property("profit_center",'read_only', 0)
 				frm.set_df_property("document_number",'read_only', 0)
@@ -145,28 +180,7 @@ frappe.ui.form.on("Pharmacy", {
 	}
 });
 
-frappe.ui.form.on("Pharmacy", {
-	before_load: function(frm) {
-		if(frm.is_new()==1 || frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
-		var df_rate = frappe.meta.get_docfield("Enclosed Bills", "invoice_receival_no", cur_frm.doc.name);
-		df_rate.read_only = 0;
-		var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po", cur_frm.doc.name);
-		df_rate.read_only = 0;
-		var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po_attachment", cur_frm.doc.name);
-		df_rate.read_only = 0;
-		frm.refresh_fields();
-		}
-		else{
-		var df_rate = frappe.meta.get_docfield("Enclosed Bills", "invoice_receival_no", cur_frm.doc.name);
-		df_rate.read_only = 1;
-		var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po", cur_frm.doc.name);
-		df_rate.read_only = 1;
-		var df_rate = frappe.meta.get_docfield("Enclosed Bills", "po_attachment", cur_frm.doc.name);
-		df_rate.read_only = 1;
-		frm.refresh_fields();
-		}
-}
-});
+
 // Child table field Mandatory when workflow state in draft
 frappe.ui.form.on('Pharmacy', {
 	before_load: function(frm) {

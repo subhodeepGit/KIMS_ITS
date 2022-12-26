@@ -89,9 +89,140 @@ frappe.ui.form.on("PO Consignment", {
 		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
 		//cannot able to delete rows
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
+		if(frm.is_new()==1 || frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "invoice_receival_no", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "hospital_margin_note_no", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "po", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "po_attachment", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "document_receiving_date", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "hospital_margin_note_date", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "hospital_margin_amount", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "patient_name", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "mrn_no", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "document_no", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "document_date", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			frm.refresh_fields();
+			}
+			else{
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "invoice_receival_no", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "hospital_margin_note_no", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "po", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "po_attachment", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "document_receiving_date", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "hospital_margin_note_date", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "hospital_margin_amount", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "patient_name", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "mrn_no", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "document_no", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Credit Note and PO", "document_date", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			frm.refresh_fields();
+			}
 		if (frm.doc.workflow_state=="Passed for Payment" || frm.doc.workflow_state=="Draft"){
 			frm.set_df_property("third_party_verification", "cannot_add_rows", true);
 			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
+		}
+		if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
+			frm.set_df_property("details_of_invoices_credit_note_and_po", "cannot_add_rows", false);
+			frm.set_df_property("details_of_invoices_credit_note_and_po", "cannot_delete_rows", false);
+			}
+			else{
+			frm.set_df_property("details_of_invoices_credit_note_and_po", "cannot_add_rows", true);
+			frm.set_df_property("details_of_invoices_credit_note_and_po", "cannot_delete_rows", true);
+			}
+		if(frm.is_new()==1){
+			frm.set_df_property('note_sheet_no', 'read_only', 0)
+			frm.set_df_property('company', 'read_only', 0)
+			frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+			frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+			frm.set_df_property('for_which_department', 'read_only', 0)
+			frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+			frm.set_df_property("supplier_code",'read_only', 0)
+			frm.set_df_property("audit_ref_no",'read_only', 1)
+			frm.set_df_property("today_date",'read_only', 1)
+			frm.set_df_property("profit_center",'read_only', 1)
+			frm.set_df_property("document_number",'read_only', 1)
+			frm.set_df_property("ref_no",'read_only', 1)
+			frm.set_df_property("document_date",'read_only', 1)
+			frm.set_df_property("attach_journal_voucher",'read_only', 1)
+			// frm.set_df_property("third_party_verification", "cannot_add_rows", true);
+			// frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
+		}
+		else{
+			if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save" ){
+				frm.set_df_property('note_sheet_no', 'read_only', 0)
+				frm.set_df_property('company', 'read_only', 0)
+				frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+				frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+				frm.set_df_property('for_which_department', 'read_only', 0)
+				frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+				frm.set_df_property("supplier_code",'read_only', 0)
+				frm.set_df_property("amount_clearance_period_in_days",'read_only', 0)
+				frm.set_df_property("priority",'read_only', 0)
+				
+			}
+			else{
+				frm.set_df_property('note_sheet_no', 'read_only', 1)
+				frm.set_df_property('company', 'read_only', 1)
+				frm.set_df_property('date_of_note_sheet', 'read_only', 1)
+				frm.set_df_property('name_of_schooldepartment', 'read_only', 1)
+				frm.set_df_property('for_which_department', 'read_only', 1)
+				frm.set_df_property("item_of_purchaseexpense",'read_only', 1)
+				frm.set_df_property("supplier_code",'read_only', 1)
+				frm.set_df_property("amount_clearance_period_in_days",'read_only', 1)
+				frm.set_df_property("priority",'read_only', 1)
+			}
+	
+			if (frm.doc.workflow_state=="Approved by Director, Administration"){
+				frm.set_df_property("audit_ref_no", "reqd", 1);
+				frm.set_df_property("today_date", "reqd", 1);
+				frm.set_df_property("audit_ref_no",'read_only', 0)
+				frm.set_df_property("today_date",'read_only', 0)
+			}
+			else {
+				frm.set_df_property("audit_ref_no",'read_only', 1)
+				frm.set_df_property("today_date",'read_only', 1)
+			}
+			if (frm.doc.workflow_state=="Journal Entry by Account Dept."){
+				frm.set_df_property("profit_center",'read_only', 0)
+				frm.set_df_property("document_number",'read_only', 0)
+				frm.set_df_property("ref_no",'read_only', 0)
+				frm.set_df_property("document_date",'read_only', 0)
+				frm.set_df_property("attach_journal_voucher",'read_only', 0)
+				frm.set_df_property("profit_center",'reqd', 1)
+				frm.set_df_property("document_number",'reqd', 1)
+				frm.set_df_property("ref_no",'reqd', 1)
+				frm.set_df_property("document_date",'reqd', 1)
+				frm.set_df_property("attach_journal_voucher",'reqd', 1)
+			}
+			else{
+				frm.set_df_property("profit_center",'read_only', 1)
+				frm.set_df_property("document_number",'read_only', 1)
+				frm.set_df_property("ref_no",'read_only', 1)
+				frm.set_df_property("document_date",'read_only', 1)
+				frm.set_df_property("attach_journal_voucher",'read_only', 1)
+			}
 		}
 	}
 });
@@ -137,73 +268,73 @@ frappe.ui.form.on('PO Consignment', {
 				df1.reqd = 1; // not working
 			}
 			
-			if(frm.is_new()==1){
-				frm.set_df_property('note_sheet_no', 'read_only', 0)
-				frm.set_df_property('company', 'read_only', 0)
-				frm.set_df_property('date_of_note_sheet', 'read_only', 0)
-				frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
-				frm.set_df_property('for_which_department', 'read_only', 0)
-				frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
-				frm.set_df_property("supplier_code",'read_only', 0)
-				frm.set_df_property("audit_ref_no",'read_only', 1)
-				frm.set_df_property("today_date",'read_only', 1)
-				frm.set_df_property("profit_center",'read_only', 1)
-				frm.set_df_property("document_number",'read_only', 1)
-				frm.set_df_property("ref_no",'read_only', 1)
-				frm.set_df_property("document_date",'read_only', 1)
-				frm.set_df_property("attach_journal_voucher",'read_only', 1)
-				// frm.set_df_property("third_party_verification", "cannot_add_rows", true);
-				// frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
-			}
-			else{
-				if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save" ){
-					frm.set_df_property('note_sheet_no', 'read_only', 0)
-					frm.set_df_property('company', 'read_only', 0)
-					frm.set_df_property('date_of_note_sheet', 'read_only', 0)
-					frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
-					frm.set_df_property('for_which_department', 'read_only', 0)
-					frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
-					frm.set_df_property("supplier_code",'read_only', 0)
-				}
-				else{
-					frm.set_df_property('note_sheet_no', 'read_only', 1)
-					frm.set_df_property('company', 'read_only', 1)
-					frm.set_df_property('date_of_note_sheet', 'read_only', 1)
-					frm.set_df_property('name_of_schooldepartment', 'read_only', 1)
-					frm.set_df_property('for_which_department', 'read_only', 1)
-					frm.set_df_property("item_of_purchaseexpense",'read_only', 1)
-					frm.set_df_property("supplier_code",'read_only', 1)
-				}
+			// if(frm.is_new()==1){
+			// 	frm.set_df_property('note_sheet_no', 'read_only', 0)
+			// 	frm.set_df_property('company', 'read_only', 0)
+			// 	frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+			// 	frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+			// 	frm.set_df_property('for_which_department', 'read_only', 0)
+			// 	frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+			// 	frm.set_df_property("supplier_code",'read_only', 0)
+			// 	frm.set_df_property("audit_ref_no",'read_only', 1)
+			// 	frm.set_df_property("today_date",'read_only', 1)
+			// 	frm.set_df_property("profit_center",'read_only', 1)
+			// 	frm.set_df_property("document_number",'read_only', 1)
+			// 	frm.set_df_property("ref_no",'read_only', 1)
+			// 	frm.set_df_property("document_date",'read_only', 1)
+			// 	frm.set_df_property("attach_journal_voucher",'read_only', 1)
+			// 	// frm.set_df_property("third_party_verification", "cannot_add_rows", true);
+			// 	// frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
+			// }
+			// else{
+			// 	if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save" ){
+			// 		frm.set_df_property('note_sheet_no', 'read_only', 0)
+			// 		frm.set_df_property('company', 'read_only', 0)
+			// 		frm.set_df_property('date_of_note_sheet', 'read_only', 0)
+			// 		frm.set_df_property('name_of_schooldepartment', 'read_only', 0)
+			// 		frm.set_df_property('for_which_department', 'read_only', 0)
+			// 		frm.set_df_property("item_of_purchaseexpense",'read_only', 0)
+			// 		frm.set_df_property("supplier_code",'read_only', 0)
+			// 	}
+			// 	else{
+			// 		frm.set_df_property('note_sheet_no', 'read_only', 1)
+			// 		frm.set_df_property('company', 'read_only', 1)
+			// 		frm.set_df_property('date_of_note_sheet', 'read_only', 1)
+			// 		frm.set_df_property('name_of_schooldepartment', 'read_only', 1)
+			// 		frm.set_df_property('for_which_department', 'read_only', 1)
+			// 		frm.set_df_property("item_of_purchaseexpense",'read_only', 1)
+			// 		frm.set_df_property("supplier_code",'read_only', 1)
+			// 	}
 		
-				if (frm.doc.workflow_state=="Approved by Director, Administration"){
-					frm.set_df_property("audit_ref_no", "reqd", 1);
-					frm.set_df_property("today_date", "reqd", 1);
-					frm.set_df_property("audit_ref_no",'read_only', 0)
-					frm.set_df_property("today_date",'read_only', 0)
-				}
-				else {
-					frm.set_df_property("audit_ref_no",'read_only', 1)
-					frm.set_df_property("today_date",'read_only', 1)
-				}
-				if (frm.doc.workflow_state=="Journal Entry by Account Dept."){
-					frm.set_df_property("profit_center",'read_only', 0)
-					frm.set_df_property("document_number",'read_only', 0)
-					frm.set_df_property("ref_no",'read_only', 0)
-					frm.set_df_property("document_date",'read_only', 0)
-					frm.set_df_property("attach_journal_voucher",'read_only', 0)
-					frm.set_df_property("profit_center",'reqd', 1)
-					frm.set_df_property("document_number",'reqd', 1)
-					frm.set_df_property("ref_no",'reqd', 1)
-					frm.set_df_property("document_date",'reqd', 1)
-					frm.set_df_property("attach_journal_voucher",'reqd', 1)
-				}
-				else{
-					frm.set_df_property("profit_center",'read_only', 1)
-					frm.set_df_property("document_number",'read_only', 1)
-					frm.set_df_property("ref_no",'read_only', 1)
-					frm.set_df_property("document_date",'read_only', 1)
-					frm.set_df_property("attach_journal_voucher",'read_only', 1)
-				}
+			// 	if (frm.doc.workflow_state=="Approved by Director, Administration"){
+			// 		frm.set_df_property("audit_ref_no", "reqd", 1);
+			// 		frm.set_df_property("today_date", "reqd", 1);
+			// 		frm.set_df_property("audit_ref_no",'read_only', 0)
+			// 		frm.set_df_property("today_date",'read_only', 0)
+			// 	}
+			// 	else {
+			// 		frm.set_df_property("audit_ref_no",'read_only', 1)
+			// 		frm.set_df_property("today_date",'read_only', 1)
+			// 	}
+			// 	if (frm.doc.workflow_state=="Journal Entry by Account Dept."){
+			// 		frm.set_df_property("profit_center",'read_only', 0)
+			// 		frm.set_df_property("document_number",'read_only', 0)
+			// 		frm.set_df_property("ref_no",'read_only', 0)
+			// 		frm.set_df_property("document_date",'read_only', 0)
+			// 		frm.set_df_property("attach_journal_voucher",'read_only', 0)
+			// 		frm.set_df_property("profit_center",'reqd', 1)
+			// 		frm.set_df_property("document_number",'reqd', 1)
+			// 		frm.set_df_property("ref_no",'reqd', 1)
+			// 		frm.set_df_property("document_date",'reqd', 1)
+			// 		frm.set_df_property("attach_journal_voucher",'reqd', 1)
+			// 	}
+			// 	else{
+			// 		frm.set_df_property("profit_center",'read_only', 1)
+			// 		frm.set_df_property("document_number",'read_only', 1)
+			// 		frm.set_df_property("ref_no",'read_only', 1)
+			// 		frm.set_df_property("document_date",'read_only', 1)
+			// 		frm.set_df_property("attach_journal_voucher",'read_only', 1)
+			// 	}
 				// eval:(doc.workflow_state=="Approved by Director, Administration");/
 				// eval:(doc.workflow_state=="Approved by Director, Administration");today_dateToday
 				// eval:(doc.workflow_state=="Passed for Payment") || (doc.workflow_state=="Cancelled")
@@ -212,7 +343,7 @@ frappe.ui.form.on('PO Consignment', {
 				// || (doc.workflow_state=="Approved by Auditor(Audit Verification)")
 				// eval:(doc.workflow_state=="Journal Entry by Account Dept.") || (doc.workflow_state=="Passed for Payment");
 
-			}
+			// }
 		},
 		before_save: function(frm) {
 			frm.trigger("mandatory_field");

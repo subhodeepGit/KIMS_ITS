@@ -148,37 +148,33 @@ frappe.ui.form.on('PO Consumable', {
 });
 
 frappe.ui.form.on("PO Consumable", {
-	before_load: function(frm) {
-		if(frm.is_new()==1 || frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "invoice_receival_no", cur_frm.doc.name);
-		df_rate.read_only = 0;
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "details_of_invoices_and_po", cur_frm.doc.name);
-		df_rate.read_only = 0;
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment_attachment", cur_frm.doc.name);
-		df_rate.read_only = 0;
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment", cur_frm.doc.name);
-		df_rate.read_only = 0;
-		frm.refresh_fields();
-		}
-		else{
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "invoice_receival_no", cur_frm.doc.name);
-		df_rate.read_only = 1;
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "details_of_invoices_and_po", cur_frm.doc.name);
-		df_rate.read_only = 1;
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment_attachment", cur_frm.doc.name);
-		df_rate.read_only = 1;
-		var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment", cur_frm.doc.name);
-		df_rate.read_only = 1;
-		frm.refresh_fields();
-		}
-}
-});
-frappe.ui.form.on("PO Consumable", {
 	onload:function(frm){
 		//cannot able to add rows
 		frm.set_df_property("authorized_signature", "cannot_add_rows", true);
 		//cannot able to delete rows
 		frm.set_df_property("authorized_signature", "cannot_delete_rows", true);
+		if(frm.is_new()==1 || frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "invoice_receival_no", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "details_of_invoices_and_po", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment_attachment", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment", cur_frm.doc.name);
+			df_rate.read_only = 0;
+			frm.refresh_fields();
+			}
+			else{
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "invoice_receival_no", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "details_of_invoices_and_po", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment_attachment", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			var df_rate = frappe.meta.get_docfield("Details of Invoices and PO", "po_attachment", cur_frm.doc.name);
+			df_rate.read_only = 1;
+			frm.refresh_fields();
+			}
 		if (frm.doc.workflow_state=="Passed for Payment" || frm.doc.workflow_state=="Draft"){
 			frm.set_df_property("third_party_verification", "cannot_add_rows", true);
 			frm.set_df_property("third_party_verification", "cannot_delete_rows", true);
