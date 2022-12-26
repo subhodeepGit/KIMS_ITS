@@ -124,7 +124,6 @@
    "fieldtype": "Select",
    "label": "Priority",
    "options": "\nUrgent\nNormal\nHigh Priority\nLow Priority",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -174,8 +173,7 @@
    "default": "0",
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
-   "label": "TDS Amount To Be Deducted (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "TDS Amount To Be Deducted (In Rs.)"
   },
   {
    "fieldname": "column_break_23",
@@ -185,8 +183,7 @@
    "default": "0",
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Advance Amount Already Paid (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Advance Amount Already Paid (In Rs.)"
   },
   {
    "default": "0",
@@ -317,7 +314,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-15 16:57:11.407581",
+ "modified": "2022-12-26 17:57:03.236133",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
