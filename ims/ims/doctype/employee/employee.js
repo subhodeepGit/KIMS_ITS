@@ -93,7 +93,7 @@ frappe.ui.form.on('Employee', {
 			frm.set_df_property("branch_name", "hidden", 1);
 			frm.set_df_property("bank_address", "hidden", 1);
 		}
-		if (frappe.session.user=="Administrator"){
+		if (frappe.session.user=="Administrator" || frappe.user.has_role(["System Manager"])){
 			frm.set_df_property("new_password", "read_only", 0);
 			frm.set_df_property("enabled", "read_only", 0);
 			frm.set_df_property("first_name", "read_only", 0);

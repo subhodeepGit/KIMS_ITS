@@ -1,6 +1,39 @@
 {
- "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Invoice Tracking System</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":9}},{\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Invoice\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"PO Based invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Non PO based Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Other Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Payment Workflow\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Third Party Verification\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Absent Employee Replacement\",\"col\":4}}]",
+ "charts": [
+  {
+   "chart_name": "Invoice Receival Charts",
+   "label": "Invoice Receival Charts"
+  },
+  {
+   "chart_name": "T-Kitchen Charts",
+   "label": "T-Kitchen Charts"
+  },
+  {
+   "chart_name": "PO Consignment Charts",
+   "label": "PO Consignment Charts"
+  },
+  {
+   "chart_name": "PO Material Management Charts",
+   "label": "PO Material Management Charts"
+  },
+  {
+   "chart_name": "Pharmacy Charts",
+   "label": "Pharmacy Charts"
+  },
+  {
+   "chart_name": "Patient Refund Charts",
+   "label": "Patient Refund Charts"
+  },
+  {
+   "chart_name": "Non PO Contract Charts",
+   "label": "Non PO Contract Charts"
+  },
+  {
+   "chart_name": "Non PO Non Contract Charts",
+   "label": "Non PO Non Contract Charts"
+  }
+ ],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Invoice Tracking System</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Invoice\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"PO Based invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Non PO based Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Other Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Payment Workflow\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Third Party Verification\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Absent Employee Replacement\",\"col\":4}}]",
  "creation": "2022-11-03 11:00:43.773444",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -342,8 +375,8 @@
    "type": "Link"
   }
  ],
- "modified": "2022-12-21 12:34:14.776020",
- "modified_by": "Administrator",
+ "modified": "2022-12-26 18:08:24.015579",
+ "modified_by": "raj@gg.cc",
  "module": "Ims",
  "name": "Invoice Tracking System",
  "owner": "Administrator",
@@ -352,14 +385,6 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 30.0,
- "shortcuts": [
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Dashboard",
-   "link_to": "ITS Dashboard",
-   "type": "Dashboard"
-  }
- ],
+ "shortcuts": [],
  "title": "Invoice Tracking System"
 }
