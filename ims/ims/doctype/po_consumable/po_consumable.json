@@ -136,7 +136,6 @@
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
@@ -144,20 +143,17 @@
    "fieldtype": "Select",
    "label": "Priority",
    "options": "\nUrgent\nNormal\nHigh Priority\nLow Priority",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")",
    "reqd": 1
   },
   {
    "fieldname": "master_invoice_attachment",
    "fieldtype": "Attach",
-   "label": "Master Invoice Attachment",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Master Invoice Attachment"
   },
   {
    "fieldname": "note_sheet_attachment",
    "fieldtype": "Attach",
-   "label": "Note sheet Attachment",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Note sheet Attachment"
   },
   {
    "fieldname": "audit_section_section",
@@ -209,8 +205,7 @@
    "default": "0",
    "fieldname": "tds_amount_to_be_deducted_in_rs",
    "fieldtype": "Currency",
-   "label": "TDS Amount To Be Deducted (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "TDS Amount To Be Deducted (In Rs.)"
   },
   {
    "fieldname": "column_break_21",
@@ -220,8 +215,7 @@
    "default": "0",
    "fieldname": "advance_amount_already_paid_in_rs",
    "fieldtype": "Currency",
-   "label": "Advance Amount Already Paid (In Rs.)",
-   "read_only_depends_on": "eval:(doc.workflow_state==\"Passed for Payment\") || (doc.workflow_state==\"Cancelled\")"
+   "label": "Advance Amount Already Paid (In Rs.)"
   },
   {
    "default": "0",
@@ -295,7 +289,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-15 12:29:56.050197",
+ "modified": "2022-12-26 15:12:23.514571",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Consumable",
