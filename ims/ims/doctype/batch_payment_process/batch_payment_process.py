@@ -31,7 +31,9 @@ class BatchPaymentProcess(Document):
 
 		field_update_notesheer(self)
 		if self.workflow_state=="Verified & Submitted by Note Creator":
-			merge_same_vendor(self)
+			doc_before_save = self.get_doc_before_save()
+			if doc_before_save.get("vendor_wise_payment_details") == self.get("vendor_wise_payment_details"):
+				merge_same_vendor(self)
 		calculate_total(self)
 		session_user = frappe.session.user
 		if self.workflow_state!="Rejected and Transfer":
@@ -518,9 +520,10 @@ def status_update(self):
 	for t in self.get("table_26"):
 		invoice = frappe.get_all("Invoice Receival",{"note_no":t.invoice_tracking_number},["name"])
 		if invoice:
-			if workflow_status!="Cancelled":
-				frappe.db.set_value("Invoice Receival",invoice,"batch_payment_no",name)
-				frappe.db.set_value("Invoice Receival",invoice,"payment_status",workflow_status)
-			else:
-				frappe.db.set_value("Invoice Receival",invoice,"batch_payment_no","")
-				frappe.db.set_value("Invoice Receival",invoice,"payment_status","")
+			for x in invoice:
+				if workflow_status!="Cancelled":
+					frappe.db.set_value("Invoice Receival",x["name"],"batch_payment_no",name)
+					frappe.db.set_value("Invoice Receival",x["name"],"payment_status",workflow_status)
+				else:
+					frappe.db.set_value("Invoice Receival",x["name"],"batch_payment_no","")
+					frappe.db.set_value("Invoice Receival",x["name"],"payment_status","")

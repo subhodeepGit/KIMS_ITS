@@ -81,7 +81,7 @@ frappe.ui.form.on("Batch Payment Process", {
 		frm.set_df_property("audit_reference_no",'read_only', 0)
 		frm.set_df_property("audit_posting_date",'read_only', 0)
 }
-		if(frm.doc.document_status!="Check Preparation And Signature"){
+		if(frm.doc.document_status!="Cheque Preparation And Signature"){
 			frm.set_df_property("cheque_no",'read_only', 1)
 			frm.set_df_property("cheque_date",'read_only', 1)
 			frm.set_df_property("cheque_attachment",'read_only', 1)
@@ -105,7 +105,7 @@ frappe.ui.form.on("Batch Payment Process", {
 			frm.set_value('audit_reference_no', '')
 			frm.set_value('audit_posting_date', '')
 		}
-		if(frm.doc.document_status=="Check Preparation And Signature"){
+		if(frm.doc.document_status=="Cheque Preparation And Signature"){
 			frm.set_df_property("cheque_no",'reqd', 1)
 			frm.set_df_property("cheque_date",'reqd', 1)
 			frm.set_df_property("cheque_attachment",'reqd', 1)
@@ -161,7 +161,7 @@ frappe.ui.form.on('Batch Payment Process', {
 
 frappe.ui.form.on("Batch Payment Process", {
 	validate:function(frm){
-		if(frm.doc.workflow_state=="Draft"){
+		if(frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
 			frm.clear_table("vendor_wise_payment_details");
 	}
 }
@@ -242,7 +242,7 @@ frappe.ui.form.on("Batch Payment Process", {
 	},
 	get_outstanding_documents: function(frm, filters) {
 		frm.clear_table("table_26");
-		if (frm.doc.workflow_state=="Draft"){
+		if (frm.doc.workflow_state=="Draft" || frm.doc.workflow_state=="Verify and Save"){
 			frm.clear_table("vendor_wise_payment_details");
 			}
 		var args={
