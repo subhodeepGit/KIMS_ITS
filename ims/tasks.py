@@ -1,7 +1,7 @@
 import frappe
 from frappe import utils
 from datetime import timedelta,date
-from ims.ims.notification.custom_notification import report_scheduler,report_scheduler_reject_trasfer,report_holder_notesheet
+from ims.ims.notification.custom_notification import report_scheduler,report_scheduler_reject_trasfer,report_holder_notesheet,notesheet_reminder_mail
 
 
 
@@ -696,11 +696,118 @@ def notification_for_approval():
             report_holder_notesheet(emp_data,list_data_for_mail,field)     
 
 
-         
-       
+def mail_for_noteceater():
+    # bench --site erp.soulunileaders.com execute ims.tasks.mail_for_noteceater
+
+    doctype_name=['PO Consumable',"PO Consignment","PO Material Management","Pharmacy","Non PO Contract","Non PO Non Contract",
+                "Patient Refund"]
+    ################################### Invoice Data ####################
+    invoice_recv=frappe.get_all("Invoice Receival",{"invoice_status":"Passed for Notesheet"})
+    for t in invoice_recv:
+        t['doc_type']="Invoice Receival"
+
+    invoice_recv_emp=[]      
+    for t in doctype_name:
+        if t!="Patient Refund":
+            data=frappe.get_all("Workflow",{"document_type":t,"is_active":1},['name'])
+            data=frappe.get_all("Workflow Document State",{"parent":data[0]['name'],"state":"Verify and Save"},['allow_edit'])
+            role=data[0]['allow_edit']
+            emp=frappe.get_all("Employee",{"role":role,"enabled":1},['name','role','full_name','employee_number','email','department'])
+            for j in emp:
+                invoice_recv_emp.append(j)
+    ################################### Invoice Data ####################
+    ############################# Note sheet data ##############
+    pass_for_payment_data=[]            
+    for t in doctype_name:   
+        data=[]         
+        data=frappe.get_all(t,[["workflow_state","=","Passed for Payment"],["batch_payment_no","=",""],["batch_payment_no","!=","Cancelled"]],['name'])
+        for j in data:
+            j['doc_type']=t
+            pass_for_payment_data.append(j)
 
 
-    
+
+    data=frappe.get_all("Workflow",{"document_type":"Batch Payment Process","is_active":1},['name'])
+    data=frappe.get_all("Workflow Document State",{"parent":data[0]['name'],"state":"Verify and Save"},['allow_edit'])
+    role=data[0]['allow_edit']
+    pass_for_payment_emp=frappe.get_all("Employee",{"role":role,"enabled":1},['name','role','full_name','employee_number','email','department'])
+    ##################################### end Note sheet data###########    
+    genral_field_list= ['name','priority','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount_in_rs',
+                        'tds_amount_to_be_deducted_in_rs','advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status',
+                        'amount_clearance_period_in_days']
+    po_consignment_field_list=['name','priority','note_sheet_no','posting_date','item_of_purchaseexpense','total_hospital_margin_amount','supplier_code','name_of_supplier',
+                                            'to_pay_total','total_amount_in_rs','less_credit_note_amount_in_rs','net_final_amount_to_be_paid_in_rs','document_status']                                      
+    pharmacy_field_list=['name','priority','note_sheet_no','posting_date','item_of_purchaseexpense','supplier_code','name_of_supplier','total_amount'
+                                    ,'advance_amount_already_paid_in_rs','net_final_amount_to_be_paid_in_rs','document_status',
+                                    'amount_clearance_period_in_days']
+    patient_refund_field_list=['name',"type_of_insurance","name_of_the_patient","ip__uhid_no","posting_date","total_bill","approval_of_tpa__insurance__corporate__ostf",
+                                    "amount_deposited_by_patient","net_refundable_in_figures",'document_status']
+    batch_payment_process=['name',"date","document_status","account_reference_no","bank_ac_no","bank_name","bank_address","account_reference_no",
+                                            "account_post_date","audit_reference_no","audit_posting_date","cheque_no","cheque_date","total_amount"]
+    invoice_data_fied=["name","company","type_of_invoice","invoice_no","invoice_date","type_of_supplier","supplier_code","supplier_name",
+                        "remarks_if_any","posting_date","invoice_status","note_sheet_status","note_no","type_of_note_sheet","batch_payment_no",
+                        "payment_status"]                                        
+
+    doctype_name_filed_map=[{"parent":'PO Consumable',"fieldname":genral_field_list},{"parent":"PO Consignment","fieldname":po_consignment_field_list},
+                    {"parent":"PO Material Management","fieldname":genral_field_list},{"parent":"Pharmacy","fieldname":pharmacy_field_list}
+                    ,{"parent":"Non PO Contract","fieldname":genral_field_list},{"parent":"Non PO Non Contract","fieldname":genral_field_list},
+                {"parent":"Patient Refund","fieldname":patient_refund_field_list},{"parent":"Batch Payment Process","fieldname":batch_payment_process}
+                ,{"parent":"Invoice Receival","fieldname":invoice_data_fied}]
+
+    field=[]
+    for t in doctype_name_filed_map:
+        fieldname=t["fieldname"]
+        for j in fieldname:
+            dofield=frappe.get_all("DocField",filters=[["parent","=",t['parent']],["fieldname","=",j]],fields=["label","fieldname","parent"])
+            if dofield:
+                field.append(dofield[0])
+    ########################################## Field            
+    emp_final_list={}
+    for t in invoice_recv_emp:
+        if t['name'] in emp_final_list.keys():
+            pass
+        else:
+            emp_final_list[t['name']]=[]    
+    for t in emp_final_list:
+        for j in invoice_recv:
+            emp_final_list[t].append(j)
+
+
+    for t in pass_for_payment_emp:
+        if t['name'] in emp_final_list.keys():
+            for j in pass_for_payment_data:
+                emp_final_list[t['name']].append(j)
+        else:
+            emp_final_list[t['name']]=[]          
+            for j in pass_for_payment_data:
+                emp_final_list[t['name']].append(j)               
+
+    for list_of_dictionaries in emp_final_list:
+        new_list = []
+        for dictionary in emp_final_list[list_of_dictionaries]:
+            if dictionary not in new_list:
+                new_list.append(dictionary)
+        emp_final_list[list_of_dictionaries]=  new_list
+    # print(emp_final_list) 
+    for t in emp_final_list:
+        emp_data=frappe.get_all("Employee",{"name":t,"enabled":1},['name','role','full_name','employee_number','email','department'])
+        if emp_data:
+            notsheet_data=emp_final_list[t]
+            list_data_for_mail=[]
+            for k in notsheet_data:
+                for j in doctype_name_filed_map:
+                    if j['parent']==k['doc_type']:
+                        try:
+                            data=frappe.get_all(j['parent'],{"name":k['parent']},j['fieldname'])
+                            for l in data:
+                                l['doc_type']=k['doc_type']
+                                list_data_for_mail.append(l)
+                        except:
+                            data=frappe.get_all(j['parent'],{"name":k['name']},j['fieldname'])  
+                            for l in data:
+                                l['doc_type']=k['doc_type']
+                                list_data_for_mail.append(l) 
+            notesheet_reminder_mail(field,emp_data,list_data_for_mail)
             
 
 
