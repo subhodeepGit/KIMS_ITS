@@ -1,38 +1,5 @@
 {
- "charts": [
-  {
-   "chart_name": "Invoice Receival Charts",
-   "label": "Invoice Receival Charts"
-  },
-  {
-   "chart_name": "T-Kitchen Charts",
-   "label": "T-Kitchen Charts"
-  },
-  {
-   "chart_name": "PO Consignment Charts",
-   "label": "PO Consignment Charts"
-  },
-  {
-   "chart_name": "PO Material Management Charts",
-   "label": "PO Material Management Charts"
-  },
-  {
-   "chart_name": "Pharmacy Charts",
-   "label": "Pharmacy Charts"
-  },
-  {
-   "chart_name": "Patient Refund Charts",
-   "label": "Patient Refund Charts"
-  },
-  {
-   "chart_name": "Non PO Contract Charts",
-   "label": "Non PO Contract Charts"
-  },
-  {
-   "chart_name": "Non PO Non Contract Charts",
-   "label": "Non PO Non Contract Charts"
-  }
- ],
+ "charts": [],
  "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Invoice Tracking System</span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Invoice\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"PO Based invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Non PO based Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Other Invoices\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Payment Workflow\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Third Party Verification\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Absent Employee Replacement\",\"col\":4}}]",
  "creation": "2022-11-03 11:00:43.773444",
  "docstatus": 0,
@@ -233,8 +200,44 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Invoice",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Invoice Receival",
+   "link_count": 0,
+   "link_to": "Invoice Receival",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Absent Employee Replacement",
+   "link_count": 1,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Absent Employee Replacement",
+   "link_count": 0,
+   "link_to": "Absent Employee Replacement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Masters",
-   "link_count": 10,
+   "link_count": 8,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -291,26 +294,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Material or Service",
-   "link_count": 0,
-   "link_to": "Material or Service",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Material or Service Group",
-   "link_count": 0,
-   "link_to": "Material or Service Group",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Bank Details For Payment",
    "link_count": 0,
    "link_to": "Bank Details For Payment",
@@ -337,45 +320,9 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Invoice",
-   "link_count": 1,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Invoice Receival",
-   "link_count": 0,
-   "link_to": "Invoice Receival",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Absent Employee Replacement",
-   "link_count": 1,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Absent Employee Replacement",
-   "link_count": 0,
-   "link_to": "Absent Employee Replacement",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
   }
  ],
- "modified": "2022-12-26 18:08:24.015579",
+ "modified": "2022-12-27 12:22:33.903577",
  "modified_by": "raj@gg.cc",
  "module": "Ims",
  "name": "Invoice Tracking System",
