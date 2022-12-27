@@ -1,0 +1,57 @@
+{
+ "charts": [
+  {
+   "chart_name": "Invoice Receival Charts",
+   "label": "Invoice Receival Charts"
+  },
+  {
+   "chart_name": "T-Kitchen Charts",
+   "label": "T-Kitchen Charts"
+  },
+  {
+   "chart_name": "PO Consignment Charts",
+   "label": "PO Consignment Charts"
+  },
+  {
+   "chart_name": "PO Material Management Charts",
+   "label": "PO Material Management Charts"
+  },
+  {
+   "chart_name": "Pharmacy Charts",
+   "label": "Pharmacy Charts"
+  },
+  {
+   "chart_name": "Non PO Contract Charts",
+   "label": "Non PO Contract Charts"
+  },
+  {
+   "chart_name": "Non PO Non Contract Charts",
+   "label": "Non PO Non Contract Charts"
+  },
+  {
+   "chart_name": "Patient Refund Charts",
+   "label": "Patient Refund Charts"
+  }
+ ],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">ITS Dashboard</span>\",\"col\":12}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Invoice Receival Charts\",\"col\":12}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"T-Kitchen Charts\",\"col\":6}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"PO Consignment Charts\",\"col\":6}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"PO Material Management Charts\",\"col\":12}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Pharmacy Charts\",\"col\":6}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Non PO Contract Charts\",\"col\":6}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Non PO Non Contract Charts\",\"col\":12}},{\"type\":\"chart\",\"data\":{\"chart_name\":\"Patient Refund Charts\",\"col\":12}}]",
+ "creation": "2022-12-27 12:35:05.510372",
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "idx": 0,
+ "label": "ITS Dashboard",
+ "links": [],
+ "modified": "2022-12-27 12:41:09.962604",
+ "modified_by": "raj@gg.cc",
+ "module": "Ims",
+ "name": "ITS Dashboard",
+ "owner": "raj@gg.cc",
+ "parent_page": "Invoice Tracking System",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 9.0,
+ "shortcuts": [],
+ "title": "ITS Dashboard"
+}
