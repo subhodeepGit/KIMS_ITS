@@ -1,0 +1,36 @@
+{
+ "based_on": "posting_date",
+ "chart_name": "Invoice Receival Amounts",
+ "chart_type": "Sum",
+ "creation": "2022-12-27 12:57:22.288903",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Invoice Receival",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "last_synced_on": "2022-12-27 13:11:12.215252",
+ "modified": "2022-12-27 13:11:26.785578",
+ "modified_by": "raj@gg.cc",
+ "module": "Ims",
+ "name": "Invoice Receival Amounts",
+ "number_of_groups": 0,
+ "owner": "raj@gg.cc",
+ "parent_document_type": "",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "source": "",
+ "time_interval": "Monthly",
+ "timeseries": 1,
+ "timespan": "Last Quarter",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "value_based_on": "invoices_amountin_rs",
+ "y_axis": []
+}

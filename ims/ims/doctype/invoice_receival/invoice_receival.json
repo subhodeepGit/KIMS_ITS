@@ -21,6 +21,7 @@
   "remarks_if_any",
   "column_break_8",
   "posting_date",
+  "date_of_receival",
   "invoice_status",
   "note_sheet_status",
   "note_no",
@@ -172,12 +173,18 @@
    "fieldtype": "Data",
    "label": "Employee Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "date_of_receival",
+   "fieldtype": "Date",
+   "label": "Date Of Receival",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-20 15:42:32.730997",
+ "modified": "2022-12-27 13:09:05.643622",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Invoice Receival",

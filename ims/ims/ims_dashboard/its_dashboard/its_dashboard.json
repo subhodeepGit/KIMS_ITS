@@ -32,6 +32,14 @@
   {
    "chart": "Patient Refund Charts",
    "width": "Full"
+  },
+  {
+   "chart": "Invoice Receival",
+   "width": "Half"
+  },
+  {
+   "chart": "Invoice Receival Amounts",
+   "width": "Half"
   }
  ],
  "creation": "2022-12-20 16:16:02.807745",
@@ -41,8 +49,8 @@
  "idx": 0,
  "is_default": 1,
  "is_standard": 1,
- "modified": "2022-12-23 11:30:32.094089",
- "modified_by": "Administrator",
+ "modified": "2022-12-27 12:57:28.424901",
+ "modified_by": "raj@gg.cc",
  "module": "Ims",
  "name": "ITS Dashboard",
  "owner": "Administrator"

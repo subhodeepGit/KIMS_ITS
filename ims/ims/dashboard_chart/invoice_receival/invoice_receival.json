@@ -1,0 +1,36 @@
+{
+ "based_on": "posting_date",
+ "chart_name": "Invoice Receival",
+ "chart_type": "Count",
+ "creation": "2022-12-27 12:55:20.155540",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "document_type": "Invoice Receival",
+ "dynamic_filters_json": "[]",
+ "filters_json": "[]",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "last_synced_on": "2022-12-27 13:11:28.696764",
+ "modified": "2022-12-27 13:11:41.349300",
+ "modified_by": "raj@gg.cc",
+ "module": "Ims",
+ "name": "Invoice Receival",
+ "number_of_groups": 0,
+ "owner": "raj@gg.cc",
+ "parent_document_type": "",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "source": "",
+ "time_interval": "Monthly",
+ "timeseries": 1,
+ "timespan": "Last Quarter",
+ "type": "Bar",
+ "use_report_chart": 0,
+ "value_based_on": "",
+ "y_axis": []
+}
