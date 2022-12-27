@@ -127,6 +127,9 @@ scheduler_events = {
 		"30 8,12,16 * * *": [
 			"ims.tasks.notification_for_approval"
 		],
+		"30 8,12,16 * * *": [
+			"ims.tasks.notesheet_reminder_mail"
+		],
 		"*/5 * * * *": [
 			"ims.ims.employee_permission_schedular.employee_user"
 		]

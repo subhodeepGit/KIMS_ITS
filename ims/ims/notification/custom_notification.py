@@ -460,6 +460,45 @@ def report_holder_notesheet(emp_data,list_data_for_mail,field):
     send_mail(receipient,sub,msg,attachments) 
 
 
+def notesheet_reminder_mail(field,emp_data,list_data_for_mail):
+    date_time=str(utils.now())[:19]
+    msg=""""""
+    ####### Section Head
+    sub = """ Report for Pending Invoice And Batch Payment  %s as on %s """%(emp_data[0]['full_name'],date_time)
+    msg =msg+ "<p><b> Following Note Sheets are Pending  as on %s</b></p> <br><br>"%(date_time)
+    ########## end of Section Head
+    c=""
+    for t in list_data_for_mail:
+        coloum=[]
+        for j in field:
+            if j['parent']==t['doc_type']:
+                coloum.append(j)
+        table_head="""<p>Notesheet Name %s</p><br>"""%(t['doc_type'])
+        ############ Coloum Name   
+        c1=""" <table border=1>
+                    <tr>
+                    <th>Document No</th>"""
+        c2=""            
+        for j in coloum:
+            c2=c2+"""<th>%s</th>"""%(j['label'])
+        c1=c1+c2
+        c1=c1+"""</tr>"""
+        ################# end Coloum Name
+        c3="""<td>%s</td>"""%(t['name'])
+        for j in coloum:
+            c3=c3+"""<td>%s</td>"""%(t[j['fieldname']])
+        c3="<tr>"+c3+"</tr>"
+        c1=table_head+c1+c3+"""</table><br>"""
+        c=c+c1
+    if c!="":
+        msg=msg+c
+    else:
+        msg=msg+"""<br><p>No Doument found</p><br>"""   
+
+    receipient = emp_data[0]['email']
+    attachments=""
+    send_mail(receipient,sub,msg,attachments) 
+
 
             
 
