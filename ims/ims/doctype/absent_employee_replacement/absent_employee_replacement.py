@@ -11,10 +11,12 @@ class AbsentEmployeeReplacement(Document):
         today = now.strftime("%Y-%m-%d %H:%M:%S")		
         if self.email == self.email1:
             frappe.throw("Employee Name is same in both <b>From Employee</b> and <b>To Employee</b>")
+        if self.role == self.role1:
+            frappe.throw("Role is same in both Employee")
         if today >= self.to_date:
             frappe.throw("<b>To Date</b> must be greater than today date or current time")
-        if self.from_date <= today:
-            frappe.throw("<b>From Date</b> must be greater than today date or current time")
+        # if self.from_date <= today:
+        #     frappe.throw("<b>From Date</b> must be greater than today date or current time")
         if self.from_date >= self.to_date:
             frappe.throw("<b>To Date</b> must be greater than <b>From date</b>")
 

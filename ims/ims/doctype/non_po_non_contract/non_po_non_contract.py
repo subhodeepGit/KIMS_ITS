@@ -242,7 +242,7 @@ def third_party_verification(self):
 					ref_party_doc=frappe.get_doc({
 						'doctype':'Third-Party Verification',
 						"company":self.company,
-						"type_of_note_sheet":"Pharmacy",
+						"type_of_note_sheet":"Non PO Non Contract",
 						"documnet_no":self.name,
 						"note_sheet_no":self.note_sheet_no,
 						"date_of_note_sheet":self.date_of_note_sheet,
