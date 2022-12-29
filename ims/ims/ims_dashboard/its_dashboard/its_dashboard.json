@@ -40,6 +40,10 @@
   {
    "chart": "Invoice Receival Amounts",
    "width": "Half"
+  },
+  {
+   "chart": "PO Consignment",
+   "width": "Half"
   }
  ],
  "creation": "2022-12-20 16:16:02.807745",
@@ -49,8 +53,8 @@
  "idx": 0,
  "is_default": 1,
  "is_standard": 1,
- "modified": "2022-12-27 12:57:28.424901",
- "modified_by": "raj@gg.cc",
+ "modified": "2022-12-29 17:51:13.249177",
+ "modified_by": "Administrator",
  "module": "Ims",
  "name": "ITS Dashboard",
  "owner": "Administrator"
