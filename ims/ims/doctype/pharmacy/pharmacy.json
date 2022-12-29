@@ -119,7 +119,6 @@
    "reqd": 1
   },
   {
-   "fetch_from": "supplier_code.amount_clearance_period_in_days",
    "fieldname": "amount_clearance_period_in_days",
    "fieldtype": "Int",
    "label": "Amount Clearance Period (in Days)",
@@ -294,7 +293,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-15 12:32:55.032548",
+ "modified": "2022-12-29 15:27:33.424367",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Pharmacy",
