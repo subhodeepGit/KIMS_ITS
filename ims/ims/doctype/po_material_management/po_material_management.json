@@ -62,7 +62,6 @@
    "fieldtype": "Data",
    "hidden": 1,
    "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Note Sheet No."
   },
   {
@@ -288,7 +287,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-04 15:40:02.765704",
+ "modified": "2023-01-04 16:04:53.891415",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "PO Material Management",
