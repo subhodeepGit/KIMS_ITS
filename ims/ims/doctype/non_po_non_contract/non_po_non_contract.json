@@ -65,10 +65,10 @@
   {
    "fieldname": "note_sheet_no",
    "fieldtype": "Data",
+   "hidden": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Note Sheet No.",
-   "reqd": 1
+   "label": "Note Sheet No."
   },
   {
    "fieldname": "date_of_note_sheet",
@@ -314,7 +314,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-26 17:57:03.236133",
+ "modified": "2023-01-04 15:41:40.830800",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Non PO Non Contract",
