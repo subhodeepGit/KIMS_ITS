@@ -78,7 +78,7 @@ class NonPOContract(Document):
 					else:
 						previous_status=previous_status[0]['workflow_state']
 
-					document_type="PO Consumable"
+					document_type="Non PO Contract"
 					approval_status_print=""
 					workflow_name=frappe.get_all("Workflow",{"document_type":document_type,"is_active":1},['name'])[0]['name']
 					if previous_status=="":
