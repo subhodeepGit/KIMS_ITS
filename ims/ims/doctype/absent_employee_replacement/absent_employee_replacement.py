@@ -4,7 +4,7 @@
 import frappe
 from frappe.model.document import Document
 from datetime import datetime
-from ims.ims.employee_permission_schedular import employee_user
+from ims.employee_permission_schedular import employee_user
 
 class AbsentEmployeeReplacement(Document):  
     # def on_submit(self):
