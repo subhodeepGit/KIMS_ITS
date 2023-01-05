@@ -9,7 +9,7 @@ def employee_user():
     for Nr in cancel:
         if Nr:
             employee = frappe.get_doc("User",Nr.email1)
-            employee.remove_roles("Translator")
+            employee.remove_roles(Nr.role)
             employee.flags.ignore_permissions = True
             employee.save()
         employee.save()
@@ -19,13 +19,13 @@ def employee_user():
             to_dt = datetime.strftime(Nr.to_date, "%Y-%m-%d %H:%M:%S")
             if Nr.email != Nr.email1:
                 if from_dt <= today <= to_dt:
-                    employee = frappe.get_doc("User",Nr.email1).add_roles(Nr.role)
-                    employee.add_roles("Translator")
+                    employee = frappe.get_doc("User",Nr.email1)
+                    employee.add_roles(Nr.role)
                     employee.flags.ignore_permissions = True
                     employee.save()
                 if to_dt <= today:
                     employee = frappe.get_doc("User",Nr.email1)
-                    employee.remove_roles("Translator")
+                    employee.remove_roles(Nr.role)
                     employee.flags.ignore_permissions = True
                     employee.save()
 
