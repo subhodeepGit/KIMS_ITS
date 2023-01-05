@@ -10,6 +10,8 @@ def employee_user():
         employee = frappe.get_doc("User",Nr["email1"])
         if Nr:
             employee.remove_roles(Nr["role"])
+            print("3cancel")
+            print(Nr["role"])
             employee.flags.ignore_permissions = True
             employee.save()
         employee.save()
@@ -21,10 +23,14 @@ def employee_user():
             if Nr["email"] != Nr["email1"]:
                 if from_dt <= today <= to_dt:
                     employee.add_roles(Nr["role"])
+                    print("1rolegiven")
+                    print(Nr["role"])
                     employee.flags.ignore_permissions = True
                     employee.save()
                 if to_dt <= today:
                     employee.remove_roles(Nr["role"])
+                    print("2roletaken")
+                    print(Nr["role"])
                     employee.flags.ignore_permissions = True
                     employee.save()
         employee.save()
