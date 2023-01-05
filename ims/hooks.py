@@ -131,7 +131,7 @@ scheduler_events = {
 			"ims.tasks.notesheet_reminder_mail"
 		],
 		"* * * * *": [
-			"ims.ims.employee_permission_schedular.employee_user"
+			# "ims.ims.employee_permission_schedular.employee_user"
 			# "ims.ims.employee_permission_schedular.can"
 		]
 	},
