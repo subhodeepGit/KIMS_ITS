@@ -7,9 +7,9 @@ from datetime import datetime
 from ims.ims.employee_permission_schedular import employee_user
 
 class AbsentEmployeeReplacement(Document):  
-    def on_submit(self):
-        employee = frappe.get_doc("User",self.email1)
-        employee.add_roles("Accounts Clerk")
+    # def on_submit(self):
+    #     employee = frappe.get_doc("User",self.email1)
+    #     employee.add_roles("Accounts Clerk")
     def validate(self):
         now = datetime.now()
         today = now.strftime("%Y-%m-%d %H:%M:%S")		
