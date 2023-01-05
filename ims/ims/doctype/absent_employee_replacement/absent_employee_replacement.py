@@ -4,8 +4,11 @@
 import frappe
 from frappe.model.document import Document
 from datetime import datetime
+from ims.ims.employee_permission_schedular import employee_user
 
-class AbsentEmployeeReplacement(Document):   
+class AbsentEmployeeReplacement(Document):  
+    def on_submit(self):
+         employee_user()
     def validate(self):
         now = datetime.now()
         today = now.strftime("%Y-%m-%d %H:%M:%S")		
