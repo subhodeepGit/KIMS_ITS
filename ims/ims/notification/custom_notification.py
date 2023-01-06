@@ -10,8 +10,13 @@ def supplier_payment_initiazation(self):
     sub="""<p><b>Your payment is Initiated</b></p><br>"""
     msg="""<b>Thank You</b><br>"""
     # send_mail(frappe.db.get_value("Student Applicant",doc.get('name'),"student_email_id"),'Application status',msg) [{},{},{}] "email_id"
+    supplier = frappe.get_all("Supplier",{"name":self.supplier_code},["email_id"])
+    employee = frappe.get_all("Employee",{"name":self.employee},["email"])
     attachments = None
-    send_mail(frappe.get_all("Supplier",{"name":self.supplier_code},["email_id"])[0]["email_id"],sub,msg,attachments)
+    if supplier:
+        send_mail(supplier[0]["email_id"],sub,msg,attachments)
+    if employee:
+        send_mail(employee[0]["email"],sub,msg,attachments)
 
 def supplier_passforpayment(self):
     sub="""<p><b>Your Invoice is verified and passed for payment</b></p><br>"""
