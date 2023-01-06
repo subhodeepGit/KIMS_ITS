@@ -429,7 +429,7 @@
    "description": "Money deposited by the Patient",
    "fieldname": "section_break_52",
    "fieldtype": "Section Break",
-   "label": "Refund details Section"
+   "label": "Refunds/Receipts Details"
   },
   {
    "fieldname": "column_break_52",
@@ -572,7 +572,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-21 12:55:24.682431",
+ "modified": "2023-01-06 11:33:30.607160",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
