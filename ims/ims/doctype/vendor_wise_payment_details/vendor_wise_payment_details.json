@@ -6,6 +6,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "type_of_client",
   "vendor_code",
   "vendor_name",
   "ac_holder_name",
@@ -107,7 +108,7 @@
    "fieldname": "vendor_code",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Vendor Code",
+   "label": "Vendor Code / IP / UHID No. / Employee Code",
    "options": "Supplier",
    "read_only": 1
   },
@@ -116,7 +117,7 @@
    "fieldname": "vendor_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Vendor Name",
+   "label": "Vendor Name / Patient Name / Employee Name",
    "read_only": 1
   },
   {
@@ -132,12 +133,18 @@
    "label": "Payment Status",
    "mandatory_depends_on": "eval:parent.document_status==\"UTR Update\"",
    "options": "\nPayment successful\nPayment Failed"
+  },
+  {
+   "fieldname": "type_of_client",
+   "fieldtype": "Data",
+   "label": "Type Of Client",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-15 16:09:33.787011",
+ "modified": "2023-01-08 21:50:14.004205",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Vendor Wise Payment Details",

@@ -249,6 +249,7 @@ def get_outstanding_amount(args,name):
 						t["bank_name"]=sup_info[0]['bank_name']
 						t['bank_address']=sup_info[0]['bank_address']
 						t['name_of_notesheet']=doctype['doctype']
+						t['type_of_clients']="Supplier"
 					if t['type_of_supplier']=="Employee":
 						emp_info=frappe.db.get_all("Employee",{"name":t['employee']},["ifsc_code","bank_ac_no","account_holder_name","bank_address","branch_name","bank_name"])
 						t["ifsc_code"]=emp_info[0]['ifsc_code']
@@ -257,6 +258,7 @@ def get_outstanding_amount(args,name):
 						t["bank_name"]=emp_info[0]['bank_name']
 						t['bank_address']=emp_info[0]['branch_name']
 						t['name_of_notesheet']=doctype['doctype']
+						t['type_of_clients']="Employee"
 
 				for t in invoice_data:
 					emp={}
@@ -275,6 +277,7 @@ def get_outstanding_amount(args,name):
 						emp['ifsc_code']=t['ifsc_code']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
+						emp['type_of_clients']=t['type_of_clients']
 						if not args.get('patient_refund'):
 							if not args.get('employee'):
 								data.append(emp)
@@ -293,6 +296,7 @@ def get_outstanding_amount(args,name):
 						emp['ifsc_code']=t['ifsc_code']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
 						emp['net_final_amount_to_be_paid_in_rs']=t['net_final_amount_to_be_paid_in_rs']
+						emp['type_of_clients']=t['type_of_clients']
 						if not args.get('patient_refund'):
 							if not args.get('vendor'):
 								data.append(emp)
@@ -310,6 +314,7 @@ def get_outstanding_amount(args,name):
 					t["bank_name"]=sup_info[0]['bank_name']
 					t['bank_address']=sup_info[0]['bank_address']
 					t['name_of_notesheet']=doctype['doctype']
+					t['type_of_clients']="Supplier"
 
 				for t in invoice_data:
 					if not args.get('employee'):
@@ -345,6 +350,8 @@ def get_outstanding_amount(args,name):
 				patient_refund['name']=t['name']
 				patient_refund['workflow_state']=t['workflow_state']
 				patient_refund['name_of_notesheet']=doctype['doctype']
+				patient_refund['type_of_clients']="Patient"
+				
 				if not args.get('vendor'):
 					if not args.get('employee'):
 						if not args.get('priority'):
@@ -367,12 +374,14 @@ def get_outstanding_amount(args,name):
 				all_ready['bank_ac_no']=x['ac_no']
 				all_ready['ifsc_code']=x['ifsc_code']
 				all_ready['net_final_amount_to_be_paid_in_rs']=x['amount']
-				all_ready['net_final_amount_to_be_paid_in_rs']=x['amount1']			
+				all_ready['net_final_amount_to_be_paid_in_rs']=x['amount1']		
+				all_ready['type_of_clients']="Patient"	
 				data.append(all_ready)
 
 	if not data:
 		frappe.msgprint("You have No Data in NoteSheet")
-
+	print("\n\n")
+	print(data)
 	return data
 	########################################################
 	# po_con=frappe.db.sql(""" Select supplier_code,name_of_supplier from `tabPO Consumable`
@@ -404,6 +413,7 @@ def merge_same_vendor(self):
 		a['account_holder_name']=t.ac_holder_name
 		a['bank_name']=t.bank_name
 		a['bank_address']=t.branch
+		a['type_of_clients']=t.type_of_clients
 		data.append(a)
 	
 	if not data:
@@ -425,6 +435,7 @@ def merge_same_vendor(self):
 					a["ac_no"]=j['bank_ac_no']
 					a["ifsc_code"]=j['ifsc_code']
 					a["branch"]=j['bank_address']
+					a['type_of_clients']=j['type_of_clients']
 					a["amount"]=[]
 					break
 			final_data.append(a)
@@ -446,7 +457,8 @@ def merge_same_vendor(self):
 					"ac_no":t['ac_no'],
 					"ifsc_code":t['ifsc_code'],
 					"branch":t['branch'],
-					"amount":t['amount']                                                                   
+					"amount":t['amount'],
+					"type_of_client":t['type_of_clients']                                                                   
 				})
 def mand(self):
 	if self.document_status=="Payment Sheet Submitted to Bank":

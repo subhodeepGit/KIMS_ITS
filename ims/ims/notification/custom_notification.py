@@ -33,10 +33,21 @@ def supplier_finalpayment(self):
     sub="""Your payment is Done"""
     msg="""<b>Thank You</b><br>"""
     attachments = None
-    vendor_code = frappe.get_all("Vendor Wise Payment Details",{"parent":self.name},["vendor_code"])
-    vendor=vendor_code[0]["vendor_code"]
-    vendor_email=frappe.get_all("Supplier",{"name":vendor},["email_id"])
-    send_mail(vendor_email[0]["email_id"],sub,msg,attachments)
+    vendor_code = frappe.get_all("Vendor Wise Payment Details",{"parent":self.name},["vendor_code","type_of_client"])
+    for t in vendor_code:
+        if t['type_of_client']=="Employee":
+            vendor=t["vendor_code"]
+            vendor_email=frappe.get_all("Employee",{"name":vendor},["email"])
+            send_mail(vendor_email[0]["email_id"],sub,msg,attachments)
+        elif t['type_of_client']=="Supplier":
+            vendor=t["vendor_code"]
+            vendor_email=frappe.get_all("Supplier",{"name":vendor},["email_id"])
+            send_mail(vendor_email[0]["email_id"],sub,msg,attachments)
+        elif t['type_of_client']=="Patient":
+            vendor=t["vendor_code"]
+            vendor_email=frappe.get_all("Patient Refund",{"ip__uhid_no":vendor},["concern_person_email_id"])
+            send_mail(vendor_email[0]["email_id"],sub,msg,attachments)   
+
 
 def thirdparty_email(user):
     receipient = user

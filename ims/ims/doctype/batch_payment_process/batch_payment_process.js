@@ -287,6 +287,7 @@ frappe.ui.form.on("Batch Payment Process", {
 						c.invoice_tracking_number=element.name
 						c.approve=element.workflow_state
 						c.name_of_notesheet=element.name_of_notesheet
+						c.type_of_clients=element.type_of_clients
 					});
 				} 
 				frm.refresh();

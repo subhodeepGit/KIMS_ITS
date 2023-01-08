@@ -13,6 +13,7 @@
   "document_date",
   "vendor_code",
   "vendor_name",
+  "type_of_clients",
   "column_break_7",
   "ac_holder_name",
   "bank_name",
@@ -119,12 +120,18 @@
    "in_list_view": 1,
    "label": "Name of NoteSheet",
    "read_only": 1
+  },
+  {
+   "fieldname": "type_of_clients",
+   "fieldtype": "Data",
+   "label": "Type Of Client",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-12-19 13:20:27.096060",
+ "modified": "2023-01-08 20:35:05.935949",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Batch Payment Child",
