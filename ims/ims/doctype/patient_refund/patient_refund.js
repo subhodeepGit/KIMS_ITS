@@ -81,7 +81,12 @@ frappe.ui.form.on('Patient Refund', "name_of_the_patient", function(frm) {
 	frm.set_value("data_62",name_patient);
 	refresh_field("data_62");
 });
-
+frappe.ui.form.on('Patient Refund', "approval_of_tpa__insurance__corporate__ostf", function(frm) {
+	var amount_patient = "";
+	amount_patient = cur_frm.doc.approval_of_tpa__insurance__corporate__ostf;
+	frm.set_value("approved_amount",amount_patient);
+	refresh_field("approved_amount");
+});
 
 frappe.ui.form.on('Patient Refund', {
 	ifsc_code: function(frm) {
@@ -209,7 +214,7 @@ frappe.ui.form.on('Patient Refund', {
 			// frm.set_df_property("insurance_details_attachment",'reqd', 1)
 		}
 		else{
-			frm.set_df_property("approved_amount",'reqd', 0)
+			// frm.set_df_property("approved_amount",'reqd', 0)
 			frm.set_df_property("name_of_the_insurance",'reqd', 0)
 			frm.set_df_property("insurance_details_attachment",'reqd', 0)
 		}
@@ -257,7 +262,7 @@ frappe.ui.form.on('Patient Refund', {
 				frm.set_df_property("total_amount_refunded",'read_only', 0)
 				frm.set_df_property("refund_attachment",'read_only', 0)
 				frm.set_df_property("type_of_insurance",'read_only', 0)
-				frm.set_df_property("approved_amount",'read_only', 0)
+				// frm.set_df_property("approved_amount",'read_only', 0)
 				frm.set_df_property("name_of_the_insurance",'read_only', 0)
 				frm.set_df_property("insurance_details_attachment",'read_only', 0)
 				frm.set_df_property("xerox_copy_of_any_itenty_proof",'read_only', 0)
@@ -300,7 +305,7 @@ frappe.ui.form.on('Patient Refund', {
 					frm.set_df_property("total_amount_refunded",'read_only', 0)
 					frm.set_df_property("refund_attachment",'read_only', 0)
 					frm.set_df_property("type_of_insurance",'read_only', 0)
-					frm.set_df_property("approved_amount",'read_only', 0)
+					// frm.set_df_property("approved_amount",'read_only', 0)
 					frm.set_df_property("name_of_the_insurance",'read_only', 0)
 					frm.set_df_property("insurance_details_attachment",'read_only', 0)
 					frm.set_df_property("xerox_copy_of_any_itenty_proof",'read_only', 0)
@@ -338,7 +343,7 @@ frappe.ui.form.on('Patient Refund', {
 					frm.set_df_property("total_amount_refunded",'read_only', 1)
 					frm.set_df_property("refund_attachment",'read_only', 1)
 					frm.set_df_property("type_of_insurance",'read_only', 1)
-					frm.set_df_property("approved_amount",'read_only', 1)
+					// frm.set_df_property("approved_amount",'read_only', 1)
 					frm.set_df_property("name_of_the_insurance",'read_only', 1)
 					frm.set_df_property("insurance_details_attachment",'read_only', 1)
 					frm.set_df_property("xerox_copy_of_any_itenty_proof",'read_only', 1)

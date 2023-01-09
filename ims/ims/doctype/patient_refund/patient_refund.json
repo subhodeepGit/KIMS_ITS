@@ -417,14 +417,12 @@
   {
    "fieldname": "bill_no",
    "fieldtype": "Data",
-   "label": "Bill No",
-   "reqd": 1
+   "label": "Bill No"
   },
   {
    "fieldname": "bill_date",
    "fieldtype": "Date",
-   "label": "Bill Date",
-   "reqd": 1
+   "label": "Bill Date"
   },
   {
    "description": "Money deposited by the Patient",
@@ -497,7 +495,7 @@
   {
    "fieldname": "total_amount_refunded",
    "fieldtype": "Currency",
-   "label": "Total Amount Refunded",
+   "label": "Total Amount Deposited",
    "reqd": 1
   },
   {
@@ -516,7 +514,8 @@
    "description": "Amount paid by the insurance provider and not the patient",
    "fieldname": "approved_amount",
    "fieldtype": "Currency",
-   "label": "Approved Amount"
+   "label": "Approved Amount",
+   "read_only": 1
   },
   {
    "fieldname": "type_of_insurance",
@@ -532,7 +531,7 @@
   {
    "fieldname": "name_of_the_insurance",
    "fieldtype": "Link",
-   "label": "Name of the Insurance",
+   "label": "TPA / Insurance / Corporate / OSTF",
    "options": "Health Insurance Name"
   },
   {
@@ -579,7 +578,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-08 21:14:59.094172",
+ "modified": "2023-01-09 16:17:47.879239",
  "modified_by": "Administrator",
  "module": "Ims",
  "name": "Patient Refund",
