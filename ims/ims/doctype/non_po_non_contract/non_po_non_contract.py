@@ -261,7 +261,7 @@ def third_party_verification(self):
 							"credit_memo_attachment":j.credit_memo,
 							"document_attachment":j.document_attachment,
 							"po_attachment_attachment":j.po_attachment,
-							"bill_summary_attadelivery_challanchment":j.bill_summary,
+							"bill_summary_attachment":j.bill_summary,
 							"delivery_challan_attachment":j.delivery_challan,
 							"grn_attachment":j.grn,
 						})
