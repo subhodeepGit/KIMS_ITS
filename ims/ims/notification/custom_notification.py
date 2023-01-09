@@ -11,23 +11,29 @@ def supplier_payment_initiazation(self):
     msg="""<b>Thank You</b><br>"""
     # send_mail(frappe.db.get_value("Student Applicant",doc.get('name'),"student_email_id"),'Application status',msg) [{},{},{}] "email_id"
     supplier = frappe.get_all("Supplier",{"name":self.supplier_code},["email_id"])
-    employee = frappe.get_all("Employee",{"name":self.employee},["email"])
     attachments = None
-    if supplier:
+    if self.doctype == "Non PO Non Contract":
+        employee = frappe.get_all("Employee",{"name":self.employee},["email"])
+        if supplier:
+            send_mail(supplier[0]["email_id"],sub,msg,attachments)
+        if employee:
+            send_mail(employee[0]["email"],sub,msg,attachments)
+    else:
         send_mail(supplier[0]["email_id"],sub,msg,attachments)
-    if employee:
-        send_mail(employee[0]["email"],sub,msg,attachments)
 
 def supplier_passforpayment(self):
     sub="""<p><b>Your Invoice is verified and passed for payment</b></p><br>"""
     msg="""<b>Thank You</b><br>"""
     supplier = frappe.get_all("Supplier",{"name":self.supplier_code},["email_id"])
-    employee = frappe.get_all("Employee",{"name":self.employee},["email"])
     attachments = None
-    if supplier:
+    if self.doctype == "Non PO Non Contract":
+        employee = frappe.get_all("Employee",{"name":self.employee},["email"])
+        if supplier:
+            send_mail(supplier[0]["email_id"],sub,msg,attachments)
+        if employee:
+            send_mail(employee[0]["email"],sub,msg,attachments)
+    else:
         send_mail(supplier[0]["email_id"],sub,msg,attachments)
-    if employee:
-        send_mail(employee[0]["email"],sub,msg,attachments)
 
 def supplier_finalpayment(self):
     sub="""Your payment is Done"""
